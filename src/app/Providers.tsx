@@ -1,6 +1,7 @@
 "use client";
 
 import { ThemeProvider } from "styled-components";
+
 import theme from "./styles/thems";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
