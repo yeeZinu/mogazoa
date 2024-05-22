@@ -18,7 +18,10 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "react/jsx-props-no-spreading": "off",
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      { "endOfLine": "auto" } // OS별 줄바꿈 방식 충돌 오류 방지
+    ],
     "react/function-component-definition": "off",
     "react/jsx-no-useless-fragment": "off",
     "no-restricted-imports": ["error", { "patterns": ["..*"] }],
