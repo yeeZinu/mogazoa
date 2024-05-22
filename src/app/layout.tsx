@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import localFont from "next/font/local";
 
-import StyledComponentsRegistry from "@/components/StyledComponentsRegistry";
+import StyledComponentsRegistry from "@/lib/StyledComponentsRegistry";
 import GlobalStyle from "@/styles/global";
 
 import Providers from "./Providers";
