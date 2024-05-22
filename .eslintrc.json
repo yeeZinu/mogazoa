@@ -13,7 +13,7 @@
     "plugin:prettier/recommended",
     "prettier"
   ],
-  "ignorePatterns": ["node_modules/", "next.config.mjs"],
+  "ignorePatterns": ["next.config.mjs"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
