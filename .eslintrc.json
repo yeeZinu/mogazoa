@@ -21,6 +21,7 @@
     "prettier/prettier": "error",
     "react/function-component-definition": "off",
     "react/jsx-no-useless-fragment": "off",
+    "no-restricted-imports": ["error", { "patterns": ["..*"] }],
     "import/order": [
       "error",
       {
