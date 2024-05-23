@@ -4,8 +4,8 @@ $breakpoints: (
   pc: "screen and (min-width: 1024px)",
 );
 
-@mixin media($breakpoint) {
-  @media #{map-get($breakpoints, $breakpoint)} {
+@mixin respond-to($breakpoint) {
+  @media #{map.get($breakpoints, $breakpoint)} {
     @content;
   }
 }
