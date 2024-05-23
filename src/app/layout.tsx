@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Providers from "@/lib/Providers";
-import "@/styles/_reset.scss";
-import "@/styles/_common.scss";
+import "@/styles/reset.scss";
+import "@/styles/common.scss";
 
 export const metadata: Metadata = {
   title: "Mogazoa",
