@@ -18,8 +18,8 @@
   flex-direction: column;
   gap: 2rem;
   align-items: center;
-  color: $white-100;
   justify-content: center;
+  color: $white-100;
   background: $black-200;
 
   @include rounded-sm;
