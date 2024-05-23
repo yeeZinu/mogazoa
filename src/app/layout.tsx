@@ -25,6 +25,7 @@ export default function RootLayout({
       className={pretendard.className}
     >
       <body>
+        <div id='modal' />
         <Providers>{children}</Providers>
       </body>
     </html>
