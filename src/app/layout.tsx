@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import localFont from "next/font/local";
+import Providers from "@/lib/Providers";
 
 export const metadata: Metadata = {
   title: "Mogazoa",
@@ -22,7 +23,9 @@ export default function RootLayout({
       lang="ko"
       className={pretendard.className}
     >
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

@@ -25,6 +25,7 @@
     "react/function-component-definition": "off",
     "react/jsx-no-useless-fragment": "off",
     "no-restricted-imports": ["error", { "patterns": ["..*"] }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/order": [
       "error",
       {
