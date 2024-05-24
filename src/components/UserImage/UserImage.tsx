@@ -7,17 +7,17 @@ type UserImageProps = {
   /* eslint-disable-next-line react/require-default-props */
   image?: string;
   nickname: string;
-  type: "USER_PROFILE" | "PROFILE_RANK" | "PROFILE_LIST";
+  size: "small" | "medium" | "large";
 };
 
-export default function UserImage({ image = DEFAULT_PROFILE_IMAGE, nickname, type }: UserImageProps) {
+export default function UserImage({ image = DEFAULT_PROFILE_IMAGE, nickname, size }: UserImageProps) {
   return (
     <div
       className={cn(
         styles.container,
-        type === "USER_PROFILE" && styles.userProfile,
-        type === "PROFILE_RANK" && styles.userRank,
-        type === "PROFILE_LIST" && styles.userFollowList,
+        size === "small" && styles.small,
+        size === "medium" && styles.medium,
+        size === "large" && styles.large,
       )}
     >
       <Image
