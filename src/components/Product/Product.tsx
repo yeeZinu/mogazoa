@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { STAR_ACTIVE_ICON, DEFAULT_PROFILE_IMAGE } from "@/utils/constant";
+import { STAR_ACTIVE_ICON, DEFAULT_PRODUCT_IMAGE } from "@/utils/constant";
 import styles from "./Product.module.scss";
 
 type ProductProps = {
@@ -24,7 +24,7 @@ export default function Product({ product }: ProductProps) {
     <div className={styles.container}>
       <div className={styles.imageBox}>
         <Image
-          src={isImageError ? DEFAULT_PROFILE_IMAGE : imageUrl}
+          src={isImageError ? DEFAULT_PRODUCT_IMAGE : imageUrl}
           fill
           alt={`${name} 이미지`}
           className={styles.image}
