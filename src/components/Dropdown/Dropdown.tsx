@@ -53,11 +53,12 @@ export default function Dropdown({ items, control, name, placeholder, rules }: D
     <div className={styles.container}>
       <div
         className={cn(styles.dropdownBox, isOpen && styles.focused, value && styles.selected, error && styles.error)}
+        role='button'
+        tabIndex={0}
+        aria-expanded={isOpen}
         onClick={handleToggle}
         onKeyDown={handleToggle}
         onBlur={handleBlur}
-        role='button'
-        tabIndex={0}
       >
         {selectedItem?.option || placeholder}
         <Image
