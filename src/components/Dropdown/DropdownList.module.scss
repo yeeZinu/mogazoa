@@ -2,6 +2,7 @@
 
 .dropdownList {
   position: absolute;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   gap: 5px;

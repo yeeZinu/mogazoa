@@ -86,6 +86,7 @@
 }
 
 .errorMessage {
+  position: absolute;
   display: inline-block;
   margin-top: 4px;
   color: $red-100;
