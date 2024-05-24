@@ -22,3 +22,4 @@ export const EYE_ON_ICON = "/images/visibility-on.svg";
 export const LOADING_SMALL_IMAGE = "/images/loading-small.svg";
 export const LOADING_LARGE_IMAGE = "/images/loading-large.svg";
 export const LOGO_IMAGE = "/images/main-logo.svg";
+export const DEFAULT_PROFILE_IMAGE = "/images/profile-default.svg";

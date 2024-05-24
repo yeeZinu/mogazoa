@@ -1,0 +1,43 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  @include rounded-full;
+
+  position: relative;
+  overflow: hidden;
+
+  &.small {
+    width: 42px;
+    height: 42px;
+
+    @include respond-to(tablet) {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &.medium {
+    width: 52px;
+    height: 52px;
+
+    @include respond-to(tablet) {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  &.large {
+    width: 180px;
+    height: 180px;
+
+    @include respond-to(tablet) {
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+  .image {
+    object-fit: cover;
+  }
+}
