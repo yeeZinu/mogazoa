@@ -26,11 +26,12 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 23px 20px;
-  background: $black-200;
 
-  @include border-color;
-  @include rounded-md;
+  @include color-box() {
+    @include rounded-md;
+  }
+
+  padding: 23px 20px;
 
   @include respond-to(tablet) {
     height: 60px;
