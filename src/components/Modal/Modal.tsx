@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import useEscapeKeydown from "@/hooks/useEscapeKeydown";
+import useKeydown from "@/hooks/useKeydown";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import usePreventScroll from "@/hooks/usePreventScroll";
 import styles from "./Modal.module.scss";
@@ -26,7 +26,7 @@ function ModalPortal({ children }: { children: React.ReactNode }) {
 export default function Modal({ children, onClose }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   useOutsideClick(modalRef, onClose);
-  useEscapeKeydown(onClose);
+  useKeydown("Escape", onClose);
   usePreventScroll();
 
   return (
