@@ -54,32 +54,6 @@
   }
 }
 
-.dropdownList {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-items: flex-start;
-  width: 100%;
-  padding: 10px;
-  margin-top: 1px;
-
-  @include color-box() {
-    @include rounded-md;
-  }
-
-  .dropdownItem {
-    width: 100%;
-    padding: 8px 20px;
-  }
-
-  .dropdownItem:hover {
-    color: $white-100;
-    background-color: $gray-300;
-    border-radius: 6px;
-  }
-}
-
 @keyframes rotate-up {
   from {
     transform: rotate(0deg);

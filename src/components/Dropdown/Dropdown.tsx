@@ -3,14 +3,11 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useController, Control } from "react-hook-form";
+import DropdownList from "@/components/Dropdown/DropdownList";
 import cn from "@/utils/classNames";
 import { DROP_DOWN_ICON } from "@/utils/constant";
 import styles from "./Dropdown.module.scss";
-
-type ItemType = {
-  id: number;
-  option: string;
-};
+import type { ItemType } from "@/components/Dropdown/type";
 
 type DropdownProps = {
   items: ItemType[];
@@ -36,14 +33,14 @@ export default function Dropdown({ items, control, name, placeholder, rules }: D
     defaultValue: "",
   });
 
-  const selectedItem = items.find((item) => item.id === value);
+  const selectedItem = items.find((item) => item.value === value);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
   const handleItemClick = (item: ItemType) => {
-    onChange(item.id);
+    onChange(item.value);
     setIsOpen(false);
   };
 
@@ -72,25 +69,11 @@ export default function Dropdown({ items, control, name, placeholder, rules }: D
         />
       </div>
       {isOpen && (
-        <ul
-          className={styles.dropdownList}
-          role='listbox'
-        >
-          {items.map((item) => (
-            <li
-              key={item.id}
-              className={styles.dropdownItem}
-              role='option'
-              aria-selected={value === item.id}
-              tabIndex={item.id}
-              onMouseDown={(e) => e.preventDefault()}
-              onClick={() => handleItemClick(item)}
-              onKeyDown={() => handleItemClick(item)}
-            >
-              {item.option}
-            </li>
-          ))}
-        </ul>
+        <DropdownList
+          items={items}
+          selected={value}
+          onClick={handleItemClick}
+        />
       )}
       {error && <span className={styles.errorMessage}>{error.message}</span>}
     </div>
