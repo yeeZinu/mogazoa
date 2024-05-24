@@ -6,6 +6,7 @@
 }
 
 .container {
+  position: relative;
   color: $gray-200;
   cursor: pointer;
 
@@ -21,13 +22,12 @@
 }
 
 .dropdownBox {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 
-  @include color-box() {
+  @include color-box {
     @include rounded-md;
   }
 
@@ -90,5 +90,5 @@
   margin-top: 4px;
   color: $red-100;
 
-  @include text-sm;
+  @include text-xs;
 }

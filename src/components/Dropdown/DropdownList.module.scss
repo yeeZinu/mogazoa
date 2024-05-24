@@ -10,7 +10,7 @@
   padding: 10px;
   margin-top: 1px;
 
-  @include color-box() {
+  @include color-box {
     @include rounded-md;
   }
 
