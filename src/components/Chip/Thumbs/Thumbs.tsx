@@ -6,20 +6,16 @@ import { THUMBS_UP_ACTIVE_ICON, THUMBS_UP_ICON } from "@/utils/constant";
 import styles from "./Thumbs.module.scss";
 
 type ThumbsProps = {
-  count: number;
-  setCount: React.Dispatch<React.SetStateAction<number>>;
+  onClick: () => void;
+  children: React.ReactNode;
 };
 
-function Thumbs({ count, setCount }: ThumbsProps) {
+function Thumbs({ onClick, children }: ThumbsProps) {
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
-    if (active) {
-      setCount(count - 1);
-    } else {
-      setCount(count + 1);
-    }
     setActive(!active);
+    onClick();
   };
 
   return (
@@ -34,7 +30,7 @@ function Thumbs({ count, setCount }: ThumbsProps) {
         width={18}
         height={18}
       />
-      {count}
+      {children}
     </button>
   );
 }
