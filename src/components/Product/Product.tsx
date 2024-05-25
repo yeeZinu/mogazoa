@@ -26,7 +26,7 @@ export default function Product({ product }: ProductProps) {
         <Image
           src={isImageError ? DEFAULT_PRODUCT_IMAGE : imageUrl}
           fill
-          alt={`${name} 이미지`}
+          alt={`${name}`}
           className={styles.image}
           onError={() => setIsImageError(true)}
         />
@@ -45,7 +45,7 @@ export default function Product({ product }: ProductProps) {
               <Image
                 src={STAR_ACTIVE_ICON}
                 fill
-                alt='별 아이콘'
+                alt='별'
               />
             </div>
             <span className={styles.rating}>{rating}</span>

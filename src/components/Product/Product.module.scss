@@ -6,16 +6,16 @@
   flex-direction: column;
   gap: 25px;
   width: 100%;
-  height: 308px;
 
   @include color-box;
 
+  padding-bottom: 25px;
+
   @include respond-to(tablet) {
-    height: 256px;
+    padding-bottom: 20px;
   }
 
   @include respond-to(mobile) {
-    height: auto;
     padding: 10px;
   }
 }
@@ -31,10 +31,6 @@
 
   @include respond-to(mobile) {
     height: 98px;
-  }
-
-  .image {
-    object-fit: contain;
   }
 }
 
@@ -113,4 +109,3 @@
     }
   }
 }
-
