@@ -1,0 +1,111 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+
+  @include color-box;
+
+  padding-bottom: 25px;
+
+  @include respond-to(tablet) {
+    padding-bottom: 20px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 10px;
+  }
+}
+
+.imageBox {
+  position: relative;
+  width: 100%;
+  height: 200px;
+
+  @include respond-to(tablet) {
+    height: 160px;
+  }
+
+  @include respond-to(mobile) {
+    height: 98px;
+  }
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .name {
+    color: $white-100;
+
+    @include text-lg;
+
+    @include respond-to(tablet) {
+      @include text-normal;
+    }
+
+    @include respond-to(mobile) {
+      @include text-sm;
+    }
+  }
+}
+
+.infoDetailBox {
+  display: flex;
+  justify-content: space-between;
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+.reviewFavorite {
+  display: flex;
+  gap: 15px;
+  color: $gray-200;
+
+  @include text-normal;
+
+  @include respond-to(tablet) {
+    @include text-sm;
+  }
+
+  @include respond-to(mobile) {
+    @include text-xs;
+  }
+}
+
+.ratingBox {
+  display: flex;
+  gap: 2px;
+
+  .icon {
+    position: relative;
+    width: 16px;
+
+    @include respond-to(tablet) {
+      width: 15px;
+    }
+
+    @include respond-to(mobile) {
+      width: 12px;
+    }
+  }
+
+  .rating {
+    color: $gray-100;
+
+    @include respond-to(tablet) {
+      @include text-sm;
+    }
+
+    @include respond-to(mobile) {
+      @include text-xs;
+    }
+  }
+}

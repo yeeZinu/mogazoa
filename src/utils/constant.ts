@@ -23,3 +23,4 @@ export const LOADING_SMALL_IMAGE = "/images/loading-small.svg";
 export const LOADING_LARGE_IMAGE = "/images/loading-large.svg";
 export const LOGO_IMAGE = "/images/main-logo.svg";
 export const DEFAULT_PROFILE_IMAGE = "/images/profile-default.svg";
+export const DEFAULT_PRODUCT_IMAGE = "/images/product-default.svg";
