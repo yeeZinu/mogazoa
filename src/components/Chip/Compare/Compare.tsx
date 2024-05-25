@@ -15,8 +15,8 @@ export function Compare1({ children }: CompareProps) {
         <Image
           src={CLOSE_ICON}
           alt='close'
-          width={17}
-          height={17}
+          width={18}
+          height={18}
           className={styles.closeIcon}
         />
       </div>
@@ -32,8 +32,8 @@ export function Compare2({ children }: CompareProps) {
         <Image
           src={CLOSE_ICON}
           alt='close'
-          width={17}
-          height={17}
+          width={18}
+          height={18}
           className={styles.closeIcon}
         />
       </div>
