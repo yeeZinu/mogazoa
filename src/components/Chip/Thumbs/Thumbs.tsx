@@ -5,8 +5,12 @@ import React, { useState } from "react";
 import { THUMBS_UP_ACTIVE_ICON, THUMBS_UP_ICON } from "@/utils/constant";
 import styles from "./Thumbs.module.scss";
 
-function Thumbs() {
-  const [count, setCount] = useState(0);
+type ThumbsProps = {
+  count: number;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+};
+
+function Thumbs({ count, setCount }: ThumbsProps) {
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
