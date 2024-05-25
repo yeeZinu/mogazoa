@@ -1,0 +1,53 @@
+@import "@/styles/_index";
+
+.first {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $pink-100;
+  border-radius: 5rem;
+  width: 3.2rem;
+  height: 1.8rem;
+  background-color: rgba(255, 47, 158, 0.1);
+  font-size: 1.2rem;
+  @mixin mobile {
+    width: 2.6rem;
+    height: 1.6rem;
+    font-size: 1rem;
+  }
+}
+.second {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $green-100;
+  border-radius: 5rem;
+  width: 3.2rem;
+  height: 1.8rem;
+  background-color: rgba(5, 213, 139, 0.1);
+  font-size: 1.2rem;
+  @mixin mobile {
+    width: 2.6rem;
+    height: 1.6rem;
+    font-size: 1rem;
+  }
+}
+.third {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $gray-100;
+  border-radius: 5rem;
+  width: 3.2rem;
+  height: 1.8rem;
+  background-color: rgba(255, 200, 60, 0.1);
+  font-size: 1.2rem;
+  @mixin mobile {
+    width: 2.6rem;
+    height: 1.6rem;
+    font-size: 1rem;
+  }
+}
+.default {
+  display: none;
+}

@@ -1,0 +1,55 @@
+@import "@/styles/_index";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: 29px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background-color: aliceblue;
+}
+.music {
+  background-color: rgba(197, 209, 124, 0.1);
+  color: #c5d17c;
+}
+.movie {
+  background-color: rgba(247, 86, 50, 0.1);
+  color: #f75532;
+}
+.study {
+  background-color: rgba(169, 83, 255, 0.1);
+  color: #a953ff;
+}
+.hotel {
+  background-color: rgba(73, 175, 26, 0.1);
+  color: #49af1a;
+}
+.furniture {
+  background-color: rgba(214, 118, 193, 0.1);
+  color: #d676c1;
+}
+.restaurant {
+  background-color: rgba(255, 126, 70, 0.1);
+  color: #ff7e46;
+}
+.electronics {
+  background-color: rgba(35, 181, 129, 0.1);
+  color: #23b581;
+}
+.cosmetics {
+  background-color: rgba(253, 82, 154, 0.1);
+  color: #fd529a;
+}
+.clothes {
+  background-color: rgba(117, 122, 255, 0.1);
+  color: #757aff;
+}
+.app {
+  background-color: rgba(48, 152, 227, 0.1);
+  color: #3098e3;
+}
+.default {
+  display: none;
+}
