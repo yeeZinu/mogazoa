@@ -1,0 +1,25 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 18px 25px;
+
+  @include respond-to(mobile) {
+    width: 100%
+  }
+}
+
+.primary {
+  background: $blue-gradient;
+  color: $white-100;
+}
+
+.disabled {
+  background: $gray-300;
+  color: $gray-200;
+}
