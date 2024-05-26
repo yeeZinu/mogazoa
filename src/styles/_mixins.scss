@@ -20,6 +20,10 @@
   font-size: 1.5rem;
 }
 
+@mixin font-light {
+  font-weight: 300;
+}
+
 @mixin font-normal {
   font-weight: 400;
 }
