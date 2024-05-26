@@ -4,8 +4,8 @@ export default function Home() {
   return (
     <div>
       <Button
-        styleType='primary'
-        disabled={false}
+        styleType='tertiary'
+        disabled
       >
         이게 닫히는 버튼임 ㅇㅇ
       </Button>
