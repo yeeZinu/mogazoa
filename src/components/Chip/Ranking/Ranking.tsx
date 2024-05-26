@@ -21,7 +21,7 @@ function Ranking({ children, ...rest }: RankingProps) {
 
   return (
     <div
-      className={`${styles[RANKING_TYPE[typeCheck]?.style] ?? styles.default}`}
+      className={`${styles[RANKING_TYPE[typeCheck]?.style] ?? styles.default} ${styles.container}`}
       {...rest}
     >
       <div>{children}등</div>

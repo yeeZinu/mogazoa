@@ -8,7 +8,12 @@
   height: 29px;
   padding: 4px 10px;
   border-radius: 8px;
-  background-color: aliceblue;
+  font-size: 18px;
+  font-weight: 500;
+  @include respond-to(mibile) {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
 }
 .music {
   background-color: rgba(197, 209, 124, 0.1);
