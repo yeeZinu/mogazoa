@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Gnb from "@/components/Gnb/Gnb";
+import Gnb from "@/components/Gnb";
 import Providers from "@/lib/Providers";
 import "@/styles/_reset.scss";
 import "@/styles/_common.scss";
