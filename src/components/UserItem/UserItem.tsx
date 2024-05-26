@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
-import { Rating } from "@/components/Rating";
 import { UserImage } from "@/components/UserImage";
+import { Rating } from "@/components/UserItem/Rating";
 import { formatNumber } from "./formatNumbers";
 import styles from "./UserItem.module.scss";
 
