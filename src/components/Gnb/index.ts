@@ -1,3 +1,1 @@
-import Gnb from "./Gnb";
-
-export default Gnb;
+export { default as Gnb } from "./Gnb";

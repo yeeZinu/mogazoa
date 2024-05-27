@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import SearchInput from "@/components/Gnb/SearchInput";
 import cn from "@/utils/classNames";
 import { LOGO_IMAGE, MENU_TOGGLE_ICON } from "@/utils/constant";
 import styles from "./Gnb.module.scss";
+import { SearchInput } from "./SearchInput";
 
 export default function Gnb() {
   const [isInputOpen, setInputOpen] = useState(true);
