@@ -7,7 +7,7 @@
   justify-content: space-between;
   width: 100%;
   padding: 22px 120px;
-  background-color: #1c1c22;
+  background-color: $bg-black-100;
 
   @include respond-to(tablet) {
     padding: 15px 30px;
