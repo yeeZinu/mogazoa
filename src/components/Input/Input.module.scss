@@ -1,0 +1,48 @@
+@import "@/styles/_index.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 40rem;
+}
+
+.label {
+  color: $white-100;
+}
+
+.input {
+  border: none;
+  width: 100%;
+  outline: 1px solid $gray-300;
+  background: $black-200;
+  color: $white-100;
+  padding: 1rem;
+
+  &:focus {
+    outline: 1px solid $blue-100;
+  }
+
+  @include rounded-md;
+}
+
+.inputBox {
+  position: relative;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  transform: translateY(-50%);
+}
+
+.error {
+  outline: 1px solid $red-100;
+}
+
+.errorMessage {
+  color: $red-100;
+
+  @include text-xs;
+}
