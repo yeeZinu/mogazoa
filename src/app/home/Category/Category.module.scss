@@ -1,0 +1,85 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  background-color: $bg-black-100;
+  color: $white-100;
+  width: 200px;
+  padding-top: 45px;
+
+  @include text-normal;
+
+  @include respond-to(tablet) {
+    width: 180px;
+    @include text-sm;
+  }
+
+  @include respond-to(mobile) {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    padding-top: 60px;
+
+    &.open {
+      display: block;
+    }
+  }
+}
+
+.category {
+  padding: 0px 20px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 20px;
+  color: $gray-200;
+}
+
+.item {
+  cursor: pointer;
+  transition:
+    background-color 0.3s linear,
+    color 0.3s linear;
+  padding: 15px 20px;
+
+  @include rounded-md;
+
+  &:hover,
+  &.selected {
+    color: $white-100;
+
+    @include color-box {
+      @include rounded-md;
+      padding: 14px 19px;
+    }
+  }
+}
+
+.mobileButton {
+  display: none;
+
+  @include respond-to(mobile) {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 100px;
+  }
+}
+
+.closeButton {
+  display: none;
+
+  @include respond-to(mobile) {
+    display: block;
+    position: absolute;
+    top: 50px;
+    right: 20px;
+  }
+}
