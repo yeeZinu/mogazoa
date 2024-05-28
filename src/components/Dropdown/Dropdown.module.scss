@@ -7,6 +7,7 @@
 
 .container {
   position: relative;
+  width: 100%;
   color: $gray-200;
   cursor: pointer;
 
@@ -19,13 +20,24 @@
   @include respond-to(mobile) {
     @include text-xs;
   }
+
+  &.sort {
+    width: 160px;
+
+    @include respond-to(tablet) {
+      width: 140px;
+    }
+
+    @include respond-to(mobile) {
+      width: 100px;
+    }
+  }
 }
 
 .dropdownBox {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
 
   @include color-box {
     @include rounded-md;
@@ -34,11 +46,11 @@
   padding: 23px 20px;
 
   @include respond-to(tablet) {
-    height: 60px;
+    padding: 17px 20px;
   }
 
   @include respond-to(mobile) {
-    height: 55px;
+    padding: 17px 20px;
   }
 
   &.focused,
@@ -51,7 +63,21 @@
   }
 
   &.focused {
-    @include border-color($blue-200);
+    @include border-color(transparent);
+
+    background:
+      linear-gradient($black-200, $black-200) padding-box,
+      $blue-gradient border-box;
+  }
+
+  &.sort {
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+
+    &.focused {
+      background: transparent padding-box;
+    }
   }
 }
 

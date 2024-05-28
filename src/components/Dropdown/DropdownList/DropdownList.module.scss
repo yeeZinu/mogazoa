@@ -7,22 +7,23 @@
   flex-direction: column;
   gap: 5px;
   align-items: flex-start;
-  width: 100%;
-  padding: 10px;
+  width: inherit;
   margin-top: 1px;
 
   @include color-box {
     @include rounded-md;
+
+    padding: 10px;
   }
 
   .dropdownItem {
     width: 100%;
     padding: 8px 20px;
-  }
 
-  .dropdownItem:hover {
-    color: $white-100;
-    background-color: $gray-300;
-    border-radius: 6px;
+    &:hover {
+      color: $white-100;
+      background-color: $gray-300;
+      border-radius: 6px;
+    }
   }
 }

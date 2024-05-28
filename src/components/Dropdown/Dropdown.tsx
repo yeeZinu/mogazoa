@@ -3,22 +3,22 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useController, Control } from "react-hook-form";
-import DropdownList from "@/components/Dropdown/DropdownList";
 import cn from "@/utils/classNames";
 import { DROP_DOWN_ICON } from "@/utils/constant";
 import styles from "./Dropdown.module.scss";
-import type { ItemType } from "@/components/Dropdown/type";
+import { DropdownList } from "./DropdownList";
+import type { ItemType, VariantType } from "@/components/Dropdown/type";
 
 type DropdownProps = {
   items: ItemType[];
   control: Control;
   name: string;
+  variant?: VariantType;
   placeholder: string;
-  // eslint-disable-next-line react/require-default-props
   rules?: { required: string };
 };
 
-export default function Dropdown({ items, control, name, placeholder, rules }: DropdownProps) {
+export default function Dropdown({ items, control, name, variant, placeholder, rules }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const {
@@ -50,9 +50,15 @@ export default function Dropdown({ items, control, name, placeholder, rules }: D
   };
 
   return (
-    <div className={styles.container}>
+    <div className={cn(styles.container, `${styles[`${variant}`]}`)}>
       <div
-        className={cn(styles.dropdownBox, isOpen && styles.focused, value && styles.selected, error && styles.error)}
+        className={cn(
+          styles.dropdownBox,
+          isOpen && styles.focused,
+          value && styles.selected,
+          error && styles.error,
+          `${styles[`${variant}`]}`,
+        )}
         role='button'
         tabIndex={0}
         aria-expanded={isOpen}
@@ -76,6 +82,7 @@ export default function Dropdown({ items, control, name, placeholder, rules }: D
           onClick={handleItemClick}
         />
       )}
+
       {error && <span className={styles.errorMessage}>{error.message}</span>}
     </div>
   );

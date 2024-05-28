@@ -1,3 +1,4 @@
+import cn from "@/utils/classNames";
 import styles from "./DropdownList.module.scss";
 import type { ItemType } from "@/components/Dropdown/type";
 
@@ -10,7 +11,7 @@ type DropdownListProps = {
 export default function DropdownList({ items, selected, onClick }: DropdownListProps) {
   return (
     <ul
-      className={styles.dropdownList}
+      className={cn(styles.dropdownList)}
       role='listbox'
     >
       {items.map((item) => (
