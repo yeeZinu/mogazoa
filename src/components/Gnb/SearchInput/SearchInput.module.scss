@@ -1,0 +1,50 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  cursor: pointer;
+  transition: width 1s ease-in-out;
+  transform: translateY(-50%);
+}
+
+.input {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 400px;
+  padding: 16px 16px 16px 60px;
+  color: $white-100;
+  background: $black-200;
+  border: none;
+  border-radius: 28px;
+  transition: width 1s ease-in-out;
+
+  &:focus {
+    outline: none;
+  }
+
+  @include text-normal;
+
+  @include respond-to(tablet) {
+    width: 300px;
+
+    @include text-sm;
+  }
+
+  @include respond-to(mobile) {
+    @include text-xs;
+  }
+}
+
+.closed {
+  width: 0;
+  padding-right: 0;
+  background-color: $bg-black-100;
+}
