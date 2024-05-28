@@ -10,16 +10,16 @@ type CategoryType<T extends string> = {
 };
 
 const CATEGORY_TYPE: CategoryType<string> = {
-  음악: { style: "music" },
-  "영화/드라마": { style: "movie" },
-  "강의/책": { style: "study" },
-  호텔: { style: "hotel" },
-  "가구/인테리어": { style: "furniture" },
-  식당: { style: "restaurant" },
-  전자기기: { style: "electronics" },
-  화장품: { style: "cosmetics" },
-  "의류/악세서리": { style: "clothes" },
-  앱: { style: "app" },
+  음악: { style: "yellow" },
+  "영화/드라마": { style: "red" },
+  "강의/책": { style: "purple" },
+  호텔: { style: "green" },
+  "가구/인테리어": { style: "pink" },
+  식당: { style: "orange" },
+  전자기기: { style: "mint" },
+  화장품: { style: "hotpink" },
+  "의류/악세서리": { style: "navy" },
+  앱: { style: "blue" },
   default: { style: "default" },
 };
 
