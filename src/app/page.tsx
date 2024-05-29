@@ -11,7 +11,7 @@ export default function Home() {
       <Statistics
         title='별점 평균'
         rating={4.9}
-        categoryMetric={props}
+        compare={props}
       />
     </div>
   );
