@@ -14,9 +14,9 @@ type StatisticsProps = {
 };
 
 type DataCompareProps = {
-  rating: number;
-  favoriteCount: number;
-  reviewCount: number;
+  rating?: number;
+  favoriteCount?: number;
+  reviewCount?: number;
 };
 
 export default function Statistics({ title, rating, reviewCount, favoriteCount, compare }: StatisticsProps) {
