@@ -1,4 +1,5 @@
 @import "@/styles/_index";
+@import "@/styles/_media";
 
 .container {
   display: flex;
@@ -10,7 +11,7 @@
   border-radius: 8px;
   font-size: 18px;
   font-weight: 500;
-  @include respond-to(mibile) {
+  @include respond-to(mobile) {
     padding: 4px 8px;
     font-size: 12px;
   }
