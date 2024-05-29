@@ -9,8 +9,10 @@ export default function Home() {
   return (
     <div>
       <Statistics
-        title='별점 평균'
-        rating={4.9}
+        title='리뷰'
+        rating={4.5}
+        favoriteCount={4}
+        reviewCount={6}
         compare={props}
       />
     </div>

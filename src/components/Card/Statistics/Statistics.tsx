@@ -36,11 +36,13 @@ export default function Statistics({ title, rating, reviewCount, favoriteCount, 
       changeImageSrc = SAVE_ICON;
       mainContent = favoriteCount;
       compareItemResult = compare?.favoriteCount;
+      compareResult = parseFloat(Math.abs(mainContent! - compareItemResult!).toFixed(0));
       break;
     case "리뷰":
       changeImageSrc = BUBBLE_ICON;
       mainContent = reviewCount;
       compareItemResult = compare?.reviewCount;
+      compareResult = parseFloat(Math.abs(mainContent! - compareItemResult!).toFixed(0));
       break;
   }
 
@@ -67,8 +69,8 @@ export default function Statistics({ title, rating, reviewCount, favoriteCount, 
         </span>
       ) : (
         <span className={styles.description}>
-          같은 카테고리 제품들보다 <br />
-          <strong>{compareResult?.toFixed(0)}개 </strong>
+          같은 카테고리 제품들보다
+          <strong> {compareResult}개 </strong>
           {mainContent! > compareItemResult! ? "높아" : "낮아"}요!
         </span>
       )}
