@@ -1,0 +1,44 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  padding: 30px 74px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 300px;
+  height: 190px;
+
+  @include rounded-lg;
+  background: $black-200;
+  border: 1px solid $gray-300;
+}
+
+.title {
+  color: $white-100;
+  font-size: 18px;
+}
+
+.contentBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+
+  span {
+    @include text-xl;
+    color: $gray-100;
+  }
+}
+
+.description {
+  color: $gray-200;
+  @include text-sm;
+
+  strong {
+    color: $white-100;
+  }
+}
