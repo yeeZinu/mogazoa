@@ -3,11 +3,11 @@
 import Image from "next/image";
 import React from "react";
 import Category from "@/components/Chip/Category/Category";
-import { STAR_ACTIVE_ICON, SAVE_ICON, BUBBLE_ICON } from "@/utils/constant";
+import { STAR_ACTIVE_ICON, BUBBLE_ICON } from "@/utils/constant";
 import styles from "./Activity.module.scss";
 
 type ActivityProps = {
-  title: "별점 평균" | "리뷰" | "카테고리";
+  title: "남긴 별점 평균" | "남긴 리뷰" | "관심 카테고리";
   averageRating?: number;
   reviewCount?: number;
   chipCategoty?: MostFavoriteCategoryProps;
@@ -21,25 +21,37 @@ type MostFavoriteCategoryProps = {
 export default function Activity({ title, averageRating, reviewCount, chipCategoty }: ActivityProps) {
   let changeImageSrc: string | undefined;
   let mainContent: number | undefined;
+  let namgin: string | undefined;
+  let namuji: string | undefined;
+
+  if (title.length > 5) {
+    namuji = title.slice(3);
+    namgin = title.slice(0, 3);
+  } else {
+    namgin = title;
+    namuji = "";
+  }
+
   switch (title) {
-    case "별점 평균":
+    case "남긴 별점 평균":
       changeImageSrc = STAR_ACTIVE_ICON;
       mainContent = averageRating;
       break;
-    case "리뷰":
-      changeImageSrc = SAVE_ICON;
-      mainContent = reviewCount;
-      break;
-    case "카테고리":
+    case "남긴 리뷰":
       changeImageSrc = BUBBLE_ICON;
-      mainContent = chipCategoty?.id;
+      mainContent = reviewCount;
       break;
   }
 
   return (
     <div className={styles.container}>
-      <div className={styles.mobileBox}>
-        <div className={styles.title}>{title}</div>
+      <div className={styles.title}>
+        <span>{namgin}</span>
+        <span>{namuji}</span>
+      </div>
+      {title === "관심 카테고리" ? (
+        <Category>{chipCategoty?.name}</Category>
+      ) : (
         <div className={styles.contentBox}>
           <figure className={styles.imageBox}>
             <Image
@@ -50,8 +62,7 @@ export default function Activity({ title, averageRating, reviewCount, chipCatego
           </figure>
           <span>{mainContent}</span>
         </div>
-        <Category>전자기기</Category>
-      </div>
+      )}
     </div>
   );
 }
