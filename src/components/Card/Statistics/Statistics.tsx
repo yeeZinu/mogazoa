@@ -46,20 +46,23 @@ export default function Statistics({ title, rating, reviewCount, favoriteCount, 
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>{title}</div>
-      <figure className={styles.contentBox}>
-        <Image
-          src={changeImageSrc as string}
-          alt='title'
-          width={24}
-          height={24}
-        />
-        <span>{mainContent}</span>
-      </figure>
+      <div className={styles.mobileBox}>
+        <div className={styles.title}>{title}</div>
+        <div className={styles.contentBox}>
+          <figure className={styles.imageBox}>
+            <Image
+              src={changeImageSrc as string}
+              alt='title'
+              fill
+            />
+          </figure>
+          <span>{mainContent}</span>
+        </div>
+      </div>
       {title === "별점 평균" ? (
         <span className={styles.description}>
-          같은 카테고리 제품들보다 <br />
-          <strong>{compareResult}점 </strong>
+          같은 카테고리 제품들보다
+          <strong> {compareResult}점 </strong>
           {mainContent! > compareItemResult! ? "높아" : "낮아"}요!
         </span>
       ) : (

@@ -2,24 +2,49 @@
 @import "@/styles/_media";
 
 .container {
-  display: flex;
+  display: inline-flex;
   padding: 30px 74px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
 
-  width: 300px;
-  height: 190px;
-
   @include rounded-lg;
   background: $black-200;
   border: 1px solid $gray-300;
+
+  @include respond-to(tablet) {
+    padding: 30px 43px;
+  }
+
+  @include respond-to(mobile) {
+    display: flex;
+    width: 335px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+.mobileBox {
+  @include respond-to(mobile) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 }
 
 .title {
   color: $white-100;
   font-size: 18px;
+
+  @include respond-to(tablet) {
+    @include text-normal;
+  }
+
+  @include respond-to(mobile) {
+    @include text-sm;
+  }
 }
 
 .contentBox {
@@ -31,14 +56,52 @@
   span {
     @include text-xl;
     color: $gray-100;
+
+    @include respond-to(tablet) {
+      font-size: 20px;
+    }
+
+    @include respond-to(mobile) {
+      @include text-normal;
+    }
+  }
+
+  @include respond-to(mobile) {
+    padding: 0;
+  }
+}
+
+.imageBox {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+
+  @include respond-to(tablet) {
+    width: 20px;
+    height: 20px;
+  }
+
+  @include respond-to(mobile) {
+    width: 19px;
+    height: 19px;
   }
 }
 
 .description {
+  width: 150px;
+  text-align: center;
   color: $gray-200;
   @include text-sm;
+  line-height: 20px;
 
   strong {
     color: $white-100;
+    white-space: pre-line;
+  }
+
+  @include respond-to(mobile) {
+    width: auto;
+    @include text-xs;
   }
 }
