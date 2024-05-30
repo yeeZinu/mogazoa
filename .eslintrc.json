@@ -23,6 +23,7 @@
     "react/jsx-no-useless-fragment": "off",
     "no-restricted-imports": ["error", { "patterns": ["..*"] }],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/prefer-default-export": "off",
     "import/order": [
       "error",
       {
