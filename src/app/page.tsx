@@ -1,37 +1,22 @@
-"use client";
-
-import { useState } from "react";
-import Category from "@/app/home/Category/Category";
-import cn from "@/utils/classNames";
+import ProductCategory from "@/app/home/ProductCategory/ProductCategory";
 import styles from "./page.module.scss";
 
-export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState<null | string>(null);
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+async function getData() {
+  const res = await fetch("https://mogazoa-api.vercel.app/20/categories");
 
-  const handleCategorySelect = (category: null | string) => {
-    setSelectedCategory(category);
-  };
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
 
-  const toggleCategory = () => {
-    setIsCategoryOpen(!isCategoryOpen);
-  };
+  return res.json();
+}
+
+export default async function Home() {
+  const categories = await getData();
 
   return (
     <div className={styles.container}>
-      <button
-        type='button'
-        className={cn(styles.categoryToggle)}
-        onClick={toggleCategory}
-      >
-        {selectedCategory ?? "카테고리"}
-      </button>
-      <Category
-        isOpen={isCategoryOpen}
-        selected={selectedCategory}
-        onToggle={toggleCategory}
-        onSelect={handleCategorySelect}
-      />
+      <ProductCategory categories={categories} />
     </div>
   );
 }
