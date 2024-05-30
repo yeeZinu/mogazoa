@@ -1,0 +1,91 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 22px 120px;
+  background-color: $bg-black-100;
+
+  @include respond-to(tablet) {
+    padding: 15px 30px;
+  }
+
+  @include respond-to(mobile) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    padding: 23px 20px;
+  }
+}
+
+.logoBox {
+  @include respond-to(mobile) {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.logo {
+  @include respond-to(tablet) {
+    width: 138px;
+    height: auto;
+  }
+
+  @include respond-to(mobile) {
+    width: 112px;
+    height: auto;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+
+    &.invisible {
+      opacity: 0;
+    }
+  }
+}
+
+.menuIcon {
+  position: absolute;
+  display: none;
+
+  @include respond-to(mobile) {
+    position: static;
+    display: block;
+  }
+}
+
+.actionBox {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+
+  @include respond-to(tablet) {
+    gap: 30px;
+  }
+
+  @include respond-to(mobile) {
+    position: absolute;
+    right: 16px;
+  }
+}
+
+.userAction {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  color: $white-100;
+
+  @include text-normal;
+
+  @include respond-to(tablet) {
+    gap: 30px;
+
+    @include text-sm;
+  }
+
+  @include respond-to(mobile) {
+    display: none;
+  }
+}

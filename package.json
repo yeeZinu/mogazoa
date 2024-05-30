@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky",
-    "stylelint": "stylelint './src/**/*.{ts,tsx}' --fix"
+    "stylelint": "stylelint '**/*.scss' --fix"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.37.1",

@@ -1,0 +1,32 @@
+@import "@/styles/_index";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5rem;
+  width: 3.2rem;
+  height: 1.8rem;
+  font-size: 1.2rem;
+  @include respond-to(mibile) {
+    width: 2.6rem;
+    height: 1.6rem;
+    font-size: 1rem;
+  }
+}
+
+.first {
+  color: $pink-100;
+  background-color: rgba(255, 47, 158, 0.1);
+}
+.second {
+  color: $green-100;
+  background-color: rgba(5, 213, 139, 0.1);
+}
+.third {
+  color: $gray-100;
+  background-color: rgba(255, 200, 60, 0.1);
+}
+.default {
+  display: none;
+}

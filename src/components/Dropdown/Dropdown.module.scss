@@ -1,0 +1,121 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+@mixin border-color($color: $gray-300) {
+  border: 1px solid $color;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  color: $gray-200;
+  cursor: pointer;
+
+  @include text-normal;
+
+  @include respond-to(tablet) {
+    @include text-sm;
+  }
+
+  @include respond-to(mobile) {
+    @include text-xs;
+  }
+
+  &.order {
+    width: 160px;
+
+    @include respond-to(tablet) {
+      width: 140px;
+    }
+
+    @include respond-to(mobile) {
+      width: 100px;
+    }
+  }
+}
+
+.dropdownBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include color-box {
+    @include rounded-md;
+  }
+
+  padding: 23px 20px;
+
+  @include respond-to(tablet) {
+    padding: 17px 20px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 17px 20px;
+  }
+
+  &.focused,
+  &.selected {
+    color: $white-100;
+  }
+
+  &.error {
+    @include border-color($red-100);
+  }
+
+  &.focused {
+    @include border-color(transparent);
+
+    background:
+      linear-gradient($black-200, $black-200) padding-box,
+      $blue-gradient border-box;
+  }
+
+  &.order {
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+
+    &.focused {
+      background: transparent padding-box;
+    }
+  }
+}
+
+@keyframes rotate-up {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotate-down {
+  from {
+    transform: rotate(180deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.icon {
+  &Up {
+    animation: rotate-up 0.5s forwards;
+  }
+
+  &Down {
+    animation: rotate-down 0.5s forwards;
+  }
+}
+
+.errorMessage {
+  position: absolute;
+  display: inline-block;
+  margin-top: 4px;
+  color: $red-100;
+
+  @include text-xs;
+}
