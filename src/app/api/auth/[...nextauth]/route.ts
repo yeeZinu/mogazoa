@@ -48,7 +48,6 @@ export const authOptions: NextAuthOptions = {
         provider: { label: "프로바이더", type: "text" },
       },
       async authorize(credentials) {
-        console.log("시작");
         const result = await fetch(`${process.env.BASE_URL}/auth/signUp/${credentials?.provider}`, {
           method: "POST",
           headers: {

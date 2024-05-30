@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -18,14 +18,6 @@ export default function OauthSignUpPage({ params }: { params: { provider: string
   } = useForm<FormData>();
   const router = useRouter();
   const { provider } = params;
-
-  const { status } = useSession();
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/");
-    }
-  }, [status, router]);
 
   useEffect(() => {
     // js-cookie 라이브러리 도입 문의

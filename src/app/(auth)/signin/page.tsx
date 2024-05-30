@@ -1,8 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { signIn, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { GOOGLE_ICON, KAKAO_ICON } from "@/utils/constant";
 import OauthSignInButton from "./OauthSignInButton/OauthSignInButton";
@@ -19,12 +18,6 @@ export default function SignInPage() {
     formState: { errors },
   } = useForm<FormData>();
   const router = useRouter();
-  const { status } = useSession();
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/");
-    }
-  }, []);
 
   const onSubmit = async (data: FormData) => {
     const result = await signIn("credentials", {
