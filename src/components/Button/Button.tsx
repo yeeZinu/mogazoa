@@ -7,20 +7,14 @@ type ButtonProps = {
   children: React.ReactNode;
   styleType: "primary" | "secondary" | "tertiary";
   disabled: boolean;
+  className: string;
 };
 
-export default function Button({ children, styleType, disabled = false, ...rest }: ButtonProps) {
+export default function Button({ children, styleType, disabled = false, className, ...rest }: ButtonProps) {
   return (
     // eslint-disable-next-line react/button-has-type
     <button
-      className={cn(
-        styles.container,
-        styleType === "primary" && styles.primary,
-        styleType === "secondary" && styles.secondary,
-        styleType === "tertiary" && styles.tertiary,
-
-        disabled === true && styles.disabled,
-      )}
+      className={cn(styles.container, styles[styleType], `${className}`)}
       {...rest}
       disabled={disabled}
     >
