@@ -1,5 +1,9 @@
 @import "@/styles/_color";
 
+@mixin text-xxs {
+  font-size: 0.75rem;
+}
+
 @mixin text-xs {
   font-size: 0.8rem;
 }
