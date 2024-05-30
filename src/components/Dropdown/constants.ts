@@ -1,9 +1,9 @@
 export const DROPDOWN = {
   CATEGORY: "category",
-  SORT: "sort",
+  ORDER: "order",
 } as const;
 
-export const SORT = {
+export const ORDER = {
   PRODUCT: [
     {
       value: "recent",

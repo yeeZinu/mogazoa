@@ -69,7 +69,7 @@ export default function Dropdown({ items, control, name, variant, placeholder, r
         {selectedItem?.option || placeholder}
         <Image
           src={DROP_DOWN_ICON}
-          alt='드롭다운 아이콘'
+          alt='화살표'
           width={22}
           height={22}
           className={`${isOpen ? styles.iconUp : styles.iconDown}`}

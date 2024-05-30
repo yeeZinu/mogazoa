@@ -21,7 +21,7 @@
     @include text-xs;
   }
 
-  &.sort {
+  &.order {
     width: 160px;
 
     @include respond-to(tablet) {
@@ -70,7 +70,7 @@
       $blue-gradient border-box;
   }
 
-  &.sort {
+  &.order {
     padding: 10px;
     background-color: transparent;
     border: none;

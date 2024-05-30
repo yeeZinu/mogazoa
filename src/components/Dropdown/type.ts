@@ -1,4 +1,4 @@
-import { DROPDOWN } from "@/utils/constants";
+import { DROPDOWN } from "./constants";
 
 export type ItemType = {
   value: number | string;
