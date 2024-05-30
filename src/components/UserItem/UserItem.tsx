@@ -1,4 +1,5 @@
 /* eslint-disable react/require-default-props */
+import { Ranking } from "@/components/Chip/Ranking";
 import { UserImage } from "@/components/UserImage";
 import { Rating } from "@/components/UserItem/Rating";
 import { formatNumber } from "./formatNumbers";
@@ -26,7 +27,7 @@ export default function UserItem({ image, nickname, rating, followersCount, revi
       />
       <div className={styles.detailBox}>
         <div className={styles.userTitle}>
-          {rank ? <span style={{ color: "orange" }}>{rank}등</span> : null}
+          {rank ? <Ranking>{String(rank)}</Ranking> : null}
           <span className={styles.userNickname}>{nickname}</span>
         </div>
         <div className={styles.userDesc}>
