@@ -24,6 +24,7 @@
     "no-restricted-imports": ["error", { "patterns": ["..*"] }],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/prefer-default-export": "off",
+    "react/require-default-props": "off",
     "import/order": [
       "error",
       {
