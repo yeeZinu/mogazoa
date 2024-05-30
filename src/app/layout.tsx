@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Gnb } from "@/components/Gnb";
 import AuthProvider from "@/lib/AuthProvider";
 import Providers from "@/lib/Providers";
 import "@/styles/_reset.scss";
@@ -28,7 +29,10 @@ export default function RootLayout({
       <body>
         <div id='modal' />
         <AuthProvider>
-          <Providers>{children}</Providers>
+          <Providers>
+            <Gnb />
+            {children}
+          </Providers>
         </AuthProvider>
       </body>
     </html>

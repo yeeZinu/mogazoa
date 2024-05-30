@@ -1,0 +1,15 @@
+@import "@/styles/_index";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: $gray-200;
+  border-radius: 100px;
+  width: 96px;
+  height: 30px;
+  background-color: $black-200;
+  border: 0.1rem solid $gray-300;
+  font-size: 14px;
+}

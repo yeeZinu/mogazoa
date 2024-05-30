@@ -1,0 +1,29 @@
+@import "@/styles/_index";
+
+.dropdownList {
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  width: inherit;
+  margin-top: 1px;
+
+  @include color-box {
+    @include rounded-md;
+
+    padding: 10px;
+  }
+
+  .dropdownItem {
+    width: 100%;
+    padding: 8px 20px;
+
+    &:hover {
+      color: $white-100;
+      background-color: $gray-300;
+      border-radius: 6px;
+    }
+  }
+}

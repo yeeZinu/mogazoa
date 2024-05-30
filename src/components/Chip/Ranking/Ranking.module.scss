@@ -1,0 +1,35 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3.2rem;
+  width: 2.2rem;
+  height: 1.2rem;
+  @include text-xs;
+  @include font-normal;
+
+  @include respond-to(tablet) {
+    width: 1.7rem;
+    height: 1rem;
+    @include text-xxs;
+  }
+}
+
+.first {
+  color: $pink-100;
+  background-color: rgba(255, 47, 158, 0.1);
+}
+.second {
+  color: $green-100;
+  background-color: rgba(5, 213, 139, 0.1);
+}
+.third {
+  color: $gray-100;
+  background-color: rgba(255, 200, 60, 0.1);
+}
+.default {
+  display: none;
+}

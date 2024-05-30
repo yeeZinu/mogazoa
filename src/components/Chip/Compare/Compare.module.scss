@@ -1,0 +1,28 @@
+@import "@/styles/_index";
+.back {
+  background-color: black;
+}
+
+.container {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 16px;
+}
+.closeIcon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  padding: 2px;
+}
+.compare1 {
+  background-color: rgba(5, 213, 140, 0.3);
+  color: $green-100;
+}
+.compare2 {
+  background-color: rgba(255, 47, 159, 0.3);
+  color: $pink-100;
+}
