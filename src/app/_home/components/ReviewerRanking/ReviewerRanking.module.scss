@@ -1,0 +1,47 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  width: 250px;
+  height: 100%;
+  padding: 45px 30px;
+  color: $white-100;
+  background-color: $bg-black-100;
+
+  @include respond-to(tablet) {
+    width: 100%;
+  }
+}
+
+.header {
+  margin-bottom: 30px;
+
+  @include text-normal;
+}
+
+.ranking {
+  width: 100%;
+}
+
+.rankingBox {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @include respond-to(tablet) {
+    flex-direction: row;
+    gap: 20px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.item {
+  width: 100%;
+  min-width: 190px;
+  height: 42px;
+  border: 1px solid $black-100;
+}

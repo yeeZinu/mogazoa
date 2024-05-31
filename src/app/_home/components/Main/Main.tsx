@@ -2,11 +2,13 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import Category from "@/app/home/Category/Category";
-import CategoryList from "@/app/home/Category/CategoryList";
+import Category from "@/app/_home/components/Category/Category";
+import CategoryList from "@/app/_home/components/Category/CategoryList";
+import Product from "@/app/_home/components/Product/Product";
+import { ReviewerRanking } from "@/app/_home/components/ReviewerRanking";
 import cn from "@/utils/classNames";
 import createQueryString from "@/utils/createQueryString";
-import styles from "./ProductCategory.module.scss";
+import styles from "./Main.module.scss";
 
 type CategoryType = {
   id: number;
@@ -15,7 +17,7 @@ type CategoryType = {
   updatedAt: Date;
 };
 
-export default function ProductCategory({ categories }: { categories: CategoryType[] }) {
+export default function Main({ categories }: { categories: CategoryType[] }) {
   const [selectedCategory, setSelectedCategory] = useState<null | string>(null);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const router = useRouter();
@@ -37,14 +39,14 @@ export default function ProductCategory({ categories }: { categories: CategoryTy
     router.push(`/?${createQueryString("category", id.toString(), searchParams)}`);
   };
   return (
-    <>
-      <button
+    <div className={cn(styles.container)}>
+      {/* <button
         type='button'
         className={cn(styles.categoryToggle)}
         onClick={toggleCategory}
       >
         {selectedCategory ?? "카테고리"}
-      </button>
+      </button> */}
       <Category
         isOpen={isCategoryOpen}
         onToggle={toggleCategory}
@@ -55,6 +57,11 @@ export default function ProductCategory({ categories }: { categories: CategoryTy
           categoryList={categories}
         />
       </Category>
-    </>
+
+      <div className={styles.mainAndRightSide}>
+        <Product />
+        <ReviewerRanking />
+      </div>
+    </div>
   );
 }

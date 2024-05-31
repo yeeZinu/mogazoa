@@ -1,0 +1,41 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.mainAndRightSide {
+  display: flex;
+  width: 100%;
+
+  @include respond-to(tablet) {
+    flex-direction: column-reverse;
+    width: calc(100% - 180px);
+  }
+
+  @include respond-to(mobile) {
+    width: 100%;
+  }
+
+  // .box {
+  //   display: flex;
+  //   max-width: 1340px;
+
+  //   @include respond-to(tablet) {
+  //     flex-direction: column-reverse;
+  //   }
+  // }
+}
+
+// .categoryToggle {
+//   display: none;
+
+//   @include respond-to(mobile) {
+//     position: fixed;
+//     top: 100px;
+//     right: 100px;
+//     display: block;
+//   }
+// }

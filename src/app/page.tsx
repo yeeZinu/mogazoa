@@ -1,4 +1,4 @@
-import ProductCategory from "@/app/home/ProductCategory/ProductCategory";
+import Main from "@/app/_home/components/Main/Main";
 import styles from "./page.module.scss";
 
 async function getData() {
@@ -16,7 +16,9 @@ export default async function Home() {
 
   return (
     <div className={styles.container}>
-      <ProductCategory categories={categories} />
+      <div className={styles.content}>
+        <Main categories={categories} />
+      </div>
     </div>
   );
 }
