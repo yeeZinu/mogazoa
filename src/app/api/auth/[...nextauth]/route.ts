@@ -41,6 +41,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     CredentialsProvider({
+      id: "EasySignUp",
       name: "EasySignUp",
       credentials: {
         nickname: { label: "닉네임", type: "text" },
