@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonHTMLAttributes } from "react";
 import cn from "@/utils/classNames";
 import styles from "./Button.module.scss";
 
@@ -8,7 +9,7 @@ type ButtonProps = {
   styleType: "primary" | "secondary" | "tertiary";
   disabled: boolean;
   className: string;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function Button({ children, styleType, disabled = false, className, ...rest }: ButtonProps) {
   return (
