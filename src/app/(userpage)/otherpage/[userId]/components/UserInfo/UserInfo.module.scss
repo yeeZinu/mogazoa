@@ -1,0 +1,64 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 340px;
+  padding: 30px 20px;
+
+  gap: 40px;
+
+  border-radius: 12px;
+  border: 1px solid $gray-300;
+  background-color: $black-200;
+}
+
+.descriptionBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  p {
+    @include text-xl;
+    color: $white-100;
+  }
+}
+
+.followBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 184px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    :nth-child(1) {
+      color: $white-100;
+      font-size: 20px;
+      font-weight: 600px;
+    }
+
+    :nth-child(2) {
+      color: $gray-100;
+      @include text-normal;
+      @include font-normal;
+    }
+  }
+}
+
+.buttonWidth {
+  width: 300px;
+}
