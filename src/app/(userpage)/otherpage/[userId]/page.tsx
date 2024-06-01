@@ -21,7 +21,7 @@ export default function OtherPage() {
         안녕하세요, 별점의 화신 surisuri마수리입니다'
         follower={762}
         folloing={102}
-        isfollow
+        isfollow={false}
       />
     </div>
   );
