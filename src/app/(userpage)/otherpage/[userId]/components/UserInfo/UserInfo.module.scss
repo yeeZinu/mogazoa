@@ -15,6 +15,17 @@
   border-radius: 12px;
   border: 1px solid $gray-300;
   background-color: $black-200;
+
+  @include respond-to(tablet) {
+    width: 509px;
+    padding: 30px;
+
+    gap: 30px;
+  }
+
+  @include respond-to(mobile) {
+    width: 335px;
+  }
 }
 
 .descriptionBox {
@@ -28,6 +39,14 @@
   p {
     @include text-xl;
     color: $white-100;
+  }
+
+  @include respond-to(tablet) {
+    gap: 10px;
+
+    p {
+      font-size: 20px;
+    }
   }
 }
 
@@ -56,5 +75,22 @@
       @include text-normal;
       @include font-normal;
     }
+  }
+
+  @include respond-to(tablet) {
+    width: 234px;
+
+    div {
+      :nth-child(1) {
+        font-size: 18px;
+      }
+      :nth-child(2) {
+        @include text-sm;
+      }
+    }
+  }
+
+  @include respond-to(mobile) {
+    width: 194px;
   }
 }
