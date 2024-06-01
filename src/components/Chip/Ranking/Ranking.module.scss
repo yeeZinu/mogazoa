@@ -3,12 +3,13 @@
 
 .container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  border-radius: 5rem;
+  justify-content: center;
   width: 3.2rem;
   height: 1.8rem;
   font-size: 1.2rem;
+  border-radius: 5rem;
+
   @include respond-to(mobile) {
     width: 2.6rem;
     height: 1.6rem;
@@ -18,16 +19,19 @@
 
 .first {
   color: $pink-100;
-  background-color: rgba(255, 47, 158, 0.1);
+  background-color: rgb(255 47 158 / 10%);
 }
+
 .second {
   color: $green-100;
-  background-color: rgba(5, 213, 139, 0.1);
+  background-color: rgb(5 213 139 / 10%);
 }
+
 .third {
   color: $gray-100;
-  background-color: rgba(255, 200, 60, 0.1);
+  background-color: rgb(255 200 60 / 10%);
 }
+
 .default {
   display: none;
 }
