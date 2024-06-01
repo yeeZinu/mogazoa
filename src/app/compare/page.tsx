@@ -33,9 +33,14 @@ function ComparePage() {
       </div>
       {compare && (
         <div className={styles.compare}>
-          <div>
-            <div>Air Pods Max 상품이 승리하였습니다!</div>
-            <div>6가지 항목 중 3가지 항목에서 우세합니다.</div>
+          <div className={styles.resultBox}>
+            <div className={styles.result}>
+              <div>
+                <span className={styles.colorText}>Air Pods Max</span> 상품이
+              </div>
+              <div>승리하였습니다!</div>
+            </div>
+            <div className={styles.reason}>6가지 항목 중 3가지 항목에서 우세합니다.</div>
           </div>
           <table className={styles.table}>
             <thead>
