@@ -1,31 +1,102 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Compare } from "@/components/Chip/Compare/Compare";
 import { LOADING_LARGE_IMAGE } from "@/utils/constant";
 import styles from "./compare.module.scss";
 
 function ComparePage() {
   const [compare, setCompare] = useState(false);
+  const [chips, setChips] = useState<{ product1: string; product2: string }>({ product1: "", product2: "" });
+  const [inputValue1, setInputValue1] = useState("");
+  const [inputValue2, setInputValue2] = useState("");
+  const [isFocused1, setIsFocused1] = useState(false);
+  const [isFocused2, setIsFocused2] = useState(false);
+  const inputRef1 = useRef<HTMLInputElement>(null);
+  const inputRef2 = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    localStorage.setItem("chips", JSON.stringify(chips));
+  }, [chips]);
+
+  const handleKeyDown = (product: "product1" | "product2") => (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const value = (e.target as HTMLInputElement).value.trim();
+      if (value !== "") {
+        setChips((prevChips) => ({ ...prevChips, [product]: value }));
+        if (product === "product1") {
+          setInputValue1("");
+          if (inputRef1.current) {
+            inputRef1.current.blur();
+          }
+        } else {
+          setInputValue2("");
+          if (inputRef2.current) {
+            inputRef2.current.blur();
+          }
+        }
+      }
+    }
+  };
+  const removeChip = (product: "product1" | "product2") => () => {
+    setChips((prevChips) => {
+      const newChips = { ...prevChips, [product]: undefined };
+      window.localStorage.setItem("chips", JSON.stringify(newChips));
+      return newChips;
+    });
+  };
 
   return (
     <div className={styles.background}>
       <div className={styles.content}>
         <div>
           <div className={styles.text}>상품 1</div>
-          <input
-            type='search'
-            className={styles.input}
-            placeholder='상품명을 입력하세요.'
-          />
+          <div className={styles.inputBox}>
+            <div className={styles.compareChip}>
+              {!isFocused1 && chips.product1 && (
+                <Compare
+                  value={chips.product1}
+                  onRemove={removeChip("product1")}
+                  color
+                />
+              )}
+            </div>
+            <input
+              ref={inputRef1}
+              type='search'
+              className={styles.input}
+              value={inputValue1}
+              onKeyDown={handleKeyDown("product1")}
+              onChange={(e) => setInputValue1(e.target.value)}
+              onFocus={() => setIsFocused1(true)}
+              onBlur={() => setIsFocused1(false)}
+            />
+          </div>
         </div>
         <div>
           <div className={styles.text}>상품 2</div>
-          <input
-            type='search'
-            className={styles.input}
-            placeholder='상품명을 입력하세요.'
-          />
+          <div className={styles.inputBox}>
+            <div className={styles.compareChip}>
+              {!isFocused2 && chips.product2 && (
+                <Compare
+                  value={chips.product2}
+                  onRemove={removeChip("product2")}
+                />
+              )}
+            </div>
+            <input
+              ref={inputRef2}
+              type='search'
+              className={styles.input}
+              value={inputValue2}
+              onKeyDown={handleKeyDown("product2")}
+              onChange={(e) => setInputValue2(e.target.value)}
+              onFocus={() => setIsFocused2(true)}
+              onBlur={() => setIsFocused2(false)}
+            />
+          </div>
         </div>
         <button
           type='button'

@@ -36,6 +36,18 @@
     padding-top: 30px;
   }
 }
+.inputBox {
+  position: relative;
+}
+.compareChip {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  @include respond-to(tablet) {
+    top: 11px;
+    left: 13px;
+  }
+}
 
 .input {
   gap: 10px;

@@ -1,10 +1,6 @@
 @import "@/styles/_index";
 @import "@/styles/_media";
 
-.back {
-  background-color: black;
-}
-
 .container {
   display: flex;
   gap: 10px;
@@ -20,6 +16,7 @@
   padding: 2px;
   background-color: rgb(0 0 0 / 50%);
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .compare1 {
