@@ -1,0 +1,51 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  gap: 10px;
+
+  .detailBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .userTitle,
+    .userDescItem {
+      display: flex;
+      gap: 5px;
+      text-align: center;
+    }
+
+    .userTitle {
+      align-items: center;
+    }
+
+    .userNickname {
+      color: $white-100;
+
+      @include text-normal;
+      @include font-normal;
+
+      @include respond-to(tablet) {
+        @include text-sm;
+      }
+    }
+
+    .userDesc {
+      display: flex;
+      gap: 15px;
+
+      .userDescItem span {
+        @include text-sm;
+        @include font-light;
+
+        color: $gray-200;
+
+        @include respond-to(tablet) {
+          @include text-xs;
+        }
+      }
+    }
+  }
+}
