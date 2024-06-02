@@ -24,7 +24,7 @@ export default function CategoryList({ selected, onClick, categoryList }: Catego
         <li key={id}>
           <div
             role='button'
-            className={cn(styles.item, selected === name && styles.selected)}
+            className={cn(styles.item, selected === id.toString() && styles.selected)}
             onClick={() => onClick(id, name)}
             onKeyDown={() => onClick(id, name)}
             tabIndex={0}

@@ -1,7 +1,7 @@
-import ProductList from "@/app/_home/components/Product/ProductList/ProductList";
+import { ProductList } from "@/app/_home/components/Products/ProductList";
 import { list } from "@/app/_home/mock";
 import cn from "@/utils/classNames";
-import styles from "./Product.module.scss";
+import styles from "./PopularProducts.module.scss";
 
 export default function Product() {
   return (

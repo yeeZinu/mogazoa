@@ -4,10 +4,11 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import Category from "@/app/_home/components/Category/Category";
 import CategoryList from "@/app/_home/components/Category/CategoryList";
-import Product from "@/app/_home/components/Product/Product";
+import FilteredProducts from "@/app/_home/components/Products/FilteredProducts/FilteredProducts";
+import PopularProduct from "@/app/_home/components/Products/PopularProducts/PopularProducts";
 import { ReviewerRanking } from "@/app/_home/components/ReviewerRanking";
 import cn from "@/utils/classNames";
-import createQueryString from "@/utils/createQueryString";
+import { createQueryString, deleteQueryString } from "@/utils/createQueryString";
 import styles from "./Main.module.scss";
 
 type CategoryType = {
@@ -18,7 +19,7 @@ type CategoryType = {
 };
 
 export default function Main({ categories }: { categories: CategoryType[] }) {
-  const [selectedCategory, setSelectedCategory] = useState<null | string>(null);
+  const [selectedCategory, setSelectedCategory] = useState<null | Pick<CategoryType, "id" | "name">>(null);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -28,16 +29,20 @@ export default function Main({ categories }: { categories: CategoryType[] }) {
   };
 
   const handleClick = (id: number, name: string) => {
-    if (selectedCategory === name) {
+    if (selectedCategory?.name === name) {
       setSelectedCategory(null);
+      router.push(`/?${deleteQueryString("category", searchParams)}`);
     } else {
-      setSelectedCategory(name);
+      setSelectedCategory({ id, name });
+      router.push(`/?${createQueryString("category", id.toString(), searchParams)}`);
     }
 
     toggleCategory();
-
-    router.push(`/?${createQueryString("category", id.toString(), searchParams)}`);
   };
+
+  const hasQueryParams = Array.from(searchParams.entries()).length > 0;
+  const category = searchParams.get("category");
+
   return (
     <div className={cn(styles.container)}>
       {/* <button
@@ -52,14 +57,14 @@ export default function Main({ categories }: { categories: CategoryType[] }) {
         onToggle={toggleCategory}
       >
         <CategoryList
-          selected={selectedCategory}
+          selected={category}
           onClick={handleClick}
           categoryList={categories}
         />
       </Category>
 
       <div className={styles.mainAndRightSide}>
-        <Product />
+        {hasQueryParams ? <FilteredProducts selectedCategory={selectedCategory?.name ?? null} /> : <PopularProduct />}
         <ReviewerRanking />
       </div>
     </div>

@@ -9,7 +9,7 @@ import styles from "./Gnb.module.scss";
 import { SearchInput } from "./SearchInput";
 
 export default function Gnb() {
-  const [isInputOpen, setInputOpen] = useState(true);
+  const [isInputOpen, setInputOpen] = useState(false);
 
   const handleClick = () => {
     setInputOpen(!isInputOpen);

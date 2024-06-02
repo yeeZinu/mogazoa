@@ -1,0 +1,32 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  width: 100%;
+}
+
+.content {
+  padding: 60px 60px 20px 90px;
+
+  @include respond-to(tablet) {
+    padding-left: 25px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 60px 20px 20px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.headerText {
+  @include text-xl;
+
+  font-weight: 600;
+  color: $white-100;
+}

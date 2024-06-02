@@ -20,7 +20,7 @@ export default function Category({ isOpen, onToggle, children }: CategoryProps) 
         src={CLOSE_ICON}
         width={18}
         height={18}
-        alt='close'
+        alt='닫기'
         onClick={onToggle}
       />
       <div className={cn(styles.category)}>카테고리</div>
