@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState } from "react";
+import { LOADING_LARGE_IMAGE } from "@/utils/constant";
 import styles from "./compare.module.scss";
 
 function ComparePage() {
@@ -14,6 +16,7 @@ function ComparePage() {
           <input
             type='search'
             className={styles.input}
+            placeholder='상품명을 입력하세요.'
           />
         </div>
         <div>
@@ -21,6 +24,7 @@ function ComparePage() {
           <input
             type='search'
             className={styles.input}
+            placeholder='상품명을 입력하세요.'
           />
         </div>
         <button
@@ -31,7 +35,7 @@ function ComparePage() {
           비교하기
         </button>
       </div>
-      {compare && (
+      {compare ? (
         <div className={styles.compare}>
           <div className={styles.resultBox}>
             <div className={styles.result}>
@@ -90,6 +94,15 @@ function ComparePage() {
               </tr>
             </tbody>
           </table>
+        </div>
+      ) : (
+        <div className={styles.loading}>
+          <Image
+            src={LOADING_LARGE_IMAGE}
+            alt='loading'
+            width={87}
+            height={84}
+          />
         </div>
       )}
     </div>
