@@ -3,9 +3,9 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { ProductList } from "@/app/_home/components/Products/ProductList";
-import { QUERY } from "@/app/_home/constants";
-import { list } from "@/app/_home/mock";
+import { ProductList } from "@/_home/components/Products/ProductList";
+import { QUERY } from "@/_home/constants";
+import { list } from "@/_home/mock";
 import { Dropdown } from "@/components/Dropdown";
 import { ORDER, DROPDOWN } from "@/components/Dropdown/constants";
 import cn from "@/utils/classNames";

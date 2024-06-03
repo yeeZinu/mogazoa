@@ -1,1 +1,1 @@
-export { default as FilteredProduct } from "./FilteredProducts";
+export { default as FilteredProducts } from "./FilteredProducts";

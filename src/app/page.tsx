@@ -1,4 +1,4 @@
-import Main from "@/app/_home/components/Main/Main";
+import { Main } from "@/_home/components/Main";
 import { ranking } from "@/app/_home/mock";
 import styles from "./page.module.scss";
 

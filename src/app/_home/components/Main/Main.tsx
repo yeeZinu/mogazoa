@@ -2,17 +2,15 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import Category from "@/app/_home/components/Category/Category";
-import CategoryList from "@/app/_home/components/Category/CategoryList";
-import FilteredProducts from "@/app/_home/components/Products/FilteredProducts/FilteredProducts";
-import PopularProduct from "@/app/_home/components/Products/PopularProducts/PopularProducts";
-import { ReviewerRanking } from "@/app/_home/components/ReviewerRanking";
-import { QUERY } from "@/app/_home/constants";
+import { Category, CategoryList } from "@/_home/components/Category";
+import { PopularProducts, FilteredProducts } from "@/_home/components/Products";
+import { ReviewerRanking } from "@/_home/components/ReviewerRanking";
+import { QUERY } from "@/_home/constants";
 import CategoryFilter from "@/components/Chip/Category-filter/CategoryFilter";
 import cn from "@/utils/classNames";
 import { createQueryString, deleteQueryString } from "@/utils/createQueryString";
 import styles from "./Main.module.scss";
-import type { CategoryType } from "@/app/_home/types";
+import type { CategoryType } from "@/_home/types";
 import type { UserRankingType } from "@/types/global";
 
 type MainProps = {
@@ -59,7 +57,7 @@ export default function Main({ categories, ranking }: MainProps) {
       </Category>
 
       <div className={styles.content}>
-        {hasQueryParams ? <FilteredProducts selectedCategory={selectedCategory?.name ?? null} /> : <PopularProduct />}
+        {hasQueryParams ? <FilteredProducts selectedCategory={selectedCategory?.name ?? null} /> : <PopularProducts />}
         <button
           type='button'
           className={cn(styles.categoryToggle)}
