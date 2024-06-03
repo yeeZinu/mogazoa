@@ -4,15 +4,17 @@
 .container {
   display: flex;
   align-items: center;
-  border-radius: 3.2rem;
   width: 2.2rem;
   height: 1.2rem;
+  border-radius: 3.2rem;
+
   @include text-xs;
   @include font-normal;
 
   @include respond-to(tablet) {
     width: 1.7rem;
     height: 1rem;
+
     @include text-xxs;
   }
 }

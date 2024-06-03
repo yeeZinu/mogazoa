@@ -5,13 +5,15 @@
   position: relative;
   width: 100%;
   min-height: calc(100vh - 85px);
-  overflow: auto;
-  background-color: $bg-black-100;
-  color: $white-100;
   padding-bottom: 50px;
+  overflow: auto;
+  color: $white-100;
+  background-color: $bg-black-100;
+
   @include respond-to(tablet) {
     min-height: calc(100vh - 78px);
   }
+
   @include respond-to(mobile) {
     min-height: calc(100vh - 68px);
   }
@@ -36,13 +38,16 @@
     padding-top: 30px;
   }
 }
+
 .inputBox {
   position: relative;
 }
+
 .compareChip {
   position: absolute;
   top: 20px;
   left: 20px;
+
   @include respond-to(tablet) {
     top: 11px;
     left: 13px;
@@ -202,14 +207,17 @@
 .loser {
   color: $pink-100;
 }
+
 .loading {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-height: calc(100vh - 255px);
+
   @include respond-to(tablet) {
     min-height: calc(100vh - 248px);
   }
+
   @include respond-to(mobile) {
     min-height: calc(100vh - 380px);
   }
