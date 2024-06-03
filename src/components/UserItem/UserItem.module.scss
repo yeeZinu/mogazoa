@@ -4,6 +4,7 @@
 .container {
   display: flex;
   gap: 10px;
+  white-space: nowrap;
 
   .detailBox {
     display: flex;
