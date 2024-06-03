@@ -4,15 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import cn from "@/utils/classNames";
-import { LOGO_IMAGE, MENU_TOGGLE_ICON } from "@/utils/constant";
+import { LOGO_IMAGE, MENU_TOGGLE_ICON, CLOSE_ICON } from "@/utils/constant";
 import styles from "./Gnb.module.scss";
 import { SearchInput } from "./SearchInput";
 
 export default function Gnb() {
-  const [isInputOpen, setInputOpen] = useState(true);
+  const [isInputOpen, setInputOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const handleClick = () => {
+  const handleSearchClick = () => {
     setInputOpen(!isInputOpen);
+  };
+
+  const handleMenuClick = () => {
+    setMenuOpen(!isMenuOpen);
   };
 
   // TODO: 로그인 상태 가져오기
@@ -26,6 +31,7 @@ export default function Gnb() {
         width={24}
         height={24}
         alt='메뉴'
+        onClick={handleMenuClick}
       />
 
       <div className={styles.logoBox}>
@@ -43,20 +49,32 @@ export default function Gnb() {
       <div className={styles.actionBox}>
         <SearchInput
           isOpen={isInputOpen}
-          onClick={handleClick}
+          onClick={handleSearchClick}
         />
 
-        {isLogin ? (
-          <div className={styles.userAction}>
-            <Link href='/compare'>비교하기</Link>
-            <Link href='/mypage'>내 프로필</Link>
+        <div className={cn(styles.sidebar, isMenuOpen && styles.open)}>
+          <Image
+            className={cn(styles.closeIcon)}
+            src={CLOSE_ICON}
+            width={18}
+            height={18}
+            alt='닫기'
+            onClick={handleMenuClick}
+          />
+          <div className={cn(styles.userAction, isMenuOpen && styles.open)}>
+            {isLogin ? (
+              <>
+                <Link href='/compare'>비교하기</Link>
+                <Link href='/mypage'>내 프로필</Link>
+              </>
+            ) : (
+              <>
+                <Link href='/signin'>로그인</Link>
+                <Link href='/signup'>회원가입</Link>
+              </>
+            )}
           </div>
-        ) : (
-          <div className={styles.userAction}>
-            <Link href='/signin'>로그인</Link>
-            <Link href='/signup'>회원가입</Link>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );
