@@ -1,0 +1,13 @@
+@import "@/styles/_index";
+
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: $bg-black-100;
+
+  .main {
+    display: flex;
+    justify-content: center;
+    color: $white-100;
+  }
+}

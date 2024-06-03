@@ -3,34 +3,31 @@
 import Image from "next/image";
 import { useState } from "react";
 import { STAR_ACTIVE_ICON, DEFAULT_PRODUCT_IMAGE } from "@/utils/constant";
-import styles from "./Product.module.scss";
+import styles from "./ProductCard.module.scss";
+import type { ProductType } from "@/types/global";
 
 type ProductProps = {
-  product: {
-    name: string;
-    reviewCount: number;
-    favoriteCount: number;
-    rating: number;
-    image: string;
-  };
+  product: ProductType;
 };
 
-export default function Product({ product }: ProductProps) {
-  const { name, reviewCount, favoriteCount, rating, image: imageUrl } = product;
+export default function ProductCard({ product }: ProductProps) {
+  const { id, name, reviewCount, favoriteCount, rating, image: imageUrl } = product;
 
   const [isImageError, setIsImageError] = useState(false);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.imageBox}>
-        <Image
-          src={isImageError ? DEFAULT_PRODUCT_IMAGE : imageUrl}
-          fill
-          alt={`${name}`}
-          className={styles.image}
-          onError={() => setIsImageError(true)}
-        />
-      </div>
+    <div
+      key={id}
+      className={styles.container}
+    >
+      <Image
+        src={isImageError ? DEFAULT_PRODUCT_IMAGE : imageUrl}
+        width={284}
+        height={200}
+        alt={`${name}`}
+        className={styles.image}
+        onError={() => setIsImageError(true)}
+      />
 
       <div className={styles.infoBox}>
         <div className={styles.name}>{name}</div>

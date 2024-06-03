@@ -1,0 +1,14 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+
+  @include respond-to(tablet) {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+}
