@@ -1,0 +1,23 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.buttonBox {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 40px;
+}
+
+.selectButton {
+  all: unset;
+}
+
+.active {
+  color: red;
+}
