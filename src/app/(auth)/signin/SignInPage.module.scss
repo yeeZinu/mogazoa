@@ -1,0 +1,20 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .button {
+    width: auto;
+  }
+}
