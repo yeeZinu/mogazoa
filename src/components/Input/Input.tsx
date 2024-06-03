@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import cn from "@/utils/classNames";
 import { EYE_OFF_ICON, EYE_ON_ICON } from "@/utils/constant";
 import styles from "./Input.module.scss";
@@ -23,7 +23,7 @@ export default function Input({
   name,
   label,
   type,
-  placeholder = "",
+  placeholder,
   required,
   minLength,
   maxLength,
@@ -33,7 +33,7 @@ export default function Input({
   const {
     register,
     formState: { errors },
-  } = useForm({ mode: "onBlur" });
+  } = useFormContext();
 
   const [showPassword, setShowPassword] = useState(false);
   const handleEyeIconClick = () => setShowPassword((prev: boolean) => !prev);
