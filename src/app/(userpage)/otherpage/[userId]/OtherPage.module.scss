@@ -3,7 +3,32 @@
 
 .container {
   display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 60px;
+}
+
+.activity {
+  display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  width: 940px;
+  gap: 80px;
+}
+
+.activityDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
+  gap: 20px;
+}
+
+.activityDetailText {
+  padding-bottom: 30px;
+  font-size: 20px;
+  font-weight: 600;
 }
