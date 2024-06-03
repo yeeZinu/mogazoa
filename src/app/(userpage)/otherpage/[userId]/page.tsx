@@ -23,6 +23,7 @@ export default function OtherPage() {
         folloing={102}
         isfollow={false}
       />
+      <div>hi</div>
     </div>
   );
 }
