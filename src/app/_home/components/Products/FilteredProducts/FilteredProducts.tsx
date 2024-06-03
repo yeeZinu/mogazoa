@@ -1,12 +1,15 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ProductList } from "@/app/_home/components/Products/ProductList";
+import { QUERY } from "@/app/_home/constants";
 import { list } from "@/app/_home/mock";
 import { Dropdown } from "@/components/Dropdown";
 import { ORDER, DROPDOWN } from "@/components/Dropdown/constants";
 import cn from "@/utils/classNames";
+import { createQueryString } from "@/utils/createQueryString";
 import styles from "./FilteredProducts.module.scss";
 
 type FilteredProductsProps = {
@@ -15,17 +18,24 @@ type FilteredProductsProps = {
 
 export default function FilteredProducts({ selectedCategory }: FilteredProductsProps) {
   const searchParams = useSearchParams();
-  const category = searchParams.get("category");
-  const search = searchParams.get("search");
+  const router = useRouter();
+  const category = searchParams.get(QUERY.CATEGORY);
+  const keyword = searchParams.get(QUERY.KEYWORD);
 
-  const { control } = useForm({ mode: "onBlur" });
+  const { control, watch } = useForm({ mode: "onBlur" });
+
+  useEffect(() => {
+    if (watch("order")) {
+      router.push(`/?${createQueryString(QUERY.ORDER, watch("order"), searchParams)}`);
+    }
+  }, [watch("order")]);
 
   let filteringText = "";
 
-  if (category && search) {
-    filteringText = `${selectedCategory} 카테고리의 ${search}로 검색한 상품`;
-  } else if (search) {
-    filteringText = `${search}로 검색한 상품`;
+  if (category && keyword) {
+    filteringText = `${selectedCategory} 카테고리의 ${keyword}로 검색한 상품`;
+  } else if (keyword) {
+    filteringText = `${keyword}로 검색한 상품`;
   } else if (category) {
     filteringText = `${selectedCategory}의 모든 상품`;
   }
@@ -38,7 +48,7 @@ export default function FilteredProducts({ selectedCategory }: FilteredProductsP
           <Dropdown
             items={ORDER.PRODUCT}
             control={control}
-            name='sort'
+            name='order'
             variant={DROPDOWN.ORDER}
             placeholder={ORDER.PRODUCT[0].option}
           />

@@ -53,6 +53,7 @@
   @include respond-to(mobile) {
     position: static;
     display: block;
+    cursor: pointer;
   }
 }
 
@@ -87,5 +88,57 @@
 
   @include respond-to(mobile) {
     display: none;
+
+    &.open {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding-top: 40px;
+      color: $white-100;
+
+      @include text-normal;
+    }
+  }
+}
+
+@keyframes sidebar-open {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.sidebar {
+  @include respond-to(mobile) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    display: none;
+    width: 250px;
+    padding: 23px 20px;
+    background-color: $black-400;
+    transform: translateX(-100%);
+
+    &.open {
+      display: block;
+      animation: sidebar-open 0.5s forwards;
+    }
+  }
+}
+
+.closeIcon {
+  display: none;
+
+  @include respond-to(mobile) {
+    position: absolute;
+    top: 23px;
+    left: 20px;
+    display: block;
+    cursor: pointer;
   }
 }

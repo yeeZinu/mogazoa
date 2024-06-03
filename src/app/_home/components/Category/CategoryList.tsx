@@ -1,12 +1,6 @@
 import cn from "@/utils/classNames";
 import styles from "./CategoryList.module.scss";
-
-type CategoryType = {
-  id: number;
-  name: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import type { CategoryType } from "@/app/_home/types";
 
 type CategoryListProps = {
   selected: null | string;

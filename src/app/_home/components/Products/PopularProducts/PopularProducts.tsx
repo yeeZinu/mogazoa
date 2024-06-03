@@ -3,7 +3,7 @@ import { list } from "@/app/_home/mock";
 import cn from "@/utils/classNames";
 import styles from "./PopularProducts.module.scss";
 
-export default function Product() {
+export default function PopularProducts() {
   return (
     <div className={cn(styles.container)}>
       <div className={cn(styles.section)}>

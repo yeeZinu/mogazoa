@@ -24,7 +24,7 @@ export default function SearchInput({ isOpen, onClick }: SearchInputProps) {
   const { register, handleSubmit } = useForm<KeywordType>();
 
   const onSubmit: SubmitHandler<KeywordType> = ({ keyword }) => {
-    router.push(`/?${createQueryString("search", keyword, searchParams)}`);
+    router.push(`/?${createQueryString("keyword", keyword, searchParams)}`);
   };
 
   return (

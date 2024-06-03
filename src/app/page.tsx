@@ -1,6 +1,8 @@
 import Main from "@/app/_home/components/Main/Main";
+import { ranking } from "@/app/_home/mock";
 import styles from "./page.module.scss";
 
+// TODO: hook으로 분리
 async function getData() {
   const res = await fetch("https://mogazoa-api.vercel.app/20/categories");
 
@@ -11,13 +13,18 @@ async function getData() {
   return res.json();
 }
 
+// TODO: data fetch (ranking)
+
 export default async function Home() {
   const categories = await getData();
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <Main categories={categories} />
+        <Main
+          categories={categories}
+          ranking={ranking}
+        />
       </div>
     </div>
   );

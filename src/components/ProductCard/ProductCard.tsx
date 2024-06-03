@@ -11,12 +11,15 @@ type ProductProps = {
 };
 
 export default function ProductCard({ product }: ProductProps) {
-  const { name, reviewCount, favoriteCount, rating, image: imageUrl } = product;
+  const { id, name, reviewCount, favoriteCount, rating, image: imageUrl } = product;
 
   const [isImageError, setIsImageError] = useState(false);
 
   return (
-    <div className={styles.container}>
+    <div
+      key={id}
+      className={styles.container}
+    >
       <Image
         src={isImageError ? DEFAULT_PRODUCT_IMAGE : imageUrl}
         width={284}

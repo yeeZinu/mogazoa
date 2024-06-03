@@ -1,5 +1,63 @@
 import { DEFAULT_PRODUCT_IMAGE } from "@/utils/constant";
 
+export const ranking = [
+  {
+    updatedAt: "2024-06-02T23:43:28.042Z",
+    createdAt: "2024-06-02T23:43:28.042Z",
+    teamId: "string",
+    image: "",
+    description: "string",
+    nickname: "일등",
+    id: 1,
+    reviewCount: 5,
+    followersCount: 100,
+  },
+  {
+    updatedAt: "2024-06-02T23:43:28.042Z",
+    createdAt: "2024-06-02T23:43:28.042Z",
+    teamId: "string",
+    image: "",
+    description: "string",
+    nickname: "string",
+    id: 2,
+    reviewCount: 4,
+    followersCount: 4,
+  },
+  {
+    updatedAt: "2024-06-02T23:43:28.042Z",
+    createdAt: "2024-06-02T23:43:28.042Z",
+    teamId: "string",
+    image: "",
+    description: "string",
+    nickname: "string",
+    id: 3,
+    reviewCount: 3,
+    followersCount: 3,
+  },
+  {
+    updatedAt: "2024-06-02T23:43:28.042Z",
+    createdAt: "2024-06-02T23:43:28.042Z",
+    teamId: "string",
+    image: "",
+    description: "string",
+    nickname: "string",
+    id: 4,
+    reviewCount: 2,
+    followersCount: 2,
+  },
+  {
+    updatedAt: "2024-06-02T23:43:28.042Z",
+    createdAt: "2024-06-02T23:43:28.042Z",
+    teamId: "string",
+    image: "",
+    description: "string",
+    nickname: "string",
+    id: 5,
+    reviewCount: 1,
+    followersCount: 1,
+  },
+];
+
 export const list = [
   {
     updatedAt: new Date("2024-05-30T09:41:57.081Z"),
@@ -23,7 +81,7 @@ export const list = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 2,
   },
   {
     updatedAt: new Date("2024-05-30T09:41:57.081Z"),
@@ -35,7 +93,7 @@ export const list = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 3,
   },
   {
     updatedAt: new Date("2024-05-30T09:41:57.081Z"),
@@ -47,7 +105,7 @@ export const list = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 4,
   },
   {
     updatedAt: new Date("2024-05-30T09:41:57.081Z"),
@@ -59,7 +117,7 @@ export const list = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 5,
   },
   {
     updatedAt: new Date("2024-05-30T09:41:57.081Z"),
@@ -71,6 +129,6 @@ export const list = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 6,
   },
 ];
