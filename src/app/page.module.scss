@@ -1,0 +1,26 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: $bg-black-100;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  max-width: 1560px;
+  margin: 0 auto;
+}
+
+.categoryToggle {
+  display: none;
+
+  @include respond-to(mobile) {
+    position: fixed;
+    top: 100px;
+    right: 100px;
+    display: block;
+  }
+}

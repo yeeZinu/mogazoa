@@ -13,6 +13,8 @@ const RANKING_TYPE: RankingType<string> = {
   1: { style: "first" },
   2: { style: "second" },
   3: { style: "third" },
+  4: { style: "third" },
+  5: { style: "third" },
   default: { style: "default" },
 };
 
@@ -28,9 +30,5 @@ function Ranking({ children, ...rest }: RankingProps) {
     </div>
   );
 }
-
-Ranking.defaultProps = {
-  children: "default",
-};
 
 export default Ranking;
