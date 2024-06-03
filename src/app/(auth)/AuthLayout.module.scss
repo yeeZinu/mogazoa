@@ -4,11 +4,11 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 60px;
+  justify-content: center;
   width: 640px;
-  padding: 100px 0;
   min-height: calc(100vh - 88.5px);
+  padding: 100px 0;
 
   @include respond-to(tablet) {
     max-width: minmax(440px, calc(100% - 304px));

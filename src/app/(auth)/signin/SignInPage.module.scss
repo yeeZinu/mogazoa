@@ -4,14 +4,14 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 100%;
   gap: 20px;
+  width: 100%;
 
   label {
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap: 5px;
+    width: 100%;
   }
 
   .button {

@@ -3,59 +3,71 @@
 
 .container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: fit-content;
   height: 29px;
   padding: 4px 10px;
-  border-radius: 8px;
   font-size: 18px;
   font-weight: 500;
+  border-radius: 8px;
+
   @include respond-to(mobile) {
     padding: 4px 8px;
     font-size: 12px;
   }
 }
+
 .yellow {
-  background-color: rgba(197, 209, 124, 0.1);
   color: #c5d17c;
+  background-color: rgb(197 209 124 / 10%);
 }
+
 .red {
-  background-color: rgba(247, 86, 50, 0.1);
   color: #f75532;
+  background-color: rgb(247 86 50 / 10%);
 }
+
 .purple {
-  background-color: rgba(169, 83, 255, 0.1);
   color: #a953ff;
+  background-color: rgb(169 83 255 / 10%);
 }
+
 .green {
-  background-color: rgba(73, 175, 26, 0.1);
   color: #49af1a;
+  background-color: rgb(73 175 26 / 10%);
 }
+
 .pink {
-  background-color: rgba(214, 118, 193, 0.1);
   color: #d676c1;
+  background-color: rgb(214 118 193 / 10%);
 }
+
 .orange {
-  background-color: rgba(255, 126, 70, 0.1);
   color: #ff7e46;
+  background-color: rgb(255 126 70 / 10%);
 }
+
 .mint {
-  background-color: rgba(35, 181, 129, 0.1);
   color: #23b581;
+  background-color: rgb(35 181 129 / 10%);
 }
+
 .hotpink {
-  background-color: rgba(253, 82, 154, 0.1);
   color: #fd529a;
+  background-color: rgb(253 82 154 / 10%);
 }
+
 .navy {
-  background-color: rgba(117, 122, 255, 0.1);
   color: #757aff;
+  background-color: rgb(117 122 255 / 10%);
 }
+
 .blue {
-  background-color: rgba(48, 152, 227, 0.1);
   color: #3098e3;
+  background-color: rgb(48 152 227 / 10%);
 }
+
 .default {
   display: none;
 }
