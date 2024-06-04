@@ -2,22 +2,24 @@
 
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 5px;
+  align-items: center;
+  justify-content: center;
   width: fit-content;
   padding: 6px 12px;
-  border-radius: 100px;
-  border: 1px solid $gray-300;
-  background-color: $black-200;
-  color: $gray-100;
   font-size: 14px;
+  color: $gray-100;
   cursor: pointer;
-  @include respond-to(mibile) {
+  background-color: $black-200;
+  border: 1px solid $gray-300;
+  border-radius: 100px;
+
+  @include respond-to(mobile) {
     padding: 6px 10px;
     font-size: 12px;
   }
 }
+
 .active {
   color: #5363ff;
 }
