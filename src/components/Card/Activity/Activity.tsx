@@ -2,7 +2,7 @@
 /* eslint-disable react/require-default-props */ // type에 ? 연산자 추가하기 위한 주석
 import Image from "next/image";
 import React from "react";
-import Category from "@/components/Chip/Category/Category";
+import CategoryChip from "@/components/Chip/Category-chip/CategoryChip";
 import { STAR_ACTIVE_ICON, BUBBLE_ICON } from "@/utils/constant";
 import styles from "./Activity.module.scss";
 
@@ -50,7 +50,7 @@ export default function Activity({ title, averageRating, reviewCount, chipCatego
         <span>{namuji}</span>
       </div>
       {title === "관심 카테고리" ? (
-        <Category>{chipCategoty?.name}</Category>
+        <CategoryChip>{chipCategoty?.name}</CategoryChip>
       ) : (
         <div className={styles.contentBox}>
           <figure className={styles.imageBox}>

@@ -23,7 +23,7 @@ const CATEGORY_TYPE: CategoryType<string> = {
   default: { style: "default" },
 };
 
-function Category({ children, ...rest }: CategoryProps) {
+function CategoryChip({ children, ...rest }: CategoryProps) {
   const typeCheck = children ?? "default";
 
   return (
@@ -36,8 +36,8 @@ function Category({ children, ...rest }: CategoryProps) {
   );
 }
 
-Category.defaultProps = {
+CategoryChip.defaultProps = {
   children: "default",
 };
 
-export default Category;
+export default CategoryChip;
