@@ -4,27 +4,27 @@
 .container {
   display: flex;
   flex-direction: row;
+  gap: 50px;
   align-items: start;
   justify-content: center;
-  gap: 50px;
   margin-top: 60px;
 }
 
 .activity {
   display: flex;
   flex-direction: column;
+  gap: 80px;
   align-items: center;
   justify-content: flex-start;
   width: 940px;
-  gap: 80px;
 }
 
 .activityDetails {
   display: flex;
   flex-direction: row;
+  gap: 20px;
   align-items: center;
   justify-content: center;
-  gap: 20px;
 }
 
 .activityDetailText {

@@ -6,9 +6,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
   padding: 18px 25px;
   font-weight: 600;
+  border-radius: 8px;
 
   @include respond-to(mobile) {
     width: 100%;
@@ -20,41 +20,39 @@
 }
 
 .primary {
-  background: $blue-gradient;
   color: $white-100;
+  background: $blue-gradient;
 
   &:disabled {
+    color: $gray-200;
     pointer-events: none;
     background: $gray-300;
-    color: $gray-200;
   }
 }
 
 .secondary {
-  border: 1px solid var(--main-main_gradation, $blue-100);
-  background: var(--main-main_gradation, linear-gradient(91deg, $blue-100 0%, $blue-200 100%));
+  background: var($blue-200, linear-gradient(91deg, $blue-100 0%, $blue-200 100%));
   background-clip: text;
-  -webkit-background-clip: text;
+  border: 1px solid var($blue-200, $blue-100);
   -webkit-text-fill-color: transparent;
 
   &:disabled {
     pointer-events: none;
-    border: 1px solid $gray-300;
     background: $gray-200;
     background-clip: text;
-    -webkit-background-clip: text;
+    border: 1px solid $gray-300;
     -webkit-text-fill-color: transparent;
   }
 }
 
 .tertiary {
-  border: 1px solid $gray-100;
   color: $gray-100;
+  border: 1px solid $gray-100;
 
   &:disabled {
+    color: $gray-200;
     pointer-events: none;
     border: 1px solid $gray-300;
-    color: $gray-200;
   }
 }
 

@@ -3,11 +3,12 @@
 
 .container {
   width: 100%;
+  line-height: 22px;
   color: $gray-200;
+  word-break: break-word;
+
   @include text-normal;
   @include font-normal;
-  line-height: 22px;
-  word-break: break-word;
 
   @include respond-to(tablet){
     @include text-sm;
