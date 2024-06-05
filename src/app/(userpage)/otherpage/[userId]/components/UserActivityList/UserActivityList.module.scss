@@ -6,18 +6,3 @@
   flex-direction: column;
   width: 100%;
 }
-
-.buttonBox {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  justify-content: start;
-}
-
-.selectButton {
-  all: unset;
-}
-
-.active {
-  color: red;
-}

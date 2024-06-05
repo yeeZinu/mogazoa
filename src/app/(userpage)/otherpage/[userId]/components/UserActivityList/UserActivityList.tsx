@@ -1,50 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { productMock } from "@/app/(userpage)/productMock";
+import { Dropdown } from "@/components/Dropdown";
+import { ORDER, DROPDOWN } from "@/components/Dropdown/constants";
+import useWindowSize from "@/hooks/useWindowSize";
 import cn from "@/utils/classNames";
 import styles from "./UserActivityList.module.scss";
+// eslint-disable-next-line no-restricted-imports
+import TabButton from "../TabButton/TabButton";
 // eslint-disable-next-line no-restricted-imports
 import UserProductList from "../UserProductList/UserProductList";
 
 export default function UserActivityList() {
-  const [button, setButton] = useState<string>("reviewed");
+  const [selectedButton, setSelectedButton] = useState<string>("reviewed");
+  const { width } = useWindowSize();
+  const { control, watch } = useForm({ mode: "onBlur" });
+
+  useEffect(() => {
+    if (watch("select")) {
+      console.log("바뀜", watch("select"));
+    }
+  }, [watch("select")]);
+
+  const onSelectButtonHandler = (value: string) => {
+    setSelectedButton(value);
+  };
 
   return (
-    <div className={styles.container}>
-      <div className={cn(styles.buttonBox)}>
-        <div
-          className={cn(styles.selectButton, styles[`${button === "reviewed" ? "active" : ""}`])}
-          onClick={() => {
-            setButton("reviewed");
-          }}
-          onKeyDown={() => setButton("reviewed")}
-          role='button'
-          tabIndex={0}
-        >
-          리뷰 남긴 상품
+    <div className={cn(styles.container)}>
+      {width > 768 ? (
+        <TabButton
+          onSelectButton={onSelectButtonHandler}
+          button={selectedButton}
+        />
+      ) : (
+        <div>
+          <Dropdown
+            items={ORDER.PROFILE}
+            control={control}
+            name='select'
+            variant={DROPDOWN.ORDER}
+            placeholder={ORDER.PROFILE[0].option}
+          />
         </div>
-        <div
-          className={cn(styles.selectButton, styles[`${button === "created" ? "active" : ""}`])}
-          onClick={() => {
-            setButton("created");
-          }}
-          onKeyDown={() => setButton("created")}
-          role='button'
-          tabIndex={0}
-        >
-          등록한 상품
-        </div>
-        <div
-          className={cn(styles.selectButton, styles[`${button === "favorite" ? "active" : ""}`])}
-          onClick={() => {
-            setButton("favorite");
-          }}
-          onKeyDown={() => setButton("favorite")}
-          role='button'
-          tabIndex={0}
-        >
-          찜한 상품
-        </div>
-      </div>
+      )}
       <UserProductList list={productMock} />
     </div>
   );
