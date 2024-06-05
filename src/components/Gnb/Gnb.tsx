@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import cn from "@/utils/classNames";
 import { LOGO_IMAGE, MENU_TOGGLE_ICON, CLOSE_ICON } from "@/utils/constant";
@@ -12,6 +13,8 @@ export default function Gnb() {
   const [isInputOpen, setInputOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
+  const { status } = useSession();
+
   const handleSearchClick = () => {
     setInputOpen(!isInputOpen);
   };
@@ -19,9 +22,6 @@ export default function Gnb() {
   const handleMenuClick = () => {
     setMenuOpen(!isMenuOpen);
   };
-
-  // TODO: 로그인 상태 가져오기
-  const isLogin = true;
 
   return (
     <div className={styles.container}>
@@ -62,7 +62,7 @@ export default function Gnb() {
             onClick={handleMenuClick}
           />
           <div className={cn(styles.userAction, isMenuOpen && styles.open)}>
-            {isLogin ? (
+            {status === "authenticated" ? (
               <>
                 <Link href='/compare'>비교하기</Link>
                 <Link href='/mypage'>내 프로필</Link>
