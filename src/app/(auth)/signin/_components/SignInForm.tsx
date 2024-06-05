@@ -1,22 +1,49 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import styles from "./SignInForm.module.scss";
 
+type SignInFormData = {
+  email: string;
+  password: string;
+};
+
 export default function SignInForm() {
-  const methods = useForm({ mode: "onBlur" });
+  const methods = useForm<SignInFormData>({ mode: "onBlur" });
   const {
     handleSubmit,
     formState: { isValid },
+    setError,
   } = methods;
+  const router = useRouter();
 
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  const onSubmit = async (data: SignInFormData) => {
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    });
+
+    if (result?.ok) {
+      router.push("/");
+    } else {
+      console.log("로그인 실패");
+      setError("email", { type: "loginError", message: "이메일 혹은 비밀번호를 확인해주세요." });
+      setError("password", { type: "loginError" });
+    }
+  };
 
   return (
     <FormProvider {...methods}>
       <form
         className={styles.container}
-        onSubmit={handleSubmit(() => {})}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <Input
           name='email'
