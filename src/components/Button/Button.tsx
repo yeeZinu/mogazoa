@@ -7,11 +7,11 @@ import styles from "./Button.module.scss";
 type ButtonProps = {
   children: React.ReactNode;
   styleType: "primary" | "secondary" | "tertiary";
-  disabled: boolean;
-  className: string;
+  disabled?: boolean;
+  className?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function Button({ children, styleType, disabled = false, className, ...rest }: ButtonProps) {
+export default function Button({ children, styleType, disabled = false, className = "noStyle", ...rest }: ButtonProps) {
   return (
     // eslint-disable-next-line react/button-has-type
     <button
