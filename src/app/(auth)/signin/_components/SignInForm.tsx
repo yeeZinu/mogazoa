@@ -45,19 +45,23 @@ export default function SignInForm() {
         className={styles.container}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Input
-          name='email'
-          label='이메일'
-          type='email'
-          required='이메일은 필수 입력입니다.'
-          pattern={{ value: emailRegex, message: "이메일 형식으로 작성해주세요." }}
-        />
-        <Input
-          name='password'
-          label='비밀번호'
-          type='password'
-          required='비밀번호는 필수 입력입니다.'
-        />
+        <div className={styles.inputBox}>
+          <Input
+            name='email'
+            label='이메일'
+            type='email'
+            required='이메일은 필수 입력입니다.'
+            placeholder='이메일을 입력해 주세요'
+            pattern={{ value: emailRegex, message: "이메일 형식으로 작성해주세요." }}
+          />
+          <Input
+            name='password'
+            label='비밀번호'
+            type='password'
+            placeholder='비밀번호를 입력해 주세요'
+            required='비밀번호는 필수 입력입니다.'
+          />
+        </div>
         <Button
           styleType='primary'
           disabled={!isValid}
