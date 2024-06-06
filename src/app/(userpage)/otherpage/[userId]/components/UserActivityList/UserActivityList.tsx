@@ -17,7 +17,10 @@ export default function UserActivityList() {
   const { control, watch } = useForm({ mode: "onBlur" });
 
   useEffect(() => {
-    setSelectedButton(watch("select"));
+    if (watch("select") !== undefined) {
+      setSelectedButton(watch("select"));
+    }
+    setSelectedButton("reviewed");
   }, [watch("select")]);
 
   const onSelectButtonHandler = (value: string) => {
