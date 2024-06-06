@@ -31,14 +31,14 @@
   height: 68px;
 
   @include respond-to(tablet) {
-    padding: 10px 14px;
     gap: 15px;
     height: 60px;
+    padding: 10px 14px;
   }
 
   @include respond-to(mobile) {
-    padding: 0;
     height: 80px;
+    padding: 0;
   }
 }
 

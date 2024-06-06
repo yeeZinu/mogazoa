@@ -11,8 +11,8 @@
 
   @include respond-to(tablet) {
     flex-direction: column;
-    margin-top: 40px;
     align-items: center;
+    margin-top: 40px;
   }
 
   @include respond-to(mobile) {
@@ -55,8 +55,8 @@
   justify-content: center;
 
   @include respond-to(tablet) {
-    width: 509px;
     gap: 10px;
+    width: 509px;
   }
 
   @include respond-to(mobile) {
