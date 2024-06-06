@@ -1,4 +1,5 @@
 import React from "react";
+import { ORDER } from "@/components/Dropdown/constants";
 import cn from "@/utils/classNames";
 import styles from "./TabButton.module.scss";
 
@@ -7,42 +8,40 @@ type TabButtonProps = {
   onSelectButton: (value: string) => void;
 };
 
+type TabButtonComponentProps = {
+  children: React.ReactNode;
+  button: string;
+  onSelectButton: (value: string) => void;
+  active: string;
+};
+
+function TabButtonComponent({ children, button, onSelectButton, active }: TabButtonComponentProps) {
+  return (
+    <div
+      className={cn(styles.selectButton, styles[`${active === button ? "active" : ""}`])}
+      onClick={() => onSelectButton(active)}
+      onKeyDown={() => onSelectButton(active)}
+      role='button'
+      tabIndex={0}
+    >
+      <span>{children}</span>
+    </div>
+  );
+}
+
 export default function TabButton({ button, onSelectButton }: TabButtonProps) {
   return (
-    <div>
-      <div className={cn(styles.buttonBox)}>
-        <div
-          className={cn(styles.selectButton, styles[`${button === "reviewed" ? "active" : ""}`])}
-          onClick={() => onSelectButton("reviewed")}
-          onKeyDown={() => onSelectButton("reviewed")}
-          role='button'
-          tabIndex={0}
+    <div className={cn(styles.buttonBox)}>
+      {ORDER.PROFILE.map((profile) => (
+        <TabButtonComponent
+          key={profile.id}
+          button={button}
+          onSelectButton={onSelectButton}
+          active={profile.value}
         >
-          리뷰 남긴 상품
-        </div>
-        <div
-          className={cn(styles.selectButton, styles[`${button === "created" ? "active" : ""}`])}
-          onClick={() => {
-            onSelectButton("created");
-          }}
-          onKeyDown={() => onSelectButton("created")}
-          role='button'
-          tabIndex={0}
-        >
-          등록한 상품
-        </div>
-        <div
-          className={cn(styles.selectButton, styles[`${button === "favorite" ? "active" : ""}`])}
-          onClick={() => {
-            onSelectButton("favorite");
-          }}
-          onKeyDown={() => onSelectButton("favorite")}
-          role='button'
-          tabIndex={0}
-        >
-          찜한 상품
-        </div>
-      </div>
+          {profile.option}
+        </TabButtonComponent>
+      ))}
     </div>
   );
 }

@@ -23,7 +23,7 @@ export const productMock = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 2,
   },
   {
     updatedAt: new Date("2024-05-30T09:41:57.081Z"),
@@ -35,7 +35,7 @@ export const productMock = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 3,
   },
   {
     updatedAt: new Date("2024-05-30T09:41:57.081Z"),
@@ -47,7 +47,7 @@ export const productMock = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 4,
   },
   {
     updatedAt: new Date("2024-05-30T09:41:57.081Z"),
@@ -59,7 +59,7 @@ export const productMock = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 5,
   },
   {
     updatedAt: new Date("2024-05-30T09:41:57.081Z"),
@@ -71,7 +71,7 @@ export const productMock = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 6,
   },
   {
     updatedAt: new Date("2024-05-30T09:41:57.081Z"),
@@ -83,6 +83,6 @@ export const productMock = [
     rating: 0,
     image: `${DEFAULT_PRODUCT_IMAGE}`,
     name: "string",
-    id: 1,
+    id: 7,
   },
 ];

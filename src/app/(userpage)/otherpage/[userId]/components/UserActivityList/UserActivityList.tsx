@@ -17,9 +17,7 @@ export default function UserActivityList() {
   const { control, watch } = useForm({ mode: "onBlur" });
 
   useEffect(() => {
-    if (watch("select")) {
-      console.log("바뀜", watch("select"));
-    }
+    setSelectedButton(watch("select"));
   }, [watch("select")]);
 
   const onSelectButtonHandler = (value: string) => {
@@ -28,7 +26,7 @@ export default function UserActivityList() {
 
   return (
     <div className={cn(styles.container)}>
-      {width > 768 ? (
+      {width > 1023 ? (
         <TabButton
           onSelectButton={onSelectButtonHandler}
           button={selectedButton}

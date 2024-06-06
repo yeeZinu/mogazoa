@@ -4,10 +4,20 @@
 .container {
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 60px;
   align-items: start;
   justify-content: center;
   margin-top: 60px;
+
+  @include respond-to(tablet) {
+    flex-direction: column;
+    margin-top: 40px;
+    align-items: center;
+  }
+
+  @include respond-to(mobile) {
+    margin-top: 30px;
+  }
 }
 
 .activity {
@@ -17,6 +27,24 @@
   align-items: center;
   justify-content: flex-start;
   width: 940px;
+
+  @include respond-to(tablet) {
+    width: 509px;
+  }
+
+  @include respond-to(mobile) {
+    width: 335px;
+  }
+}
+
+.activityDetailText {
+  padding-bottom: 30px;
+  font-size: 20px;
+  font-weight: 600;
+
+  @include respond-to(tablet) {
+    font-size: 18px;
+  }
 }
 
 .activityDetails {
@@ -25,10 +53,13 @@
   gap: 20px;
   align-items: center;
   justify-content: center;
-}
 
-.activityDetailText {
-  padding-bottom: 30px;
-  font-size: 20px;
-  font-weight: 600;
+  @include respond-to(tablet) {
+    width: 509px;
+    gap: 10px;
+  }
+
+  @include respond-to(mobile) {
+    width: 335px;
+  }
 }

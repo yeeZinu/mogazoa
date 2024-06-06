@@ -14,6 +14,10 @@
   @include rounded-lg;
 
   @include respond-to(tablet) {
+    padding: 30px 21px;
+  }
+
+  @include respond-to(mobile) {
     padding: 20px 21px;
   }
 }
@@ -27,12 +31,13 @@
   height: 68px;
 
   @include respond-to(tablet) {
+    padding: 10px 14px;
     gap: 15px;
     height: 60px;
-
   }
 
   @include respond-to(mobile) {
+    padding: 0;
     height: 80px;
   }
 }
@@ -69,6 +74,10 @@
 
     @include respond-to(tablet) {
       font-size: 20px;
+    }
+
+    @include respond-to(mobile) {
+      font-size: 18px;
     }
   }
 
