@@ -1,8 +1,5 @@
 @import "@/styles/_index";
-
-.back {
-  background-color: black;
-}
+@import "@/styles/_media";
 
 .container {
   display: flex;
@@ -17,6 +14,7 @@
 
 .closeIcon {
   padding: 2px;
+  cursor: pointer;
   background-color: rgb(0 0 0 / 50%);
   border-radius: 6px;
 }
