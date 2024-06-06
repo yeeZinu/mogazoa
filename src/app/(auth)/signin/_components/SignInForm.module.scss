@@ -1,9 +1,38 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
 .container {
   display: flex;
   flex-direction: column;
+  gap: 50px;
   width: 100%;
+
+  .inputBox {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input {
+      padding: 23px 20px;
+
+      @include respond-to(tablet) {
+        padding: 20px;
+      }
+    }
+  }
 
   .signInButton {
     width: auto;
+    padding: 21px;
+    @include text-lg;
+
+    @include respond-to(tablet) {
+      @include text-normal;
+      padding: 18px;
+    }
   }
 }
