@@ -1,22 +1,14 @@
 import { Main } from "@/_home/components/Main";
-import { ranking } from "@/app/_home/mock";
+import { getCategories } from "@/app/_home/api/getCategories";
+import { getProducts } from "@/app/_home/api/getProducts";
+import { getRanking } from "@/app/_home/api/getRanking";
 import styles from "./page.module.scss";
 
-// TODO: hook으로 분리
-async function getData() {
-  const res = await fetch("https://mogazoa-api.vercel.app/20/categories");
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-
-// TODO: data fetch (ranking)
-
 export default async function Home() {
-  const categories = await getData();
+  const categories = await getCategories();
+  const ranking = await getRanking();
+  const hotProducts = await getProducts("reviewCount");
+  const ratingProducts = await getProducts("rating");
 
   return (
     <div className={styles.container}>
@@ -24,6 +16,7 @@ export default async function Home() {
         <Main
           categories={categories}
           ranking={ranking}
+          products={{ hotProducts, ratingProducts }}
         />
       </div>
     </div>
