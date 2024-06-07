@@ -16,7 +16,7 @@ export default function ProductList({ list, lastRef }: ProductListProps) {
     <div className={cn(styles.container)}>
       {list.map((item, idx) => (
         <Link
-          href={`/product/${item.id}`}
+          href={`/product-detail/${item.id}`}
           key={item.id}
         >
           <ProductCard product={item} />
