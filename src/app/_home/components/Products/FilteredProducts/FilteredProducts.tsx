@@ -15,10 +15,10 @@ import { createQueryString } from "@/utils/createQueryString";
 import styles from "./FilteredProducts.module.scss";
 
 type FilteredProductsProps = {
-  selectedCategory: string | null;
+  category: string | null;
 };
 
-export default function FilteredProducts({ selectedCategory }: FilteredProductsProps) {
+export default function FilteredProducts({ category }: FilteredProductsProps) {
   const { ref, inView } = useInView();
 
   const searchParams = useSearchParams();
@@ -30,9 +30,6 @@ export default function FilteredProducts({ selectedCategory }: FilteredProductsP
   const { data: productData, fetchNextPage, hasNextPage } = useGetFilteredProducts(params.toString());
 
   const { control, watch } = useForm({ mode: "onBlur" });
-
-  const category = searchParams.get(QUERY.CATEGORY);
-  const keyword = searchParams.get(QUERY.KEYWORD);
 
   useEffect(() => {
     if (watch("order")) {
@@ -48,7 +45,9 @@ export default function FilteredProducts({ selectedCategory }: FilteredProductsP
 
   let filteringText = "";
 
-  if (category && keyword && selectedCategory) {
+  const keyword = searchParams.get(QUERY.KEYWORD);
+
+  if (keyword && category) {
     filteringText = `${category} 카테고리의 ${keyword}로 검색한 상품`;
   } else if (keyword) {
     filteringText = `${keyword}로 검색한 상품`;

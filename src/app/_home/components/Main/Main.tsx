@@ -22,8 +22,10 @@ type MainProps = {
 export default function Main({ categories, ranking, products }: MainProps) {
   const [selectedCategory, setSelectedCategory] = useState<null | Pick<CategoryType, "id" | "name">>(null);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const { hotProducts, ratingProducts } = products;
 
   const toggleCategory = () => {
@@ -43,7 +45,8 @@ export default function Main({ categories, ranking, products }: MainProps) {
   };
 
   const hasQueryParams = Array.from(searchParams.entries()).length > 0;
-  const category = searchParams.get(QUERY.CATEGORY);
+  const categoryParam = searchParams.get(QUERY.CATEGORY);
+  const category = categories.find(({ id }) => categoryParam === id.toString())?.name;
 
   return (
     <div className={cn(styles.container)}>
@@ -52,7 +55,7 @@ export default function Main({ categories, ranking, products }: MainProps) {
         onToggle={toggleCategory}
       >
         <CategoryList
-          selected={category}
+          selected={categoryParam}
           onClick={handleCategoryClick}
           categoryList={categories}
         />
@@ -60,7 +63,7 @@ export default function Main({ categories, ranking, products }: MainProps) {
 
       <div className={styles.content}>
         {hasQueryParams ? (
-          <FilteredProducts selectedCategory={selectedCategory?.name ?? null} />
+          <FilteredProducts category={category ?? null} />
         ) : (
           <PopularProducts
             hotProducts={hotProducts.list.slice(0, 6)}
@@ -72,7 +75,7 @@ export default function Main({ categories, ranking, products }: MainProps) {
           className={cn(styles.categoryToggle)}
           onClick={toggleCategory}
         >
-          <CategoryFilter>{selectedCategory?.name ?? "카테고리"}</CategoryFilter>
+          <CategoryFilter>{category ?? "카테고리"}</CategoryFilter>
         </button>
 
         <ReviewerRanking ranking={ranking.slice(0, 5)} />
