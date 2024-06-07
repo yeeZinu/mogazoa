@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useInView } from "react-intersection-observer";
 import { ProductList } from "@/_home/components/Products/ProductList";
 import { QUERY } from "@/_home/constants";
@@ -29,13 +29,14 @@ export default function FilteredProducts({ category }: FilteredProductsProps) {
 
   const { data: productData, fetchNextPage, hasNextPage } = useGetFilteredProducts(params.toString());
 
-  const { control, watch } = useForm({ mode: "onBlur" });
+  const { control } = useForm({ mode: "onBlur" });
+  const order = useWatch({ control, name: "order" });
 
   useEffect(() => {
-    if (watch("order")) {
-      router.push(`/?${createQueryString(QUERY.ORDER, watch("order"), searchParams)}`);
+    if (order) {
+      router.push(`/?${createQueryString(QUERY.ORDER, order, searchParams)}`);
     }
-  }, [watch("order")]);
+  }, [order, router, searchParams]);
 
   useEffect(() => {
     if (inView && hasNextPage) {
