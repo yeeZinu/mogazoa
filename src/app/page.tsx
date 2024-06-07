@@ -1,14 +1,13 @@
 import { Main } from "@/_home/components/Main";
-import { getCategories } from "@/app/_home/api/getCategories";
-import { getProducts } from "@/app/_home/api/getProducts";
-import { getRanking } from "@/app/_home/api/getRanking";
+import { getData } from "@/app/_home/api/getData";
+
 import styles from "./page.module.scss";
 
 export default async function Home() {
-  const categories = await getCategories();
-  const ranking = await getRanking();
-  const hotProducts = await getProducts("reviewCount");
-  const ratingProducts = await getProducts("rating");
+  const categories = await getData("/categories");
+  const ranking = await getData("/users/ranking");
+  const hotProducts = await getData(`/products?order=reviewCount`);
+  const ratingProducts = await getData(`/products?order=rating`);
 
   return (
     <div className={styles.container}>

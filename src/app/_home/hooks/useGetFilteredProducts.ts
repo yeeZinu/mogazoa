@@ -5,7 +5,7 @@ const fetchProducts = async (pageParam: number, queryString: string) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/products?cursor=${pageParam}&${queryString}`);
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error(`HTTP Error: ${res.status}`);
   }
 
   return res.json();
