@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from "react";
-import styles from "./Category.module.scss";
+import styles from "./CategoryChip.module.scss";
 
 type CategoryProps = {
   children?: keyof typeof CATEGORY_TYPE;
