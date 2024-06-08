@@ -14,8 +14,8 @@ export type UserRankingType = UserType & {
 };
 
 export type ProductType = {
-  updatedAt: Date;
-  createdAt: Date;
+  updatedAt: string;
+  createdAt: string;
   writerId: number;
   categoryId: number;
   favoriteCount: number;
@@ -24,4 +24,9 @@ export type ProductType = {
   image: string;
   name: string;
   id: number;
+};
+
+export type ProductsResponseType = {
+  list: ProductType[];
+  nextCursor: number;
 };
