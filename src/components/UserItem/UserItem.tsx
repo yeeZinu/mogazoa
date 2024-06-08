@@ -15,8 +15,12 @@ type UserItemProps = {
 };
 
 export default function UserItem({ image, nickname, rating, followersCount, reviewCount, rank }: UserItemProps) {
-  const formattedFollowersCount = followersCount ? formatNumber(followersCount) : "";
-  const formattedReviewCount = reviewCount ? formatNumber(reviewCount) : "";
+  // 리뷰, 팔로워 값이 0일 경우를 대비한 조건 추가
+  const formattedFollowersCount =
+    String(followersCount) && followersCount !== undefined ? formatNumber(followersCount) : "";
+  const formattedReviewCount = String(reviewCount) && reviewCount !== undefined ? formatNumber(reviewCount) : "";
+
+  const formattedNickname = nickname.length > 7 ? `${nickname.slice(0, 6)}...` : nickname;
 
   return (
     <div className={styles.container}>
@@ -28,10 +32,10 @@ export default function UserItem({ image, nickname, rating, followersCount, revi
       <div className={styles.detailBox}>
         <div className={styles.userTitle}>
           {rank ? <Ranking>{String(rank)}</Ranking> : null}
-          <span className={styles.userNickname}>{nickname}</span>
+          <span className={styles.userNickname}>{formattedNickname}</span>
         </div>
         <div className={styles.userDesc}>
-          {followersCount && reviewCount ? (
+          {!rating && String(followersCount) && String(reviewCount) ? (
             <>
               <div className={styles.userDescItem}>
                 <span>팔로워</span>
