@@ -1,4 +1,4 @@
-@import "@/styles/_index.scss";
+@import "@/styles/_index";
 
 .container {
   display: flex;
@@ -12,12 +12,12 @@
 }
 
 .input {
-  border: none;
   width: 100%;
-  outline: 1px solid $gray-300;
-  background: $black-200;
-  color: $white-100;
   padding: 1rem;
+  color: $white-100;
+  background: $black-200;
+  border: none;
+  outline: 1px solid $gray-300;
 
   &:focus {
     outline: 1px solid $blue-100;
@@ -32,9 +32,9 @@
 
 .eyeIcon {
   position: absolute;
-  cursor: pointer;
   top: 50%;
   right: 0.6rem;
+  cursor: pointer;
   transform: translateY(-50%);
 }
 

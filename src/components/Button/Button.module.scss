@@ -31,16 +31,14 @@
 }
 
 .secondary {
-  background: var(--main-main_gradation, linear-gradient(91deg, $blue-100 0%, $blue-200 100%));
+  background: var($blue-200, linear-gradient(91deg, $blue-100 0%, $blue-200 100%));
   background-clip: text;
-  background-clip: text;
-  border: 1px solid var(--main-main_gradation, $blue-100);
+  border: 1px solid var($blue-200, $blue-100);
   -webkit-text-fill-color: transparent;
 
   &:disabled {
     pointer-events: none;
     background: $gray-200;
-    background-clip: text;
     background-clip: text;
     border: 1px solid $gray-300;
     -webkit-text-fill-color: transparent;
@@ -55,5 +53,17 @@
     color: $gray-200;
     pointer-events: none;
     border: 1px solid $gray-300;
+  }
+}
+
+.profile {
+  width: 250px;
+
+  @include respond-to(tablet) {
+    width: 400px;
+  }
+
+  @include respond-to(mobile) {
+    width: 245px;
   }
 }

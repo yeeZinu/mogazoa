@@ -1,0 +1,65 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  align-items: start;
+  justify-content: center;
+  margin-top: 60px;
+
+  @include respond-to(tablet) {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  @include respond-to(mobile) {
+    margin-top: 30px;
+  }
+}
+
+.activity {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 940px;
+
+  @include respond-to(tablet) {
+    width: 509px;
+  }
+
+  @include respond-to(mobile) {
+    width: 335px;
+  }
+}
+
+.activityDetailText {
+  padding-bottom: 30px;
+  font-size: 20px;
+  font-weight: 600;
+
+  @include respond-to(tablet) {
+    font-size: 18px;
+  }
+}
+
+.activityDetails {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  @include respond-to(tablet) {
+    gap: 10px;
+    width: 509px;
+  }
+
+  @include respond-to(mobile) {
+    width: 335px;
+  }
+}
