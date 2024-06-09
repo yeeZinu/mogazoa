@@ -41,7 +41,7 @@ export default function Main({ categories, ranking, products }: MainProps) {
       router.push(`/?${createQueryString(QUERY.CATEGORY, id.toString(), searchParams)}`);
     }
 
-    toggleCategory();
+    setIsCategoryOpen(false);
   };
 
   const hasQueryParams = Array.from(searchParams.entries()).length > 0;
