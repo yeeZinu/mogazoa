@@ -16,6 +16,8 @@
 
 .result {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 8px;
   margin-bottom: 20px;
   font-size: 24px;
@@ -26,13 +28,16 @@
   }
 }
 
-.colorText {
-  color: $pink-100;
-  margin-right: 8px;
-}
-
 .winnerText {
   color: $green-100;
+}
+
+.loserText {
+  color: $pink-100;
+}
+
+.drawText {
+  color: $gray-100;
 }
 
 .reason {
@@ -92,4 +97,8 @@
 
 .loser {
   color: $pink-100;
+}
+
+.draw {
+  color: $gray-100;
 }

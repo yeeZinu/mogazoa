@@ -10,14 +10,25 @@ import CompareTable from "./table/CompareTable";
 type Product = {
   id: number;
   name: string;
-  updatedAt: string;
-  createdAt: string;
-  writerId: number;
-  categoryId: number;
-  favoriteCount: number;
-  reviewCount: number;
-  rating: number;
+  description: string;
   image: string;
+  rating: number;
+  reviewCount: number;
+  favoriteCount: number;
+  categoryId: number;
+  createdAt: string;
+  updatedAt: string;
+  writerId: number;
+  isFavorite: boolean;
+  category: {
+    id: number;
+    name: string;
+  };
+  categoryMetric: {
+    rating: number;
+    favoriteCount: number;
+    reviewCount: number;
+  };
 };
 
 function ComparePage() {
