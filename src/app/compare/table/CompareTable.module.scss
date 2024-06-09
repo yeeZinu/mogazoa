@@ -1,0 +1,95 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.compare {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $white-100;
+}
+
+.resultBox {
+  margin-top: 80px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.result {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+
+  @include respond-to(tablet) {
+    flex-direction: column;
+  }
+}
+
+.colorText {
+  color: $pink-100;
+  margin-right: 8px;
+}
+
+.winnerText {
+  color: $green-100;
+}
+
+.reason {
+  font-size: 16px;
+  font-weight: 400;
+  color: $gray-100;
+}
+
+.table {
+  width: 940px;
+  margin: 20px 0;
+  font-size: 14px;
+  text-align: left;
+  background-color: $black-200;
+  border-radius: 12px;
+
+  @include respond-to(tablet) {
+    width: 684px;
+  }
+
+  @include respond-to(mobile) {
+    width: 335px;
+    font-size: 12px;
+  }
+}
+
+.trHead {
+  color: $gray-100;
+  border-bottom: 1px solid $gray-300;
+}
+
+.name {
+  color: $gray-100;
+}
+
+.th {
+  padding: 20px;
+  text-align: center;
+
+  @include respond-to(mobile) {
+    padding: 15px;
+  }
+}
+
+.td {
+  padding: 30px;
+  text-align: center;
+
+  @include respond-to(mobile) {
+    padding: 15px;
+  }
+}
+
+.winner {
+  color: $green-100;
+}
+
+.loser {
+  color: $pink-100;
+}

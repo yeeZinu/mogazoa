@@ -1,0 +1,136 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.content {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+  justify-content: center;
+  padding-top: 60px;
+
+  // margin-top: 60px;
+  @include respond-to(tablet) {
+    padding-top: 40px;
+  }
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    padding-top: 30px;
+  }
+}
+
+.inputBox {
+  position: relative;
+}
+
+.compareChip {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  @include respond-to(tablet) {
+    top: 11px;
+    left: 13px;
+  }
+}
+
+.input {
+  gap: 10px;
+  width: 350px;
+  height: 70px;
+  padding: 23px 20px;
+  font-family: Pretendard;
+  font-size: 16px;
+  color: $white-100;
+  background: $black-200;
+  border: 1px solid $gray-300;
+  border-radius: 8px;
+
+  &:focus {
+    border: 1px solid $blue-100;
+    outline: none;
+  }
+
+  @include respond-to(tablet) {
+    width: 240px;
+    height: 55px;
+    font-size: 14px;
+  }
+
+  @include respond-to(mobile) {
+    width: 335px;
+    height: 55px;
+    padding: 23px 20px;
+    border-radius: 8px;
+  }
+}
+
+.suggestions {
+  z-index: 1000;
+  position: absolute;
+  background-color: $black-200;
+  width: 350px;
+  padding: 10px;
+  border: 1px solid $gray-300;
+  border-radius: 8px;
+  @include respond-to(tablet) {
+    width: 240px;
+    font-size: 14px;
+  }
+
+  @include respond-to(mobile) {
+    width: 335px;
+    border-radius: 8px;
+  }
+}
+.listItem {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: $gray-200;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 300;
+
+  &:hover {
+    background-color: $black-100;
+    color: $white-100;
+  }
+}
+
+.text {
+  margin-bottom: 10px;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+  color: $white-100;
+}
+
+.button {
+  gap: 10px;
+  width: 200px;
+  height: 70px;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 600;
+  color: $white-100;
+  background: linear-gradient(91.17deg, #5097fa 0%, #5363ff 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  @include respond-to(tablet) {
+    width: 164px;
+    height: 55px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  @include respond-to(mobile) {
+    gap: 10px;
+    width: 335px;
+    height: 50px;
+    border-radius: 8px;
+  }
+}
