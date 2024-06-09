@@ -8,7 +8,6 @@
   justify-content: center;
   padding-top: 60px;
 
-  // margin-top: 60px;
   @include respond-to(tablet) {
     padding-top: 40px;
   }
@@ -68,13 +67,14 @@
 }
 
 .suggestions {
-  z-index: 1000;
   position: absolute;
-  background-color: $black-200;
+  z-index: 1000;
   width: 350px;
   padding: 10px;
+  background-color: $black-200;
   border: 1px solid $gray-300;
   border-radius: 8px;
+
   @include respond-to(tablet) {
     width: 240px;
     font-size: 14px;
@@ -85,17 +85,18 @@
     border-radius: 8px;
   }
 }
+
 .listItem {
   padding: 10px 20px;
   font-size: 16px;
+  font-weight: 300;
   color: $gray-200;
   cursor: pointer;
   border-radius: 6px;
-  font-weight: 300;
 
   &:hover {
-    background-color: $black-100;
     color: $white-100;
+    background-color: $black-100;
   }
 }
 
@@ -115,10 +116,10 @@
   font-size: 18px;
   font-weight: 600;
   color: $white-100;
+  cursor: pointer;
   background: linear-gradient(91.17deg, #5097fa 0%, #5363ff 100%);
   border: none;
   border-radius: 8px;
-  cursor: pointer;
 
   @include respond-to(tablet) {
     width: 164px;
