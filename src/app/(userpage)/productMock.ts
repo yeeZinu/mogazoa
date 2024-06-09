@@ -2,8 +2,8 @@ import { DEFAULT_PRODUCT_IMAGE } from "@/utils/constant";
 
 export const productMock = [
   {
-    updatedAt: new Date("2024-05-30T09:41:57.081Z"),
-    createdAt: new Date("2024-05-30T09:41:57.081Z"),
+    updatedAt: "2024-05-30T09:41:57.081Z",
+    createdAt: "2024-05-30T09:41:57.081Z",
     writerId: 1,
     categoryId: 1,
     favoriteCount: 0,
@@ -14,8 +14,8 @@ export const productMock = [
     id: 1,
   },
   {
-    updatedAt: new Date("2024-05-30T09:41:57.081Z"),
-    createdAt: new Date("2024-05-30T09:41:57.081Z"),
+    updatedAt: "2024-05-30T09:41:57.081Z",
+    createdAt: "2024-05-30T09:41:57.081Z",
     writerId: 1,
     categoryId: 1,
     favoriteCount: 0,
@@ -26,8 +26,8 @@ export const productMock = [
     id: 2,
   },
   {
-    updatedAt: new Date("2024-05-30T09:41:57.081Z"),
-    createdAt: new Date("2024-05-30T09:41:57.081Z"),
+    updatedAt: "2024-05-30T09:41:57.081Z",
+    createdAt: "2024-05-30T09:41:57.081Z",
     writerId: 1,
     categoryId: 1,
     favoriteCount: 0,
@@ -38,8 +38,8 @@ export const productMock = [
     id: 3,
   },
   {
-    updatedAt: new Date("2024-05-30T09:41:57.081Z"),
-    createdAt: new Date("2024-05-30T09:41:57.081Z"),
+    updatedAt: "2024-05-30T09:41:57.081Z",
+    createdAt: "2024-05-30T09:41:57.081Z",
     writerId: 1,
     categoryId: 1,
     favoriteCount: 0,
@@ -50,8 +50,8 @@ export const productMock = [
     id: 4,
   },
   {
-    updatedAt: new Date("2024-05-30T09:41:57.081Z"),
-    createdAt: new Date("2024-05-30T09:41:57.081Z"),
+    updatedAt: "2024-05-30T09:41:57.081Z",
+    createdAt: "2024-05-30T09:41:57.081Z",
     writerId: 1,
     categoryId: 1,
     favoriteCount: 0,
@@ -62,8 +62,8 @@ export const productMock = [
     id: 5,
   },
   {
-    updatedAt: new Date("2024-05-30T09:41:57.081Z"),
-    createdAt: new Date("2024-05-30T09:41:57.081Z"),
+    updatedAt: "2024-05-30T09:41:57.081Z",
+    createdAt: "2024-05-30T09:41:57.081Z",
     writerId: 1,
     categoryId: 1,
     favoriteCount: 0,
@@ -74,8 +74,8 @@ export const productMock = [
     id: 6,
   },
   {
-    updatedAt: new Date("2024-05-30T09:41:57.081Z"),
-    createdAt: new Date("2024-05-30T09:41:57.081Z"),
+    updatedAt: "2024-05-30T09:41:57.081Z",
+    createdAt: "2024-05-30T09:41:57.081Z",
     writerId: 1,
     categoryId: 1,
     favoriteCount: 0,
