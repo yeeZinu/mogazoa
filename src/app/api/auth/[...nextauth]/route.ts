@@ -34,7 +34,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log(user);
       if (user) {
         // eslint-disable-next-line no-param-reassign
         token.accessToken = user?.accessToken;
