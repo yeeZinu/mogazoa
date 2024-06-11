@@ -33,20 +33,9 @@ type CompareTableProps = {
 const CompareTable: React.FC<CompareTableProps> = ({ product1, product2 }) => {
   const compareProducts = () => {
     const criteria = [
-      { name: "절대 별점", product1: product1.rating, product2: product2.rating },
-      { name: "상대 별점", product1: product1.categoryMetric.rating, product2: product2.categoryMetric.rating },
-      { name: "절대 찜 개수", product1: product1.favoriteCount, product2: product2.favoriteCount },
-      {
-        name: "상대 찜 개수",
-        product1: product1.categoryMetric.favoriteCount,
-        product2: product2.categoryMetric.favoriteCount,
-      },
-      { name: "절대 조회수", product1: product1.reviewCount, product2: product2.reviewCount },
-      {
-        name: "상대 조회수",
-        product1: product1.categoryMetric.reviewCount,
-        product2: product2.categoryMetric.reviewCount,
-      },
+      { name: "별점", product1: product1.rating, product2: product2.rating },
+      { name: "찜 개수", product1: product1.favoriteCount, product2: product2.favoriteCount },
+      { name: "조회수", product1: product1.reviewCount, product2: product2.reviewCount },
     ];
 
     let product1Wins = 0;
@@ -111,7 +100,7 @@ const CompareTable: React.FC<CompareTableProps> = ({ product1, product2 }) => {
           </div>
         </div>
         <div className={styles.reason}>
-          6가지 항목 중 {Math.max(product1Wins, product2Wins)}가지 항목에서 우세합니다.
+          3가지 항목 중 {Math.max(product1Wins, product2Wins)}가지 항목에서 우세합니다.
         </div>
       </div>
       <table className={styles.table}>
