@@ -15,7 +15,7 @@ export default function Button({ children, styleType, disabled = false, classNam
   return (
     // eslint-disable-next-line react/button-has-type
     <button
-      className={cn(styles.container, styles[styleType], styles[className])}
+      className={cn(styles.container, styles[styleType], className)}
       {...rest}
       disabled={disabled}
     >

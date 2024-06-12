@@ -31,13 +31,13 @@
 }
 
 .secondary {
-  background: var($blue-200, linear-gradient(91deg, $blue-100 0%, $blue-200 100%));
+  background: linear-gradient(91deg, $blue-100 0%, $blue-200 100%);
   background-clip: text;
-  border: 1px solid var($blue-200, $blue-100);
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  color: transparent;
+  border: 1px solid $blue-200;
 
   &:disabled {
-    pointer-events: none;
     background: $gray-200;
     background-clip: text;
     border: 1px solid $gray-300;

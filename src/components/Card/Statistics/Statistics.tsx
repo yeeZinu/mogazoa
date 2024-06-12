@@ -58,7 +58,7 @@ export default function Statistics({ title, rating, reviewCount, favoriteCount, 
               fill
             />
           </figure>
-          <span>{mainContent}</span>
+          <span>{mainContent?.toFixed(1)}</span>
         </div>
       </div>
       {title === "별점 평균" ? (
