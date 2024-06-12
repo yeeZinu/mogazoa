@@ -41,8 +41,8 @@ export default function UserInfo({ nickname, image, description, follower, follo
       </div>
       {isfollow ? (
         <Button
-          styleType='secondary'
-          disabled={false}
+          styleType='tertiary'
+          disabled
           className='profile'
         >
           팔로우 취소
