@@ -1,10 +1,22 @@
 @import "@/styles/_index";
+@import "@/styles/_media";
 
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   width: 40rem;
+  height: 5.2rem;
+  margin: 0.4rem 0;
+
+  @include respond-to(tablet) {
+    height: 4.6rem;
+  }
+
+  @include respond-to(mobile) {
+    height: 4.6rem;
+  }
 }
 
 .label {
@@ -13,7 +25,7 @@
 
 .input {
   width: 100%;
-  padding: 1rem;
+  padding: 23px 20px;
   color: $white-100;
   background: $black-200;
   border: none;
@@ -24,18 +36,14 @@
   }
 
   @include rounded-md;
-}
 
-.inputBox {
-  position: relative;
-}
+  @include respond-to(tablet) {
+    padding: 17px 20px;
+  }
 
-.eyeIcon {
-  position: absolute;
-  top: 50%;
-  right: 0.6rem;
-  cursor: pointer;
-  transform: translateY(-50%);
+  @include respond-to(mobile) {
+    padding: 17px 20px;
+  }
 }
 
 .error {
@@ -43,6 +51,9 @@
 }
 
 .errorMessage {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
   color: $red-100;
 
   @include text-xs;
