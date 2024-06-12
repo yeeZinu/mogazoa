@@ -10,7 +10,7 @@ export default function MyPage() {
   return (
     <div className={cn(styles.container)}>
       <span>MyPage</span>
-      <Link href={`/otherpage/${userId}`}>이동 부탁</Link>
+      <Link href={`/userpage/${userId}`}>이동 부탁</Link>
     </div>
   );
 }

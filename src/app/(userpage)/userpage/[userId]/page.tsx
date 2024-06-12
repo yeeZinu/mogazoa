@@ -9,9 +9,9 @@ import cn from "@/utils/classNames";
 // 추후 데이터 연결시 받아온데이터로 변환 예정
 import UserActivityList from "./components/UserActivityList/UserActivityList";
 import UserInfo from "./components/UserInfo/UserInfo";
-import styles from "./OtherPage.module.scss";
+import styles from "./UserPage.module.scss";
 
-export default function OtherPage() {
+export default function UserPage() {
   // userId를 받아오는 useParams function
   // const { userId } = useParams<{ userId: string }>();
 
