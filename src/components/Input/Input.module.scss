@@ -61,3 +61,15 @@
 
   @include text-xs;
 }
+
+.inputBox {
+  position: relative;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
