@@ -31,10 +31,10 @@
 }
 
 .secondary {
+  color: transparent;
   background: linear-gradient(91deg, $blue-100 0%, $blue-200 100%);
   background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  background-clip: text;
   border: 1px solid $blue-200;
 
   &:disabled {
