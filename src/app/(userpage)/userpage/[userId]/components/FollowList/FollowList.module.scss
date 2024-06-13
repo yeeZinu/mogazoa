@@ -17,12 +17,13 @@
 
 .listBox {
   display: flex;
+  gap: 20px;
   align-items: center;
   justify-content: start;
-  gap: 20px;
 
   span {
     font-size: 18px;
+
     @include font-semibold;
 
     @include respond-to(tablet) {

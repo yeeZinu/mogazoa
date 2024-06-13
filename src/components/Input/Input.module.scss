@@ -40,11 +40,13 @@
 
   @include respond-to(tablet) {
     padding: 17px 20px;
+
     @include text-sm;
   }
 
   @include respond-to(mobile) {
     padding: 17px 20px;
+
     @include text-xs;
   }
 }
