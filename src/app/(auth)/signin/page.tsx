@@ -5,8 +5,7 @@ import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "@/components/Button/Button";
-import { GOOGLE_ICON, KAKAO_ICON } from "@/utils/constant";
-import OauthSignInButton from "./_components/OauthSignInButton/OauthSignInButton";
+import { OauthSignInBox } from "./_components/OauthSignInBox";
 import styles from "./SignInPage.module.scss";
 
 type FormData = {
@@ -22,18 +21,6 @@ export default function SignInPage() {
     formState: { errors },
   } = useForm<FormData>();
   const router = useRouter();
-
-  const handleKakaoSignIn = async () => {
-    // 카카오 SDK 초기화
-    if (!window.Kakao.isInitialized()) {
-      window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
-    }
-    // 인가 코드 요청
-    window.Kakao.Auth.authorize({
-      redirectUri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI,
-      scope: "openid",
-    });
-  };
 
   const onSubmit = async (data: FormData) => {
     const result = await signIn("credentials", {
@@ -56,24 +43,6 @@ export default function SignInPage() {
       setDisabled(false);
     }
   }, [errors.email, errors.password]);
-
-  useEffect(() => {
-    const handleKakaoCallback = async () => {
-      const code = new URL(window.location.href).searchParams.get("code") ?? "";
-
-      if (!localStorage.getItem("authCode") && code) {
-        // 다시 redirect됐을 경우 요청 두 번 방지
-        localStorage.setItem("authCode", code);
-        const result = await signIn("kakao", { redirect: false, callbackUrl: "/", code });
-
-        if (result?.status === 403) {
-          localStorage.removeItem("authCode");
-          router.push("/oauth/signup/kakao");
-        }
-      }
-    };
-    handleKakaoCallback();
-  }, [router]);
 
   return (
     <div>
@@ -108,16 +77,7 @@ export default function SignInPage() {
           SignIn
         </Button>
       </form>
-      <OauthSignInButton
-        image={GOOGLE_ICON}
-        name='google'
-        onClick={() => signIn("google", { callbackUrl: "/" })}
-      />
-      <OauthSignInButton
-        image={KAKAO_ICON}
-        name='kakao'
-        onClick={handleKakaoSignIn}
-      />
+      <OauthSignInBox />
     </div>
   );
 }
