@@ -1,0 +1,35 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.background {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 85px);
+  padding-bottom: 50px;
+  overflow: auto;
+  color: $white-100;
+  background-color: $bg-black-100;
+
+  @include respond-to(tablet) {
+    min-height: calc(100vh - 78px);
+  }
+
+  @include respond-to(mobile) {
+    min-height: calc(100vh - 68px);
+  }
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 255px);
+
+  @include respond-to(tablet) {
+    min-height: calc(100vh - 248px);
+  }
+
+  @include respond-to(mobile) {
+    min-height: calc(100vh - 380px);
+  }
+}

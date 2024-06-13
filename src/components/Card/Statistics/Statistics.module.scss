@@ -1,0 +1,116 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 74px;
+  background: $black-200;
+  border: 1px solid $gray-300;
+  
+  @include rounded-lg;
+
+  @include respond-to(tablet) {
+    padding: 30px 43px;
+  }
+
+  @include respond-to(mobile) {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+    width: 335px;
+    padding: 20px;
+  }
+}
+
+.mobileBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @include respond-to(mobile) {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
+}
+
+.title {
+  font-size: 18px;
+  color: $white-100;
+
+  @include respond-to(tablet) {
+    @include text-normal;
+  }
+
+  @include respond-to(mobile) {
+    @include text-sm;
+  }
+}
+
+.contentBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+
+  span {
+    @include text-xl;
+
+    color: $gray-100;
+
+    @include respond-to(tablet) {
+      font-size: 20px;
+    }
+
+    @include respond-to(mobile) {
+      @include text-normal;
+    }
+  }
+
+  @include respond-to(mobile) {
+    padding: 0;
+  }
+}
+
+.imageBox {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+
+  @include respond-to(tablet) {
+    width: 20px;
+    height: 20px;
+  }
+
+  @include respond-to(mobile) {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+.description {
+  width: 150px;
+  line-height: 20px;
+  color: $gray-200;
+  text-align: center;
+
+  @include text-sm;
+
+  strong {
+    color: $white-100;
+    white-space: pre-line;
+  }
+
+  @include respond-to(mobile) {
+    width: auto;
+
+    @include text-xs;
+  }
+}

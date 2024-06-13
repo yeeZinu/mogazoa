@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from "react";
-import styles from "./Category.module.scss";
+import styles from "./CategoryChip.module.scss";
 
 type CategoryProps = {
   children?: keyof typeof CATEGORY_TYPE;
@@ -23,7 +23,7 @@ const CATEGORY_TYPE: CategoryType<string> = {
   default: { style: "default" },
 };
 
-function Category({ children, ...rest }: CategoryProps) {
+function CategoryChip({ children, ...rest }: CategoryProps) {
   const typeCheck = children ?? "default";
 
   return (
@@ -36,8 +36,8 @@ function Category({ children, ...rest }: CategoryProps) {
   );
 }
 
-Category.defaultProps = {
+CategoryChip.defaultProps = {
   children: "default",
 };
 
-export default Category;
+export default CategoryChip;

@@ -1,0 +1,73 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: 29px;
+  padding: 4px 10px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 8px;
+
+  @include respond-to(mobile) {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
+.yellow {
+  color: #c5d17c;
+  background-color: rgb(197 209 124 / 10%);
+}
+
+.red {
+  color: #f75532;
+  background-color: rgb(247 86 50 / 10%);
+}
+
+.purple {
+  color: #a953ff;
+  background-color: rgb(169 83 255 / 10%);
+}
+
+.green {
+  color: #49af1a;
+  background-color: rgb(73 175 26 / 10%);
+}
+
+.pink {
+  color: #d676c1;
+  background-color: rgb(214 118 193 / 10%);
+}
+
+.orange {
+  color: #ff7e46;
+  background-color: rgb(255 126 70 / 10%);
+}
+
+.mint {
+  color: #23b581;
+  background-color: rgb(35 181 129 / 10%);
+}
+
+.hotpink {
+  color: #fd529a;
+  background-color: rgb(253 82 154 / 10%);
+}
+
+.navy {
+  color: #757aff;
+  background-color: rgb(117 122 255 / 10%);
+}
+
+.blue {
+  color: #3098e3;
+  background-color: rgb(48 152 227 / 10%);
+}
+
+.default {
+  display: none;
+}

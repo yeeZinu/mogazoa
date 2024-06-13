@@ -36,4 +36,21 @@ export const ORDER = {
       option: "좋아요순",
     },
   ],
+  PROFILE: [
+    {
+      id: 0,
+      value: "reviewed",
+      option: "리뷰 남긴 상품",
+    },
+    {
+      id: 1,
+      value: "created",
+      option: "등록한 상품",
+    },
+    {
+      id: 2,
+      value: "favorite",
+      option: "찜한 상품",
+    },
+  ],
 };

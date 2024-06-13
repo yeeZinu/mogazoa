@@ -1,0 +1,22 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  justify-content: center;
+  width: 640px;
+  min-height: calc(100vh - 88.5px);
+  padding: 100px 0;
+
+  @include respond-to(tablet) {
+    max-width: minmax(440px, calc(100% - 304px));
+  }
+
+  @include respond-to(mobile) {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    padding: 0 20px;
+  }
+}

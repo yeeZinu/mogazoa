@@ -1,0 +1,20 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.buttonBox {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 30px;
+}
+
+.selectButton {
+  all: unset;
+  color: $gray-100;
+  cursor: pointer;
+}
+
+.active {
+  color: $white-100;
+}

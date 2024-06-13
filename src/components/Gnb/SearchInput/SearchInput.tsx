@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import cn from "@/utils/classNames";
 import { SEARCH_ICON } from "@/utils/constant";
-import createQueryString from "@/utils/createQueryString";
+import { createQueryString } from "@/utils/createQueryString";
 import styles from "./SearchInput.module.scss";
 
 type SearchInputProps = {
@@ -21,10 +21,11 @@ export default function SearchInput({ isOpen, onClick }: SearchInputProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const { register, handleSubmit } = useForm<KeywordType>();
+  const { register, handleSubmit, reset } = useForm<KeywordType>();
 
   const onSubmit: SubmitHandler<KeywordType> = ({ keyword }) => {
-    router.push(`/?${createQueryString("search", keyword, searchParams)}`);
+    router.push(`/?${createQueryString("keyword", keyword, searchParams)}`);
+    reset();
   };
 
   return (

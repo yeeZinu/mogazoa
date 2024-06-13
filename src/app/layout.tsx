@@ -6,6 +6,7 @@ import AuthProvider from "@/lib/AuthProvider";
 import Providers from "@/lib/Providers";
 import "@/styles/_reset.scss";
 import "@/styles/_common.scss";
+import styles from "./RootLayout.module.scss";
 
 export const metadata: Metadata = {
   title: "Mogazoa",
@@ -34,12 +35,12 @@ export default function RootLayout({
       lang='ko'
       className={pretendard.className}
     >
-      <body>
+      <body className={styles.container}>
         <div id='modal' />
         <AuthProvider>
           <Providers>
             <Gnb />
-            {children}
+            <main className={styles.main}>{children}</main>
           </Providers>
         </AuthProvider>
         <Script

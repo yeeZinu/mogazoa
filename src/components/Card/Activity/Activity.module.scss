@@ -1,0 +1,104 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  max-width: 300px;
+  padding: 30px 105px;
+  background: $black-200;
+  border: 1px solid $gray-300;
+
+  @include rounded-lg;
+  @include rounded-lg;
+
+  @include respond-to(tablet) {
+    padding: 30px 21px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 20px 21px;
+  }
+}
+
+.borderBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  height: 68px;
+
+  @include respond-to(tablet) {
+    gap: 15px;
+    height: 60px;
+    padding: 10px 14px;
+  }
+
+  @include respond-to(mobile) {
+    height: 80px;
+    padding: 0;
+  }
+}
+
+.title {
+  gap: 5px;
+  width: 91px;
+  color: $gray-100;
+  text-align: center;
+
+
+  @include text-normal;
+
+  @include respond-to(tablet) {
+    @include text-sm;
+  }
+
+
+  @include respond-to(mobile) {
+    display: flex;
+    flex-direction: column;
+    width: 58px;
+  }
+}
+
+.contentBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 29px;
+
+  span {
+    @include text-xl;
+
+
+    color: $white-100;
+
+    @include respond-to(tablet) {
+      font-size: 20px;
+    }
+
+    @include respond-to(mobile) {
+      font-size: 18px;
+    }
+  }
+
+  @include respond-to(mobile) {
+    padding: 0;
+  }
+}
+
+.imageBox {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+
+  @include respond-to(tablet) {
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -12,3 +12,21 @@ export type UserRankingType = UserType & {
   reviewCount: number;
   followersCount: number;
 };
+
+export type ProductType = {
+  updatedAt: string;
+  createdAt: string;
+  writerId: number;
+  categoryId: number;
+  favoriteCount: number;
+  reviewCount: number;
+  rating: number;
+  image: string;
+  name: string;
+  id: number;
+};
+
+export type ProductsResponseType = {
+  list: ProductType[];
+  nextCursor: number;
+};

@@ -1,0 +1,31 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 20px;
+  color: $gray-200;
+}
+
+.item {
+  padding: 15px 20px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s linear,
+    color 0.3s linear;
+
+  @include rounded-md;
+
+  &:hover,
+  &.selected {
+    color: $white-100;
+
+    @include color-box {
+      @include rounded-md;
+
+      padding: 14px 19px;
+    }
+  }
+}
