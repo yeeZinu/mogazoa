@@ -2,7 +2,6 @@ import { cookies } from "next/headers";
 import NextAuth, { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import KakaoProvider from "next-auth/providers/kakao";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -10,37 +9,54 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-    KakaoProvider({
-      clientId: process.env.KAKAO_REST_API_KEY!,
-      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
-    }),
     CredentialsProvider({
-      name: "Credentials",
+      // 카카오 로그인
+      name: "kakao",
+      id: "kakao",
       credentials: {
-        email: { label: "유저 이메일", type: "email", placeholder: "user@email.com" },
-        password: { label: "패스워드", type: "password" },
+        code: { type: "text", label: "토큰" },
       },
       async authorize(credentials) {
-        const result = await fetch(`${process.env.BASE_URL}/auth/signIn`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: credentials?.email, password: credentials?.password }),
-        });
-        const data = await result.json();
-        const user = data?.user;
-        if (!user) {
-          throw new Error("No user found");
-        }
+        try {
+          const result = await fetch(`${process.env.BASE_URL}/auth/signIn/kakao`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              redirectUri: "http://localhost:3000/signin",
+              token: credentials?.code,
+            }),
+          });
 
-        return {
-          ...user,
-          accessToken: data.accessToken,
-        };
+          const data = await result.json();
+          const user = data?.user;
+
+          console.log(data);
+          console.log(result.status);
+
+          if (result.status === 403) {
+            return { redirect: "http://localhost:3000/oauth/signup/kakao" };
+          }
+
+          if (user) {
+            return {
+              ...user,
+              accessToken: user.accessToken,
+            };
+          }
+
+          return null;
+        } catch (error) {
+          throw new Error();
+        }
       },
     }),
     CredentialsProvider({
+      /**
+       * 간편 회원가입
+       * @TODO : 에러 처리
+       */
       id: "EasySignUp",
       name: "EasySignUp",
       credentials: {
@@ -56,15 +72,12 @@ export const authOptions: NextAuthOptions = {
           },
           body: JSON.stringify({
             nickname: credentials?.nickname,
-            redirectUri: `http://localhost:3000/api/auth/callback/${credentials?.provider}`,
+            redirectUri: `${process.env.REDIRECT_URI}/${credentials?.provider}`,
             token: credentials?.token,
           }),
         });
         const data = await result.json();
         const user = data?.user;
-        if (!user) {
-          throw new Error("failed to signup!");
-        }
 
         return {
           ...user,
@@ -75,7 +88,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log(user);
       if (user) {
         // eslint-disable-next-line no-param-reassign
         token.accessToken = user?.accessToken;
@@ -91,13 +103,22 @@ export const authOptions: NextAuthOptions = {
       session.user = token.user as User;
       return session;
     },
-    async signIn({ account }) {
-      if (account?.provider !== "credentials") {
-        console.log(account);
-        const token = account?.provider === "google" ? account?.id_token : account?.access_token;
+    async signIn({ account, credentials, user }) {
+      console.log("account: ", account);
+      console.log("credentials: ", credentials);
+
+      // 카카오 로그인 미가입자인 경우(redirect)
+      if (user && user?.redirect) {
+        cookies().set("oauth-token", credentials?.code as string);
+        return false;
+      }
+
+      // 구글 로그인 가입자 & 미가입자
+      if (account?.provider === "google") {
+        const token = account?.id_token;
         try {
           const payload = {
-            redirectUri: `http://localhost:3000/api/auth/callback/${account?.provider}`,
+            redirectUri: `${process.env.REDIRECT_URI}/${account?.provider}`,
             token,
           };
           console.log("Payload:", payload);
@@ -110,19 +131,20 @@ export const authOptions: NextAuthOptions = {
           });
           const data = await result.json();
           console.log("Response:", data);
-          console.log("status:", result.status);
+
           if (data.user) {
             return true;
           }
+
           if (result.status === 403 && data.message === "등록되지 않은 사용자입니다.") {
             cookies().set("oauth-token", token as string);
-            console.log("redirect");
-
             return `/oauth/signup/${account?.provider}`;
           }
+
           return false;
         } catch (error) {
           console.log(error);
+          return false;
         }
       }
       return true;
@@ -133,6 +155,7 @@ export const authOptions: NextAuthOptions = {
     newUser: "/signup",
   },
   secret: process.env.SECRET,
+  debug: true,
 };
 
 const handler = NextAuth(authOptions);
