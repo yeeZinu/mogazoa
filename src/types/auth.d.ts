@@ -1,6 +1,7 @@
 export declare module "next-auth" {
   interface User {
     accessToken: string;
+    redirect?: string;
   }
   interface Session {
     accessToken: string;
