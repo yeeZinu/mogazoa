@@ -20,7 +20,6 @@ export default function OauthSignUpPage({ params }: { params: { provider: string
   const { provider } = params;
 
   useEffect(() => {
-    // js-cookie 라이브러리 도입 문의
     const allCookies = document.cookie;
     const cookieName = "oauth-token";
     const matchToken = allCookies.match(new RegExp(`(^| )${cookieName}=([^;]+)`));
@@ -59,10 +58,6 @@ export default function OauthSignUpPage({ params }: { params: { provider: string
         />
         {errors.nickname && <p>{errors.nickname.message}</p>}
         <button type='submit'>submit</button>
-        <p>
-          {oauthToken}
-          {provider}
-        </p>
       </form>
     </div>
   );
