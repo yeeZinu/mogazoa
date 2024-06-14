@@ -2,13 +2,11 @@
 
 /* eslint-disable no-restricted-imports */
 
+import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
-// user mock data
-// import { userMock } from "@/app/(userpage)/userMock";
+import React from "react";
 import Activity from "@/components/Card/Activity/Activity";
 import cn from "@/utils/classNames";
-// 추후 데이터 연결시 받아온데이터로 변환 예정
 import HttpClient from "@/utils/httpClient";
 import UserActivityList from "./components/UserActivityList/UserActivityList";
 import UserInfo from "./components/UserInfo/UserInfo";
@@ -17,37 +15,33 @@ import { UserDetail } from "../../types";
 
 export default function UserPage({ params }: { params: { userId: number } }) {
   const { data: session } = useSession();
-  const [userData, setUserData] = useState<UserDetail>();
+  const ACCESS_TOKEN = session?.accessToken;
 
   const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL!);
 
-  const getUserData = async () => {
-    if (session) {
-      const ACCESS_TOKEN = session.accessToken;
-      setUserData(
-        await httpClient.get(`users/${params.userId}`, {
-          headers: { Authorization: ACCESS_TOKEN },
-          cache: "no-cache",
-        }),
-      );
-    }
-  };
-
-  useEffect(() => {
-    getUserData();
-  }, []);
+  const { data } = useQuery({
+    queryKey: ["userData", params.userId],
+    queryFn: async () => {
+      const res = httpClient.get<UserDetail>(`users/${params.userId}`, {
+        headers: { Authorization: ACCESS_TOKEN ?? "" },
+        cache: "no-cache",
+      });
+      return res;
+    },
+  });
 
   return (
     <div className={cn(styles.container)}>
-      {userData && (
+      {data && (
         <>
           <UserInfo
-            nickname={userData.nickname}
-            image={userData.image}
-            description={userData.description}
-            follower={userData.followersCount}
-            folloing={userData.followeesCount}
-            isfollow={userData.isFollowing}
+            userId={params.userId}
+            nickname={data.nickname}
+            image={data.image}
+            description={data.description}
+            follower={data.followersCount}
+            folloing={data.followeesCount}
+            isfollow={data.isFollowing}
           />
           <div className={styles.activity}>
             <section>
@@ -55,15 +49,15 @@ export default function UserPage({ params }: { params: { userId: number } }) {
               <div className={styles.activityDetails}>
                 <Activity
                   title='남긴 별점 평균'
-                  averageRating={userData.averageRating}
+                  averageRating={data.averageRating}
                 />
                 <Activity
                   title='남긴 리뷰'
-                  reviewCount={userData.reviewCount}
+                  reviewCount={data.reviewCount}
                 />
                 <Activity
                   title='관심 카테고리'
-                  chipCategoty={userData.mostFavoriteCategory}
+                  chipCategoty={data.mostFavoriteCategory}
                 />
               </div>
             </section>

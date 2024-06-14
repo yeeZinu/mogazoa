@@ -1,6 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import Button from "@/components/Button/Button";
 import { UserImage } from "@/components/UserImage";
@@ -9,8 +10,11 @@ import styles from "./UserInfo.module.scss";
 import FollowModal from "../FollowModal/FollowModal";
 // eslint-disable-next-line no-restricted-imports
 import HTMLContent from "../HTMLContent/HTMLContent";
+// eslint-disable-next-line no-restricted-imports
+import MyProfileButton from "../MyProfileButton/MyProfileButton";
 
 type UserInfoProps = {
+  userId: number;
   nickname: string;
   image: string;
   description: string;
@@ -19,11 +23,21 @@ type UserInfoProps = {
   isfollow: boolean;
 };
 
-export default function UserInfo({ nickname, image, description, follower, folloing, isfollow }: UserInfoProps) {
-  // textarea에서 쓴 줄바꿈 변환해서 서버로 보내기
-  // const formattedDescription = description.replace(/\n/g, "<br>")
+export default function UserInfo({
+  userId,
+  nickname,
+  image,
+  description,
+  follower,
+  folloing,
+  isfollow,
+}: UserInfoProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [followModalProps, setFollowModalProps] = useState("");
+  const { data: session } = useSession();
+  const loginUser = session?.user.id;
+
+  console.log(loginUser, userId);
 
   const handelFolloweesModal = () => {
     setFollowModalProps("followees");
@@ -62,22 +76,28 @@ export default function UserInfo({ nickname, image, description, follower, follo
             <p>팔로잉</p>
           </div>
         </div>
-        {isfollow ? (
-          <Button
-            styleType='tertiary'
-            disabled
-            className='profile'
-          >
-            팔로우 취소
-          </Button>
+        {Number(userId) === loginUser ? (
+          <MyProfileButton />
         ) : (
-          <Button
-            styleType='primary'
-            disabled={false}
-            className='profile'
-          >
-            팔로우
-          </Button>
+          <div>
+            {isfollow ? (
+              <Button
+                styleType='tertiary'
+                disabled
+                className={styles.profile}
+              >
+                팔로우 취소
+              </Button>
+            ) : (
+              <Button
+                styleType='primary'
+                disabled={false}
+                className={styles.profile}
+              >
+                팔로우
+              </Button>
+            )}
+          </div>
         )}
       </div>
     </>
