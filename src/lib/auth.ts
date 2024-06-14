@@ -30,6 +30,45 @@ const authOptions: NextAuthOptions = {
         };
       },
     }),
+    Credentials({
+      id: "signup",
+      name: "signup",
+      credentials: {
+        email: { label: "email", type: "email", placeholder: "user@email.com" },
+        nickname: { label: "nickname", type: "text", placeholder: "nickname" },
+        password: { label: "password", type: "password", placeholder: "password" },
+        passwordConfirmation: { label: "passwordConfirmation", type: "password", placeholder: "password confirmation" },
+      },
+      async authorize(credentials) {
+        try {
+          const result = await fetch(`${process.env.BASE_URL}/auth/signUp`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: credentials?.email,
+              nickname: credentials?.nickname,
+              password: credentials?.password,
+              passwordConfirmation: credentials?.passwordConfirmation,
+            }),
+          });
+          const data = await result.json();
+          const user = data?.user;
+
+          if (result.ok && user) {
+            return {
+              ...user,
+              accessToken: data.accessToken,
+            };
+          }
+          return await Promise.reject(data);
+        } catch (error) {
+          const typedError = error as { message: string; details: { [key: string]: { message: string } } };
+          throw new Error(typedError?.message);
+        }
+      },
+    }),
   ],
   callbacks: {
     async jwt({ token, user }) {
@@ -51,6 +90,7 @@ const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/signin",
+    newUser: "/signup",
   },
   secret: process.env.SECRET,
 };
