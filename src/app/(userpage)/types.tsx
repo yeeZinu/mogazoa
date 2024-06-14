@@ -19,18 +19,18 @@ export type UserDetail = {
 
 export type UserProduct = {
   nextCursor: number;
-  list: [
-    {
-      updatedAt: Date;
-      createdAt: Date;
-      writerId: number;
-      categoryId: number;
-      favoriteCount: number;
-      reviewCount: number;
-      rating: number;
-      image: string;
-      name: string;
-      id: number;
-    },
-  ];
+  list: Follow[];
+};
+
+export type Follow = {
+  updatedAt: string;
+  createdAt: string;
+  writerId: number;
+  categoryId: number;
+  favoriteCount: number;
+  reviewCount: number;
+  rating: number;
+  image: string;
+  name: string;
+  id: number;
 };
