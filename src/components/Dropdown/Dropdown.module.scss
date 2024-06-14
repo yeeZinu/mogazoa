@@ -9,6 +9,7 @@
   position: relative;
   width: 100%;
   color: $gray-200;
+  white-space: nowrap;
   cursor: pointer;
 
   @include text-normal;
@@ -29,7 +30,7 @@
     }
 
     @include respond-to(mobile) {
-      width: 100px;
+      width: 120px;
     }
   }
 }

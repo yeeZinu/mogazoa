@@ -45,24 +45,26 @@ export default function Activity({ title, averageRating, reviewCount, chipCatego
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>
-        <span>{namgin}</span>
-        <span>{namuji}</span>
-      </div>
-      {title === "관심 카테고리" ? (
-        <CategoryChip>{chipCategoty?.name}</CategoryChip>
-      ) : (
-        <div className={styles.contentBox}>
-          <figure className={styles.imageBox}>
-            <Image
-              src={changeImageSrc as string}
-              alt='title'
-              fill
-            />
-          </figure>
-          <span>{mainContent}</span>
+      <div className={styles.borderBox}>
+        <div className={styles.title}>
+          <span>{namgin}</span>
+          <span>{namuji}</span>
         </div>
-      )}
+        {title === "관심 카테고리" ? (
+          <CategoryChip>{chipCategoty?.name}</CategoryChip>
+        ) : (
+          <div className={styles.contentBox}>
+            <figure className={styles.imageBox}>
+              <Image
+                src={changeImageSrc as string}
+                alt='title'
+                fill
+              />
+            </figure>
+            <span>{mainContent}</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

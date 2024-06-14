@@ -21,10 +21,11 @@ export default function SearchInput({ isOpen, onClick }: SearchInputProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const { register, handleSubmit } = useForm<KeywordType>();
+  const { register, handleSubmit, reset } = useForm<KeywordType>();
 
   const onSubmit: SubmitHandler<KeywordType> = ({ keyword }) => {
     router.push(`/?${createQueryString("keyword", keyword, searchParams)}`);
+    reset();
   };
 
   return (

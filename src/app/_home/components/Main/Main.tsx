@@ -11,18 +11,22 @@ import cn from "@/utils/classNames";
 import { createQueryString, deleteQueryString } from "@/utils/createQueryString";
 import styles from "./Main.module.scss";
 import type { CategoryType } from "@/_home/types";
-import type { UserRankingType } from "@/types/global";
+import type { UserRankingType, ProductsResponseType } from "@/types/global";
 
 type MainProps = {
   categories: CategoryType[];
   ranking: UserRankingType[];
+  products: { hotProducts: ProductsResponseType; ratingProducts: ProductsResponseType };
 };
 
-export default function Main({ categories, ranking }: MainProps) {
+export default function Main({ categories, ranking, products }: MainProps) {
   const [selectedCategory, setSelectedCategory] = useState<null | Pick<CategoryType, "id" | "name">>(null);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const { hotProducts, ratingProducts } = products;
 
   const toggleCategory = () => {
     setIsCategoryOpen(!isCategoryOpen);
@@ -37,11 +41,12 @@ export default function Main({ categories, ranking }: MainProps) {
       router.push(`/?${createQueryString(QUERY.CATEGORY, id.toString(), searchParams)}`);
     }
 
-    toggleCategory();
+    setIsCategoryOpen(false);
   };
 
   const hasQueryParams = Array.from(searchParams.entries()).length > 0;
-  const category = searchParams.get(QUERY.CATEGORY);
+  const categoryParam = searchParams.get(QUERY.CATEGORY);
+  const category = categories.find(({ id }) => categoryParam === id.toString())?.name;
 
   return (
     <div className={cn(styles.container)}>
@@ -50,23 +55,30 @@ export default function Main({ categories, ranking }: MainProps) {
         onToggle={toggleCategory}
       >
         <CategoryList
-          selected={category}
+          selected={categoryParam}
           onClick={handleCategoryClick}
           categoryList={categories}
         />
       </Category>
 
       <div className={styles.content}>
-        {hasQueryParams ? <FilteredProducts selectedCategory={selectedCategory?.name ?? null} /> : <PopularProducts />}
+        {hasQueryParams ? (
+          <FilteredProducts category={category ?? null} />
+        ) : (
+          <PopularProducts
+            hotProducts={hotProducts.list.slice(0, 6)}
+            ratingProducts={ratingProducts.list.slice(0, 6)}
+          />
+        )}
         <button
           type='button'
           className={cn(styles.categoryToggle)}
           onClick={toggleCategory}
         >
-          <CategoryFilter>{selectedCategory?.name ?? "카테고리"}</CategoryFilter>
+          <CategoryFilter>{category ?? "카테고리"}</CategoryFilter>
         </button>
 
-        <ReviewerRanking ranking={ranking} />
+        <ReviewerRanking ranking={ranking.slice(0, 5)} />
       </div>
     </div>
   );
