@@ -65,7 +65,7 @@ export default function Gnb() {
             {status === "authenticated" ? (
               <>
                 <Link href='/compare'>비교하기</Link>
-                <Link href={`/userpage/${session.user.id}`}>내 프로필</Link>
+                <Link href={`/user/${session.user.id}`}>내 프로필</Link>
               </>
             ) : (
               <>
