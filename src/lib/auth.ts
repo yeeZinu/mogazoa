@@ -21,7 +21,7 @@ const authOptions: NextAuthOptions = {
         const user = data?.user;
 
         if (!user) {
-          throw new Error("로그인 실패: 계정 정보를 다시 확인해주세요.");
+          return null;
         }
 
         return {
@@ -53,6 +53,7 @@ const authOptions: NextAuthOptions = {
     signIn: "/signin",
   },
   secret: process.env.SECRET,
+  debug: true,
 };
 
 export default authOptions;
