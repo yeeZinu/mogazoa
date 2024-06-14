@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const pretendard = localFont({
-  src: "../../public/gfonts/Pretendard-Regular.woff2",
+  src: "../../public/fonts/Pretendard-Regular.woff2",
   display: "swap",
 });
 
