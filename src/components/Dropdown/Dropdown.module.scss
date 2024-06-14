@@ -50,10 +50,6 @@
     padding: 17px 20px;
   }
 
-  @include respond-to(mobile) {
-    padding: 17px 20px;
-  }
-
   &.focused,
   &.selected {
     color: $white-100;
