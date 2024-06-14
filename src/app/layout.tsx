@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Gnb } from "@/components/Gnb";
+import authOptions from "@/lib/auth";
 import AuthProvider from "@/lib/AuthProvider";
 import Providers from "@/lib/Providers";
 import "@/styles/_reset.scss";
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const pretendard = localFont({
-  src: "../../public/fonts/Pretendard-Regular.woff2",
+  src: "../../public/gfonts/Pretendard-Regular.woff2",
   display: "swap",
 });
 
