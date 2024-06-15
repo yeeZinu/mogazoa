@@ -26,6 +26,7 @@ export default function SignUpForm() {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { isValid, errors },
   } = useForm<SignUpFormData>({ mode: "onBlur" });
   const router = useRouter();
@@ -78,8 +79,14 @@ export default function SignUpForm() {
       });
 
       if (result?.error) {
-        setModalMessage(result?.error);
+        setModalMessage(result.error);
         setIsModal(true);
+
+        if (result.error.includes("닉네임")) {
+          setError("nickname", { message: "이미 사용중인 닉네임입니다." });
+        } else if (result.error.includes("이메일")) {
+          setError("email", { message: "이미 사용중인 이메일입니다." });
+        }
       } else {
         router.push("/");
       }
@@ -90,6 +97,10 @@ export default function SignUpForm() {
     }
   };
 
+  /**
+   * AuthInput 컴포넌트 생성
+   * auth용 스타일링 파일 통합
+   */
   return (
     <>
       <AlertModal
