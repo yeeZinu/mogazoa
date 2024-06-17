@@ -46,7 +46,7 @@ export default function UploadImage<T extends FieldValues>({
   };
 
   return (
-    <section>
+    <>
       <div className={cn(styles.layout, className)}>
         {image && (
           <Image
@@ -75,8 +75,8 @@ export default function UploadImage<T extends FieldValues>({
           <Image
             className={styles.uploadImage}
             src={PHOTO_ICON}
-            width={100}
-            height={100}
+            width={80}
+            height={80}
             alt='upload'
           />
           <p className={styles.uploadText}>이미지 선택하기</p>
@@ -88,6 +88,6 @@ export default function UploadImage<T extends FieldValues>({
           />
         )}
       </div>
-    </section>
+    </>
   );
 }
