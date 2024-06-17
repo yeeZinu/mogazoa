@@ -2,23 +2,32 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import { useController, Control } from "react-hook-form";
+import { Control, useController, FieldValues, Path, PathValue, RegisterOptions } from "react-hook-form";
 import cn from "@/utils/classNames";
 import { DROP_DOWN_ICON } from "@/utils/constant";
 import styles from "./Dropdown.module.scss";
 import { DropdownList } from "./DropdownList";
 import type { ItemType, VariantType } from "@/components/Dropdown/type";
 
-type DropdownProps = {
+type DropdownProps<T extends FieldValues> = {
   items: ItemType[];
-  control: Control;
-  name: string;
+  control: Control<T>;
+  name: Path<T>;
   variant?: VariantType;
   placeholder: string;
-  rules?: { required: string };
+  rules?: RegisterOptions<T>;
+  className?: string;
 };
 
-export default function Dropdown({ items, control, name, variant, placeholder, rules }: DropdownProps) {
+export default function Dropdown<T extends FieldValues>({
+  items,
+  control,
+  name,
+  variant,
+  placeholder,
+  rules,
+  className,
+}: DropdownProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
 
   const {
@@ -30,7 +39,7 @@ export default function Dropdown({ items, control, name, variant, placeholder, r
     rules: {
       ...rules,
     },
-    defaultValue: "",
+    defaultValue: "" as PathValue<T, Path<T>>,
   });
 
   const selectedItem = items.find((item) => item.value === value);
@@ -50,14 +59,14 @@ export default function Dropdown({ items, control, name, variant, placeholder, r
   };
 
   return (
-    <div className={cn(styles.container, `${styles[`${variant}`]}`)}>
+    <div className={cn(styles.container, styles[`${variant}`], className)}>
       <div
         className={cn(
           styles.dropdownBox,
           isOpen && styles.focused,
           value && styles.selected,
           error && styles.error,
-          `${styles[`${variant}`]}`,
+          styles[`${variant}`],
         )}
         role='button'
         tabIndex={0}
