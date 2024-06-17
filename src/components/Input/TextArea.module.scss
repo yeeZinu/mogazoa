@@ -11,14 +11,19 @@
 }
 
 .textarea {
+  width: 100%;
   padding: 1.2rem;
   color: $white-100;
   resize: none;
   background: $black-200;
-  border: 1px solid $gray-200;
-  width: 100%;
+  border: none;
+  outline: 1px solid $gray-300;
 
   @include rounded-md;
+
+  &:focus {
+    outline: 1px solid $blue-100;
+  }
 }
 
 .error {
@@ -27,7 +32,7 @@
 
 .errorMessage {
   position: absolute;
-  bottom: -25px;
+  bottom: -15px;
   left: 0;
   color: $red-100;
 

@@ -1,4 +1,4 @@
-@import "@/styles/_index.scss";
+@import "@/styles/_index";
 
 .container {
   position: relative;
@@ -6,28 +6,31 @@
 }
 
 .layout {
-  background: $black-300;
   padding: 3rem 5rem;
+  background: $black-300;
+
   @include rounded-lg;
 }
 
 .cropperBox {
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+
   @include rounded-lg;
 }
 
 .previewBox {
   display: flex;
-  text-align: left;
   flex-direction: column;
-  margin-bottom: 3rem;
   gap: 1rem;
+  margin-bottom: 3rem;
+  text-align: left;
 }
 
 .text {
   margin-top: 1rem;
+
   @include text-lg;
 }
 
@@ -36,6 +39,7 @@
   height: 200px;
   overflow: hidden;
   border: 3px solid $blue-100;
+
   @include rounded-xs;
 }
 
@@ -48,15 +52,15 @@
 }
 
 .bottomLayout {
-  margin-top: 3rem;
   display: flex;
   gap: 5rem;
-  justify-content: space-between;
   align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 3rem;
 }
 
 .button {
-  height: 1.2rem;
   width: 7rem;
+  height: 1.2rem;
   margin-bottom: 3rem;
 }
