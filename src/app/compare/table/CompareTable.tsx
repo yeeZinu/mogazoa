@@ -4,7 +4,6 @@ import styles from "./CompareTable.module.scss";
 type Product = {
   id: number;
   name: string;
-  description: string;
   image: string;
   rating: number;
   reviewCount: number;
@@ -13,16 +12,6 @@ type Product = {
   createdAt: string;
   updatedAt: string;
   writerId: number;
-  isFavorite: boolean;
-  category: {
-    id: number;
-    name: string;
-  };
-  categoryMetric: {
-    rating: number;
-    favoriteCount: number;
-    reviewCount: number;
-  };
 };
 
 type CompareTableProps = {

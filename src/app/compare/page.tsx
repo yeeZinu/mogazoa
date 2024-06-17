@@ -19,16 +19,6 @@ type Product = {
   createdAt: string;
   updatedAt: string;
   writerId: number;
-  isFavorite: boolean;
-  category: {
-    id: number;
-    name: string;
-  };
-  categoryMetric: {
-    rating: number;
-    favoriteCount: number;
-    reviewCount: number;
-  };
 };
 
 function ComparePage() {

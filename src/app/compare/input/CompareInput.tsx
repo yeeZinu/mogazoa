@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
 import { Compare } from "@/components/Chip/Compare/Compare";
 import styles from "./CompareInput.module.scss";
-import { dummyProducts, Product } from "./compareProductMock";
+import { Product } from "./compareProductMock";
 import { saveToLocalStorage, getFromLocalStorage } from "./localStorage";
 
 type ProductSelectorProps = {
@@ -15,31 +15,42 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
   const [suggestions2, setSuggestions2] = useState<Product[]>([]);
   const [selectedProduct1, setSelectedProduct1] = useState<Product | null>(null);
   const [selectedProduct2, setSelectedProduct2] = useState<Product | null>(null);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const savedProduct1 = getFromLocalStorage("selectedProduct1");
     const savedProduct2 = getFromLocalStorage("selectedProduct2");
     if (savedProduct1) setSelectedProduct1(savedProduct1);
     if (savedProduct2) setSelectedProduct2(savedProduct2);
+
+    const fetchAllProducts = async () => {
+      try {
+        const response = await fetch(`https://mogazoa-api.vercel.app/4-20/products`);
+        const data = await response.json();
+        const products: Product[] = data.list.map((item: Product) => ({
+          id: item.id,
+          name: item.name,
+          image: item.image,
+          rating: item.rating,
+          reviewCount: item.reviewCount,
+          favoriteCount: item.favoriteCount,
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt,
+          writerId: item.writerId,
+          categoryId: item.categoryId,
+        }));
+        setAllProducts(products);
+      } catch (error) {
+        console.error("상품을 불러오는 중 오류가 발생했습니다.");
+      }
+    };
+
+    fetchAllProducts();
   }, []);
 
-  const handleSearch = async (query: string, setSuggestions: React.Dispatch<React.SetStateAction<Product[]>>) => {
-    // if (query.length > 0) {
-    //   try {
-    //     const response = await fetch(`/4-20/products?search=${query}`);
-    //     const data = await response.json();
-    //     const products: Product[] = data.list;
-    //     setSuggestions(products);
-    //   } catch (error) {
-    //     console.error("Failed to fetch suggestions:", error);
-    //   }
-    // } else {
-    //   setSuggestions([]);
-    // }
-
-    // Use dummy data for now
+  const handleSearch = (query: string, setSuggestions: React.Dispatch<React.SetStateAction<Product[]>>) => {
     if (query.length > 0) {
-      const filteredProducts = dummyProducts.filter((product) =>
+      const filteredProducts = allProducts.filter((product) =>
         product.name.toLowerCase().includes(query.toLowerCase()),
       );
       setSuggestions(filteredProducts);
@@ -78,10 +89,12 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
     onCompare(selectedProduct1, selectedProduct2);
   };
 
+  const isCompareButtonDisabled = !selectedProduct1 || !selectedProduct2;
+
   return (
     <div className={styles.content}>
       <div>
-        <div className={styles.text}>상품 1: </div>
+        <div className={styles.text}>상품 1 </div>
         <div className={styles.inputBox}>
           <div className={styles.compareChip}>
             {selectedProduct1 && (
@@ -127,7 +140,7 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
         </div>
       </div>
       <div>
-        <div className={styles.text}>상품 2: </div>
+        <div className={styles.text}>상품 2 </div>
         <div className={styles.inputBox}>
           <div className={styles.compareChip}>
             {selectedProduct2 && (
@@ -175,7 +188,8 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
       <button
         type='button'
         onClick={handleCompareClick}
-        className={styles.button}
+        className={`${styles.button} ${isCompareButtonDisabled && styles.buttonDisabled}`}
+        disabled={isCompareButtonDisabled}
       >
         비교하기
       </button>
