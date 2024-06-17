@@ -94,7 +94,7 @@
 }
 
 .profile {
-  width: 250px;
+  width: 100%;
 
   @include respond-to(tablet) {
     width: 80%;

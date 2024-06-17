@@ -77,7 +77,7 @@ export default function Gnb({ initialSession }: GnbProps) {
             {currentSession ? (
               <>
                 <Link href='/compare'>비교하기</Link>
-                <Link href={`/user/${session?.user.id}`}>내 프로필</Link>
+                <Link href={`/user/${currentSession.user.id}`}>내 프로필</Link>
               </>
             ) : (
               <>

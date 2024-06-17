@@ -37,8 +37,6 @@ export default function UserInfo({
   const { data: session } = useSession();
   const loginUser = session?.user.id;
 
-  console.log(loginUser, userId);
-
   const handelFolloweesModal = () => {
     setFollowModalProps("followees");
     setIsModalOpen(true);

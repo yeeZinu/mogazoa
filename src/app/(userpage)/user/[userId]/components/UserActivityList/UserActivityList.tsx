@@ -2,10 +2,11 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { productMock } from "@/app/(userpage)/productMock";
+import { useInView } from "react-intersection-observer";
 import { Dropdown } from "@/components/Dropdown";
 import { ORDER, DROPDOWN } from "@/components/Dropdown/constants";
 import useWindowSize from "@/hooks/useWindowSize";
+import { ProductType, ProductsResponseType } from "@/types/global";
 import cn from "@/utils/classNames";
 import HttpClient from "@/utils/httpClient";
 import styles from "./UserActivityList.module.scss";
@@ -20,31 +21,45 @@ export default function UserActivityList() {
   const { width } = useWindowSize();
   const { control, watch } = useForm({ mode: "onBlur" });
 
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+  });
+
   const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL!);
   const userId = session?.user.id;
   const ACCESS_TOKEN = session?.accessToken ?? "";
 
-  const { data } = useInfiniteQuery({
+  const {
+    data: userProductData,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
     queryKey: ["userProductData", selectedButton],
     queryFn: async ({ pageParam }) => {
-      const res = await httpClient.get(`users/${userId}/${selectedButton}-products?cursor=${pageParam}`, {
-        headers: { Authorization: ACCESS_TOKEN },
-        cache: "no-cache",
-      });
+      const res = await httpClient.get<ProductsResponseType>(
+        `users/${userId}/${selectedButton}-products?cursor=${pageParam}`,
+        {
+          headers: { Authorization: ACCESS_TOKEN },
+          cache: "no-cache",
+        },
+      );
       return res;
     },
+    select: (data): ProductType[] => data.pages.map((page) => page.list).flat(),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
   });
-
-  console.log("select", selectedButton, data);
 
   useEffect(() => {
     if (watch("select") !== undefined) {
       setSelectedButton(watch("select"));
     }
     setSelectedButton("reviewed");
-  }, [watch("select")]);
+
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage, hasNextPage, watch("select")]);
 
   const onSelectButtonHandler = (value: string) => {
     setSelectedButton(value);
@@ -68,7 +83,12 @@ export default function UserActivityList() {
           />
         </div>
       )}
-      <UserProductList list={productMock} />
+      {userProductData && (
+        <UserProductList
+          list={userProductData}
+          lastRef={ref}
+        />
+      )}
     </div>
   );
 }

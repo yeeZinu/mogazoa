@@ -19,10 +19,16 @@ export default function MyProfileButton() {
       <Button
         styleType='primary'
         onClick={handleOpen}
+        className={styles.profile}
       >
         프로필 수정
       </Button>
-      <Button styleType='tertiary'>로그아웃</Button>
+      <Button
+        styleType='tertiary'
+        className={styles.profile}
+      >
+        로그아웃
+      </Button>
     </div>
   );
 }
