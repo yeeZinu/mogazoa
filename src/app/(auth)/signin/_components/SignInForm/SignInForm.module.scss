@@ -36,10 +36,12 @@
   .signInButton {
     width: auto;
     padding: 21px;
+
     @include text-lg;
 
     @include respond-to(tablet) {
       @include text-normal;
+
       padding: 18px;
     }
   }

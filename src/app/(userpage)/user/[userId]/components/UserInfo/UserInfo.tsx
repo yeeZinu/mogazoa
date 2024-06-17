@@ -77,7 +77,7 @@ export default function UserInfo({
         {Number(userId) === loginUser ? (
           <MyProfileButton />
         ) : (
-          <div>
+          <div className={styles.followButton}>
             {isfollow ? (
               <Button
                 styleType='tertiary'
