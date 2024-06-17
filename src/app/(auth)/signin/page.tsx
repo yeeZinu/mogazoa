@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "@/components/Button/Button";
+import { OauthSignInBox } from "./_components/OauthSignInBox";
 import styles from "./SignInPage.module.scss";
 
 type FormData = {
@@ -22,7 +23,7 @@ export default function SignInPage() {
   const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
-    const result = await signIn("credentials", {
+    const result = await signIn("signin", {
       redirect: false,
       email: data.email,
       password: data.password,
@@ -76,6 +77,7 @@ export default function SignInPage() {
           SignIn
         </Button>
       </form>
+      <OauthSignInBox />
     </div>
   );
 }
