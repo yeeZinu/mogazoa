@@ -221,7 +221,7 @@ const authOptions: NextAuthOptions = {
     signIn: "/signin",
     newUser: "/signup",
   },
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   debug: true,
 };
 
