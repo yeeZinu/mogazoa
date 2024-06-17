@@ -1,0 +1,18 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  .title {
+    @include text-normal;
+    @include font-normal;
+
+    @include respond-to(tablet) {
+      @include text-sm;
+    }
+  }
+}
