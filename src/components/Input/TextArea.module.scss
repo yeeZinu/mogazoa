@@ -1,0 +1,42 @@
+@import "@/styles/_index.scss";
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.default {
+  width: 20rem;
+  height: 8rem;
+}
+
+.textarea {
+  border: 1px solid $gray-200;
+  padding: 8px;
+  background: $black-200;
+  color: $white-100;
+  resize: none;
+
+  @include rounded-md;
+}
+
+.error {
+  outline: 1px solid $red-100;
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  color: $red-100;
+  @include text-xs;
+}
+
+.charCount {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 12px;
+  color: $gray-200;
+}
