@@ -1,0 +1,40 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+  width: 360px;
+
+  @include respond-to(mobile) {
+    width: minmax(320px, calc(100% - 40px));
+  }
+
+  .title {
+    @include text-xl;
+    @include font-bold;
+
+    @include respond-to(tablet) {
+      @include text-lg;
+    }
+  }
+
+  .message {
+    @include text-normal;
+    @include font-normal;
+
+    @include respond-to(tablet) {
+      @include text-sm;
+    }
+  }
+
+  .button {
+    width: auto;
+
+    @include respond-to(tablet) {
+      @include text-sm;
+    }
+  }
+}
