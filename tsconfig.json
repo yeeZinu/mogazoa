@@ -22,7 +22,8 @@
       "@/*": ["src/*"],
       "@/images/*": ["public/images/*"],
       "@/fonts/*": ["public/fonts/*"],
-      "@/_home/*": ["src/app/_home/*"]
+      "@/_home/*": ["src/app/_home/*"],
+      "@/signin/*": ["src/app/(auth)/signin/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
