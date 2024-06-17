@@ -1,0 +1,43 @@
+@import "@/styles/_index";
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.default {
+  width: 20rem;
+  height: 8rem;
+}
+
+.textarea {
+  padding: 8px;
+  color: $white-100;
+  resize: none;
+  background: $black-200;
+  border: 1px solid $gray-200;
+
+  @include rounded-md;
+}
+
+.error {
+  outline: 1px solid $red-100;
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  color: $red-100;
+
+  @include text-xs;
+}
+
+.charCount {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  font-size: 12px;
+  color: $gray-200;
+}
