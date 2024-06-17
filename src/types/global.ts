@@ -30,3 +30,10 @@ export type ProductsResponseType = {
   list: ProductType[];
   nextCursor: number;
 };
+
+export type CategoryType = {
+  id: number;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
