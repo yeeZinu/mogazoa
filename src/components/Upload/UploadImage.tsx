@@ -46,7 +46,7 @@ export default function UploadImage<T extends FieldValues>({
   };
 
   return (
-    <section>
+    <>
       <div className={cn(styles.layout, className)}>
         {image && (
           <Image
@@ -88,6 +88,6 @@ export default function UploadImage<T extends FieldValues>({
           />
         )}
       </div>
-    </section>
+    </>
   );
 }
