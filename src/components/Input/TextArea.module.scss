@@ -7,16 +7,16 @@
 }
 
 .default {
-  width: 20rem;
-  height: 8rem;
+  width: 100%;
 }
 
 .textarea {
-  padding: 8px;
+  padding: 1.2rem;
   color: $white-100;
   resize: none;
   background: $black-200;
   border: 1px solid $gray-200;
+  width: 100%;
 
   @include rounded-md;
 }

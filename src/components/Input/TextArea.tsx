@@ -25,9 +25,9 @@ export default function TextArea<T extends FieldValues>({
   const [charCount, setCharCount] = useState(0);
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => setCharCount(event.target.value.length);
   return (
-    <div className={styles.container}>
+    <div className={cn(styles.container, className || styles.default)}>
       <textarea
-        className={cn(className || styles.default, styles.textarea, error && styles.error)}
+        className={cn(styles.textarea, error && styles.error)}
         {...register(name, { ...rules, onChange: handleInputChange })}
         {...rest}
       />
