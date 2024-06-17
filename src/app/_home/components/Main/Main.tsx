@@ -10,8 +10,7 @@ import CategoryFilter from "@/components/Chip/Category-filter/CategoryFilter";
 import cn from "@/utils/classNames";
 import { createQueryString, deleteQueryString } from "@/utils/createQueryString";
 import styles from "./Main.module.scss";
-import type { CategoryType } from "@/_home/types";
-import type { UserRankingType, ProductsResponseType } from "@/types/global";
+import type { UserRankingType, ProductsResponseType, CategoryType } from "@/types/global";
 
 type MainProps = {
   categories: CategoryType[];
