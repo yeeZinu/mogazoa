@@ -11,14 +11,6 @@
   ::placeholder {
     color: $gray-200;
   }
-
-  @include respond-to(tablet) {
-    height: 4.6rem;
-  }
-
-  @include respond-to(mobile) {
-    height: 4.6rem;
-  }
 }
 
 .label {
@@ -73,7 +65,7 @@
 .eyeIcon {
   position: absolute;
   top: 50%;
-  right: 0.6rem;
+  right: 16px;
   cursor: pointer;
   transform: translateY(-50%);
 }
