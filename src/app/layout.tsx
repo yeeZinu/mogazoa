@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { getServerSession } from "next-auth/next";
 import { Gnb } from "@/components/Gnb";
+import authOptions from "@/lib/auth";
 import AuthProvider from "@/lib/AuthProvider";
 import Providers from "@/lib/Providers";
 import "@/styles/_reset.scss";
@@ -17,11 +19,12 @@ const pretendard = localFont({
   display: "swap",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(authOptions);
   return (
     <html
       lang='ko'
@@ -31,8 +34,9 @@ export default function RootLayout({
         <div id='modal' />
         <AuthProvider>
           <Providers>
-            <Gnb />
+            <Gnb initialSession={session} />
             <main className={styles.main}>{children}</main>
+            {/* {session && <FloatingButton />} */}
           </Providers>
         </AuthProvider>
       </body>

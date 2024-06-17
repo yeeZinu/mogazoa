@@ -2,18 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cn from "@/utils/classNames";
 import { LOGO_IMAGE, MENU_TOGGLE_ICON, CLOSE_ICON } from "@/utils/constant";
 import styles from "./Gnb.module.scss";
 import { SearchInput } from "./SearchInput";
 
-export default function Gnb() {
+type GnbProps = {
+  initialSession: Session | null;
+};
+
+export default function Gnb({ initialSession }: GnbProps) {
+  const { data: session, status } = useSession();
+  const [currentSession, setCurrentSession] = useState(initialSession);
+
+  useEffect(() => {
+    if (status !== "loading" && initialSession !== session) {
+      setCurrentSession(session);
+    }
+  }, [session, initialSession, status]);
+
   const [isInputOpen, setInputOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-
-  const { status, data: session } = useSession();
 
   const handleSearchClick = () => {
     setInputOpen(!isInputOpen);
@@ -62,10 +74,10 @@ export default function Gnb() {
             onClick={handleMenuClick}
           />
           <div className={cn(styles.userAction, isMenuOpen && styles.open)}>
-            {status === "authenticated" ? (
+            {currentSession ? (
               <>
                 <Link href='/compare'>비교하기</Link>
-                <Link href={`/user/${session.user.id}`}>내 프로필</Link>
+                <Link href={`/user/${session?.user.id}`}>내 프로필</Link>
               </>
             ) : (
               <>
