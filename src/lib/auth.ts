@@ -57,8 +57,8 @@ const authOptions: NextAuthOptions = {
        * 간편 회원가입
        * @TODO : 에러 처리
        */
-      id: "EasySignUp",
-      name: "EasySignUp",
+      id: "easySignup",
+      name: "easySignup",
       credentials: {
         nickname: { label: "닉네임", type: "text" },
         token: { label: "토큰", type: "text" },
@@ -86,7 +86,7 @@ const authOptions: NextAuthOptions = {
       },
     }),
     Credentials({
-      name: "SignIn",
+      name: "signin",
       id: "signin",
       credentials: {
         email: { label: "email", type: "email", placeholder: "user@email.com" },

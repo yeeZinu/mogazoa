@@ -26,7 +26,7 @@ export default function SignInForm() {
   const router = useRouter();
 
   const onSubmit = async (data: SignInFormData) => {
-    const result = await signIn("credentials", {
+    const result = await signIn("signin", {
       redirect: false,
       email: data.email,
       password: data.password,

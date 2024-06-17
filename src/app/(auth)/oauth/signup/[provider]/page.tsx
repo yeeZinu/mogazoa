@@ -34,7 +34,7 @@ export default function OauthSignUpPage({ params }: { params: { provider: string
 
   const handleEasySignUp = async (data: FormData) => {
     console.log("oauthToken:", oauthToken);
-    const result = await signIn("EasySignUp", {
+    const result = await signIn("easySignup", {
       redirect: false,
       nickname: data.nickname,
       token: oauthToken,
