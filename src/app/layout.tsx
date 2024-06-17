@@ -26,7 +26,7 @@ declare global {
     Kakao: any;
   }
 }
-
+        
 export default async function RootLayout({
   children,
 }: Readonly<{
