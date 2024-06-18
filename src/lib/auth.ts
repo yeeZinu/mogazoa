@@ -65,24 +65,34 @@ const authOptions: NextAuthOptions = {
         provider: { label: "프로바이더", type: "text" },
       },
       async authorize(credentials) {
-        const result = await fetch(`${process.env.BASE_URL}/auth/signUp/${credentials?.provider}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            nickname: credentials?.nickname,
-            redirectUri: `${process.env.REDIRECT_URI}/${credentials?.provider}`,
-            token: credentials?.token,
-          }),
-        });
-        const data = await result.json();
-        const user = data?.user;
+        try {
+          const result = await fetch(`${process.env.BASE_URL}/auth/signUp/${credentials?.provider}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              nickname: credentials?.nickname,
+              redirectUri: `${process.env.REDIRECT_URI}/${credentials?.provider}`,
+              token: credentials?.token,
+            }),
+          });
 
-        return {
-          ...user,
-          accessToken: data.accessToken,
-        };
+          const data = await result.json();
+          const user = data?.user;
+
+          if (result.ok && user) {
+            return {
+              ...user,
+              accessToken: data.accessToken,
+            };
+          }
+
+          return await Promise.reject(data);
+        } catch (error) {
+          const typedError = error as { message: string; details: { [key: string]: { message: string } } };
+          throw new Error(typedError?.message);
+        }
       },
     }),
     Credentials({
