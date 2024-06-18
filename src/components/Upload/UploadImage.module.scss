@@ -18,13 +18,14 @@
   cursor: pointer;
   background: $black-200;
   border: none;
+  outline: 1px solid $gray-300;
   opacity: 0;
   transition:
     opacity 1s ease,
     background 1s ease,
     transform 1s ease;
 
-  @include rounded-xl;
+  @include rounded-md;
 }
 
 .uploadInput {
@@ -33,7 +34,7 @@
 
 .uploadText {
   margin-top: 1.2rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: $white-100;
 }
 
