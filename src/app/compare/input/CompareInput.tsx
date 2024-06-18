@@ -25,7 +25,7 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
 
     const fetchAllProducts = async () => {
       try {
-        const response = await fetch(`https://mogazoa-api.vercel.app/4-20/products`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/products`);
         const data = await response.json();
         const products: Product[] = data.list.map((item: Product) => ({
           id: item.id,
