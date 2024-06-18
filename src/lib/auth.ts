@@ -32,9 +32,6 @@ const authOptions: NextAuthOptions = {
           const data = await result.json();
           const user = data?.user;
 
-          console.log(data);
-          console.log(result.status);
-
           if (result.status === 403) {
             return { redirect: "http://localhost:3000/oauth/signup/kakao" };
           }
@@ -53,10 +50,6 @@ const authOptions: NextAuthOptions = {
       },
     }),
     Credentials({
-      /**
-       * 간편 회원가입
-       * @TODO : 에러 처리
-       */
       id: "easySignup",
       name: "easySignup",
       credentials: {
@@ -82,6 +75,7 @@ const authOptions: NextAuthOptions = {
           const user = data?.user;
 
           if (result.ok && user) {
+            cookies().delete("oauth-token");
             return {
               ...user,
               accessToken: data.accessToken,
@@ -103,24 +97,28 @@ const authOptions: NextAuthOptions = {
         password: { label: "password", type: "password", placeholder: "password" },
       },
       async authorize(credentials) {
-        const result = await fetch(`${process.env.BASE_URL}/auth/signIn`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: credentials?.email, password: credentials?.password }),
-        });
-        const data = await result.json();
-        const user = data?.user;
+        try {
+          const result = await fetch(`${process.env.BASE_URL}/auth/signIn`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: credentials?.email, password: credentials?.password }),
+          });
+          const data = await result.json();
+          const user = data?.user;
 
-        if (!user) {
-          return null;
+          if (!user) {
+            return null;
+          }
+
+          return {
+            ...user,
+            accessToken: data.accessToken,
+          };
+        } catch (error) {
+          throw new Error("로그인 과정에서 오류가 발생했어요.");
         }
-
-        return {
-          ...user,
-          accessToken: data.accessToken,
-        };
       },
     }),
     Credentials({
@@ -181,9 +179,6 @@ const authOptions: NextAuthOptions = {
       return session;
     },
     async signIn({ account, credentials, user }) {
-      console.log("account: ", account);
-      console.log("credentials: ", credentials);
-
       // 카카오 로그인 미가입자인 경우(redirect)
       if (user && user?.redirect) {
         cookies().set("oauth-token", credentials?.code as string);
@@ -198,7 +193,6 @@ const authOptions: NextAuthOptions = {
             redirectUri: `${process.env.REDIRECT_URI}/${account?.provider}`,
             token,
           };
-          console.log("Payload:", payload);
           const result = await fetch(`${process.env.BASE_URL}/auth/signIn/${account?.provider}`, {
             method: "POST",
             headers: {
@@ -207,20 +201,18 @@ const authOptions: NextAuthOptions = {
             body: JSON.stringify(payload),
           });
           const data = await result.json();
-          console.log("Response:", data);
 
           if (data.user) {
             return true;
           }
 
           if (result.status === 403 && data.message === "등록되지 않은 사용자입니다.") {
-            cookies().set("oauth-token", token as string);
+            cookies().set("oauth-token", token as string, { httpOnly: true, secure: true });
             return `/oauth/signup/${account?.provider}`;
           }
 
           return false;
         } catch (error) {
-          console.log(error);
           return false;
         }
       }
