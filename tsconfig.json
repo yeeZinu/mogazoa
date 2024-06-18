@@ -23,7 +23,7 @@
       "@/images/*": ["public/images/*"],
       "@/fonts/*": ["public/fonts/*"],
       "@/_home/*": ["src/app/_home/*"],
-      "@/signin/*": ["src/app/(auth)/signin/*"]
+      "@/auth/*": ["src/app/(auth)/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
