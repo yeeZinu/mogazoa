@@ -1,4 +1,4 @@
-import { OauthSignInBox } from "./_components/OauthSignInBox";
+import { OauthSignInBox } from "@/auth/_components/OauthSignInBox";
 import { SignInForm } from "./_components/SignInForm";
 import styles from "./SignInPage.module.scss";
 
