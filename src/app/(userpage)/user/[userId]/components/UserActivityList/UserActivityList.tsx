@@ -1,4 +1,7 @@
+"use client";
+
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -16,6 +19,7 @@ import TabButton from "../TabButton/TabButton";
 import UserProductList from "../UserProductList/UserProductList";
 
 export default function UserActivityList() {
+  const router = useRouter();
   const [selectedButton, setSelectedButton] = useState<string>("reviewed");
   const { data: session } = useSession();
   const { width } = useWindowSize();
@@ -28,6 +32,13 @@ export default function UserActivityList() {
   const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL!);
   const userId = session?.user.id;
   const ACCESS_TOKEN = session?.accessToken ?? "";
+
+  const querySelectButton = (value: string) => {
+    const params = new URLSearchParams();
+    params.set("order", value);
+
+    return params.toString();
+  };
 
   const {
     data: userProductData,
@@ -50,16 +61,18 @@ export default function UserActivityList() {
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
   });
 
+  const selectTab = ORDER.PROFILE.filter((i) => i.value === selectedButton);
+
   useEffect(() => {
     if (watch("select") !== undefined) {
       setSelectedButton(watch("select"));
     }
-    setSelectedButton("reviewed");
 
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView, fetchNextPage, hasNextPage, watch("select")]);
+    router.push(`${userId}/?${querySelectButton(selectedButton)}`);
+  }, [inView, fetchNextPage, hasNextPage, watch("select"), selectedButton]);
 
   const onSelectButtonHandler = (value: string) => {
     setSelectedButton(value);
@@ -79,7 +92,9 @@ export default function UserActivityList() {
             control={control}
             name='select'
             variant={DROPDOWN.ORDER}
-            placeholder={ORDER.PROFILE[0].option}
+            placeholder={
+              ORDER.PROFILE[0].option !== selectTab[0].option ? selectTab[0].option : ORDER.PROFILE[0].option
+            }
           />
         </div>
       )}
