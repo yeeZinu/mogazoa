@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -22,6 +23,7 @@ type OauthSignUpFormData = {
 export default function OauthSignUpForm({ provider, token }: OauthSignUpFormProps) {
   const [isModal, setIsModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -46,6 +48,8 @@ export default function OauthSignUpForm({ provider, token }: OauthSignUpFormProp
     } else if (result?.error) {
       setModalMessage(result.error);
       setIsModal(true);
+    } else {
+      router.push("/");
     }
   };
 

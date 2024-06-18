@@ -34,6 +34,8 @@ export default function OauthSignInBox() {
           localStorage.removeItem("authCode");
           router.push("/oauth/signup/kakao");
         }
+      } else {
+        localStorage.removeItem("authCode");
       }
     };
     handleKakaoCallback();
