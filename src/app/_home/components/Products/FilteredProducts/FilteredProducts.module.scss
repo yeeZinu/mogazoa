@@ -29,4 +29,8 @@
 
   font-weight: 600;
   color: $white-100;
+
+  @include respond-to(tablet) {
+    @include text-lg;
+  }
 }

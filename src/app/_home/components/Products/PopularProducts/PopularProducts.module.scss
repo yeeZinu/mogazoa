@@ -23,10 +23,15 @@
   margin-bottom: 30px;
   font-weight: 600;
   color: $white-100;
+  line-height: 42px;
 
   span {
     color: transparent;
     background: $blue-gradient;
     background-clip: text;
+  }
+
+  @include respond-to(tablet) {
+    @include text-lg;
   }
 }
