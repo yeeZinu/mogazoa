@@ -6,15 +6,15 @@
 }
 
 .section {
-  padding: 60px 60px 20px 90px;
+  // padding: 60px 60px 20px 90px;
 
-  @include respond-to(tablet) {
-    padding-left: 25px;
-  }
+  // @include respond-to(tablet) {
+  //   padding-left: 25px;
+  // }
 
-  @include respond-to(mobile) {
-    padding: 30px 20px 20px;
-  }
+  // @include respond-to(mobile) {
+  //   padding: 30px 20px 20px;
+  // }
 }
 
 .header {
@@ -22,8 +22,8 @@
 
   margin-bottom: 30px;
   font-weight: 600;
-  color: $white-100;
   line-height: 42px;
+  color: $white-100;
 
   span {
     color: transparent;
