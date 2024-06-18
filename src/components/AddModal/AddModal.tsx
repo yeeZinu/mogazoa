@@ -78,7 +78,7 @@ export default function AddModal({ onClose }: ProductModalProps) {
             setTimeout(() => {
               setIsSubmitted(false);
               onClose();
-            }, 3000);
+            }, 2000);
           },
           onError: (error: Error) => {
             const response: ErrorResponse = JSON.parse(error.message);
@@ -89,7 +89,7 @@ export default function AddModal({ onClose }: ProductModalProps) {
               setIsError(true);
               setTimeout(() => {
                 setIsError(false);
-              }, 3000);
+              }, 2000);
             }
           },
         });
