@@ -59,9 +59,9 @@ export default function SignUpForm() {
       setIsModal(true);
 
       if (result.error.includes("닉네임")) {
-        setError("nickname", { message: "이미 사용중인 닉네임입니다." });
+        setError("nickname", { message: result.error });
       } else if (result.error.includes("이메일")) {
-        setError("email", { message: "이미 사용중인 이메일입니다." });
+        setError("email", { message: result.error });
       }
     } else {
       router.push("/");
