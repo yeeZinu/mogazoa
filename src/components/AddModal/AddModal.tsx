@@ -44,7 +44,7 @@ export default function AddModal({ onClose }: ProductModalProps) {
     setError,
     handleSubmit,
     formState: { isValid, errors },
-  } = useForm<FormValues>({ mode: "onBlur" });
+  } = useForm<FormValues>({ mode: "onChange" });
 
   const { data: categoryList, isPending } = useGetCategory();
   const { updateProductMutation } = useUpdateProduct(accessToken);
@@ -129,10 +129,11 @@ export default function AddModal({ onClose }: ProductModalProps) {
             <Input
               name='productName'
               register={register}
-              rules={{ required: "상품 이름은 필수 입력입니다." }}
+              rules={{ required: "상품 이름은 필수 입력입니다.", maxLength: 20 }}
               errors={errors}
               type='text'
               placeholder='상품명(상품 등록 여부를 확인해 주세요)'
+              maxLength={20}
               className={cn(styles.input)}
             />
 
