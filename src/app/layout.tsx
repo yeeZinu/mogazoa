@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { getServerSession } from "next-auth/next";
+import { FloatingButton } from "@/components/FloatingButton";
 import { Gnb } from "@/components/Gnb";
 import authOptions from "@/lib/auth";
 import AuthProvider from "@/lib/AuthProvider";
@@ -26,7 +27,7 @@ declare global {
     Kakao: any;
   }
 }
-        
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -44,7 +45,7 @@ export default async function RootLayout({
           <Providers>
             <Gnb initialSession={session} />
             <main className={styles.main}>{children}</main>
-            {/* {session && <FloatingButton />} */}
+            <FloatingButton initialSession={session} />
           </Providers>
         </AuthProvider>
         <Script

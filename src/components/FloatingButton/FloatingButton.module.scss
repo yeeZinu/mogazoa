@@ -1,0 +1,22 @@
+@import "@/styles/index";
+
+.button {
+  position: fixed;
+  right: 50px;
+  bottom: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  background: $blue-gradient;
+  border: none;
+  border-radius: 100%;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    box-shadow: 0 0 25px $blue-100;
+    transform: rotate(180deg);
+  }
+}

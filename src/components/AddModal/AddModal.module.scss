@@ -1,0 +1,105 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  position: relative;
+  width: 620px;
+  max-width: 90vw;
+  height: auto;
+  max-height: 100dvh;
+
+  @include respond-to(tablet) {
+    width: 590px;
+  }
+}
+
+.content {
+  position: relative;
+  padding: 60px 40px 40px;
+
+  @include respond-to(mobile) {
+    padding: 40px 20px 20px;
+  }
+}
+
+.form {
+  display: grid;
+  grid-template-areas:
+    "input input imageUploader"
+    "dropdown dropdown imageUploader"
+    "textarea textarea textarea"
+    "textarea textarea textarea"
+    ". . ."
+    "submitButton submitButton submitButton";
+  grid-template-columns: 1fr 1fr 160px;
+  gap: 22px;
+
+  @include respond-to(mobile) {
+    grid-template-areas:
+      "imageUploader"
+      "input"
+      "dropdown"
+      "textarea"
+      "submitButton";
+    grid-template-columns: 1fr;
+  }
+}
+
+.header {
+  @include text-xl;
+
+  margin-bottom: 40px;
+
+  @include respond-to(mobile) {
+    @include text-lg;
+  }
+}
+
+.input {
+  grid-area: input;
+}
+
+.dropdown {
+  grid-area: dropdown;
+  width: 100%;
+}
+
+.imageUploader {
+  grid-area: imageUploader;
+  height: 160px;
+
+  @include respond-to(mobile) {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+.textarea {
+  grid-area: textarea;
+  width: 100%;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+
+  @include respond-to(mobile) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.submitButton {
+  grid-area: submitButton;
+
+  &.submitted {
+    box-shadow: 0 0 10px $blue-100;
+  }
+
+  &.error {
+    color: $white-100;
+    background-color: $red-100;
+  }
+}
