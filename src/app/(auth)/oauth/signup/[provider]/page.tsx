@@ -1,9 +1,11 @@
 "use client";
 
+// import { cookies } from "next/headers";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+// import { OauthSignUpForm } from "./_components/OauthSignUpForm";
 
 type FormData = {
   nickname: string;
@@ -11,6 +13,7 @@ type FormData = {
 
 export default function OauthSignUpPage({ params }: { params: { provider: string } }) {
   const [oauthToken, setOauthToken] = useState<string | null>("");
+  // const token = cookies().get('oauth-token');
   const {
     register,
     handleSubmit,
@@ -25,9 +28,9 @@ export default function OauthSignUpPage({ params }: { params: { provider: string
     const matchToken = allCookies.match(new RegExp(`(^| )${cookieName}=([^;]+)`));
     const token = matchToken ? matchToken[2] : null;
 
-    if (!token) {
-      router.push("/signin");
-    }
+    // if (!token) {
+    //   router.push("/signin");
+    // }
 
     setOauthToken(token);
   }, [router]);
@@ -59,6 +62,7 @@ export default function OauthSignUpPage({ params }: { params: { provider: string
         {errors.nickname && <p>{errors.nickname.message}</p>}
         <button type='submit'>submit</button>
       </form>
+      {/* <OauthSignUpForm /> */}
     </div>
   );
 }
