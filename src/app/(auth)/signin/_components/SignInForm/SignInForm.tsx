@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -20,7 +18,7 @@ type SignInFormData = {
 export default function SignInForm() {
   const {
     register,
-    formState: { isValid, errors },
+    formState: { isValid, errors, isSubmitting },
     setError,
     handleSubmit,
   } = useForm<SignInFormData>({ mode: "onBlur" });
@@ -77,10 +75,10 @@ export default function SignInForm() {
       </div>
       <Button
         styleType='primary'
-        disabled={!isValid}
+        disabled={!isValid || isSubmitting}
         className={styles.signInButton}
       >
-        로그인
+        {isSubmitting ? "로그인 중..." : "로그인"}
       </Button>
     </form>
   );
