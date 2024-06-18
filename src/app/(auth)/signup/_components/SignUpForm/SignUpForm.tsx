@@ -7,6 +7,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AlertModal } from "@/app/(auth)/_components/AlertModal";
+import { LabelBox } from "@/app/(auth)/_components/LabelBox";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import PasswordInput from "@/components/Input/PasswordInput";
@@ -114,13 +115,10 @@ export default function SignUpForm() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className={styles.inputList}>
-          <div className={styles.inputBox}>
-            <label
-              htmlFor='email'
-              className={styles.label}
-            >
-              이메일
-            </label>
+          <LabelBox
+            htmlFor='email'
+            title='이메일'
+          >
             <Input
               id='email'
               name='email'
@@ -130,14 +128,11 @@ export default function SignUpForm() {
               errors={errors}
               placeholder='이메일을 입력해 주세요'
             />
-          </div>
-          <div className={styles.inputBox}>
-            <label
-              htmlFor='nickname'
-              className={styles.label}
-            >
-              닉네임
-            </label>
+          </LabelBox>
+          <LabelBox
+            htmlFor='nickname'
+            title='닉네임'
+          >
             <Input
               id='nickname'
               name='nickname'
@@ -147,14 +142,11 @@ export default function SignUpForm() {
               errors={errors}
               placeholder='닉네임을 입력해주세요'
             />
-          </div>
-          <div className={styles.inputBox}>
-            <label
-              htmlFor='password'
-              className={styles.label}
-            >
-              비밀번호
-            </label>
+          </LabelBox>
+          <LabelBox
+            htmlFor='password'
+            title='비밀번호'
+          >
             <PasswordInput
               id='password'
               name='password'
@@ -163,14 +155,11 @@ export default function SignUpForm() {
               errors={errors}
               placeholder='비밀번호를 입력해 주세요'
             />
-          </div>
-          <div className={styles.inputBox}>
-            <label
-              htmlFor='passwordConfirmation'
-              className={styles.label}
-            >
-              비밀번호 확인
-            </label>
+          </LabelBox>
+          <LabelBox
+            htmlFor='passwordConfirmation'
+            title='비밀번호 확인'
+          >
             <PasswordInput
               id='passwordConfirmation'
               name='passwordConfirmation'
@@ -179,7 +168,7 @@ export default function SignUpForm() {
               errors={errors}
               placeholder='비밀번호를 한번 더 입력해 주세요'
             />
-          </div>
+          </LabelBox>
         </div>
         <Button
           styleType='primary'
