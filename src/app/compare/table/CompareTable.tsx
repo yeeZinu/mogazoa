@@ -1,18 +1,6 @@
 import React from "react";
+import { Product } from "@/app/compare/input/compareProductItem";
 import styles from "./CompareTable.module.scss";
-
-type Product = {
-  id: number;
-  name: string;
-  image: string;
-  rating: number;
-  reviewCount: number;
-  favoriteCount: number;
-  categoryId: number;
-  createdAt: string;
-  updatedAt: string;
-  writerId: number;
-};
 
 type CompareTableProps = {
   product1: Product;

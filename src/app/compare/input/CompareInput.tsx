@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
+import { Product } from "@/app/compare/input/compareProductItem";
 import { Compare } from "@/components/Chip/Compare/Compare";
 import styles from "./CompareInput.module.scss";
-import { Product } from "./compareProductItem";
 import { saveToLocalStorage, getFromLocalStorage } from "./localStorage";
 
 type ProductSelectorProps = {
