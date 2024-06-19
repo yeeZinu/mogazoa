@@ -1,7 +1,9 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useEffect } from "react";
-import { OauthSignInButton } from "@/signin/_components/OauthSignInButton";
+import { OauthSignInButton } from "@/auth/_components/OauthSignInButton";
 import { GOOGLE_ICON, KAKAO_ICON } from "@/utils/constant";
 import styles from "./OauthSignInBox.module.scss";
 
@@ -32,6 +34,8 @@ export default function OauthSignInBox() {
           localStorage.removeItem("authCode");
           router.push("/oauth/signup/kakao");
         }
+      } else {
+        localStorage.removeItem("authCode");
       }
     };
     handleKakaoCallback();

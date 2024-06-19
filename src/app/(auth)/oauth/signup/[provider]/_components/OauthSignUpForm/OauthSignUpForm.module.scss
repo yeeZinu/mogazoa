@@ -1,30 +1,18 @@
 @import "@/styles/_index";
 @import "@/styles/_media";
 
-.container,
-.inputList,
-.inputBox {
+.container {
   display: flex;
   flex-direction: column;
-}
-
-.container {
   gap: 60px;
-  width: 100%;
 
-  .inputList {
-    gap: 40px;
-  }
-
-  .signInButton {
+  .button {
     width: auto;
     padding: 21px;
-
     @include text-lg;
 
     @include respond-to(tablet) {
       @include text-normal;
-
       padding: 18px;
     }
   }
