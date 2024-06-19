@@ -31,9 +31,26 @@ export type ProductsResponseType = {
   nextCursor: number;
 };
 
+export type ProductRequestType = {
+  name: string;
+  image: string;
+  description: string;
+  categoryId: number;
+};
+
 export type CategoryType = {
   id: number;
   name: string;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type ErrorResponse = {
+  message: string;
+  details: {
+    name: {
+      message: string;
+      value: string;
+    };
+  };
 };
