@@ -62,9 +62,15 @@ export default function UserActivityList() {
   });
 
   const selectTab = ORDER.PROFILE.filter((i) => i.value === selectedButton);
+  console.log("selectedButton", typeof selectedButton);
+
+  console.log("selectTab", width, selectTab);
 
   useEffect(() => {
-    if (watch("select") !== undefined) {
+    if (width <= 1023 && watch("select") === undefined) {
+      setSelectedButton("reviewed");
+    }
+    if (width <= 1023 && watch("select") !== undefined) {
       setSelectedButton(watch("select"));
     }
 
