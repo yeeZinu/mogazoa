@@ -10,6 +10,7 @@ import { useGetFilteredProducts } from "@/_home/hooks/useGetFilteredProducts";
 import { useQueryParams } from "@/app/_home/hooks/useQueryParams";
 import { Dropdown } from "@/components/Dropdown";
 import { ORDER, DROPDOWN } from "@/components/Dropdown/constants";
+import { NoData } from "@/components/NoData";
 import cn from "@/utils/classNames";
 import { createQueryString } from "@/utils/createQueryString";
 import styles from "./FilteredProducts.module.scss";
@@ -58,25 +59,25 @@ export default function FilteredProducts({ category }: FilteredProductsProps) {
 
   return (
     <div className={cn(styles.container)}>
-      <div className={cn(styles.content)}>
-        <div className={cn(styles.header)}>
-          <h2 className={cn(styles.headerText)}>{filteringText}</h2>
-          <Dropdown
-            items={ORDER.PRODUCT}
-            control={control}
-            name='order'
-            variant={DROPDOWN.ORDER}
-            placeholder={ORDER.PRODUCT[0].option}
-          />
-        </div>
-
-        {productData && (
-          <ProductList
-            list={productData}
-            lastRef={ref}
-          />
-        )}
+      <div className={cn(styles.header)}>
+        <h2 className={cn(styles.headerText)}>{filteringText}</h2>
+        <Dropdown
+          items={ORDER.PRODUCT}
+          control={control}
+          name='order'
+          variant={DROPDOWN.ORDER}
+          placeholder={ORDER.PRODUCT[0].option}
+        />
       </div>
+
+      {productData.length !== 0 ? (
+        <ProductList
+          list={productData}
+          lastRef={ref}
+        />
+      ) : (
+        <NoData message='등록된 상품이 없습니다.' />
+      )}
     </div>
   );
 }
