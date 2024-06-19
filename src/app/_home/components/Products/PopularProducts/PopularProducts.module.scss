@@ -6,14 +6,10 @@
 }
 
 .section {
-  padding: 60px 60px 20px 90px;
+  padding-bottom: 80px;
 
   @include respond-to(tablet) {
-    padding-left: 25px;
-  }
-
-  @include respond-to(mobile) {
-    padding: 30px 20px 20px;
+    padding-bottom: 60px;
   }
 }
 
@@ -22,11 +18,16 @@
 
   margin-bottom: 30px;
   font-weight: 600;
+  line-height: 42px;
   color: $white-100;
 
   span {
     color: transparent;
     background: $blue-gradient;
     background-clip: text;
+  }
+
+  @include respond-to(tablet) {
+    @include text-lg;
   }
 }
