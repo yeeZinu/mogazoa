@@ -62,11 +62,6 @@ export default function UserActivityList() {
   });
 
   const selectTab = ORDER.PROFILE.filter((i) => i.value === selectedButton) ?? "reviewed";
-  console.log("selectedButton", selectedButton);
-
-  console.log("selectTab", width, selectTab);
-
-  console.log("watch(select)", watch("select"));
 
   useEffect(() => {
     if (width <= 1023 && watch("select") === "") {
