@@ -1,8 +1,46 @@
+@import "@/styles/_color";
+@import "@/styles/_mixins";
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   font-family: "pretendard";
+}
+
+body {
+  /* IE */
+  scrollbar-base-color: $black-300;
+  scrollbar-3dlight-color: $black-300;
+  scrollbar-track-color: $black-300;
+  scrollbar-highlight-color: $gray-300;
+  scrollbar-face-color: $gray-300;
+  scrollbar-shadow-color: $gray-300;
+  scrollbar-darkshadow-color: $gray-300;
+  scrollbar-arrow-color: $gray-300;
+
+  /* chrome, edge, safari, whale, opera */
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $black-300;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $black-100;
+    @include rounded-md;
+
+    &:hover {
+      background-color: $gray-300;
+    }
+  }
 }
 
 img {
