@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth";
-import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { signOut } from "next-auth/react";
+import { useState } from "react";
+import { useSessionCheck } from "@/hooks/useSessionCheck";
 import cn from "@/utils/classNames";
 import { LOGO_IMAGE, MENU_TOGGLE_ICON, CLOSE_ICON } from "@/utils/constant";
 import styles from "./Gnb.module.scss";
@@ -15,14 +16,7 @@ type GnbProps = {
 };
 
 export default function Gnb({ initialSession }: GnbProps) {
-  const { data: session, status } = useSession();
   const [currentSession, setCurrentSession] = useState(initialSession);
-
-  useEffect(() => {
-    if (status !== "loading" && initialSession !== session) {
-      setCurrentSession(session);
-    }
-  }, [session, initialSession, status]);
 
   const [isInputOpen, setInputOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -34,6 +28,12 @@ export default function Gnb({ initialSession }: GnbProps) {
   const handleMenuClick = () => {
     setMenuOpen(!isMenuOpen);
   };
+
+  const handleSession = (session: Session | null) => {
+    setCurrentSession(session);
+  };
+
+  useSessionCheck(initialSession, handleSession);
 
   return (
     <div className={styles.container}>
@@ -78,6 +78,12 @@ export default function Gnb({ initialSession }: GnbProps) {
               <>
                 <Link href='/compare'>비교하기</Link>
                 <Link href='/mypage'>내 프로필</Link>
+                <button
+                  type='button'
+                  onClick={() => signOut()}
+                >
+                  signOut
+                </button>
               </>
             ) : (
               <>
