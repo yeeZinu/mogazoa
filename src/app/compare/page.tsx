@@ -2,34 +2,11 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
+import { Product } from "@/app/compare/input/compareProductItem";
 import { LOADING_LARGE_IMAGE } from "@/utils/constant";
 import styles from "./compare.module.scss";
 import ProductSelector from "./input/CompareInput";
 import CompareTable from "./table/CompareTable";
-
-type Product = {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  rating: number;
-  reviewCount: number;
-  favoriteCount: number;
-  categoryId: number;
-  createdAt: string;
-  updatedAt: string;
-  writerId: number;
-  isFavorite: boolean;
-  category: {
-    id: number;
-    name: string;
-  };
-  categoryMetric: {
-    rating: number;
-    favoriteCount: number;
-    reviewCount: number;
-  };
-};
 
 function ComparePage() {
   const [selectedProducts, setSelectedProducts] = useState<{
