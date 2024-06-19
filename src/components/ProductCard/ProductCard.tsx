@@ -23,7 +23,7 @@ export default function ProductCard({ product }: ProductProps) {
       <Image
         src={isImageError ? DEFAULT_PRODUCT_IMAGE : imageUrl}
         width={284}
-        height={200}
+        height={284}
         alt={`${name}`}
         className={styles.image}
         onError={() => setIsImageError(true)}
