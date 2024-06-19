@@ -61,24 +61,29 @@ export default function UserActivityList() {
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
   });
 
-  const selectTab = ORDER.PROFILE.filter((i) => i.value === selectedButton);
-  console.log("selectedButton", typeof selectedButton);
+  const selectTab = ORDER.PROFILE.filter((i) => i.value === selectedButton) ?? "reviewed";
+  console.log("selectedButton", selectedButton);
 
   console.log("selectTab", width, selectTab);
 
+  console.log("watch(select)", watch("select"));
+
   useEffect(() => {
-    if (width <= 1023 && watch("select") === undefined) {
+    if (width <= 1023 && watch("select") === "") {
       setSelectedButton("reviewed");
     }
-    if (width <= 1023 && watch("select") !== undefined) {
+    if (width <= 1023 && watch("select") !== "") {
       setSelectedButton(watch("select"));
     }
 
+    router.push(`${userId}/?${querySelectButton(selectedButton)}`);
+  }, [selectedButton, watch("select")]);
+
+  useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-    router.push(`${userId}/?${querySelectButton(selectedButton)}`);
-  }, [inView, fetchNextPage, hasNextPage, watch("select"), selectedButton]);
+  }, [inView, fetchNextPage, hasNextPage]);
 
   const onSelectButtonHandler = (value: string) => {
     setSelectedButton(value);
