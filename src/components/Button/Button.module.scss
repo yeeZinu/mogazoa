@@ -54,15 +54,3 @@
     border: 1px solid $gray-300;
   }
 }
-
-.profile {
-  width: 250px;
-
-  @include respond-to(tablet) {
-    width: 400px;
-  }
-
-  @include respond-to(mobile) {
-    width: 245px;
-  }
-}

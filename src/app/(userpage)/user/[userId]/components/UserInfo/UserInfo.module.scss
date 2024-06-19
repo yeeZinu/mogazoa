@@ -92,3 +92,22 @@
     width: 194px;
   }
 }
+
+.followButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.profile {
+  width: 100%;
+
+  @include respond-to(tablet) {
+    width: 80%;
+  }
+
+  @include respond-to(mobile) {
+    width: 245px;
+  }
+}

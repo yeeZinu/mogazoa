@@ -11,8 +11,6 @@ type FollowListProps = {
 };
 
 export default function FollowList({ followData }: FollowListProps) {
-  console.log(followData);
-
   return (
     <div className={cn(styles.container)}>
       {followData.list.map((item) => (
