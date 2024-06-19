@@ -18,7 +18,11 @@ import TabButton from "../TabButton/TabButton";
 // eslint-disable-next-line no-restricted-imports
 import UserProductList from "../UserProductList/UserProductList";
 
-export default function UserActivityList() {
+type UserActivityListProps = {
+  userId: number;
+};
+
+export default function UserActivityList({ userId }: UserActivityListProps) {
   const router = useRouter();
   const [selectedButton, setSelectedButton] = useState<string>("reviewed");
   const { data: session } = useSession();
@@ -30,7 +34,6 @@ export default function UserActivityList() {
   });
 
   const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL!);
-  const userId = session?.user.id;
   const ACCESS_TOKEN = session?.accessToken ?? "";
 
   const querySelectButton = (value: string) => {

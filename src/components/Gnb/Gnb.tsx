@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth";
-import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { useSessionCheck } from "@/hooks/useSessionCheck";
 import cn from "@/utils/classNames";
@@ -78,12 +77,6 @@ export default function Gnb({ initialSession }: GnbProps) {
               <>
                 <Link href='/compare'>비교하기</Link>
                 <Link href={`/user/${currentSession.user.id}`}>내 프로필</Link>
-                <button
-                  type='button'
-                  onClick={() => signOut()}
-                >
-                  signOut
-                </button>
               </>
             ) : (
               <>

@@ -1,3 +1,4 @@
+import { signOut } from "next-auth/react";
 import React, { useState } from "react";
 import Button from "@/components/Button/Button";
 import Modal from "@/components/Modal/Modal";
@@ -26,6 +27,7 @@ export default function MyProfileButton() {
       <Button
         styleType='tertiary'
         className={styles.profile}
+        onClick={() => signOut({ callbackUrl: "/" })}
       >
         로그아웃
       </Button>
