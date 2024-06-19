@@ -1,10 +1,9 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 "use client";
 
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { LabelBox } from "@/app/(auth)/_components/LabelBox";
 import { SIGNIN_VALIDATION } from "@/app/(auth)/constants";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
@@ -19,7 +18,7 @@ type SignInFormData = {
 export default function SignInForm() {
   const {
     register,
-    formState: { isValid, errors },
+    formState: { isValid, errors, isSubmitting },
     setError,
     handleSubmit,
   } = useForm<SignInFormData>({ mode: "onBlur" });
@@ -46,13 +45,10 @@ export default function SignInForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className={styles.inputList}>
-        <div className={styles.inputBox}>
-          <label
-            htmlFor='email'
-            className={styles.label}
-          >
-            이메일
-          </label>
+        <LabelBox
+          htmlFor='email'
+          title='이메일'
+        >
           <Input
             id='email'
             name='email'
@@ -62,14 +58,11 @@ export default function SignInForm() {
             errors={errors}
             placeholder='이메일을 입력해 주세요'
           />
-        </div>
-        <div className={styles.inputBox}>
-          <label
-            htmlFor='password'
-            className={styles.label}
-          >
-            비밀번호
-          </label>
+        </LabelBox>
+        <LabelBox
+          htmlFor='password'
+          title='비밀번호'
+        >
           <PasswordInput
             id='password'
             name='password'
@@ -78,14 +71,14 @@ export default function SignInForm() {
             errors={errors}
             placeholder='비밀번호를 입력해 주세요'
           />
-        </div>
+        </LabelBox>
       </div>
       <Button
         styleType='primary'
-        disabled={!isValid}
+        disabled={!isValid || isSubmitting}
         className={styles.signInButton}
       >
-        로그인
+        {isSubmitting ? "로그인 중..." : "로그인"}
       </Button>
     </form>
   );
