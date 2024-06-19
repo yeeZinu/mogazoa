@@ -4,12 +4,13 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 20px;
+  align-items: center;
   width: 100%;
 
   .title {
     color: $gray-200;
+
     @include font-normal;
     @include text-normal;
 

@@ -5,13 +5,12 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "pretendard";
+  font-family: pretendard;
 }
 
 body {
   /* IE */
   scrollbar-base-color: $bg-black-100;
-  scrollbar-3dlight-color: $bg-black-100;
   scrollbar-track-color: $bg-black-100;
   scrollbar-highlight-color: $gray-300;
   scrollbar-face-color: $gray-300;
@@ -35,6 +34,7 @@ body {
 
   &::-webkit-scrollbar-thumb {
     background-color: $black-100;
+
     @include rounded-md;
 
     &:hover {
