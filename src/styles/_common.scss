@@ -10,9 +10,9 @@
 
 body {
   /* IE */
-  scrollbar-base-color: $black-300;
-  scrollbar-3dlight-color: $black-300;
-  scrollbar-track-color: $black-300;
+  scrollbar-base-color: $bg-black-100;
+  scrollbar-3dlight-color: $bg-black-100;
+  scrollbar-track-color: $bg-black-100;
   scrollbar-highlight-color: $gray-300;
   scrollbar-face-color: $gray-300;
   scrollbar-shadow-color: $gray-300;
@@ -30,7 +30,7 @@ body {
   }
 
   &::-webkit-scrollbar-track {
-    background-color: $black-300;
+    background-color: $bg-black-100;
   }
 
   &::-webkit-scrollbar-thumb {
