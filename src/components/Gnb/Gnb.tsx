@@ -29,6 +29,15 @@ export default function Gnb({ initialSession }: GnbProps) {
     setMenuOpen(!isMenuOpen);
   };
 
+  const handleMenuClose = () => {
+    setMenuOpen(false);
+  };
+
+  const handleSignOut = () => {
+    signOut();
+    handleMenuClose();
+  };
+
   const handleSession = (session: Session | null) => {
     setCurrentSession(session);
   };
@@ -76,19 +85,41 @@ export default function Gnb({ initialSession }: GnbProps) {
           <div className={cn(styles.userAction, isMenuOpen && styles.open)}>
             {currentSession ? (
               <>
-                <Link href='/compare'>비교하기</Link>
-                <Link href='/mypage'>내 프로필</Link>
-                <button
-                  type='button'
-                  onClick={() => signOut()}
+                <Link
+                  href='/compare'
+                  onClick={handleMenuClose}
                 >
-                  signOut
-                </button>
+                  비교하기
+                </Link>
+                <Link
+                  href='/mypage'
+                  onClick={handleMenuClose}
+                >
+                  내 프로필
+                </Link>
+                <span
+                  onClick={handleSignOut}
+                  onKeyDown={handleSignOut}
+                  role='button'
+                  tabIndex={0}
+                >
+                  로그아웃
+                </span>
               </>
             ) : (
               <>
-                <Link href='/signin'>로그인</Link>
-                <Link href='/signup'>회원가입</Link>
+                <Link
+                  href='/signin'
+                  onClick={handleMenuClose}
+                >
+                  로그인
+                </Link>
+                <Link
+                  href='/signup'
+                  onClick={handleMenuClose}
+                >
+                  회원가입
+                </Link>
               </>
             )}
           </div>
