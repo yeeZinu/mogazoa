@@ -92,7 +92,7 @@ export default function Gnb({ initialSession }: GnbProps) {
                   비교하기
                 </Link>
                 <Link
-                  href='/mypage'
+                  href={`/user/${currentSession.user.id}`}
                   onClick={handleMenuClose}
                 >
                   내 프로필

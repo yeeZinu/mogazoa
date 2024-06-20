@@ -1,12 +1,13 @@
 @import "@/styles/_index";
 
 .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 56px;
   height: 56px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @include rounded-full;
   background-color: transparent;
   border: 1px solid $gray-300;
+
+  @include rounded-full;
 }

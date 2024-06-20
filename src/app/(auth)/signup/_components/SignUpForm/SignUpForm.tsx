@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -7,6 +5,8 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AlertModal } from "@/app/(auth)/_components/AlertModal";
+import { LabelBox } from "@/app/(auth)/_components/LabelBox";
+import { SIGNUP_VALIDATION } from "@/app/(auth)/constants";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import PasswordInput from "@/components/Input/PasswordInput";
@@ -27,7 +27,7 @@ export default function SignUpForm() {
     handleSubmit,
     watch,
     setError,
-    formState: { isValid, errors },
+    formState: { isValid, errors, isSubmitting },
   } = useForm<SignUpFormData>({ mode: "onBlur" });
   const router = useRouter();
 
@@ -35,72 +35,39 @@ export default function SignUpForm() {
     setIsModal(false);
   };
 
-  /**
-   * @TODO signin 페이지 머지 후 상수 파일에 분리
-   */
-  const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  const PASSWORD_REGEX = /^[a-z0-9!@#$%^&*()_+\-=[\]{};:'"\\|,.<>/?`~]{8,}$/i;
-  const SIGNUP_VALIDATION = {
-    email: {
-      required: { value: true, message: "이메일은 필수 입력입니다." },
-      pattern: {
-        value: EMAIL_REGEX,
-        message: "이메일 형식으로 작성해주세요.",
-      },
-    },
-    nickname: {
-      required: { value: true, message: "닉네임은 필수 입력입니다." },
-      maxLength: { value: 20, message: "닉네임은 최대 20자까지 가능합니다." },
-    },
-    password: {
-      required: { value: true, message: "비밀번호는 필수 입력입니다." },
-      minLength: { value: 8, message: "비밀번호는 최소 8자 이상입니다." },
-      pattern: { value: PASSWORD_REGEX, message: "비밀번호는 숫자, 영문, 특수문자로만 이루어져야 합니다." },
-    },
-    passwordConfirmation: {
-      required: { value: true, message: "비밀번호 확인을 입력해주세요." },
-      validate: (value: string) => {
-        if (watch("password") !== value) {
-          return "비밀번호가 일치하지 않습니다.";
-        }
-        return true;
-      },
+  const PASSWORD_CONFIRMATION_VALIDATION = {
+    ...SIGNUP_VALIDATION.passwordConfirmation,
+    validate: (value: string) => {
+      if (watch("password") !== value) {
+        return "비밀번호가 일치하지 않습니다.";
+      }
+      return true;
     },
   };
 
   const onSubmit = async (data: SignUpFormData) => {
-    try {
-      const result = await signIn("signup", {
-        redirect: false,
-        email: data.email,
-        nickname: data.nickname,
-        password: data.password,
-        passwordConfirmation: data.passwordConfirmation,
-      });
+    const result = await signIn("signup", {
+      redirect: false,
+      email: data.email,
+      nickname: data.nickname,
+      password: data.password,
+      passwordConfirmation: data.passwordConfirmation,
+    });
 
-      if (result?.error) {
-        setModalMessage(result.error);
-        setIsModal(true);
+    if (result?.error) {
+      setModalMessage(result.error);
+      setIsModal(true);
 
-        if (result.error.includes("닉네임")) {
-          setError("nickname", { message: "이미 사용중인 닉네임입니다." });
-        } else if (result.error.includes("이메일")) {
-          setError("email", { message: "이미 사용중인 이메일입니다." });
-        }
-      } else {
-        router.push("/");
+      if (result.error.includes("닉네임")) {
+        setError("nickname", { message: result.error });
+      } else if (result.error.includes("이메일")) {
+        setError("email", { message: result.error });
       }
-    } catch (error) {
-      /**
-       * @TODO : 일반적인 HTTP 통신 오류 에러 핸들링
-       */
+    } else {
+      router.push("/");
     }
   };
 
-  /**
-   * AuthInput 컴포넌트 생성
-   * auth용 스타일링 파일 통합
-   */
   return (
     <>
       <AlertModal
@@ -114,13 +81,10 @@ export default function SignUpForm() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className={styles.inputList}>
-          <div className={styles.inputBox}>
-            <label
-              htmlFor='email'
-              className={styles.label}
-            >
-              이메일
-            </label>
+          <LabelBox
+            htmlFor='email'
+            title='이메일'
+          >
             <Input
               id='email'
               name='email'
@@ -130,14 +94,11 @@ export default function SignUpForm() {
               errors={errors}
               placeholder='이메일을 입력해 주세요'
             />
-          </div>
-          <div className={styles.inputBox}>
-            <label
-              htmlFor='nickname'
-              className={styles.label}
-            >
-              닉네임
-            </label>
+          </LabelBox>
+          <LabelBox
+            htmlFor='nickname'
+            title='닉네임'
+          >
             <Input
               id='nickname'
               name='nickname'
@@ -147,14 +108,11 @@ export default function SignUpForm() {
               errors={errors}
               placeholder='닉네임을 입력해주세요'
             />
-          </div>
-          <div className={styles.inputBox}>
-            <label
-              htmlFor='password'
-              className={styles.label}
-            >
-              비밀번호
-            </label>
+          </LabelBox>
+          <LabelBox
+            htmlFor='password'
+            title='비밀번호'
+          >
             <PasswordInput
               id='password'
               name='password'
@@ -163,30 +121,27 @@ export default function SignUpForm() {
               errors={errors}
               placeholder='비밀번호를 입력해 주세요'
             />
-          </div>
-          <div className={styles.inputBox}>
-            <label
-              htmlFor='passwordConfirmation'
-              className={styles.label}
-            >
-              비밀번호 확인
-            </label>
+          </LabelBox>
+          <LabelBox
+            htmlFor='passwordConfirmation'
+            title='비밀번호 확인'
+          >
             <PasswordInput
               id='passwordConfirmation'
               name='passwordConfirmation'
               register={register}
-              rules={SIGNUP_VALIDATION.passwordConfirmation}
+              rules={PASSWORD_CONFIRMATION_VALIDATION}
               errors={errors}
               placeholder='비밀번호를 한번 더 입력해 주세요'
             />
-          </div>
+          </LabelBox>
         </div>
         <Button
           styleType='primary'
-          disabled={!isValid}
-          className={styles.signInButton}
+          disabled={!isValid || isSubmitting}
+          className={styles.signUpButton}
         >
-          가입하기
+          {isSubmitting ? "가입중..." : "가입하기"}
         </Button>
       </form>
     </>

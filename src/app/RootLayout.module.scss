@@ -1,8 +1,9 @@
 @import "@/styles/_index";
 
 .container {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
   background-color: $bg-black-100;
 
   .main {

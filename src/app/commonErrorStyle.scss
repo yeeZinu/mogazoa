@@ -1,0 +1,58 @@
+@import "@/styles/_color";
+@import "@/styles/_mixins";
+@import "@/styles/_media";
+
+.errorContainer,
+.errorDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorContainer {
+  gap: 40px;
+  height: calc(100vh - 100px);
+
+  @include respond-to(mobile) {
+    gap: 32px;
+  }
+
+  .errorTitleBox {
+    .errorTitle {
+      color: transparent;
+      background: $blue-gradient;
+      background-clip: text;
+    }
+
+    @include text-xl;
+    @include font-bold;
+
+    @include respond-to(mobile) {
+      @include text-lg;
+    }
+  }
+
+  .errorDescription {
+    gap: 4px;
+
+    @include text-normal;
+    @include font-normal;
+
+    @include respond-to(mobile) {
+      @include text-sm;
+    }
+  }
+
+  .errorButton {
+    width: 140px;
+
+    @include text-normal;
+
+    @include respond-to(mobile) {
+      width: 120px;
+
+      @include text-sm;
+    }
+  }
+}
