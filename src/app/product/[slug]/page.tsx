@@ -34,10 +34,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
   ];
   return (
     <div className={styles.layout}>
-      <ProductCard
-        productDetail={productDetail}
-        accessToken={accessToken}
-      />
+      <ProductCard productDetail={productDetail} />
       <h2 className={styles.title}>상품 통계</h2>
 
       <div className={styles.metricBox}>
