@@ -1,12 +1,14 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { Category, CategoryList } from "@/_home/components/Category";
 import { PopularProducts, FilteredProducts } from "@/_home/components/Products";
 import { ReviewerRanking } from "@/_home/components/ReviewerRanking";
 import { QUERY } from "@/_home/constants";
 import CategoryFilter from "@/components/Chip/Category-filter/CategoryFilter";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { NoData } from "@/components/NoData";
 import cn from "@/utils/classNames";
 import { createQueryString, deleteQueryString } from "@/utils/createQueryString";
 import styles from "./Main.module.scss";
@@ -62,7 +64,11 @@ export default function Main({ categories, ranking, products }: MainProps) {
 
       <div className={styles.content}>
         {hasQueryParams ? (
-          <FilteredProducts category={category ?? null} />
+          <ErrorBoundary>
+            <Suspense fallback={<NoData message='Loading...' />}>
+              <FilteredProducts category={category ?? null} />
+            </Suspense>
+          </ErrorBoundary>
         ) : (
           <PopularProducts
             hotProducts={hotProducts.list.slice(0, 6)}
