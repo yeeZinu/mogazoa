@@ -61,7 +61,7 @@ export default function UserPage({ params }: { params: { userId: number } }) {
                 />
               </div>
             </section>
-            <UserActivityList />
+            <UserActivityList userId={params.userId} />
           </div>
         </>
       )}
