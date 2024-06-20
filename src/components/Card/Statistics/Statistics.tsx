@@ -5,7 +5,7 @@ import React from "react";
 import { STAR_ACTIVE_ICON, SAVE_ICON, BUBBLE_ICON } from "@/utils/constant";
 import styles from "./Statistics.module.scss";
 
-type StatisticsProps = {
+export type StatisticsProps = {
   title: "별점 평균" | "찜" | "리뷰";
   rating?: number;
   reviewCount?: number;
