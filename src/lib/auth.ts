@@ -15,6 +15,7 @@ const authOptions: NextAuthOptions = {
       id: "kakao",
       credentials: {
         code: { type: "text", label: "토큰" },
+        requestPage: { type: "text", label: "요청 페이지" },
       },
       async authorize(credentials) {
         try {
@@ -24,7 +25,7 @@ const authOptions: NextAuthOptions = {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              redirectUri: `${process.env.NEXTAUTH_URL}/signin`,
+              redirectUri: `${process.env.NEXTAUTH_URL}/${credentials?.requestPage}`,
               token: credentials?.code,
             }),
           });
