@@ -15,14 +15,27 @@
 
   @include respond-to(tablet) {
     flex-direction: column-reverse;
-    gap: 22px;
+    gap: 35px;
     width: calc(100% - 180px);
-    padding: 45px 30px 20px 25px;
+    padding: 45px 0 20px 25px;
   }
 
   @include respond-to(mobile) {
     width: 100%;
-    padding: 45px 20px 20px;
+    padding: 30px 0 20px;
+  }
+
+  .productList {
+    @include respond-to(tablet) {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 22px;
+      padding: 0 30px;
+    }
+
+    @include respond-to(mobile) {
+      padding: 0 20px;
+    }
   }
 }
 
