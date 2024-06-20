@@ -1,3 +1,5 @@
+import { CATEGORY_TYPE } from "@/components/Chip/Category-chip/CategoryChip";
+
 export type UserType = {
   updatedAt: string;
   createdAt: string;
@@ -53,4 +55,35 @@ export type ErrorResponse = {
       value: string;
     };
   };
+} 
+  
+export type ProductDetailType = {
+  id: number;
+  name: string;
+  image: string;
+  rating: number;
+  reviewCount: number;
+  categoryId: number;
+  createdAt: string;
+  updatedAt: string;
+  writerId: number;
+  description: string;
+  category: { id: number; name: keyof typeof CATEGORY_TYPE };
+  isFavorite: boolean;
+  favoriteCount: number;
+  categoryMetric: { rating: number; reviewCount: number; favoriteCount: number };
+};
+
+export type ReviewType = {
+  user: { image: string; nickname: string; id: number };
+  reviewImages: { source: string; id: number }[];
+  productId: number;
+  userId: number;
+  updatedAt: string;
+  createdAt: string;
+  isLiked: boolean;
+  likeCount: number;
+  content: string;
+  rating: number;
+  id: number;
 };

@@ -1,0 +1,58 @@
+@import "@/styles/_index";
+
+.layout {
+  display: flex;
+  gap: 0.6rem;
+  min-width: 100%;
+}
+
+.image {
+  @include rounded-lg;
+}
+
+.shareImage {
+  padding: 0.2rem;
+  background: $black-200;
+
+  @include rounded-sm;
+}
+
+.articleBox {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nameBox,
+.shareBox {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.name {
+  @include text-xl;
+  @include font-bold;
+}
+
+.description {
+  flex: 1;
+  margin-top: 2rem;
+  line-height: 1.6rem;
+}
+
+.buttonBox {
+  display: flex;
+  gap: 2rem;
+}
+
+.button {
+  flex-grow: 1;
+}
