@@ -4,14 +4,13 @@
 .container {
   width: 250px;
   height: 100%;
-  padding: 45px 30px;
+  padding: 0 30px;
   color: $white-100;
   background-color: $bg-black-100;
 
   @include respond-to(tablet) {
     width: 100%;
     padding: 0;
-    margin-bottom: 37px;
   }
 }
 
@@ -19,10 +18,26 @@
   margin-bottom: 30px;
 
   @include text-normal;
+
+  @include respond-to(tablet) {
+    padding-left: 30px;
+  }
+
+  @include respond-to(mobile) {
+    padding-left: 20px;
+  }
 }
 
 .ranking {
   width: 100%;
+
+  @include respond-to(tablet) {
+    padding-left: 30px;
+  }
+
+  @include respond-to(mobile) {
+    padding-left: 0;
+  }
 }
 
 .rankingBox {
@@ -33,10 +48,15 @@
   @include respond-to(tablet) {
     flex-direction: row;
     gap: 20px;
+    padding: 0 20px 0 0;
     overflow: auto;
 
     &::-webkit-scrollbar {
       display: none;
     }
+  }
+
+  @include respond-to(mobile) {
+    padding: 0 20px;
   }
 }
