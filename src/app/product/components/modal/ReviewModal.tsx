@@ -42,7 +42,6 @@ export default function ReviewModal({ productDetail }: { productDetail: ProductD
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     reviewSubmit(data, accessToken);
-    window.location.reload();
   };
 
   if (!accessToken) {
@@ -75,7 +74,6 @@ export default function ReviewModal({ productDetail }: { productDetail: ProductD
         name='uploadImageList'
         className={styles.uploader}
         control={control}
-        register={register}
       />
       <section className={styles.imageList}>
         {hasPreviewImageList &&
