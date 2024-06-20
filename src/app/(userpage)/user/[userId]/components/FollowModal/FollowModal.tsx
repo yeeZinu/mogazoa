@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { UserProduct } from "@/app/(userpage)/types";
 import Modal from "@/components/Modal/Modal";
 import cn from "@/utils/classNames";
@@ -18,31 +19,26 @@ type ModalProps = {
 
 export default function FollowModal({ isModalState, setIsModalState, followState }: ModalProps) {
   const { data: session } = useSession();
-  const [followData, setFollowData] = useState<UserProduct>();
+  const userId = session?.user.id;
+  const ACCESS_TOKEN = session?.accessToken ?? "";
 
   const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL!);
 
-  const handleData = async () => {
-    if (session && followState) {
-      const userId = session.user.id;
-      const ACCESS_TOKEN = session.accessToken;
-      setFollowData(
-        await httpClient.get(`users/${userId}/${followState}`, {
-          headers: { Authorization: ACCESS_TOKEN },
-          cache: "no-cache",
-        }),
-      );
-    }
-  };
-
-  useEffect(() => {
-    handleData();
-  }, [followState]);
+  const { data } = useQuery({
+    queryKey: ["followData", followState],
+    queryFn: async () => {
+      const res = httpClient.get<UserProduct>(`users/${userId}/${followState}`, {
+        headers: { Authorization: ACCESS_TOKEN },
+        cache: "no-cache",
+      });
+      return res;
+    },
+  });
 
   const handleClose = () => setIsModalState(false);
   return (
     <>
-      {followData !== undefined && isModalState && (
+      {data !== undefined && isModalState && (
         <Modal onClose={handleClose}>
           <div className={cn(styles.container)}>
             <div
@@ -59,10 +55,10 @@ export default function FollowModal({ isModalState, setIsModalState, followState
               />
             </div>
             <h1>nickname님{followState === "followees" ? "이" : "을"} 팔로우 하는 유저</h1>
-            {followData.list.length < 1 ? (
+            {data.list.length < 1 ? (
               <div className={cn(styles.noFollowBox)}>팔로우하는 유저가 없어요</div>
             ) : (
-              <FollowList followData={followData} />
+              <FollowList followData={data} />
             )}
           </div>
         </Modal>
