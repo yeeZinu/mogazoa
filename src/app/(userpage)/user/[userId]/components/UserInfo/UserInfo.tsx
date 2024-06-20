@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -81,9 +80,6 @@ export default function UserInfo({
     onError: (error: Error) => {
       console.error("Mutation failed", error.message);
     },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["userData", userId] });
-    },
   });
 
   return (
@@ -120,9 +116,9 @@ export default function UserInfo({
             {isfollow ? (
               <Button
                 styleType='tertiary'
-                disabled
+                disabled={false}
                 className={styles.profile}
-                onClick={followPostDelete}
+                onClick={() => mutation.mutate()}
               >
                 팔로우 취소
               </Button>

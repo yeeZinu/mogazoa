@@ -23,7 +23,7 @@ export default function UserPage({ params }: { params: { userId: number } }) {
     queryKey: ["userData", params.userId],
     queryFn: async () => {
       const res = httpClient.get<UserDetail>(`users/${params.userId}`, {
-        headers: { Authorization: ACCESS_TOKEN ?? "" },
+        headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
         cache: "no-cache",
       });
       return res;
@@ -35,7 +35,7 @@ export default function UserPage({ params }: { params: { userId: number } }) {
       {data && (
         <>
           <UserInfo
-            userId={params.userId}
+            userId={data.id}
             nickname={data.nickname}
             image={data.image}
             description={data.description}
