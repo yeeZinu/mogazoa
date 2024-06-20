@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import type { ProductType } from "@/types/global";
 
 const fetchProducts = async (pageParam: number, queryString: string) => {
@@ -12,7 +12,7 @@ const fetchProducts = async (pageParam: number, queryString: string) => {
 };
 
 export const useGetFilteredProducts = (queryString: string) => {
-  return useInfiniteQuery({
+  return useSuspenseInfiniteQuery({
     queryKey: ["products", queryString],
     queryFn: async ({ pageParam }) => fetchProducts(pageParam, queryString),
     select: (data): ProductType[] => data.pages.map((page) => page.list).flat(),

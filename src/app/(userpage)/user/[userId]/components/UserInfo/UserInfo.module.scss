@@ -1,0 +1,113 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 340px;
+  padding: 30px 20px;
+  background-color: $black-200;
+  border: 1px solid $gray-300;
+  border-radius: 12px;
+
+  @include respond-to(tablet) {
+    gap: 30px;
+    width: 509px;
+    padding: 30px;
+  }
+
+  @include respond-to(mobile) {
+    width: 335px;
+  }
+}
+
+.descriptionBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    @include text-xl;
+
+    color: $white-100;
+  }
+
+  @include respond-to(tablet) {
+    gap: 10px;
+
+    p {
+      font-size: 20px;
+    }
+  }
+}
+
+.followBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 184px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    :nth-child(1) {
+      font-size: 20px;
+      font-weight: 600px;
+      color: $white-100;
+    }
+
+    :nth-child(2) {
+      color: $gray-100;
+
+      @include text-normal;
+      @include font-normal;
+    }
+  }
+
+  @include respond-to(tablet) {
+    width: 234px;
+
+    div {
+      :nth-child(1) {
+        font-size: 18px;
+      }
+
+      :nth-child(2) {
+        @include text-sm;
+      }
+    }
+  }
+
+  @include respond-to(mobile) {
+    width: 194px;
+  }
+}
+
+.followButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.profile {
+  width: 100%;
+
+  @include respond-to(tablet) {
+    width: 80%;
+  }
+
+  @include respond-to(mobile) {
+    width: 245px;
+  }
+}

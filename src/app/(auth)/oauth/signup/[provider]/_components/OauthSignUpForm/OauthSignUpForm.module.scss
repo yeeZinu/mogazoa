@@ -1,0 +1,21 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+
+  .button {
+    width: auto;
+    padding: 21px;
+
+    @include text-lg;
+
+    @include respond-to(tablet) {
+      @include text-normal;
+
+      padding: 18px;
+    }
+  }
+}

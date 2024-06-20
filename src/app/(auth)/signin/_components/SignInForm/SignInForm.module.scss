@@ -9,37 +9,22 @@
 }
 
 .container {
-  gap: 30px;
+  gap: 60px;
   width: 100%;
 
   .inputList {
-    gap: 16px;
-
-    .inputBox {
-      gap: 8px;
-
-      .label {
-        @include text-normal;
-        @include font-normal;
-
-        @include respond-to(tablet) {
-          @include text-sm;
-        }
-      }
-    }
-
-    @include respond-to(mobile) {
-      gap: 8px;
-    }
+    gap: 40px;
   }
 
   .signInButton {
     width: auto;
     padding: 21px;
+
     @include text-lg;
 
     @include respond-to(tablet) {
       @include text-normal;
+
       padding: 18px;
     }
   }

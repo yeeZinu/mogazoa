@@ -8,9 +8,27 @@
   gap: 25px;
   width: 100%;
 
-  @include color-box;
+  @include color-box {
+    padding: 16px;
+    padding-bottom: 25px;
+  }
 
-  padding-bottom: 25px;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgb(0 0 0 / 30%);
+    transform: scale(1.03);
+  }
+
+  &:active {
+    background:
+      linear-gradient($black-200, $black-200) padding-box,
+      $blue-gradient border-box;
+    border: 1px solid transparent;
+  }
 
   @include respond-to(tablet) {
     padding-bottom: 20px;
@@ -24,6 +42,8 @@
 .image {
   width: 100%;
   height: auto;
+
+  @include rounded-md;
 }
 
 .infoBox {
@@ -32,7 +52,13 @@
   gap: 10px;
 
   .name {
+    display: -webkit-box;
+    overflow: hidden;
+    line-height: 1.2;
     color: $white-100;
+    word-break: break-all;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 
     @include text-lg;
 
