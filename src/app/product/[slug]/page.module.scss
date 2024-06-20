@@ -1,0 +1,19 @@
+@import "@/styles/_index";
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.metricBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  @include font-bold;
+  @include text-lg;
+}
