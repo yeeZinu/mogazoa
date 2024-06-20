@@ -49,27 +49,42 @@ export default function UserInfo({
     setFollowModalProps("followers");
     setIsModalOpen(true);
   };
+  console.log("isfollow", isfollow);
 
   const followPostDelete = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/follow`, {
-      method: isfollow ? "delete" : "post",
-      headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
+      method: isfollow ? "DELETE" : "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
       body: JSON.stringify({ userId: Number(userId) }),
     });
 
-    console.log(res);
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || "Something went wrong");
+    }
 
-    return res;
+    const data = await res.json();
+    console.log("API response data:", data);
+    return data;
   };
 
   const mutation = useMutation({
+    mutationKey: ["userFollowData", userId],
     mutationFn: followPostDelete,
-    onSuccess: () => {
-      return queryClient.invalidateQueries({ queryKey: ["userData", userId] });
+    onSuccess: (data) => {
+      console.log("Mutation successful, data:", data);
+      queryClient.invalidateQueries({ queryKey: ["userData", userId] });
+    },
+    onError: (error: Error) => {
+      console.error("Mutation failed", error.message);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["userData", userId] });
     },
   });
-
-  console.log(mutation.mutate);
 
   return (
     <>
