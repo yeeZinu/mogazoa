@@ -9,7 +9,7 @@ type CategoryType<T extends string> = {
   [key in T]: { style: string };
 };
 
-const CATEGORY_TYPE: CategoryType<string> = {
+export const CATEGORY_TYPE: CategoryType<string> = {
   음악: { style: "yellow" },
   "영화/드라마": { style: "red" },
   "강의/책": { style: "purple" },
