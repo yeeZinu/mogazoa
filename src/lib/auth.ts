@@ -203,6 +203,8 @@ const authOptions: NextAuthOptions = {
           const data = await result.json();
 
           if (data.user) {
+            /* eslint-disable no-param-reassign */
+            user.id = data.user.id;
             return true;
           }
 
