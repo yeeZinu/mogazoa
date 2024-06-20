@@ -1,0 +1,10 @@
+@import "@/styles/_index";
+
+.image {
+  cursor: pointer;
+}
+
+.active {
+  filter: brightness(1.2); /* 예제 효과: 밝기 증가 */
+  opacity: 0.8;
+}
