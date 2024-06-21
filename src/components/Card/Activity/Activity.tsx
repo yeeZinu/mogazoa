@@ -61,7 +61,7 @@ export default function Activity({ title, averageRating, reviewCount, chipCatego
                 fill
               />
             </figure>
-            <span>{mainContent}</span>
+            <span>{mainContent?.toFixed(1)}</span>
           </div>
         )}
       </div>
