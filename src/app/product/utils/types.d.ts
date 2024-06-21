@@ -12,3 +12,19 @@ export type FormValues = {
   content: string;
   uploadImageList: { blob: Blob; source: string }[];
 };
+
+export type CoupangProduct = {
+  title: string;
+  image: string;
+  price: string;
+  link: string;
+  rocketShippingImage: string | null;
+  rocketGlobalImage: string | null;
+};
+
+export type NaverProduct = {
+  title: string;
+  image: string;
+  price: string;
+  link: string;
+};
