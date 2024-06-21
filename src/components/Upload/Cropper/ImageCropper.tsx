@@ -7,7 +7,7 @@ import styles from "./ImageCropper.module.scss";
 
 type ImageCropperProps = {
   image: string | null;
-  onCrop: (croppedImage: Blob) => Promise<void>;
+  onCrop: (croppedImage: Blob | null) => Promise<void>;
 };
 
 export default function ImageCropper({ image, onCrop }: ImageCropperProps) {
@@ -16,9 +16,20 @@ export default function ImageCropper({ image, onCrop }: ImageCropperProps) {
   const handleCropClick = (event: React.MouseEvent) => {
     event.preventDefault();
     if (typeof cropperRef.current?.cropper !== "undefined") {
-      cropperRef.current?.cropper.getCroppedCanvas().toBlob((blob) => {
-        if (blob) onCrop(blob);
-      });
+      const { cropper } = cropperRef.current;
+      const canvas = cropper.getCroppedCanvas();
+      if (canvas) {
+        const newCanvas = document.createElement("canvas");
+        const ctx = newCanvas.getContext("2d");
+        newCanvas.width = canvas.width;
+        newCanvas.height = canvas.height;
+        if (ctx) {
+          ctx.fillStyle = "#f1f1f5";
+          ctx.fillRect(0, 0, newCanvas.width, newCanvas.height);
+          ctx.drawImage(canvas, 0, 0);
+          newCanvas.toBlob((blob) => onCrop(blob));
+        }
+      }
     }
   };
 
