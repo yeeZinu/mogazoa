@@ -76,7 +76,9 @@ export default function FilteredProducts({ category }: FilteredProductsProps) {
           lastRef={ref}
         />
       ) : (
-        <NoData message='등록된 상품이 없습니다.' />
+        <div className={styles.noProduct}>
+          <NoData message='등록된 상품이 없습니다.' />
+        </div>
       )}
     </div>
   );
