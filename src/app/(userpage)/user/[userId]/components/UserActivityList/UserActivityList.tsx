@@ -51,9 +51,9 @@ export default function UserActivityList({ userId }: UserActivityListProps) {
     queryKey: ["userProductData", selectedButton],
     queryFn: async ({ pageParam }) => {
       const res = await httpClient.get<ProductsResponseType>(
-        `users/${userId}/${selectedButton}-products?cursor=${pageParam}`,
+        `/users/${userId}/${selectedButton}-products?cursor=${pageParam}`,
         {
-          headers: { Authorization: ACCESS_TOKEN },
+          headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
           cache: "no-cache",
         },
       );

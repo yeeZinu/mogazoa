@@ -48,7 +48,6 @@ export default function UserInfo({
     setFollowModalProps("followers");
     setIsModalOpen(true);
   };
-  console.log("isfollow", isfollow);
 
   const followPostDelete = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/follow`, {
@@ -66,16 +65,14 @@ export default function UserInfo({
     }
 
     const data = await res.json();
-    console.log("API response data:", data);
     return data;
   };
 
   const mutation = useMutation({
     mutationKey: ["followData", userId],
     mutationFn: followPostDelete,
-    onSuccess: (data) => {
-      console.log("Mutation successful, data:", data);
-      queryClient.invalidateQueries({ queryKey: ["userData", userId] });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userData", String(userId)] });
     },
     onError: (error: Error) => {
       console.error("Mutation failed", error.message);

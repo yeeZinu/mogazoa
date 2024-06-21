@@ -27,8 +27,8 @@ export default function FollowModal({ isModalState, setIsModalState, followState
   const { data } = useQuery({
     queryKey: ["followData", followState],
     queryFn: async () => {
-      const res = httpClient.get<UserProduct>(`users/${userId}/${followState}`, {
-        headers: { Authorization: ACCESS_TOKEN },
+      const res = httpClient.get<UserProduct>(`/users/${userId}/${followState}`, {
+        headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
         cache: "no-cache",
       });
       return res;
