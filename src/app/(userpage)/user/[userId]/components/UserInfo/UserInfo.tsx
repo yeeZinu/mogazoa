@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-imports */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -6,7 +7,6 @@ import React, { useState } from "react";
 import Button from "@/components/Button/Button";
 import { UserImage } from "@/components/UserImage";
 import styles from "./UserInfo.module.scss";
-// eslint-disable-next-line no-restricted-imports
 import FollowModal from "../FollowModal/FollowModal";
 // eslint-disable-next-line no-restricted-imports
 import HTMLContent from "../HTMLContent/HTMLContent";
@@ -82,6 +82,7 @@ export default function UserInfo({
   return (
     <>
       <FollowModal
+        userId={userId}
         followState={followModalProps}
         isModalState={isModalOpen}
         setIsModalState={setIsModalOpen}
