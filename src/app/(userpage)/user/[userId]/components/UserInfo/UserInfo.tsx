@@ -71,7 +71,7 @@ export default function UserInfo({
   };
 
   const mutation = useMutation({
-    mutationKey: ["userFollowData", userId],
+    mutationKey: ["followData", userId],
     mutationFn: followPostDelete,
     onSuccess: (data) => {
       console.log("Mutation successful, data:", data);
@@ -118,7 +118,7 @@ export default function UserInfo({
                 styleType='tertiary'
                 disabled={false}
                 className={styles.profile}
-                onClick={() => mutation.mutate()}
+                onClick={() => mutation.mutate}
               >
                 팔로우 취소
               </Button>
@@ -127,7 +127,7 @@ export default function UserInfo({
                 styleType='primary'
                 disabled={false}
                 className={styles.profile}
-                onClick={() => mutation.mutate()}
+                onClick={() => mutation.mutate}
               >
                 팔로우
               </Button>
