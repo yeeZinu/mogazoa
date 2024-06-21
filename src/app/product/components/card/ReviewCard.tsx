@@ -22,6 +22,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
   const [likeCount, setLikeCount] = useState(like);
 
   const handleThumbsClick = async () => {
+    // TODO: Login해달라는거 올려야함!
     if (!userId) {
       console.log("loginmodal");
       return;
