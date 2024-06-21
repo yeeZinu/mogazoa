@@ -107,3 +107,9 @@ export type Follow = {
   nickname: string;
   id: number;
 };
+
+export type UpdateProfileRequest = {
+  description: string;
+  nickname: string;
+  image: string;
+};

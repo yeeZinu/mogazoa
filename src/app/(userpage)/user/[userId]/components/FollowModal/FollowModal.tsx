@@ -45,8 +45,6 @@ export default function FollowModal({ userId, isModalState, setIsModalState, fol
     hasNextPage: hasNextFolloweees,
   } = useFollowees(userId);
 
-  console.log("followeeData", followeeData);
-
   useEffect(() => {
     if (inView && hasNextFolloweees) {
       fetchNextFollowees();
