@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { Category, CategoryList } from "@/_home/components/Category";
 import { PopularProducts, FilteredProducts } from "@/_home/components/Products";
 import { ReviewerRanking } from "@/_home/components/ReviewerRanking";
@@ -44,6 +44,18 @@ export default function Main({ categories, ranking, products }: MainProps) {
 
     setIsCategoryOpen(false);
   };
+
+  useEffect(() => {
+    if (isCategoryOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isCategoryOpen]);
 
   const hasQueryParams = Array.from(searchParams.entries()).length > 0;
   const categoryParam = searchParams.get(QUERY.CATEGORY);
