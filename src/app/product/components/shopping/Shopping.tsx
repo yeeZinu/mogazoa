@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import CoupnagCard from "@/app/product/components/card/CoupangCard";
+import CoupangCard from "@/app/product/components/card/CoupangCard";
 import NaverCard from "@/app/product/components/card/NaverCard";
 import ProductSkeleton from "@/app/product/components/skeleton/ProductSkeleton";
 import { fetchShoppingList } from "@/app/product/utils/apis";
@@ -29,7 +29,7 @@ export default function Shopping({ name }: { name: string }) {
           <ProductSkeleton />
         ) : (
           coupangData?.items?.map((product) => (
-            <CoupnagCard
+            <CoupangCard
               key={product.link}
               product={product}
             />
