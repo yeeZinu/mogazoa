@@ -9,6 +9,7 @@ import styles from "./UploadImage.module.scss";
 type UploadImageProps<T extends FieldValues> = {
   name: Path<T>;
   className?: string;
+  defaultImage?: string | null;
   register: UseFormRegister<T>;
   setValue: UseFormSetValue<T>;
 };
@@ -16,11 +17,12 @@ type UploadImageProps<T extends FieldValues> = {
 export default function UploadImage<T extends FieldValues>({
   name,
   className = styles.default,
+  defaultImage = null,
   register,
   setValue,
 }: UploadImageProps<T>) {
   const [showModal, setShowModal] = useState(false);
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<string | null>(defaultImage);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleUploadButtonClick = () => {

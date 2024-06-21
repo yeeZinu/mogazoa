@@ -10,6 +10,7 @@ type TextAreaProps<T extends FieldValues> = {
   rules?: RegisterOptions;
   errors?: FieldErrors<T>;
   maxLength?: number;
+  defaultValue?: string;
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 export default function TextArea<T extends FieldValues>({
@@ -19,10 +20,11 @@ export default function TextArea<T extends FieldValues>({
   rules,
   errors,
   maxLength,
+  defaultValue = "",
   ...rest
 }: TextAreaProps<T>) {
   const error = errors?.[name];
-  const [charCount, setCharCount] = useState(0);
+  const [charCount, setCharCount] = useState(defaultValue.length);
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => setCharCount(event.target.value.length);
   return (
     <div className={cn(styles.container, className || styles.default)}>
