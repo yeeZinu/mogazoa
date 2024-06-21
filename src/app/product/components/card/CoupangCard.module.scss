@@ -3,10 +3,15 @@
 .container {
   display: flex;
   gap: 1rem;
-  transition: transform 0.4s ease-in-out;
 
   &:hover {
-    transform: scale(1.05);
+    .productImage {
+      transition: transform 0.4s ease-in-out;
+      transform: scale(1.1);
+    }
+    .name {
+      color: $white-100;
+    }
   }
 }
 
@@ -15,34 +20,36 @@
   flex-direction: column;
   gap: 1rem;
   width: calc(100% - 11rem);
-
-  &:hover {
-    text-decoration: underline;
-    text-decoration-color: $gray-100;
-  }
 }
 
-.productImage {
-  width: 10rem;
-  height: 10rem;
-  object-fit: cover;
-  object-position: center;
+.productImageBox {
+  width: 8rem;
+  height: 8rem;
+  overflow: hidden;
 
   @include rounded-md;
 }
 
-.coupangImage {
-  width: 6rem;
-  padding: 0.2rem;
-  background: $white-100;
+.productImage {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  object-position: center;
+}
 
-  @include rounded-sm;
+.logoBox {
+  position: relative;
+  width: 70px;
+  height: 20px;
 }
 
 .name {
   display: -webkit-box;
   -webkit-lineclamp: 3;
   -webkit-box-orient: vertical;
+  color: $gray-100;
+  line-height: 1.2;
+  @include font-light;
 }
 
 .priceBox {
@@ -51,7 +58,8 @@
 }
 
 .price {
-  color: $red-100;
+  color: $blue-100;
+  @include font-normal;
 }
 
 .rocketImage {
