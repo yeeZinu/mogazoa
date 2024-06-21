@@ -11,8 +11,8 @@ const useUploadImageMutation = () => {
     mutationFn: async (image: Blob) => {
       const formData = new FormData();
       formData.append("image", image);
-      const response = await httpClient.post<{ url: string }, FormData>(
-        "images/upload",
+      const response = await httpClient.post<{ url: string }>(
+        "/images/upload",
         {
           headers: { Authorization: `Bearer ${accessToken}` },
         },
