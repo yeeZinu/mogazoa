@@ -94,12 +94,6 @@
 .submitButton {
   grid-area: submitButton;
 
-  &.submitted {
-    color: $white-100;
-    background-color: $blue-200;
-    box-shadow: 0 0 10px $blue-100;
-  }
-
   &.error {
     color: $white-100;
     background-color: $red-100;
