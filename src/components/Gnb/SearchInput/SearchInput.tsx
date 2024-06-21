@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
+import { MutableRefObject } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import cn from "@/utils/classNames";
 import { SEARCH_ICON } from "@/utils/constant";
@@ -10,6 +11,7 @@ import styles from "./SearchInput.module.scss";
 
 type SearchInputProps = {
   isOpen: boolean;
+  inputRef: MutableRefObject<() => void>;
   onClick: () => void;
 };
 
@@ -17,7 +19,7 @@ type KeywordType = {
   keyword: string;
 };
 
-export default function SearchInput({ isOpen, onClick }: SearchInputProps) {
+export default function SearchInput({ isOpen, inputRef, onClick }: SearchInputProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -25,8 +27,10 @@ export default function SearchInput({ isOpen, onClick }: SearchInputProps) {
 
   const onSubmit: SubmitHandler<KeywordType> = ({ keyword }) => {
     router.push(`/?${createQueryString("keyword", keyword, searchParams)}`);
-    reset();
   };
+
+  // eslint-disable-next-line no-param-reassign
+  inputRef.current = reset;
 
   return (
     <form

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSessionCheck } from "@/hooks/useSessionCheck";
 import cn from "@/utils/classNames";
 import { LOGO_IMAGE, MENU_TOGGLE_ICON, CLOSE_ICON } from "@/utils/constant";
@@ -20,6 +20,12 @@ export default function Gnb({ initialSession }: GnbProps) {
 
   const [isInputOpen, setInputOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const inputRef = useRef<() => void>(() => {});
+
+  const handleLogoClick = () => {
+    inputRef.current();
+  };
 
   const handleSearchClick = () => {
     setInputOpen(!isInputOpen);
@@ -63,6 +69,7 @@ export default function Gnb({ initialSession }: GnbProps) {
             width={166}
             height={28}
             alt='로고'
+            onClick={handleLogoClick}
           />
         </Link>
       </div>
@@ -70,6 +77,7 @@ export default function Gnb({ initialSession }: GnbProps) {
       <div className={styles.actionBox}>
         <SearchInput
           isOpen={isInputOpen}
+          inputRef={inputRef}
           onClick={handleSearchClick}
         />
 
