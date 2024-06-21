@@ -87,3 +87,29 @@ export type ReviewType = {
   rating: number;
   id: number;
 };
+
+export type FollowersList = {
+  follower: Follow;
+  id: number;
+};
+
+export type FolloweesList = {
+  followee: Follow;
+  id: number;
+};
+
+export type Follow = {
+  updatedAt: string;
+  createdAt: string;
+  teamId: string;
+  image: string;
+  description: string;
+  nickname: string;
+  id: number;
+};
+
+export type UpdateProfileRequest = {
+  description: string;
+  nickname: string;
+  image: string;
+};
