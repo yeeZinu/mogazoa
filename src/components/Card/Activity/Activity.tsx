@@ -61,7 +61,11 @@ export default function Activity({ title, averageRating, reviewCount, chipCatego
                 fill
               />
             </figure>
-            <span>{mainContent?.toFixed(1)}</span>
+            {title === "남긴 별점 평균" && mainContent !== 0 ? (
+              <span>{mainContent?.toFixed(1)}</span>
+            ) : (
+              <span>{mainContent?.toFixed(0)}</span>
+            )}
           </div>
         )}
       </div>

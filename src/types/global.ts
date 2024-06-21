@@ -55,8 +55,8 @@ export type ErrorResponse = {
       value: string;
     };
   };
-} 
-  
+};
+
 export type ProductDetailType = {
   id: number;
   name: string;
