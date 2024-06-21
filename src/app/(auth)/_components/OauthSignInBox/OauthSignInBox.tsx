@@ -7,7 +7,11 @@ import { OauthSignInButton } from "@/auth/_components/OauthSignInButton";
 import { GOOGLE_ICON, KAKAO_ICON } from "@/utils/constant";
 import styles from "./OauthSignInBox.module.scss";
 
-export default function OauthSignInBox() {
+type OauthSignInBoxProps = {
+  requestPage: string;
+};
+
+export default function OauthSignInBox({ requestPage }: OauthSignInBoxProps) {
   const router = useRouter();
   const handleKakaoSignIn = async () => {
     // 카카오 SDK 초기화
@@ -15,8 +19,9 @@ export default function OauthSignInBox() {
       window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
     }
     // 인가 코드 요청
+    console.log(requestPage);
     window.Kakao.Auth.authorize({
-      redirectUri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI,
+      redirectUri: `${process.env.NEXT_PUBLIC_DOMAIN}/${requestPage}`,
       scope: "openid",
     });
   };
@@ -28,7 +33,7 @@ export default function OauthSignInBox() {
       if (!localStorage.getItem("authCode") && code) {
         // 다시 redirect됐을 경우 요청 두 번 방지
         localStorage.setItem("authCode", code);
-        const result = await signIn("kakao", { redirect: false, callbackUrl: "/", code });
+        const result = await signIn("kakao", { redirect: false, callbackUrl: "/", code, requestPage });
 
         if (result?.status === 403) {
           localStorage.removeItem("authCode");

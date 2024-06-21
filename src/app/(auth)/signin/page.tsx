@@ -6,7 +6,7 @@ export default function SignInPage() {
   return (
     <div className={styles.container}>
       <SignInForm />
-      <OauthSignInBox />
+      <OauthSignInBox requestPage='signin' />
     </div>
   );
 }
