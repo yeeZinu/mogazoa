@@ -63,25 +63,27 @@ export default function Main({ categories, ranking, products }: MainProps) {
       </Category>
 
       <div className={styles.content}>
-        {hasQueryParams ? (
-          <ErrorBoundary>
-            <Suspense fallback={<NoData message='Loading...' />}>
-              <FilteredProducts category={category ?? null} />
-            </Suspense>
-          </ErrorBoundary>
-        ) : (
-          <PopularProducts
-            hotProducts={hotProducts.list.slice(0, 6)}
-            ratingProducts={ratingProducts.list.slice(0, 6)}
-          />
-        )}
-        <button
-          type='button'
-          className={cn(styles.categoryToggle)}
-          onClick={toggleCategory}
-        >
-          <CategoryFilter>{category ?? "카테고리"}</CategoryFilter>
-        </button>
+        <div className={styles.productList}>
+          {hasQueryParams ? (
+            <ErrorBoundary>
+              <Suspense fallback={<NoData message='Loading...' />}>
+                <FilteredProducts category={category ?? null} />
+              </Suspense>
+            </ErrorBoundary>
+          ) : (
+            <PopularProducts
+              hotProducts={hotProducts.list.slice(0, 6)}
+              ratingProducts={ratingProducts.list.slice(0, 6)}
+            />
+          )}
+          <button
+            type='button'
+            className={cn(styles.categoryToggle)}
+            onClick={toggleCategory}
+          >
+            <CategoryFilter>{category ?? "카테고리"}</CategoryFilter>
+          </button>
+        </div>
 
         <ReviewerRanking ranking={ranking.slice(0, 5)} />
       </div>

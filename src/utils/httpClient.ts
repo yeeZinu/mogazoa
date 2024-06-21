@@ -5,17 +5,22 @@ export default class HttpClient {
     this.baseUrl = baseUrl;
   }
 
-  private async sendRequest<T, U>(path: string, method: string, body?: U, options: RequestInit = {}): Promise<T> {
+  private async sendRequest<T>(path: string, method: string, body?: BodyInit, options: RequestInit = {}): Promise<T> {
+    const { headers: headerOption, ...restOptions } = options;
+
+    const headers: HeadersInit = {
+      ...headerOption,
+    };
+
+    const requestOptions: RequestInit = {
+      method,
+      headers,
+      ...restOptions,
+      body,
+    };
+
     try {
-      const requestOptions: RequestInit = {
-        method,
-        headers: { "Content-Type": "application/json", ...options.headers },
-        ...options,
-      };
-      if (body) {
-        requestOptions.body = JSON.stringify(body);
-      }
-      const response = await fetch(`${this.baseUrl}/${path}`, requestOptions);
+      const response = await fetch(`${this.baseUrl}${path}`, requestOptions);
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
       }
@@ -27,18 +32,22 @@ export default class HttpClient {
   }
 
   async get<T>(path: string, options: RequestInit = {}): Promise<T> {
-    return this.sendRequest<T, never>(path, "GET", undefined, options);
+    return this.sendRequest<T>(path, "GET", undefined, options);
   }
 
-  async post<T, U>(path: string, options: RequestInit = {}, body?: U): Promise<T> {
-    return this.sendRequest<T, U>(path, "POST", body, options);
+  async post<T>(path: string, options: RequestInit = {}, body?: BodyInit): Promise<T> {
+    return this.sendRequest<T>(path, "POST", body, options);
   }
 
-  async put<T, U>(path: string, options: RequestInit = {}, body?: U): Promise<T> {
-    return this.sendRequest<T, U>(path, "PUT", body, options);
+  async put<T>(path: string, options: RequestInit = {}, body?: BodyInit): Promise<T> {
+    return this.sendRequest<T>(path, "PUT", body, options);
+  }
+
+  async patch<T>(path: string, options: RequestInit = {}, body?: BodyInit): Promise<T> {
+    return this.sendRequest<T>(path, "PATCH", body, options);
   }
 
   async delete<T>(path: string, options: RequestInit = {}): Promise<T> {
-    return this.sendRequest<T, never>(path, "DELETE", undefined, options);
+    return this.sendRequest<T>(path, "DELETE", undefined, options);
   }
 }

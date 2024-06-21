@@ -1,0 +1,61 @@
+@import "@/styles/_index";
+
+.layout {
+  display: flex;
+  width: 100%;
+  padding: 2rem;
+  background: $black-200;
+
+  @include rounded-lg;
+}
+
+.reviewBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.description {
+  flex: 1;
+  margin-bottom: 2rem;
+}
+
+.imageBox {
+  display: flex;
+  gap: 1rem;
+}
+
+.footerBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.createdAt {
+  color: $gray-200;
+
+  @include text-sm;
+}
+
+.editBox {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  padding: 0 1rem;
+
+  button {
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: $gray-200;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    @include text-sm;
+  }
+}

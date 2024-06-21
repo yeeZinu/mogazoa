@@ -1,0 +1,59 @@
+@import "@/styles/_index";
+
+.container {
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: calc(100% - 11rem);
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: $gray-100;
+  }
+}
+
+.productImage {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  object-position: center;
+
+  @include rounded-md;
+}
+
+.coupangImage {
+  width: 6rem;
+  padding: 0.2rem;
+  background: $white-100;
+
+  @include rounded-sm;
+}
+
+.name {
+  display: -webkit-box;
+  -webkit-lineclamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.priceBox {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.price {
+  color: $red-100;
+}
+
+.rocketImage {
+  height: 1rem;
+}

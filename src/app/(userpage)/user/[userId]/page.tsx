@@ -22,8 +22,9 @@ export default function UserPage({ params }: { params: { userId: number } }) {
   const { data } = useQuery({
     queryKey: ["userData", params.userId],
     queryFn: async () => {
-      const res = httpClient.get<UserDetail>(`users/${params.userId}`, {
+      const res = httpClient.get<UserDetail>(`/users/${params.userId}`, {
         headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
+        cache: "no-cache",
       });
       return res;
     },

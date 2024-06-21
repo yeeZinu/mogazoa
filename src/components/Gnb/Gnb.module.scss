@@ -6,8 +6,9 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 22px 120px;
+  padding: 16px 30px;
   background-color: $bg-black-100;
+  border-bottom: 1px solid rgba($color: $gray-100, $alpha: 10%);
 
   @include respond-to(tablet) {
     padding: 15px 30px;
@@ -79,6 +80,10 @@
   color: $white-100;
 
   @include text-normal;
+
+  span {
+    cursor: pointer;
+  }
 
   @include respond-to(tablet) {
     gap: 30px;

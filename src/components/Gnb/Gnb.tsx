@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { useSessionCheck } from "@/hooks/useSessionCheck";
 import cn from "@/utils/classNames";
@@ -26,6 +27,15 @@ export default function Gnb({ initialSession }: GnbProps) {
 
   const handleMenuClick = () => {
     setMenuOpen(!isMenuOpen);
+  };
+
+  const handleMenuClose = () => {
+    setMenuOpen(false);
+  };
+
+  const handleSignOut = () => {
+    signOut();
+    handleMenuClose();
   };
 
   const handleSession = (session: Session | null) => {
@@ -75,13 +85,41 @@ export default function Gnb({ initialSession }: GnbProps) {
           <div className={cn(styles.userAction, isMenuOpen && styles.open)}>
             {currentSession ? (
               <>
-                <Link href='/compare'>비교하기</Link>
-                <Link href={`/user/${currentSession.user.id}`}>내 프로필</Link>
+                <Link
+                  href='/compare'
+                  onClick={handleMenuClose}
+                >
+                  비교하기
+                </Link>
+                <Link
+                  href={`/user/${currentSession.user.id}`}
+                  onClick={handleMenuClose}
+                >
+                  내 프로필
+                </Link>
+                <span
+                  onClick={handleSignOut}
+                  onKeyDown={handleSignOut}
+                  role='button'
+                  tabIndex={0}
+                >
+                  로그아웃
+                </span>
               </>
             ) : (
               <>
-                <Link href='/signin'>로그인</Link>
-                <Link href='/signup'>회원가입</Link>
+                <Link
+                  href='/signin'
+                  onClick={handleMenuClose}
+                >
+                  로그인
+                </Link>
+                <Link
+                  href='/signup'
+                  onClick={handleMenuClose}
+                >
+                  회원가입
+                </Link>
               </>
             )}
           </div>
