@@ -7,6 +7,7 @@ type CropperModalProps = {
 };
 
 export default function CropperModal({ image, onCrop }: CropperModalProps) {
+  // TODO: 취소하기 기능
   return (
     <div className={styles.container}>
       <ImageCropper
