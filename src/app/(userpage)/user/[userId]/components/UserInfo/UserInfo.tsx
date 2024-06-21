@@ -118,7 +118,7 @@ export default function UserInfo({
                 styleType='tertiary'
                 disabled={false}
                 className={styles.profile}
-                onClick={() => mutation.mutate}
+                onClick={() => mutation.mutate()}
               >
                 팔로우 취소
               </Button>
@@ -127,7 +127,7 @@ export default function UserInfo({
                 styleType='primary'
                 disabled={false}
                 className={styles.profile}
-                onClick={() => mutation.mutate}
+                onClick={() => mutation.mutate()}
               >
                 팔로우
               </Button>
