@@ -12,11 +12,11 @@ export const toggleItem = async (
   const endPoint = item === "reviews" ? "like" : "favorite";
   try {
     if (isToggle) {
-      await httpClient.delete(`${item}/${id}/${endPoint}`, {
+      await httpClient.delete(`/${item}/${id}/${endPoint}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
     } else {
-      await httpClient.post(`${item}/${id}/${endPoint}`, { headers: { Authorization: `Bearer ${accessToken}` } });
+      await httpClient.post(`/${item}/${id}/${endPoint}`, { headers: { Authorization: `Bearer ${accessToken}` } });
     }
     return !isToggle;
   } catch (error) {
@@ -30,8 +30,8 @@ const uploadImage = async (image: Blob, accessToken: string | undefined): Promis
   formData.append("image", image);
 
   try {
-    const response = await httpClient.post<{ url: string }, FormData>(
-      "images/upload",
+    const response = await httpClient.post<{ url: string }>(
+      "/images/upload",
       {
         headers: { Authorization: `Bearer ${accessToken}` },
       },
@@ -56,7 +56,7 @@ export const reviewSubmit = async (data: FormValues, accessToken: string | undef
     const bodyData = { ...restData, images: imageUrlList };
 
     const response = await httpClient.post(
-      "reviews",
+      "/reviews",
       { headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` } },
       JSON.stringify(bodyData),
     );
