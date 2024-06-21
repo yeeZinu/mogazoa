@@ -67,3 +67,11 @@ export const reviewSubmit = async (data: FormValues, accessToken: string | undef
     throw new Error("Failed to submit review.");
   }
 };
+
+export const fetchShoppingList = async (platform: "coupang" | "naver", keyword: string) => {
+  const response = await fetch(`http://localhost:3000/api/search/${platform}?keyword=${encodeURIComponent(keyword)}`);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+};

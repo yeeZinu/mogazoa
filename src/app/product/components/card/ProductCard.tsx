@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import WithModal from "@/app/product/components/with-modal/WithModal";
 import { toggleItem } from "@/app/product/utils/apis";
 import { BUTTON_LIST, MODAL_LIST, SHARE_OPTION_LIST } from "@/app/product/utils/constant";
 import Button from "@/components/Button/Button";
@@ -10,7 +11,6 @@ import CategoryChip from "@/components/Chip/Category-chip/CategoryChip";
 import { ProductDetailType } from "@/types/global";
 import { SAVE_ICON, UNSAVE_ICON } from "@/utils/constant";
 import styles from "./ProductCard.module.scss";
-import WithModal from "./with-modal/WithModal";
 
 type ProductCardProps = {
   productDetail: ProductDetailType;

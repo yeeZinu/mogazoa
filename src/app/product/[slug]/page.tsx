@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
-import ProductCard from "@/app/product/components/ProductCard";
-import ReviewCardList from "@/app/product/components/ReviewCardList";
+import ProductCard from "@/app/product/components/card/ProductCard";
+import ReviewCardList from "@/app/product/components/card/ReviewCardList";
+import Shopping from "@/app/product/components/shopping/Shopping";
 import Statistics, { StatisticsProps } from "@/components/Card/Statistics/Statistics";
 import authOptions from "@/lib/auth";
 import { ProductDetailType, ReviewType } from "@/types/global";
@@ -15,12 +16,12 @@ export default async function ProductPage({ params }: { params: { slug: string }
   const productId = params.slug;
   const httpClient = new HttpClient(process.env.BASE_URL || "");
 
-  const productDetail: ProductDetailType = await httpClient.get(`products/${productId}`, {
+  const productDetail: ProductDetailType = await httpClient.get(`/products/${productId}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
     cache: "no-cache",
   });
 
-  const { list: reviewList }: { list: ReviewType[] } = await httpClient.get(`products/${productId}/reviews`, {
+  const { list: reviewList }: { list: ReviewType[] } = await httpClient.get(`/products/${productId}/reviews`, {
     headers: { Authorization: `Bearer ${accessToken}` },
     cache: "no-cache",
   });
@@ -52,6 +53,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
       </div>
       <h2 className={styles.title}>상품 리뷰</h2>
       {hasReviewList ? <ReviewCardList reviewList={reviewList} /> : <p>첫 리뷰의 주인공이 되어보세요!</p>}
+      <h2 className={styles.title}>쇼핑하러가기</h2>
+      <Shopping name={productDetail.name} />
     </div>
   );
 }

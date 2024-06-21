@@ -18,7 +18,6 @@ export default class HttpClient {
       ...restOptions,
       body,
     };
-    console.log(body);
 
     try {
       const response = await fetch(`${this.baseUrl}${path}`, requestOptions);
