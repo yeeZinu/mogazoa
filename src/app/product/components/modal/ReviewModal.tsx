@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import React from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import Rating from "@/app/product/components/Rating";
+import Rating from "@/app/product/components/rating/Rating";
 import WithModal from "@/app/product/components/with-modal/WithModal";
 import { reviewSubmit } from "@/app/product/utils/apis";
 import { FormValues } from "@/app/product/utils/types";
