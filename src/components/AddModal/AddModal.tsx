@@ -164,7 +164,7 @@ export default function AddModal({ onClose }: ProductModalProps) {
               type='submit'
               styleType='primary'
               disabled={!isValid || updateProductMutation.isPending || isSubmitted || isError}
-              className={cn(styles.submitButton, isSubmitted && styles.submitted, isError && styles.error)}
+              className={cn(styles.submitButton, isError && styles.error)}
             >
               {getButtonText()}
             </Button>
