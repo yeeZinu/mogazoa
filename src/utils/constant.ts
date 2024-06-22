@@ -26,3 +26,5 @@ export const DEFAULT_PROFILE_IMAGE = "/images/profile-default.svg";
 export const DEFAULT_PRODUCT_IMAGE = "/images/product-default.svg";
 export const NAVER_LOGO = "/images/naver.svg";
 export const COUPANG_LOGO = "/images/coupang.svg";
+export const REFRESH_ICON = "/images/refresh.png";
+export const DELETE_ICON = "/images/delete.png";
