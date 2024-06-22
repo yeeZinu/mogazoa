@@ -1,19 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
 import { useState } from "react";
-import { toggleItem } from "@/app/product/utils/apis";
+import ReviewEditModal from "@/app/product/components/modal/ReviewEditModal";
+import WithModal from "@/app/product/components/with-modal/WithModal";
+import { deleteReview, toggleItem } from "@/app/product/utils/apis";
 import Thumbs from "@/components/Chip/Thumbs/Thumbs";
 import { UserItem } from "@/components/UserItem";
 import { ReviewType } from "@/types/global";
 import styles from "./ReviewCard.module.scss";
 
-type ReviewCardProps = { review: ReviewType };
+type ReviewCardProps = { review: ReviewType; session: Session | null };
 
-export default function ReviewCard({ review }: ReviewCardProps) {
+export default function ReviewCard({ review, session }: ReviewCardProps) {
   const { id, user, isLiked, rating, content, reviewImages, createdAt, likeCount: like } = review;
-  const { data: session } = useSession();
+  const [showEditModal, setShowEditModal] = useState(false);
   const accessToken = session?.accessToken;
   const userId = session?.user?.id;
   const isWriter = userId === user.id;
@@ -32,6 +34,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
     if (activeState) setLikeCount((prev) => prev + 1);
     else setLikeCount((prev) => prev - 1);
   };
+
   return (
     <div className={styles.layout}>
       <div className={styles.userBox}>
@@ -46,6 +49,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
         <div className={styles.imageBox}>
           {reviewImages.map((image) => (
             <Image
+              className={styles.reviewImage}
               key={image.id}
               src={image.source}
               alt='product review'
@@ -61,12 +65,14 @@ export default function ReviewCard({ review }: ReviewCardProps) {
               <button
                 key='edit'
                 type='button'
+                onClick={() => setShowEditModal(true)}
               >
                 수정
               </button>,
               <button
                 key='delete'
                 type='button'
+                onClick={() => deleteReview(id, accessToken)}
               >
                 삭제
               </button>,
@@ -80,6 +86,11 @@ export default function ReviewCard({ review }: ReviewCardProps) {
           </Thumbs>
         </div>
       </article>
+      {showEditModal && (
+        <WithModal onClose={() => setShowEditModal(false)}>
+          <ReviewEditModal review={review} />
+        </WithModal>
+      )}
     </div>
   );
 }

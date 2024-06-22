@@ -41,10 +41,12 @@ export default function UploadImage<T extends FieldValues>({
     }
   };
 
-  const onCrop = async (croppedImage: Blob) => {
-    setImage(URL.createObjectURL(croppedImage));
-    setValue(name, croppedImage as PathValue<T, Path<T>>);
-    setShowModal(false);
+  const onCrop = async (croppedImage: Blob | null) => {
+    if (croppedImage) {
+      setImage(URL.createObjectURL(croppedImage));
+      setValue(name, croppedImage as PathValue<T, Path<T>>);
+      setShowModal(false);
+    }
   };
 
   return (

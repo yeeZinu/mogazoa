@@ -26,6 +26,10 @@
   gap: 1rem;
 }
 
+.reviewImage {
+  @include rounded-md;
+}
+
 .footerBox {
   display: flex;
   align-items: center;

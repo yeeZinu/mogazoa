@@ -1,5 +1,5 @@
 import HttpClient from "@/utils/httpClient";
-import { FormValues } from "./types";
+import { EditFormValues, FormValues } from "./types";
 
 const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL || "");
 
@@ -47,10 +47,9 @@ const uploadImage = async (image: Blob, accessToken: string | undefined): Promis
 
 export const reviewSubmit = async (data: FormValues, accessToken: string | undefined) => {
   const { uploadImageList, ...restData } = data;
-
   try {
     const imageUrlList = uploadImageList
-      ? await Promise.all(uploadImageList.map((image) => uploadImage(image.blob, accessToken)))
+      ? await Promise.all(uploadImageList?.map((image) => uploadImage(image.blob, accessToken)))
       : [];
 
     const bodyData = { ...restData, images: imageUrlList };
@@ -65,6 +64,46 @@ export const reviewSubmit = async (data: FormValues, accessToken: string | undef
   } catch (error) {
     console.error("Error submitting review:", error);
     throw new Error("Failed to submit review.");
+  }
+};
+
+export const reviewPatch = async (
+  data: EditFormValues,
+  reviewId: number,
+  accessToken: string | undefined,
+  originalImageList: { source: string }[],
+) => {
+  const { uploadImageList, ...restData } = data;
+  try {
+    const responseImageList = uploadImageList
+      ? await Promise.all(uploadImageList?.map((image) => uploadImage(image.blob, accessToken)))
+      : [];
+
+    const newImageList = responseImageList?.map((imageUrl) => ({ source: imageUrl }));
+    const images = originalImageList.concat(newImageList);
+
+    const bodyData = { ...restData, images };
+    const response = await httpClient.patch(
+      `/reviews/${reviewId}`,
+      { headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` } },
+      JSON.stringify(bodyData),
+    );
+    window.location.reload();
+    return response;
+  } catch (error) {
+    console.error("Error submitting review:", error);
+    throw new Error("Failed to submit review.");
+  }
+};
+
+export const deleteReview = async (id: number, accessToken: string | undefined) => {
+  try {
+    httpClient.delete(`/reviews/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } });
+    console.log("Success deleting");
+    window.location.reload();
+  } catch (error) {
+    console.error("Error deleting review:", error);
+    throw new Error("Failed to delete review.");
   }
 };
 

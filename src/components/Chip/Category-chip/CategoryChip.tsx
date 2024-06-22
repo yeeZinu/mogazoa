@@ -36,8 +36,4 @@ function CategoryChip({ children, ...rest }: CategoryProps) {
   );
 }
 
-CategoryChip.defaultProps = {
-  children: "default",
-};
-
 export default CategoryChip;

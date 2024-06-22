@@ -28,3 +28,7 @@ export type NaverProduct = {
   price: string;
   link: string;
 };
+
+export type EditFormValues = Omit<FormValues, "productId" | "reviewImages" | "images"> & {
+  images: { id?: number; source?: string }[];
+};

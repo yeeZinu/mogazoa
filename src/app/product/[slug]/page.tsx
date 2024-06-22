@@ -35,7 +35,10 @@ export default async function ProductPage({ params }: { params: { slug: string }
   ];
   return (
     <div className={styles.layout}>
-      <ProductCard productDetail={productDetail} />
+      <ProductCard
+        productDetail={productDetail}
+        session={session}
+      />
       <h2 className={styles.title}>상품 통계</h2>
 
       <div className={styles.metricBox}>
@@ -52,7 +55,14 @@ export default async function ProductPage({ params }: { params: { slug: string }
         ))}
       </div>
       <h2 className={styles.title}>상품 리뷰</h2>
-      {hasReviewList ? <ReviewCardList reviewList={reviewList} /> : <p>첫 리뷰의 주인공이 되어보세요!</p>}
+      {hasReviewList ? (
+        <ReviewCardList
+          reviewList={reviewList}
+          session={session}
+        />
+      ) : (
+        <p>첫 리뷰의 주인공이 되어보세요!</p>
+      )}
       <h2 className={styles.title}>쇼핑하러가기</h2>
       <Shopping name={productDetail.name} />
     </div>

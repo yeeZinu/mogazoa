@@ -3,7 +3,7 @@ import ImageCropper from "./ImageCropper";
 
 type CropperModalProps = {
   image: string | null;
-  onCrop: (croppedImage: Blob) => Promise<void>;
+  onCrop: (croppedImage: Blob | null) => Promise<void>;
 };
 
 export default function CropperModal({ image, onCrop }: CropperModalProps) {

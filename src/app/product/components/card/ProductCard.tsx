@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
 import React, { useState } from "react";
 import WithModal from "@/app/product/components/with-modal/WithModal";
 import { toggleItem } from "@/app/product/utils/apis";
@@ -13,12 +13,11 @@ import { SAVE_ICON, UNSAVE_ICON } from "@/utils/constant";
 import styles from "./ProductCard.module.scss";
 
 type ProductCardProps = {
+  session: Session | null;
   productDetail: ProductDetailType;
 };
 
-export default function ProductCard({ productDetail }: ProductCardProps) {
-  const { data: session } = useSession();
-  const accessToken = session?.accessToken;
+export default function ProductCard({ productDetail, session }: ProductCardProps) {
   const [modalState, setModalState] = useState<{ [key: string]: boolean }>({
     reviewModal: false,
     compareModal: false,
@@ -29,6 +28,7 @@ export default function ProductCard({ productDetail }: ProductCardProps) {
   const { id, name, description, image, category, isFavorite: favorite, writerId } = productDetail;
   const [isFavorite, setIsFavorite] = useState(favorite);
   const userId = session?.user?.id;
+  const accessToken = session?.accessToken;
   const isWriter = userId === writerId;
 
   const openModal = (modalName: string) => setModalState((prev) => ({ ...prev, [modalName]: true }));

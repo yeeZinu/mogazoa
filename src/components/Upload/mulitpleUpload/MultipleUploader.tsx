@@ -38,11 +38,13 @@ export default function MultipleUploader<T extends FieldValues>({
     }
   };
 
-  const onCrop = async (croppedImage: Blob) => {
-    const imageUrl = URL.createObjectURL(croppedImage);
-    setImage(imageUrl);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    append({ blob: croppedImage, source: imageUrl } as any);
+  const onCrop = async (croppedImage: Blob | null) => {
+    if (croppedImage) {
+      const imageUrl = URL.createObjectURL(croppedImage);
+      setImage(imageUrl);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      append({ blob: croppedImage, source: imageUrl } as any);
+    }
     setShowModal(false);
   };
 

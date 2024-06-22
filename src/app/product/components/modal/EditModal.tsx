@@ -57,29 +57,25 @@ export default function EditModal({ productDetail }: { productDetail: ProductDet
   }));
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    if (data.image) {
-      const url = await uploadImageMutation.mutateAsync(data.image);
-
-      if (url) {
-        const productData = {
-          name: data.productName,
-          description: data.description,
-          categoryId: data.category,
-          image: url,
-        };
-        httpClient.patch(
-          `/products/${id}`,
-          { headers: { Authorization: `Bearer: ${accessToken}`, "Content-Type": "application/json" } },
-          JSON.stringify(productData),
-        );
-      }
-    }
+    const url = data.image?.size ? await uploadImageMutation.mutateAsync(data.image) : image;
+    const productData = {
+      name: data.productName,
+      description: data.description,
+      categoryId: data.category,
+      image: url,
+    };
+    httpClient.patch(
+      `/products/${id}`,
+      { headers: { Authorization: `Bearer: ${accessToken}`, "Content-Type": "application/json" } },
+      JSON.stringify(productData),
+    );
+    window.location.reload();
   };
 
   return (
     <div className={cn(styles.container)}>
       <div className={cn(styles.content)}>
-        <h2 className={cn(styles.header)}>상품 추가</h2>
+        <h2 className={cn(styles.header)}>상품 수정하기</h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className={cn(styles.form)}
