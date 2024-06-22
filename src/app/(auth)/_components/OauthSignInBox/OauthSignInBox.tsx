@@ -14,12 +14,12 @@ type OauthSignInBoxProps = {
 export default function OauthSignInBox({ requestPage }: OauthSignInBoxProps) {
   const router = useRouter();
   const handleKakaoSignIn = async () => {
-    // 카카오 SDK 초기화
+    if (!window) return;
+
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
     }
-    // 인가 코드 요청
-    console.log(requestPage);
+
     window.Kakao.Auth.authorize({
       redirectUri: `${process.env.NEXT_PUBLIC_DOMAIN}/${requestPage}`,
       scope: "openid",
