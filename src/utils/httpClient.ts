@@ -6,17 +6,10 @@ export default class HttpClient {
   }
 
   private async sendRequest<T>(path: string, method: string, body?: BodyInit, options: RequestInit = {}): Promise<T> {
-    const { headers: headerOption, ...restOptions } = options;
-
-    const headers: HeadersInit = {
-      ...headerOption,
-    };
-
     const requestOptions: RequestInit = {
-      method,
-      headers,
-      ...restOptions,
-      body,
+      ...(method !== "GET" && { method }),
+      ...options,
+      ...(body !== undefined && { body }),
     };
 
     try {
