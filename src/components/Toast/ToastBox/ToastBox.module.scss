@@ -1,0 +1,71 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  @include color-box;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  color: $white-100;
+  padding: 1.2rem;
+  width: fit-content;
+  min-width: 200px;
+  max-width: 32.5rem;
+  opacity: 0;
+  margin-bottom: -50px;
+  transition: opacity 0.5s ease-in-out;
+
+  &.visible {
+    opacity: 1;
+    margin-bottom: 0;
+  }
+
+  .information {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .imageBox {
+      position: relative;
+      width: 1.2rem;
+      height: 1.2rem;
+
+      @include respond-to(tablet) {
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+    }
+
+    .message {
+      @include text-normal;
+
+      @include respond-to(tablet) {
+        @include text-sm;
+      }
+    }
+  }
+
+  .closeButton {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    width: 0.8rem;
+    height: 0.8rem;
+    opacity: 0.7;
+  }
+
+  &.success {
+    border-color: $green-100;
+  }
+  &.caution {
+    border-color: $yellow-100;
+  }
+  &.error {
+    border-color: $red-100;
+  }
+  &.info {
+    border-color: $blue-100;
+  }
+}
