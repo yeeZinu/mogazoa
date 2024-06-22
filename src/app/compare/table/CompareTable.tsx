@@ -12,7 +12,7 @@ const CompareTable: React.FC<CompareTableProps> = ({ product1, product2 }) => {
     const criteria = [
       { name: "별점", product1: product1.rating, product2: product2.rating },
       { name: "찜 개수", product1: product1.favoriteCount, product2: product2.favoriteCount },
-      { name: "조회수", product1: product1.reviewCount, product2: product2.reviewCount },
+      { name: "리뷰 개수", product1: product1.reviewCount, product2: product2.reviewCount },
     ];
 
     let product1Wins = 0;
