@@ -45,7 +45,7 @@ export default function ProductCard({ product }: ProductProps) {
                 alt='별'
               />
             </div>
-            <span className={styles.rating}>{rating}</span>
+            <span className={styles.rating}>{rating.toFixed(1)}</span>
           </div>
         </div>
       </div>
