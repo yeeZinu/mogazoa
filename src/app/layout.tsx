@@ -42,6 +42,7 @@ export default async function RootLayout({
             <FloatingButton initialSession={session} />
           </Providers>
         </AuthProvider>
+        <div id='toast' />
         <KakaoScript />
       </body>
     </html>
