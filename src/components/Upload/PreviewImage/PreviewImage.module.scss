@@ -4,21 +4,18 @@
   position: absolute;
   top: 50%;
   right: 50%;
-  display: none;
-  padding: 1rem 0.6rem;
-  color: $white-100;
   cursor: pointer;
-  background: $gray-200;
+  background: $white-100;
   border: none;
   transform: translate(50%, -50%);
+
+  &:hover {
+    background: $gray-100;
+  }
 
   @include rounded-sm;
   @include font-bold;
   @include shadow;
-
-  &:hover {
-    color: $red-100;
-  }
 }
 
 .container {
@@ -30,22 +27,22 @@
   &:hover {
     .close {
       display: block;
-      animation: fade-in 1s ease-in-out;
+      background: $gray-100;
+      animation: fade-in 0.4s ease-in-out;
     }
   }
 }
 
 @keyframes fade-in {
   0% {
-    background: $gray-100;
+    background: $white-100;
     opacity: 0.8;
-    transform: scale(0.5);
     transform: translate(50%, -50%);
   }
 
   100% {
+    background: $gray-100;
     opacity: 1;
-    transform: scale(1);
     transform: translate(50%, -50%);
   }
 }
