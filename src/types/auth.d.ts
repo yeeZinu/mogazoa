@@ -16,3 +16,10 @@ export declare module "@auth/core/jwt" {
     user: { id: number };
   }
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export declare global {
+  interface Window {
+    Kakao: any;
+  }
+}

@@ -4,7 +4,10 @@ export const shareKakao = () => {
   if (!window) return;
   const { Kakao } = window;
   const url = window.location.href;
-  Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
+
+  if (!Kakao.isInitialized()) {
+    Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY);
+  }
 
   Kakao.Share.sendDefault({
     objectType: "feed",
