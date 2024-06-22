@@ -14,13 +14,14 @@
   }
 
   box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+
   transition:
-    transform 0.3s ease,
+    background-color 0.3s ease,
     box-shadow 0.3s ease;
 
   &:hover {
     box-shadow: 0 8px 16px rgb(0 0 0 / 30%);
-    transform: scale(1.03);
+    background-color: $black-100;
   }
 
   &:active {
