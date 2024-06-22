@@ -28,3 +28,7 @@ export const NAVER_LOGO = "/images/naver.svg";
 export const COUPANG_LOGO = "/images/coupang.svg";
 export const REFRESH_ICON = "/images/refresh.png";
 export const DELETE_ICON = "/images/delete.png";
+export const ERROR_ICON = "/images/error.svg";
+export const CAUTION_ICON = "/images/caution.svg";
+export const SUCCESS_ICON = "/images/success.svg";
+export const INFO_ICON = "/images/info.svg";

@@ -28,6 +28,7 @@
 
     @include respond-to(tablet) {
       @include text-sm;
+
       margin-bottom: 0.3rem;
     }
   }
@@ -67,8 +68,8 @@
   width: calc(100% - 11rem);
 
   @include respond-to(tablet) {
-    width: calc(100% - 8rem);
     gap: 0.8rem;
+    width: calc(100% - 8rem);
   }
 
   @include respond-to(mobile) {

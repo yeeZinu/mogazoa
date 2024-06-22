@@ -21,6 +21,7 @@
   @include respond-to(tablet) {
     gap: 1rem;
   }
+
   @include respond-to(mobile) {
     width: 100%;
   }
