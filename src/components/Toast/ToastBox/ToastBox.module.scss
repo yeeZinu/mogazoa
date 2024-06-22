@@ -3,18 +3,19 @@
 
 .container {
   @include color-box;
+
   display: flex;
   gap: 1.5rem;
   align-items: center;
   justify-content: space-between;
-  color: $white-100;
-  padding: 1.2rem;
   width: fit-content;
   min-width: 12.5rem;
   max-width: 32.5rem;
-  opacity: 0;
+  padding: 1.2rem;
   margin-bottom: -50px;
-  box-shadow: 0rem 0.3rem 0.5rem 0.2rem rgb(0, 0, 0, 0.2);
+  color: $white-100;
+  box-shadow: 0 0.3rem 0.5rem 0.2rem rgb(0 0 0 / 20%);
+  opacity: 0;
 
   @include respond-to(mobile) {
     max-width: calc(100% - 40px);
@@ -26,8 +27,8 @@
 
   @keyframes identifier {
     0% {
-      opacity: 0;
       margin-bottom: -50px;
+      opacity: 0;
     }
 
     10% {
@@ -35,31 +36,31 @@
     }
 
     15% {
-      opacity: 0.9;
       margin-bottom: 10px;
+      opacity: 0.9;
       transform: scale(1);
     }
 
     20% {
+      margin-bottom: 0;
       opacity: 1;
-      margin-bottom: 0px;
     }
 
     80% {
-      opacity: 1;
       margin-bottom: 0;
+      opacity: 1;
     }
 
     100% {
-      opacity: 0;
       margin-bottom: -30px;
+      opacity: 0;
     }
   }
 
   .information {
     display: flex;
-    align-items: center;
     gap: 1rem;
+    align-items: center;
 
     .imageBox {
       position: relative;
@@ -83,23 +84,26 @@
 
   .closeButton {
     all: unset;
-    box-sizing: border-box;
-    cursor: pointer;
     position: relative;
+    box-sizing: border-box;
     width: 0.8rem;
     height: 0.8rem;
+    cursor: pointer;
     opacity: 0.7;
   }
 
   &.success {
     border-color: $green-100;
   }
+
   &.caution {
     border-color: $yellow-100;
   }
+
   &.error {
     border-color: $red-100;
   }
+
   &.info {
     border-color: $blue-100;
   }
