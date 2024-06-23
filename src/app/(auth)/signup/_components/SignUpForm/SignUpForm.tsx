@@ -64,7 +64,7 @@ export default function SignUpForm() {
   };
 
   useEffect(() => {
-    const toastInstance = new Toast();
+    const toastInstance = Toast.getInstance();
     setToast(toastInstance);
   }, []);
 

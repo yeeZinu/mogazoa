@@ -18,7 +18,7 @@ type SignInFormData = {
 };
 
 export default function SignInForm() {
-  const [toast, SetToast] = useState<Toast | null>(null);
+  const [toast, setToast] = useState<Toast | null>(null);
   const {
     register,
     formState: { isValid, errors, isSubmitting },
@@ -44,8 +44,8 @@ export default function SignInForm() {
   };
 
   useEffect(() => {
-    const toastInstance = new Toast();
-    SetToast(toastInstance);
+    const toastInstance = Toast.getInstance();
+    setToast(toastInstance);
   }, []);
 
   return (

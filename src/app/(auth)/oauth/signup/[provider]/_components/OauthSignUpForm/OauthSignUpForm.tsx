@@ -50,7 +50,7 @@ export default function OauthSignUpForm({ provider, token }: OauthSignUpFormProp
   };
 
   useEffect(() => {
-    const toastInstance = new Toast();
+    const toastInstance = Toast.getInstance();
     setToast(toastInstance);
   }, []);
 
