@@ -114,6 +114,7 @@ export default function SignUpForm() {
               rules={SIGNUP_VALIDATION.password}
               errors={errors}
               placeholder='비밀번호를 입력해 주세요'
+              autoComplete='off'
             />
           </LabelBox>
           <LabelBox
@@ -127,6 +128,7 @@ export default function SignUpForm() {
               rules={PASSWORD_CONFIRMATION_VALIDATION}
               errors={errors}
               placeholder='비밀번호를 한번 더 입력해 주세요'
+              autoComplete='off'
             />
           </LabelBox>
         </div>
