@@ -10,23 +10,25 @@ class Toast {
 
   private messages: Message[];
 
+  private autoCloseIds: { [key: string]: number };
+
   constructor() {
     this.rootElement = document.getElementById("toast") as HTMLElement;
     this.root = createRoot(this.rootElement);
     this.messages = [];
+    this.autoCloseIds = {};
 
     this.closeToast = this.closeToast.bind(this);
   }
 
   private closeToast(deleteId: string) {
     const deleteIndex = this.messages.findIndex(({ id }) => id === deleteId);
-    this.messages.splice(deleteIndex, 1);
-    this.root.render(
-      <ToastList
-        messages={this.messages}
-        closeToast={this.closeToast}
-      />,
-    );
+    if (deleteIndex !== -1) {
+      clearTimeout(this.autoCloseIds[deleteId]);
+      delete this.autoCloseIds[deleteId];
+      this.messages.splice(deleteIndex, 1);
+      this.renderToasts();
+    }
   }
 
   private renderToasts() {
@@ -39,7 +41,7 @@ class Toast {
   }
 
   private autoCloseToast(id: string) {
-    setTimeout(
+    this.autoCloseIds[id] = setTimeout(
       () => {
         this.closeToast(id);
       },
