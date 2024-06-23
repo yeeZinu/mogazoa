@@ -2,12 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { LabelBox } from "@/app/(auth)/_components/LabelBox";
 import { SIGNIN_VALIDATION } from "@/app/(auth)/constants";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import PasswordInput from "@/components/Input/PasswordInput";
+import { Toast } from "@/components/Toast";
 import styles from "./SignInForm.module.scss";
 
 type SignInFormData = {
@@ -16,6 +18,7 @@ type SignInFormData = {
 };
 
 export default function SignInForm() {
+  const [toast, SetToast] = useState<Toast | null>(null);
   const {
     register,
     formState: { isValid, errors, isSubmitting },
@@ -34,10 +37,16 @@ export default function SignInForm() {
     if (result?.ok) {
       router.push("/");
     } else {
+      toast?.error("이메일 혹은 비밀번호를 확인해주세요!");
       setError("email", { type: "loginError", message: "이메일 혹은 비밀번호를 확인해주세요." });
       setError("password", { type: "loginError" });
     }
   };
+
+  useEffect(() => {
+    const toastInstance = new Toast();
+    SetToast(toastInstance);
+  }, []);
 
   return (
     <form
