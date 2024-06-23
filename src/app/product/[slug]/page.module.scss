@@ -1,3 +1,4 @@
+@import "@/styles/_media";
 @import "@/styles/_index";
 
 .layout {
@@ -5,16 +6,36 @@
   flex-direction: column;
   gap: 3rem;
   width: 100%;
-  padding: 0 2rem;
-  padding-bottom: 2rem;
+  padding: 2rem;
+
+  @include respond-to(tablet) {
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  @include respond-to(mobile) {
+    @include text-sm;
+
+    gap: 1rem;
+    padding: 0.8rem;
+  }
 }
 
 .metricBox {
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
 }
 
 .title {
   @include font-bold;
-  @include text-lg;
+  @include text-xl;
+
+  @include respond-to(tablet) {
+    @include text-normal;
+  }
+
+  @include respond-to(mobile) {
+    @include text-sm;
+  }
 }
