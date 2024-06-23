@@ -9,7 +9,7 @@ import Input from "@/components/Input/Input";
 import TextArea from "@/components/Input/TextArea";
 import Modal from "@/components/Modal/Modal";
 import useUploadImageMutation from "@/components/Upload/hooks/useUploadImageMutation";
-import UploadImage from "@/components/Upload/UploadImage";
+import UploadImage from "@/components/Upload/ImageUpload/ImageUpload";
 import { ErrorResponse } from "@/types/global";
 import cn from "@/utils/classNames";
 import { CLOSE_ICON } from "@/utils/constant";
