@@ -2,13 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { AlertModal } from "@/app/(auth)/_components/AlertModal";
 import { LabelBox } from "@/app/(auth)/_components/LabelBox";
 import { SIGNUP_VALIDATION } from "@/app/(auth)/constants";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
+import { Toast } from "@/components/Toast";
 import styles from "./OauthSignUpForm.module.scss";
 
 type OauthSignUpFormProps = {
@@ -21,8 +21,7 @@ type OauthSignUpFormData = {
 };
 
 export default function OauthSignUpForm({ provider, token }: OauthSignUpFormProps) {
-  const [isModal, setIsModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
+  const [toast, setToast] = useState<Toast | null>(null);
   const router = useRouter();
   const {
     register,
@@ -30,10 +29,6 @@ export default function OauthSignUpForm({ provider, token }: OauthSignUpFormProp
     formState: { isValid, errors, isSubmitting },
     setError,
   } = useForm<OauthSignUpFormData>({ mode: "onBlur" });
-
-  const handleModalClose = () => {
-    setIsModal(false);
-  };
 
   const onSubmit = async (data: OauthSignUpFormData) => {
     const result = await signIn("easySignup", {
@@ -44,23 +39,29 @@ export default function OauthSignUpForm({ provider, token }: OauthSignUpFormProp
     });
 
     if (result?.error && result?.error.includes("닉네임")) {
+      toast?.error(result.error);
       setError("nickname", { message: result.error });
     } else if (result?.error) {
-      setModalMessage(result.error);
-      setIsModal(true);
+      toast?.error(result.error);
     } else {
+      toast?.success("회원가입이 완료되었습니다.");
       router.push("/");
     }
   };
 
+  useEffect(() => {
+    const toastInstance = Toast.getInstance();
+    setToast(toastInstance);
+  }, []);
+
+  useEffect(() => {
+    if (toast) {
+      toast?.info("추가 정보 등록 후 가입이 가능합니다.");
+    }
+  }, [toast]);
+
   return (
     <>
-      <AlertModal
-        isModal={isModal}
-        handleClose={handleModalClose}
-      >
-        {modalMessage}
-      </AlertModal>
       <form
         className={styles.container}
         onSubmit={handleSubmit(onSubmit)}

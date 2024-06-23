@@ -44,7 +44,7 @@ export default function OauthSignInBox({ requestPage }: OauthSignInBoxProps) {
       }
     };
     handleKakaoCallback();
-  }, [router]);
+  }, [router, requestPage]);
 
   return (
     <div className={styles.container}>

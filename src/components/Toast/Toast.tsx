@@ -1,51 +1,65 @@
-import { createRoot } from "react-dom/client";
+import { createRoot, Root } from "react-dom/client";
 import { v4 as uuid } from "uuid";
 import { ToastList } from "./ToastList";
 import { Message } from "./type";
 
 class Toast {
-  private rootElement: HTMLElement;
+  private static instance: Toast;
 
-  private root: ReturnType<typeof createRoot>;
+  private static root: Root | null = null;
 
-  private messages: Message[];
+  private messages: Message[] = [];
 
-  constructor() {
-    this.rootElement = document.getElementById("toast") as HTMLElement;
-    this.root = createRoot(this.rootElement);
-    this.messages = [];
+  private timeoutIds: { [key: string]: number } = {};
+
+  private constructor() {
+    if (!Toast.root) {
+      const rootElement = document.getElementById("toast");
+      if (!rootElement) {
+        const newRootElement = document.createElement("div");
+        newRootElement.id = "toast";
+        document.body.appendChild(newRootElement);
+        Toast.root = createRoot(newRootElement);
+      } else {
+        Toast.root = createRoot(rootElement);
+      }
+    }
 
     this.closeToast = this.closeToast.bind(this);
   }
 
+  static getInstance(): Toast {
+    if (!Toast.instance) {
+      Toast.instance = new Toast();
+    }
+    return Toast.instance;
+  }
+
   private closeToast(deleteId: string) {
     const deleteIndex = this.messages.findIndex(({ id }) => id === deleteId);
-    this.messages.splice(deleteIndex, 1);
-    this.root.render(
-      <ToastList
-        messages={this.messages}
-        closeToast={this.closeToast}
-      />,
-    );
+    if (deleteIndex !== -1) {
+      clearTimeout(this.timeoutIds[deleteId]);
+      delete this.timeoutIds[deleteId];
+      this.messages.splice(deleteIndex, 1);
+      this.renderToasts();
+    }
   }
 
   private renderToasts() {
-    this.root.render(
-      <ToastList
-        messages={this.messages}
-        closeToast={this.closeToast}
-      />,
-    );
+    if (Toast.root) {
+      Toast.root.render(
+        <ToastList
+          messages={this.messages}
+          closeToast={this.closeToast}
+        />,
+      );
+    }
   }
 
   private autoCloseToast(id: string) {
-    setTimeout(
-      () => {
-        this.closeToast(id);
-      },
-      3000,
-      this,
-    );
+    this.timeoutIds[id] = window.setTimeout(() => {
+      this.closeToast(id);
+    }, 3000);
   }
 
   success(message: string) {
