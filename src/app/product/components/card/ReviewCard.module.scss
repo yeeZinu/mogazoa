@@ -1,33 +1,155 @@
+@import "@/styles/_media";
 @import "@/styles/_index";
 
 .layout {
   display: flex;
-  width: 100%;
-  padding: 2rem;
+  flex-direction: column;
+  padding: 1rem;
   background: $black-200;
 
   @include rounded-lg;
 }
 
-.reviewBox {
+.mainBox {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 0 2rem;
+  justify-content: space-between;
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+  }
 }
 
 .description {
-  flex: 1;
-  margin-bottom: 2rem;
+  display: -webkit-box;
+  width: 15rem;
+  height: 8.5rem;
+  padding-top: 1rem;
+  overflow: hidden;
+  line-height: 1.5rem;
+  color: $white-100;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+
+  @include respond-to(tablet) {
+    @include text-sm;
+
+    width: 10rem;
+    height: 5.5rem;
+    line-height: 1.5rem;
+    -webkit-line-clamp: 3;
+  }
+
+  @include respond-to(mobile) {
+    @include text-xs;
+
+    width: 100%;
+    height: auto;
+    max-height: 8.5rem;
+  }
+}
+
+.expand {
+  display: block;
+  width: 15rem;
+  height: auto;
+  max-height: none;
+  padding-top: 1rem;
+  line-height: 1.5rem;
+  word-break: break-all;
+
+  @include respond-to(mobile) {
+    @include text-xs;
+  }
+
+  @include respond-to(tablet) {
+    @include text-sm;
+
+    width: 10rem;
+  }
+}
+
+.userBox {
+  position: relative;
+}
+
+.expandButton {
+  position: absolute;
+  bottom: -1.5rem;
+  left: 0;
+  line-height: 1.5rem;
+  color: $white-100;
+  text-decoration: underline;
+  cursor: pointer;
+  background: $black-200;
+  border: none;
 }
 
 .imageBox {
+  position: relative;
   display: flex;
   gap: 1rem;
+  align-items: center;
+  justify-content: center;
+
+  @include respond-to(mobile) {
+    justify-content: flex-start;
+    margin-top: 0.6rem;
+  }
 }
 
 .reviewImage {
+  position: relative;
+  z-index: 1;
+  width: 140px;
+  height: 140px;
+  transition:
+    transform 0.3s,
+    z-index 0.3s;
+
+  &:hover {
+    z-index: 20 !important;
+    transform: scale(1.05);
+  }
+
+  @include respond-to(mobile) {
+    &:hover {
+      transform: scale(1);
+    }
+  }
+
+  &:not(:first-child) {
+    margin-left: -110px;
+
+    @include respond-to(mobile) {
+      margin-left: -10px;
+    }
+  }
+
   @include rounded-md;
+
+  @include respond-to(tablet) {
+    width: 120px;
+    height: 120px;
+  }
+
+  @include respond-to(mobile) {
+    width: 80px;
+    height: 80px;
+    margin-top: 1.5rem;
+  }
+}
+
+.noneImage {
+  width: 120px;
+  height: 120px;
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    width: 0;
+    height: 0;
+  }
 }
 
 .footerBox {
@@ -35,13 +157,17 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .createdAt {
   color: $gray-200;
 
   @include text-sm;
+
+  @include respond-to(mobile) {
+    @include text-sm;
+  }
 }
 
 .editBox {
@@ -61,5 +187,9 @@
     border: none;
 
     @include text-sm;
+
+    @include respond-to(mobile) {
+      @include text-sm;
+    }
   }
 }
