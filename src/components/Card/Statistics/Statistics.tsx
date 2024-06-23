@@ -2,6 +2,7 @@
 /* eslint-disable react/require-default-props */
 import Image from "next/image";
 import React from "react";
+import cn from "@/utils/classNames";
 import { STAR_ACTIVE_ICON, SAVE_ICON, BUBBLE_ICON } from "@/utils/constant";
 import styles from "./Statistics.module.scss";
 
@@ -11,6 +12,7 @@ export type StatisticsProps = {
   reviewCount?: number;
   favoriteCount?: number;
   compare: DataCompareProps;
+  className?: string;
 };
 
 type DataCompareProps = {
@@ -19,7 +21,7 @@ type DataCompareProps = {
   reviewCount?: number;
 };
 
-export default function Statistics({ title, rating, reviewCount, favoriteCount, compare }: StatisticsProps) {
+export default function Statistics({ title, className, rating, reviewCount, favoriteCount, compare }: StatisticsProps) {
   let changeImageSrc: string | undefined;
   let mainContent: number | undefined;
   let compareItemResult: number | undefined;
@@ -47,7 +49,7 @@ export default function Statistics({ title, rating, reviewCount, favoriteCount, 
   }
 
   return (
-    <div className={styles.container}>
+    <div className={cn(styles.container, className)}>
       <div className={styles.mobileBox}>
         <div className={styles.title}>{title}</div>
         <div className={styles.contentBox}>
