@@ -57,6 +57,7 @@ export default function ProductCard({ productDetail, session }: ProductCardProps
           <div className={styles.nameBox}>
             <h1 className={styles.name}>{name}</h1>
             <Image
+              className={styles.favoriteImage}
               src={isFavorite ? SAVE_ICON : UNSAVE_ICON}
               alt='favorite'
               width={28}
@@ -79,7 +80,7 @@ export default function ProductCard({ productDetail, session }: ProductCardProps
           </div>
         </div>
         <p className={styles.description}>{description}</p>
-        <div className={styles.buttonBox}>
+        <div className={styles.buttonLayout}>
           {BUTTON_LIST.map(
             (button) =>
               (button.isVisible || isWriter) && (

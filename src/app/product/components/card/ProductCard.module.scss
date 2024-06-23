@@ -1,20 +1,64 @@
+@import "@/styles/_media";
 @import "@/styles/_index";
 
 .layout {
+  position: relative;
   display: flex;
   gap: 0.6rem;
   min-width: 100%;
+
+  @include respond-to(mobile) {
+    padding-bottom: 5rem;
+  }
 }
 
 .image {
   @include rounded-lg;
+
+  @include respond-to(tablet) {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  @include respond-to(mobile) {
+    width: 6rem;
+    height: 6rem;
+  }
 }
 
 .shareImage {
   padding: 0.2rem;
+  cursor: pointer;
   background: $black-200;
 
+  &:hover {
+    transform: scale(1.05);
+  }
+
   @include rounded-sm;
+
+  @include respond-to(tablet) {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  @include respond-to(mobile) {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+}
+
+.favoriteImage {
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @include respond-to(tablet) {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
 }
 
 .articleBox {
@@ -23,6 +67,14 @@
   flex-grow: 1;
   gap: 1rem;
   padding: 0 1rem;
+
+  @include respond-to(tablet) {
+    gap: 0.4rem;
+  }
+
+  button {
+    @include text-sm;
+  }
 }
 
 .titleBox {
@@ -35,24 +87,64 @@
 .shareBox {
   display: flex;
   gap: 0.6rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .name {
   @include text-xl;
   @include font-bold;
+
+  @include respond-to(tablet) {
+    @include text-lg;
+  }
+
+  @include respond-to(mobile) {
+    @include text-normal;
+  }
 }
 
 .description {
   flex: 1;
   margin-top: 2rem;
   line-height: 1.6rem;
+
+  @include respond-to(tablet) {
+    @include text-sm;
+
+    margin-top: 1.2rem;
+  }
+
+  @include respond-to(tablet) {
+    @include text-xs;
+
+    margin-top: 0.8rem;
+  }
 }
 
-.buttonBox {
+.buttonLayout {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
+
+  @include respond-to(tablet) {
+    width: 100%;
+  }
+
+  @include respond-to(mobile) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
 }
 
 .button {
   flex-grow: 1;
+
+  @include respond-to(tablet) {
+    @include text-sm;
+  }
+
+  @include respond-to(mobile) {
+    @include text-xs;
+  }
 }
