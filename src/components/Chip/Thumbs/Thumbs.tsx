@@ -22,6 +22,7 @@ function Thumbs({ isActive, onClick, children }: ThumbsProps) {
       onClick={handleClick}
     >
       <Image
+        className={styles.image}
         src={isActive ? THUMBS_UP_ACTIVE_ICON : THUMBS_UP_ICON}
         alt='Thumbs Up'
         width={18}
