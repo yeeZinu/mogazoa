@@ -2,14 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { AlertModal } from "@/app/(auth)/_components/AlertModal";
 import { LabelBox } from "@/app/(auth)/_components/LabelBox";
 import { SIGNUP_VALIDATION } from "@/app/(auth)/constants";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import PasswordInput from "@/components/Input/PasswordInput";
+import { Toast } from "@/components/Toast";
 import styles from "./SignUpForm.module.scss";
 
 type SignUpFormData = {
@@ -20,8 +20,7 @@ type SignUpFormData = {
 };
 
 export default function SignUpForm() {
-  const [isModal, setIsModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
+  const [toast, setToast] = useState<Toast | null>(null);
   const {
     register,
     handleSubmit,
@@ -30,10 +29,6 @@ export default function SignUpForm() {
     formState: { isValid, errors, isSubmitting },
   } = useForm<SignUpFormData>({ mode: "onBlur" });
   const router = useRouter();
-
-  const handleModalClose = () => {
-    setIsModal(false);
-  };
 
   const PASSWORD_CONFIRMATION_VALIDATION = {
     ...SIGNUP_VALIDATION.passwordConfirmation,
@@ -55,8 +50,7 @@ export default function SignUpForm() {
     });
 
     if (result?.error) {
-      setModalMessage(result.error);
-      setIsModal(true);
+      toast?.error(result.error);
 
       if (result.error.includes("닉네임")) {
         setError("nickname", { message: result.error });
@@ -64,18 +58,18 @@ export default function SignUpForm() {
         setError("email", { message: result.error });
       }
     } else {
+      toast?.success("회원가입이 완료되었습니다!");
       router.push("/");
     }
   };
 
+  useEffect(() => {
+    const toastInstance = Toast.getInstance();
+    setToast(toastInstance);
+  }, []);
+
   return (
     <>
-      <AlertModal
-        isModal={isModal}
-        handleClose={handleModalClose}
-      >
-        {modalMessage}
-      </AlertModal>
       <form
         className={styles.container}
         onSubmit={handleSubmit(onSubmit)}
@@ -120,6 +114,7 @@ export default function SignUpForm() {
               rules={SIGNUP_VALIDATION.password}
               errors={errors}
               placeholder='비밀번호를 입력해 주세요'
+              autoComplete='off'
             />
           </LabelBox>
           <LabelBox
@@ -133,6 +128,7 @@ export default function SignUpForm() {
               rules={PASSWORD_CONFIRMATION_VALIDATION}
               errors={errors}
               placeholder='비밀번호를 한번 더 입력해 주세요'
+              autoComplete='off'
             />
           </LabelBox>
         </div>

@@ -60,7 +60,7 @@ export default function Statistics({ title, className, rating, reviewCount, favo
               fill
             />
           </figure>
-          <span>{mainContent?.toFixed(1)}</span>
+          {title === "별점 평균" ? <span>{mainContent?.toFixed(1)}</span> : <span>{mainContent?.toFixed(0)}</span>}
         </div>
       </div>
       {title === "별점 평균" ? (

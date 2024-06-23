@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 
 const pretendard = localFont({
   src: "../../public/fonts/Pretendard-Regular.woff2",
+  variable: "--font-pretendard",
   display: "swap",
 });
 
@@ -41,6 +42,7 @@ export default async function RootLayout({
             <FloatingButton initialSession={session} />
           </Providers>
         </AuthProvider>
+        <div id='toast' />
         <KakaoScript />
       </body>
     </html>

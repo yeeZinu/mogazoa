@@ -1,0 +1,106 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.container {
+  @include color-box;
+
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+  min-width: 12.5rem;
+  max-width: 32.5rem;
+  padding: 1.2rem;
+  margin-bottom: -50px;
+  color: $white-100;
+  box-shadow: 0 0.3rem 0.5rem 0.2rem rgb(0 0 0 / 20%);
+  opacity: 0;
+
+  @include respond-to(mobile) {
+    max-width: calc(100% - 40px);
+  }
+
+  &.visible {
+    animation: toast 3s;
+  }
+
+  @keyframes toast {
+    0% {
+      margin-bottom: -50px;
+      opacity: 0;
+    }
+
+    10% {
+      transform: scale(1.05);
+    }
+
+    15% {
+      margin-bottom: 10px;
+      opacity: 0.9;
+      transform: scale(1);
+    }
+
+    20%,
+    80% {
+      margin-bottom: 0;
+      opacity: 1;
+    }
+
+    100% {
+      margin-bottom: -30px;
+      opacity: 0;
+    }
+  }
+
+  .information {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .imageBox {
+      position: relative;
+      width: 1.2rem;
+      height: 1.2rem;
+
+      @include respond-to(tablet) {
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+    }
+
+    .message {
+      @include text-normal;
+
+      @include respond-to(tablet) {
+        @include text-sm;
+      }
+    }
+  }
+
+  .closeButton {
+    all: unset;
+    position: relative;
+    box-sizing: border-box;
+    width: 0.8rem;
+    height: 0.8rem;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+  &.success {
+    border-color: $green-100;
+  }
+
+  &.caution {
+    border-color: $yellow-100;
+  }
+
+  &.error {
+    border-color: $red-100;
+  }
+
+  &.info {
+    border-color: $blue-100;
+  }
+}
