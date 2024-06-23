@@ -32,3 +32,5 @@ export const ERROR_ICON = "/images/error.svg";
 export const CAUTION_ICON = "/images/caution.svg";
 export const SUCCESS_ICON = "/images/success.svg";
 export const INFO_ICON = "/images/info.svg";
+export const ARROW_RIGHT = "/images/arrow-right.png";
+export const ARROW_LEFT = "/images/arrow-left.png";

@@ -29,6 +29,9 @@ export type NaverProduct = {
   link: string;
 };
 
-export type EditFormValues = Omit<FormValues, "productId" | "reviewImages" | "images"> & {
+export type EditFormValues = {
+  rating: number;
+  content: string;
+  uploadImageList: { blob: Blob; source: string }[];
   images: { id?: number; source?: string }[];
 };

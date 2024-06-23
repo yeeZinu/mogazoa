@@ -1,0 +1,46 @@
+@import "@/styles/_index";
+
+.close {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  cursor: pointer;
+  border: none;
+  transform: translate(50%, -50%);
+
+  &:hover {
+    background: $gray-100;
+  }
+
+  @include rounded-sm;
+  @include font-bold;
+  @include shadow;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+
+  @include rounded-sm;
+
+  &:hover {
+    .close {
+      display: block;
+      animation: fade-in 0.4s ease-in-out;
+    }
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    background: $white-100;
+    opacity: 0.8;
+    transform: translate(50%, -50%);
+  }
+
+  100% {
+    background: $gray-100;
+    opacity: 1;
+    transform: translate(50%, -50%);
+  }
+}

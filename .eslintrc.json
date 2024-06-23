@@ -25,6 +25,12 @@
     "no-restricted-imports": ["error", { "patterns": ["..*"] }],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/prefer-default-export": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "some": ["id"]
+      }
+    ],
     "react/require-default-props": "off",
     "import/order": [
       "error",

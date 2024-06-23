@@ -10,8 +10,8 @@ import { FormValues } from "@/app/product/utils/types";
 import Button from "@/components/Button/Button";
 import CategoryChip from "@/components/Chip/Category-chip/CategoryChip";
 import TextArea from "@/components/Input/TextArea";
-import MultipleUploader from "@/components/Upload/mulitpleUpload/MultipleUploader";
-import PreviewImage from "@/components/Upload/PreviewImage/PreviewImage";
+import MultipleUpload from "@/components/Upload/ImageUpload/MultipleUpload";
+import PreviewImage from "@/components/Upload/PreviewImage/RemovePreviewImage";
 import { ProductDetailType } from "@/types/global";
 import LoginModal from "./LoginModal";
 import styles from "./ReviewModal.module.scss";
@@ -21,8 +21,13 @@ export default function ReviewModal({ productDetail }: { productDetail: ProductD
   const accessToken = session?.accessToken;
   const { id, name, category } = productDetail;
 
-  // TODO: Erros처리 추가
-  const { register, handleSubmit, setValue, control, watch } = useForm<FormValues>({
+  const {
+    handleSubmit,
+    setValue,
+    control,
+    watch,
+    formState: { isValid, errors },
+  } = useForm<FormValues>({
     mode: "onBlur",
     defaultValues: {
       productId: id,
@@ -65,12 +70,14 @@ export default function ReviewModal({ productDetail }: { productDetail: ProductD
       />
       <TextArea
         name='content'
-        register={register}
+        control={control}
         placeholder='리뷰를 작성해주세요.'
-        maxLength={500}
+        rules={{ required: "리뷰를 입력해주세요", minLength: { value: 10, message: "10글자 이상 입력해주세요." } }}
+        errors={errors}
+        maxLength={300}
         rows={8}
       />
-      <MultipleUploader
+      <MultipleUpload
         name='uploadImageList'
         className={styles.uploader}
         control={control}
@@ -92,8 +99,9 @@ export default function ReviewModal({ productDetail }: { productDetail: ProductD
         className={styles.button}
         styleType='primary'
         type='submit'
+        disabled={!isValid}
       >
-        test
+        등록하기
       </Button>
     </form>
   );

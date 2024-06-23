@@ -10,7 +10,7 @@ import Input from "@/components/Input/Input";
 import TextArea from "@/components/Input/TextArea";
 import Modal from "@/components/Modal/Modal";
 import useUploadImageMutation from "@/components/Upload/hooks/useUploadImageMutation";
-import UploadImage from "@/components/Upload/UploadImage";
+import ImageUpload from "@/components/Upload/ImageUpload/ImageUpload";
 import { useGetCategory } from "@/hooks/useGetCategory";
 import { useUpdateProduct } from "@/hooks/useUpdateProduct";
 import cn from "@/utils/classNames";
@@ -28,6 +28,7 @@ type FormValues = {
   category: number;
   description: string;
   image: File;
+  croppedImage: Blob;
 };
 
 export default function AddModal({ onClose }: ProductModalProps) {
@@ -62,7 +63,7 @@ export default function AddModal({ onClose }: ProductModalProps) {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     if (data.image) {
-      const url = await uploadImageMutation.mutateAsync(data.image);
+      const url = await uploadImageMutation.mutateAsync(data.croppedImage);
 
       if (url) {
         const productData = {
@@ -119,8 +120,9 @@ export default function AddModal({ onClose }: ProductModalProps) {
             onSubmit={handleSubmit(onSubmit)}
             className={cn(styles.form)}
           >
-            <UploadImage
+            <ImageUpload
               name='image'
+              cropFiledName='croppedImage'
               setValue={setValue}
               register={register}
               className={cn(styles.imageUploader)}
@@ -149,7 +151,7 @@ export default function AddModal({ onClose }: ProductModalProps) {
             <TextArea
               name='description'
               rows={5}
-              register={register}
+              control={control}
               rules={{
                 required: "상품 설명은 필수 입력입니다.",
                 minLength: { value: 10, message: "최소 10자 이상 적어주세요." },

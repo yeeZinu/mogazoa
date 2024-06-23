@@ -7,7 +7,7 @@ import { Dropdown } from "@/components/Dropdown";
 import Input from "@/components/Input/Input";
 import TextArea from "@/components/Input/TextArea";
 import useUploadImageMutation from "@/components/Upload/hooks/useUploadImageMutation";
-import UploadImage from "@/components/Upload/UploadImage";
+import UploadImage from "@/components/Upload/ImageUpload/ImageUpload";
 import { useGetCategory } from "@/hooks/useGetCategory";
 import cn from "@/utils/classNames";
 import HttpClient from "@/utils/httpClient";
@@ -17,6 +17,7 @@ import type { CategoryType, ProductDetailType } from "@/types/global";
 
 type FormValues = {
   productName: string;
+  croppedImage: Blob;
   category: number;
   description: string;
   image: File;
@@ -31,9 +32,9 @@ export default function EditModal({ productDetail }: { productDetail: ProductDet
   const {
     register,
     control,
-    setValue,
     handleSubmit,
-    formState: { errors },
+    setValue,
+    formState: { isValid, errors },
   } = useForm<FormValues>({
     mode: "onBlur",
     defaultValues: {
@@ -82,9 +83,10 @@ export default function EditModal({ productDetail }: { productDetail: ProductDet
         >
           <UploadImage
             name='image'
-            defaultImage={image}
-            setValue={setValue}
+            cropFiledName='croppedImage'
             register={register}
+            setValue={setValue}
+            defaultImage={image}
             className={cn(styles.imageUploader)}
           />
 
@@ -111,7 +113,7 @@ export default function EditModal({ productDetail }: { productDetail: ProductDet
           <TextArea
             name='description'
             rows={5}
-            register={register}
+            control={control}
             rules={{
               required: "상품 설명은 필수 입력입니다.",
               minLength: { value: 10, message: "최소 10자 이상 적어주세요." },
@@ -127,6 +129,7 @@ export default function EditModal({ productDetail }: { productDetail: ProductDet
             type='submit'
             styleType='primary'
             className={cn(styles.submitButton)}
+            disabled={!isValid}
           >
             제출하기
           </Button>

@@ -1,48 +1,12 @@
-@import "@/styles/_index";
-
-.close {
+.productImage {
   position: absolute;
-  top: 50%;
-  right: 50%;
-  cursor: pointer;
-  background: $white-100;
-  border: none;
-  transform: translate(50%, -50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
 
-  &:hover {
-    background: $gray-100;
-  }
-
-  @include rounded-sm;
-  @include font-bold;
-  @include shadow;
-}
-
-.container {
-  position: relative;
-  overflow: hidden;
-
-  @include rounded-sm;
-
-  &:hover {
-    .close {
-      display: block;
-      background: $gray-100;
-      animation: fade-in 0.4s ease-in-out;
-    }
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    background: $white-100;
-    opacity: 0.8;
-    transform: translate(50%, -50%);
-  }
-
-  100% {
-    background: $gray-100;
-    opacity: 1;
-    transform: translate(50%, -50%);
-  }
+  @include rounded-md;
 }
