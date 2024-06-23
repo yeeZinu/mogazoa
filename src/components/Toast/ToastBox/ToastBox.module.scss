@@ -22,10 +22,10 @@
   }
 
   &.visible {
-    animation: identifier 3s;
+    animation: toast 3s;
   }
 
-  @keyframes identifier {
+  @keyframes toast {
     0% {
       margin-bottom: -50px;
       opacity: 0;
@@ -41,11 +41,7 @@
       transform: scale(1);
     }
 
-    20% {
-      margin-bottom: 0;
-      opacity: 1;
-    }
-
+    20%,
     80% {
       margin-bottom: 0;
       opacity: 1;
