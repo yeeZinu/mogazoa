@@ -8,8 +8,8 @@ import { reviewPatch } from "@/app/product/utils/apis";
 import { EditFormValues } from "@/app/product/utils/types";
 import Button from "@/components/Button/Button";
 import TextArea from "@/components/Input/TextArea";
-import MultipleUploader from "@/components/Upload/mulitpleUpload/MultipleUploader";
-import PreviewImage from "@/components/Upload/PreviewImage/PreviewImage";
+import MultipleUpload from "@/components/Upload/ImageUpload/MultipleUpload";
+import PreviewImage from "@/components/Upload/PreviewImage/RemovePreviewImage";
 import { ReviewType } from "@/types/global";
 import cn from "@/utils/classNames";
 import styles from "./ReviewEditModal.module.scss";
@@ -21,7 +21,13 @@ export default function ReviewEditModal({ review }: { review: ReviewType }) {
   const { data: session } = useSession();
   const accessToken = session?.accessToken;
 
-  const { register, handleSubmit, setValue, control, watch } = useForm<EditFormValues>({
+  const {
+    handleSubmit,
+    setValue,
+    control,
+    watch,
+    formState: { errors },
+  } = useForm<EditFormValues>({
     mode: "onBlur",
     defaultValues: {
       uploadImageList: [],
@@ -64,15 +70,16 @@ export default function ReviewEditModal({ review }: { review: ReviewType }) {
       />
       <TextArea
         name='content'
-        register={register}
+        control={control}
         placeholder='리뷰를 작성해주세요.'
         maxLength={500}
         rows={8}
       />
-      <MultipleUploader
+      <MultipleUpload
         name='uploadImageList'
         className={styles.uploader}
         control={control}
+        errors={errors}
       />
       <section className={styles.imageList}>
         {hasReviewImageList &&

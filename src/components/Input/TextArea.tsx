@@ -1,22 +1,22 @@
 import { useState } from "react";
-import { Path, UseFormRegister, FieldValues, RegisterOptions, FieldErrors } from "react-hook-form";
+import { Controller, FieldValues, FieldErrors, Control, Path, RegisterOptions } from "react-hook-form";
 import cn from "@/utils/classNames";
 import styles from "./TextArea.module.scss";
 
 type TextAreaProps<T extends FieldValues> = {
   name: Path<T>;
   className?: string;
-  register: UseFormRegister<T>;
-  rules?: RegisterOptions;
+  control: Control<T>;
+  rules?: RegisterOptions<T>;
   errors?: FieldErrors<T>;
   maxLength?: number;
-  defaultValue?: string;
+  defaultValue?: string; // 기본 값을 옵셔널로 수정했습니다.
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 export default function TextArea<T extends FieldValues>({
   name,
   className,
-  register,
+  control,
   rules,
   errors,
   maxLength,
@@ -25,19 +25,39 @@ export default function TextArea<T extends FieldValues>({
 }: TextAreaProps<T>) {
   const error = errors?.[name];
   const [charCount, setCharCount] = useState(defaultValue.length);
-  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => setCharCount(event.target.value.length);
+
   return (
     <div className={cn(styles.container, className || styles.default)}>
-      <textarea
-        className={cn(styles.textarea, error && styles.error)}
-        {...register(name, { ...rules, onChange: handleInputChange })}
-        {...rest}
+      <Controller
+        name={name}
+        control={control}
+        defaultValue={defaultValue}
+        rules={{
+          ...rules,
+          validate: (value) => (maxLength ? value.length <= maxLength : true),
+        }}
+        render={({ field: { onChange, value, ...field } }) => (
+          <>
+            <textarea
+              className={cn(styles.textarea, error && styles.error)}
+              onChange={(e) => {
+                if (!maxLength || e.target.value.length <= maxLength) {
+                  onChange(e);
+                  setCharCount(e.target.value.length);
+                }
+              }}
+              value={value}
+              {...field}
+              {...rest}
+            />
+            <div className={styles.charCount}>
+              {charCount}
+              {maxLength && `/${maxLength}`}
+            </div>
+            {error && <span className={styles.errorMessage}>{error.message as string}</span>}
+          </>
+        )}
       />
-      <div className={styles.charCount}>
-        {charCount}
-        {maxLength && `/${maxLength}`}
-      </div>
-      {error && <span className={styles.errorMessage}>{error.message as string}</span>}
     </div>
   );
 }

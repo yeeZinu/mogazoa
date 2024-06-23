@@ -8,18 +8,22 @@
 .layout {
   position: relative;
   display: flex;
-  justify-content: center;
-}
-
-.uploadButton {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  cursor: pointer;
+  align-items: center;
   background: $black-200;
   border: none;
   outline: 1px solid $gray-300;
-  opacity: 0;
+
+  @include rounded-md;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
   transition:
     opacity 1s ease,
     background 1s ease,
@@ -29,7 +33,14 @@
 }
 
 .uploadInput {
-  display: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .uploadText {
@@ -56,12 +67,29 @@
 }
 
 .layout:hover {
-  .uploadButton {
+  .label {
+    z-index: 2;
     background: $gray-100;
     opacity: 1;
   }
 
   .productImage {
+    z-index: 1;
     opacity: 0;
   }
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  color: $red-100;
+
+  @include text-xs;
+}
+
+.error {
+  outline: 1px solid $red-100;
+
+  @include rounded-md;
 }
