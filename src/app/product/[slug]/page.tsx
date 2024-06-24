@@ -56,7 +56,6 @@ export default async function ProductPage({ params }: { params: { slug: string }
           />
         ))}
       </div>
-      <h2 className={styles.title}>상품 리뷰</h2>
       <Suspense fallback={<ReviewListSkeleton reviewCount={reviewCount} />}>
         <ReviewCardList
           session={session}

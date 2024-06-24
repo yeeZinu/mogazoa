@@ -4,10 +4,14 @@
 .layout {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1.5rem 1.8rem;
   background: $black-200;
 
   @include rounded-lg;
+
+  @include respond-to(mobile) {
+    padding: 1.5rem 3rem;
+  }
 }
 
 .mainBox {
@@ -21,7 +25,7 @@
 
 .description {
   display: -webkit-box;
-  width: 15rem;
+  width: 100%;
   height: 8.5rem;
   padding-top: 1rem;
   overflow: hidden;
@@ -36,7 +40,6 @@
   @include respond-to(tablet) {
     @include text-sm;
 
-    width: 10rem;
     height: 5.5rem;
     line-height: 1.5rem;
     -webkit-line-clamp: 3;
@@ -45,9 +48,9 @@
   @include respond-to(mobile) {
     @include text-xs;
 
-    width: 100%;
     height: auto;
-    max-height: 8.5rem;
+    -webkit-line-clamp: 2;
+    height: 4rem;
   }
 }
 
@@ -61,14 +64,16 @@
   word-break: break-all;
   white-space: pre-line;
 
-  @include respond-to(mobile) {
-    @include text-xs;
-  }
-
   @include respond-to(tablet) {
     @include text-sm;
 
     width: 10rem;
+  }
+
+  @include respond-to(mobile) {
+    @include text-xs;
+
+    width: 100%;
   }
 }
 
@@ -144,7 +149,6 @@
 }
 
 .noneImage {
-  width: 120px;
   height: 120px;
 
   @include respond-to(mobile) {
