@@ -40,7 +40,7 @@ const authOptions: NextAuthOptions = {
           if (user) {
             return {
               ...user,
-              accessToken: user.accessToken,
+              accessToken: data.accessToken,
             };
           }
 
@@ -206,6 +206,8 @@ const authOptions: NextAuthOptions = {
           if (data.user) {
             /* eslint-disable no-param-reassign */
             user.id = data.user.id;
+            user.accessToken = data.accessToken;
+
             return true;
           }
 
