@@ -3,7 +3,6 @@
 /* eslint-disable no-restricted-imports */
 
 import { useQuery } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
 import React from "react";
 import Activity from "@/components/Card/Activity/Activity";
 import cn from "@/utils/classNames";
@@ -14,18 +13,12 @@ import styles from "./UserPage.module.scss";
 import { UserDetail } from "../../types";
 
 export default function UserPage({ params }: { params: { userId: number } }) {
-  const { data: session } = useSession();
-  const ACCESS_TOKEN = session?.accessToken;
-
   const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL!);
 
   const { data } = useQuery({
     queryKey: ["userData", params.userId],
     queryFn: async () => {
-      const res = httpClient.get<UserDetail>(`/users/${params.userId}`, {
-        headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
-        cache: "no-cache",
-      });
+      const res = httpClient.get<UserDetail>(`/users/${params.userId}`);
       return res;
     },
   });
