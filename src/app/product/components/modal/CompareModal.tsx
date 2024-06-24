@@ -92,7 +92,6 @@ export default function CompareModal({ productDetail, session, onClose }: ModalP
         />
       </div>
       <Button
-        className={styles.button}
         styleType='primary'
         disabled={slotState !== "ok"}
       >
