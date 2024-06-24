@@ -100,7 +100,6 @@ export const reviewPatch = async (
 export const deleteReview = async (id: number, accessToken: string | undefined) => {
   try {
     httpClient.delete(`/reviews/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } });
-    console.log("Success deleting");
     window.location.reload();
   } catch (error) {
     console.error("Error deleting review:", error);
