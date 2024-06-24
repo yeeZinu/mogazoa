@@ -1,0 +1,49 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  @include respond-to(mobile) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.dropDown {
+  margin-left: auto;
+  margin-bottom: 1rem;
+}
+
+.buttonBox {
+  display: flex;
+  padding: 0 1rem;
+  margin-top: 1.4rem;
+
+  @include respond-to(mobile) {
+    margin-top: 0.8rem;
+  }
+}
+
+.prev,
+.next {
+  padding: 0.6rem;
+  cursor: pointer;
+  background: $black-200;
+
+  @include rounded-full;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.prev {
+  margin-right: auto;
+}
+
+.next {
+  margin-left: auto;
+}
