@@ -20,6 +20,8 @@ export default class HttpClient {
       return await response.json();
     } catch (error) {
       console.log(`fetch data error, ${error}`);
+      console.log("path:", path);
+      console.log("requestOptions", requestOptions);
       throw error;
     }
   }

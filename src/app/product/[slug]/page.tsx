@@ -19,9 +19,13 @@ export default async function ProductPage({ params }: { params: { slug: string }
   const accessToken = session?.accessToken;
   const productId = params.slug;
   const httpClient = new HttpClient(process.env.BASE_URL || "");
+  const headers: Record<string, string> = { cache: "no-cache" };
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`;
+  }
 
   const productDetail: ProductDetailType = await httpClient.get(`/products/${productId}`, {
-    headers: { Authorization: `Bearer ${accessToken}` },
+    headers,
     cache: "no-cache",
   });
 
