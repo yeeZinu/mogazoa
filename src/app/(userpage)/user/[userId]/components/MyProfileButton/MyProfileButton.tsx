@@ -9,7 +9,7 @@ import Input from "@/components/Input/Input";
 import TextArea from "@/components/Input/TextArea";
 import Modal from "@/components/Modal/Modal";
 import useUploadImageMutation from "@/components/Upload/hooks/useUploadImageMutation";
-import UploadImage from "@/components/Upload/ImageUpload/ImageUpload";
+import ImageUpload from "@/components/Upload/ImageUpload/ImageUpload";
 import { ErrorResponse } from "@/types/global";
 import cn from "@/utils/classNames";
 import { CLOSE_ICON } from "@/utils/constant";
@@ -19,6 +19,7 @@ type UserFormValue = {
   description: string;
   nickname: string;
   image: File;
+  croppedImage: Blob;
 };
 
 export default function MyProfileButton() {
@@ -47,7 +48,7 @@ export default function MyProfileButton() {
 
   const onSubmit: SubmitHandler<UserFormValue> = async (data) => {
     if (data.image) {
-      const url = await uploadImageMutation.mutateAsync(data.image);
+      const url = await uploadImageMutation.mutateAsync(data.croppedImage);
 
       if (url) {
         const profileData = {
@@ -94,6 +95,7 @@ export default function MyProfileButton() {
     }
     return "저장하기";
   };
+  console.log("입력상태", isValid);
 
   return (
     <div className={cn(styles.container)}>
@@ -105,12 +107,12 @@ export default function MyProfileButton() {
               onSubmit={handleSubmit(onSubmit)}
               className={styles.form}
             >
-              <UploadImage
+              <ImageUpload
                 name='image'
+                cropFiledName='croppedImage'
                 setValue={setValue}
                 register={register}
                 className={cn(styles.imageUploader)}
-                cropFiledName='image'
               />
               <Input
                 name='nickname'
@@ -142,7 +144,7 @@ export default function MyProfileButton() {
               <Button
                 type='submit'
                 styleType='primary'
-                disabled={!isValid || uploadImageMutation.isPending || isSubmitted || isError}
+                disabled={!isValid || updateProfileMutation.isPending || isSubmitted || isError}
                 className={cn(styles.submitButton, isError && styles.error)}
               >
                 {getButtonText()}
