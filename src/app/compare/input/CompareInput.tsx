@@ -1,4 +1,5 @@
 import React, { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
+import { STORAGE_PRODUCT_A, STORAGE_PRODUCT_B } from "@/app/compare/constant/constant";
 import { Product } from "@/app/compare/input/compareProductItem";
 import { Compare } from "@/components/Chip/Compare/Compare";
 import styles from "./CompareInput.module.scss";
@@ -16,10 +17,9 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
   const [selectedProduct1, setSelectedProduct1] = useState<Product | null>(null);
   const [selectedProduct2, setSelectedProduct2] = useState<Product | null>(null);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
-
   useEffect(() => {
-    const savedProduct1 = getFromLocalStorage("selectedProduct1");
-    const savedProduct2 = getFromLocalStorage("selectedProduct2");
+    const savedProduct1 = getFromLocalStorage(STORAGE_PRODUCT_A);
+    const savedProduct2 = getFromLocalStorage(STORAGE_PRODUCT_B);
     if (savedProduct1) setSelectedProduct1(savedProduct1);
     if (savedProduct2) setSelectedProduct2(savedProduct2);
 
@@ -102,7 +102,7 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
                 value={selectedProduct1.name}
                 onRemove={() => {
                   setSelectedProduct1(null);
-                  saveToLocalStorage("selectedProduct1", null);
+                  saveToLocalStorage(STORAGE_PRODUCT_A, null);
                 }}
                 color
               />
@@ -148,7 +148,7 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
                 value={selectedProduct2.name}
                 onRemove={() => {
                   setSelectedProduct2(null);
-                  saveToLocalStorage("selectedProduct2", null);
+                  saveToLocalStorage(STORAGE_PRODUCT_B, null);
                 }}
                 color={false}
               />
