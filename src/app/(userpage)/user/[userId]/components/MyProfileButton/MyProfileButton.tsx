@@ -34,6 +34,7 @@ export default function MyProfileButton() {
   const handleOpen = () => setIsModal(true);
 
   const {
+    control,
     register,
     setValue,
     setError,
@@ -109,6 +110,7 @@ export default function MyProfileButton() {
                 setValue={setValue}
                 register={register}
                 className={cn(styles.imageUploader)}
+                cropFiledName='image'
               />
               <Input
                 name='nickname'
@@ -126,7 +128,7 @@ export default function MyProfileButton() {
               <TextArea
                 name='description'
                 rows={5}
-                register={register}
+                control={control}
                 rules={{
                   required: "자기 소개글은 필수 입력입니다.",
                   minLength: { value: 1, message: "최소 1자 이상 적어주세요." },
