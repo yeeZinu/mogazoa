@@ -10,6 +10,7 @@ import { useGetFilteredProducts } from "@/_home/hooks/useGetFilteredProducts";
 import { useQueryParams } from "@/app/_home/hooks/useQueryParams";
 import { Dropdown } from "@/components/Dropdown";
 import { ORDER, DROPDOWN } from "@/components/Dropdown/constants";
+import { findOptionByValue } from "@/components/Dropdown/utils";
 import { NoData } from "@/components/NoData";
 import cn from "@/utils/classNames";
 import { createQueryString } from "@/utils/createQueryString";
@@ -32,13 +33,13 @@ export default function FilteredProducts({ category }: FilteredProductsProps) {
   const { data: productData, fetchNextPage, hasNextPage } = useGetFilteredProducts(params.toString());
 
   const { control } = useForm({ mode: "onBlur" });
-  const order = useWatch({ control, name: "order" });
+  const watchedOrder = useWatch({ control, name: "order" });
 
   useEffect(() => {
-    if (order) {
-      router.push(`/?${createQueryString(QUERY.ORDER, order, searchParams)}`);
+    if (watchedOrder) {
+      router.push(`/?${createQueryString(QUERY.ORDER, watchedOrder, searchParams)}`);
     }
-  }, [order, router, searchParams]);
+  }, [watchedOrder, router, searchParams]);
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -47,6 +48,7 @@ export default function FilteredProducts({ category }: FilteredProductsProps) {
   }, [inView, fetchNextPage, hasNextPage]);
 
   const keyword = searchParams.get(QUERY.KEYWORD);
+  const order = searchParams.get(QUERY.ORDER);
 
   return (
     <div className={cn(styles.container)}>
@@ -60,7 +62,7 @@ export default function FilteredProducts({ category }: FilteredProductsProps) {
           control={control}
           name='order'
           variant={DROPDOWN.ORDER}
-          placeholder={ORDER.PRODUCT[0].option}
+          placeholder={findOptionByValue(ORDER.PRODUCT, order)}
         />
       </div>
 
