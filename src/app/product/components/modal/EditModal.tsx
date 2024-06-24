@@ -1,7 +1,7 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { ModalProps } from "@/app/product/utils/types";
 import Button from "@/components/Button/Button";
 import { Dropdown } from "@/components/Dropdown";
 import Input from "@/components/Input/Input";
@@ -13,7 +13,7 @@ import cn from "@/utils/classNames";
 import HttpClient from "@/utils/httpClient";
 import styles from "./EditModal.module.scss";
 import type { ItemType } from "@/components/Dropdown/type";
-import type { CategoryType, ProductDetailType } from "@/types/global";
+import type { CategoryType } from "@/types/global";
 
 type FormValues = {
   productName: string;
@@ -23,9 +23,8 @@ type FormValues = {
   image: File;
 };
 
-export default function EditModal({ productDetail }: { productDetail: ProductDetailType }) {
+export default function EditModal({ productDetail, session }: ModalProps) {
   const { id, name, image, categoryId, description } = productDetail;
-  const { data: session } = useSession();
   const accessToken = session?.accessToken || "";
   const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL || "");
 
@@ -47,7 +46,6 @@ export default function EditModal({ productDetail }: { productDetail: ProductDet
   const { data: categoryList, isPending } = useGetCategory();
   const uploadImageMutation = useUploadImageMutation();
 
-  // TODO: 카테고리 데이터 불러오기 실패 시
   if (isPending) {
     return null;
   }

@@ -1,10 +1,13 @@
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Button from "@/components/Button/Button";
+import { setSessionStorage } from "@/utils/storage";
 import styles from "./LoginModal.module.scss";
 
 export default function LoginModal() {
   const router = useRouter();
+  const pathname = usePathname();
   const handleLoginButtonClick = () => {
+    setSessionStorage("prevPath", pathname);
     router.push("/signin");
   };
   return (
