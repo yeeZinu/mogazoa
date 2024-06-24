@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { FollowModal } from "@/app/(userpage)/user/[userId]/components/FollowModal";
 import { HTMLContent } from "@/app/(userpage)/user/[userId]/components/HTMLContent";
 import { MyProfileButton } from "@/app/(userpage)/user/[userId]/components/MyProfileButton";
+import { NoLoginModal } from "@/app/(userpage)/user/[userId]/components/NoLoginModal";
 import Button from "@/components/Button/Button";
 import { UserImage } from "@/components/UserImage";
 import styles from "./UserInfo.module.scss";
@@ -30,6 +31,7 @@ export default function UserInfo({
   isfollow,
 }: UserInfoProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNoLoginModalOpen, setIsNoLoginModalOpen] = useState(false);
   const [followModalProps, setFollowModalProps] = useState("");
   const { data: session } = useSession();
   const queryClient = useQueryClient();
@@ -44,6 +46,12 @@ export default function UserInfo({
   const handelFollowersModal = () => {
     setFollowModalProps("followers");
     setIsModalOpen(true);
+  };
+
+  const handleNoLoginModal = () => {
+    if (ACCESS_TOKEN === undefined) {
+      setIsNoLoginModalOpen(true);
+    }
   };
 
   const followPostDelete = async () => {
@@ -83,6 +91,10 @@ export default function UserInfo({
         followState={followModalProps}
         isModalState={isModalOpen}
         setIsModalState={setIsModalOpen}
+      />
+      <NoLoginModal
+        isModalState={isNoLoginModalOpen}
+        setIsModalState={setIsNoLoginModalOpen}
       />
       <div className={styles.container}>
         <UserImage
@@ -126,7 +138,10 @@ export default function UserInfo({
                 styleType='primary'
                 disabled={false}
                 className={styles.profile}
-                onClick={() => mutation.mutate()}
+                onClick={() => {
+                  mutation.mutate();
+                  handleNoLoginModal();
+                }}
               >
                 팔로우
               </Button>
