@@ -38,7 +38,7 @@ export default function ReviewCardList({
   const [page, setPage] = useState(0);
 
   const loadMoreReviews = useCallback(
-    async (reviewOrder: string, reviewCursor: number) => {
+    async (reviewOrder: string, reviewCursor: number, newFetch: boolean = false) => {
       try {
         const { list: newReviews, nextCursor } = await fetchReviews(
           productId,
@@ -47,6 +47,10 @@ export default function ReviewCardList({
           session?.accessToken,
         );
         setCursor(nextCursor);
+        if (newFetch) {
+          setReviewList(newReviews);
+          return;
+        }
         setReviewList((prevReviews) => [...prevReviews, ...newReviews]);
       } catch (error) {
         console.error("Failed to load reviews:", error);
@@ -59,12 +63,12 @@ export default function ReviewCardList({
     setCursor(0);
     setPage(0);
     setReviewList([]);
-    loadMoreReviews(order, 0);
+    loadMoreReviews(order, 0, true);
   }, [order, loadMoreReviews]);
 
   const handleNextClick = () => {
     const nextPage = page + 1;
-    if (page < maxPage) {
+    if (page < Math.floor(maxPage / 2)) {
       loadMoreReviews(order, cursor || 0);
     }
     setPage(nextPage);
