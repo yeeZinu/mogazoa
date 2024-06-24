@@ -23,6 +23,7 @@ export default function UploadImage<T extends FieldValues>({
   register,
   className = styles.default,
   defaultImage = null,
+  rules,
   setValue,
 }: UploadImageProps<T>) {
   const [showCropper, setShowCropper] = useState(false);
@@ -78,7 +79,7 @@ export default function UploadImage<T extends FieldValues>({
           className={styles.uploadInput}
           type='file'
           accept='image/*'
-          {...register(name, { required: "이미지를 넣어주세요", onChange: handleImageChange })}
+          {...register(name, { ...rules, onChange: handleImageChange })}
         />
         {showCropper && (
           <CropperModal

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Controller, FieldValues, FieldErrors, Control, Path, RegisterOptions } from "react-hook-form";
+import { Controller, FieldValues, FieldErrors, Control, Path, RegisterOptions, PathValue } from "react-hook-form";
 import cn from "@/utils/classNames";
 import styles from "./TextArea.module.scss";
 
@@ -10,7 +10,7 @@ type TextAreaProps<T extends FieldValues> = {
   rules?: RegisterOptions<T>;
   errors?: FieldErrors<T>;
   maxLength?: number;
-  defaultValue?: string; // 기본 값을 옵셔널로 수정했습니다.
+  defaultValue?: string;
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 export default function TextArea<T extends FieldValues>({
@@ -31,7 +31,7 @@ export default function TextArea<T extends FieldValues>({
       <Controller
         name={name}
         control={control}
-        defaultValue={defaultValue}
+        defaultValue={defaultValue as PathValue<T, Path<T>>}
         rules={{
           ...rules,
           validate: (value) => (maxLength ? value.length <= maxLength : true),
