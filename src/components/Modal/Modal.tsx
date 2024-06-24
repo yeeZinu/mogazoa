@@ -8,7 +8,7 @@ import styles from "./Modal.module.scss";
 
 type ModalProps = {
   children: React.ReactNode;
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 function ModalPortal({ children }: { children: React.ReactNode }) {
