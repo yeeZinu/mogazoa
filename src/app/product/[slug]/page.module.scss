@@ -32,10 +32,10 @@
   @include text-xl;
 
   @include respond-to(tablet) {
-    @include text-normal;
+    @include text-lg;
   }
 
   @include respond-to(mobile) {
-    @include text-sm;
+    @include text-normal;
   }
 }

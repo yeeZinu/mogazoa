@@ -1,7 +1,10 @@
 import { getServerSession } from "next-auth";
+import { Suspense } from "react";
+import Loading from "@/app/Loading";
 import ProductCard from "@/app/product/components/card/ProductCard";
 import ReviewCardList from "@/app/product/components/card/ReviewCardList";
 import Shopping from "@/app/product/components/shopping/Shopping";
+import ShoppingSkeleton from "@/app/product/components/skeleton/ShoppingSkeleton";
 import Statistics, { StatisticsProps } from "@/components/Card/Statistics/Statistics";
 import authOptions from "@/lib/auth";
 import { ProductDetailType, ReviewType } from "@/types/global";
@@ -55,15 +58,19 @@ export default async function ProductPage({ params }: { params: { slug: string }
         ))}
       </div>
       <h2 className={styles.title}>상품 리뷰</h2>
-      <ReviewCardList
-        initialReviews={initialReviews}
-        session={session}
-        productId={productId}
-        initialCursor={initialCursor}
-        reviewCount={reviewCount}
-      />
+      <Suspense fallback={<Loading />}>
+        <ReviewCardList
+          initialReviews={initialReviews}
+          session={session}
+          productId={productId}
+          initialCursor={initialCursor}
+          reviewCount={reviewCount}
+        />
+      </Suspense>
       <h2 className={styles.title}>쇼핑하러가기</h2>
-      <Shopping name={productDetail.name} />
+      <Suspense fallback={<ShoppingSkeleton />}>
+        <Shopping name={productDetail.name} />
+      </Suspense>
     </div>
   );
 }
