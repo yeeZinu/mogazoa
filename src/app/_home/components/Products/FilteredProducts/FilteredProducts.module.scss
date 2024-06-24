@@ -12,17 +12,6 @@
   margin-bottom: 30px;
 }
 
-.headerText {
-  @include text-xl;
-
-  font-weight: 600;
-  color: $white-100;
-
-  @include respond-to(tablet) {
-    @include text-lg;
-  }
-}
-
 .noProduct {
   margin-top: 100px;
 }
