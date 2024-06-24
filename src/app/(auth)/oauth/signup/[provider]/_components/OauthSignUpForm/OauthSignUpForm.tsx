@@ -9,6 +9,7 @@ import { SIGNUP_VALIDATION } from "@/app/(auth)/constants";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import { Toast } from "@/components/Toast";
+import { getSessionStorage, setSessionStorage } from "@/utils/session";
 import styles from "./OauthSignUpForm.module.scss";
 
 type OauthSignUpFormProps = {
@@ -31,6 +32,7 @@ export default function OauthSignUpForm({ provider, token }: OauthSignUpFormProp
   } = useForm<OauthSignUpFormData>({ mode: "onBlur" });
 
   const onSubmit = async (data: OauthSignUpFormData) => {
+    const prevPath = getSessionStorage("prevPath");
     const result = await signIn("easySignup", {
       redirect: false,
       token,
@@ -43,8 +45,11 @@ export default function OauthSignUpForm({ provider, token }: OauthSignUpFormProp
       setError("nickname", { message: result.error });
     } else if (result?.error) {
       toast?.error(result.error);
-    } else {
+    } else if (result?.ok && prevPath) {
       toast?.success("회원가입이 완료되었습니다.");
+      setSessionStorage("prevPath", "");
+      router.push(prevPath);
+    } else {
       router.push("/");
     }
   };

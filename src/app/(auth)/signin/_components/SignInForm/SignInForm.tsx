@@ -10,6 +10,7 @@ import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import PasswordInput from "@/components/Input/PasswordInput";
 import { Toast } from "@/components/Toast";
+import { getSessionStorage, setSessionStorage } from "@/utils/session";
 import styles from "./SignInForm.module.scss";
 
 type SignInFormData = {
@@ -33,8 +34,12 @@ export default function SignInForm() {
       email: data.email,
       password: data.password,
     });
+    const prevPath = getSessionStorage("prevPath");
 
-    if (result?.ok) {
+    if (result?.ok && prevPath) {
+      setSessionStorage("prevPath", "");
+      router.push(prevPath);
+    } else if (result?.ok) {
       router.push("/");
     } else {
       toast?.error("이메일 혹은 비밀번호를 확인해주세요!");

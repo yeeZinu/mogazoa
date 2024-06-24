@@ -10,6 +10,7 @@ import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import PasswordInput from "@/components/Input/PasswordInput";
 import { Toast } from "@/components/Toast";
+import { getSessionStorage, setSessionStorage } from "@/utils/session";
 import styles from "./SignUpForm.module.scss";
 
 type SignUpFormData = {
@@ -41,6 +42,7 @@ export default function SignUpForm() {
   };
 
   const onSubmit = async (data: SignUpFormData) => {
+    const prevPath = getSessionStorage("prevPath");
     const result = await signIn("signup", {
       redirect: false,
       email: data.email,
@@ -57,6 +59,10 @@ export default function SignUpForm() {
       } else if (result.error.includes("이메일")) {
         setError("email", { message: result.error });
       }
+    } else if (result?.ok && prevPath) {
+      toast?.success("회원가입이 완료되었습니다!");
+      setSessionStorage("prevPath", "");
+      router.push(prevPath);
     } else {
       toast?.success("회원가입이 완료되었습니다!");
       router.push("/");
