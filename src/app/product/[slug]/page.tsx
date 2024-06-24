@@ -19,7 +19,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
   const accessToken = session?.accessToken;
   const productId = params.slug;
   const httpClient = new HttpClient(process.env.BASE_URL || "");
-  const headers: Record<string, string> = { cache: "no-cache" };
+  const headers: HeadersInit = { cache: "no-cache" };
   if (accessToken) {
     headers.Authorization = `Bearer ${accessToken}`;
   }
