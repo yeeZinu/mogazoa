@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Session } from "next-auth";
 import { useEffect, useRef, useState } from "react";
+import LoginModal from "@/app/product/components/modal/LoginModal";
 import ReviewEditModal from "@/app/product/components/modal/ReviewEditModal";
 import WithModal from "@/app/product/components/with-modal/WithModal";
 import { deleteReview, toggleItem } from "@/app/product/utils/apis";
@@ -26,14 +27,15 @@ export default function ReviewCard({ review, session }: ReviewCardProps) {
   const [likeCount, setLikeCount] = useState(like);
   const [showButton, setShowButton] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const toggleExpand = () => {
     setIsExpanded((prev) => !prev);
   };
 
   const handleThumbsClick = async () => {
-    if (!userId) {
-      console.log("loginmodal");
+    if (!accessToken) {
+      setShowLoginModal(true);
       return;
     }
     const activeState = await toggleItem(id, isActive, accessToken, "reviews");
@@ -142,6 +144,11 @@ export default function ReviewCard({ review, session }: ReviewCardProps) {
       {showEditModal && (
         <WithModal onClose={() => setShowEditModal(false)}>
           <ReviewEditModal review={review} />
+        </WithModal>
+      )}
+      {showLoginModal && (
+        <WithModal onClose={() => setShowLoginModal(false)}>
+          <LoginModal />
         </WithModal>
       )}
     </div>

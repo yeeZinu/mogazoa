@@ -3,12 +3,17 @@ import { useEffect, useState } from "react";
 import { STORAGE_PRODUCT_A, STORAGE_PRODUCT_B } from "@/app/compare/constant/constant";
 import { getFromLocalStorage, saveToLocalStorage } from "@/app/compare/input/localStorage";
 import ProductInput from "@/app/product/components/input/ProductInput";
+import WithModal from "@/app/product/components/with-modal/WithModal";
 import getButtonMessage from "@/app/product/utils/getButtonMessage";
+import { ModalProps } from "@/app/product/utils/types";
 import Button from "@/components/Button/Button";
 import { ProductDetailType } from "@/types/global";
 import styles from "./CompareModal.module.scss";
+import LoginModal from "./LoginModal";
 
-export default function CompareModal({ productDetail }: { productDetail: ProductDetailType }) {
+export default function CompareModal({ productDetail, session, onClose }: ModalProps) {
+  const accessToken = session?.accessToken;
+
   const [productState, setProductState] = useState<{ [key: string]: ProductDetailType | null }>({
     [STORAGE_PRODUCT_A]: null,
     [STORAGE_PRODUCT_B]: null,
@@ -58,6 +63,14 @@ export default function CompareModal({ productDetail }: { productDetail: Product
     saveToLocalStorage(id, productDetail);
     setSlotState("ok");
   };
+
+  if (!accessToken) {
+    return (
+      <WithModal onClose={onClose}>
+        <LoginModal />
+      </WithModal>
+    );
+  }
 
   return (
     <div className={styles.container}>

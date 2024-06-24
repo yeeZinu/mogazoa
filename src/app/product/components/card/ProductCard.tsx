@@ -103,7 +103,7 @@ export default function ProductCard({ productDetail, session }: ProductCardProps
               key={modal.name}
               onClose={() => closeModal(modal.name)}
             >
-              {React.createElement(modal.component, { productDetail })}
+              {React.createElement(modal.component, { productDetail, session, onClose: () => closeModal(modal.name) })}
             </WithModal>
           ),
       )}

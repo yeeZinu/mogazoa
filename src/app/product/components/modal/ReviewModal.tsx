@@ -1,23 +1,18 @@
-"use client";
-
-import { useSession } from "next-auth/react";
 import React from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import Rating from "@/app/product/components/rating/Rating";
 import WithModal from "@/app/product/components/with-modal/WithModal";
 import { reviewSubmit } from "@/app/product/utils/apis";
-import { FormValues } from "@/app/product/utils/types";
+import { FormValues, ModalProps } from "@/app/product/utils/types";
 import Button from "@/components/Button/Button";
 import CategoryChip from "@/components/Chip/Category-chip/CategoryChip";
 import TextArea from "@/components/Input/TextArea";
 import MultipleUpload from "@/components/Upload/ImageUpload/MultipleUpload";
 import PreviewImage from "@/components/Upload/PreviewImage/RemovePreviewImage";
-import { ProductDetailType } from "@/types/global";
 import LoginModal from "./LoginModal";
 import styles from "./ReviewModal.module.scss";
 
-export default function ReviewModal({ productDetail }: { productDetail: ProductDetailType }) {
-  const { data: session } = useSession();
+export default function ReviewModal({ productDetail, session, onClose }: ModalProps) {
   const accessToken = session?.accessToken;
   const { id, name, category } = productDetail;
 
@@ -51,7 +46,7 @@ export default function ReviewModal({ productDetail }: { productDetail: ProductD
 
   if (!accessToken) {
     return (
-      <WithModal onClose={() => {}}>
+      <WithModal onClose={onClose}>
         <LoginModal />
       </WithModal>
     );
