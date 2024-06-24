@@ -12,11 +12,6 @@
   }
 }
 
-.dropDown {
-  margin-bottom: 1rem;
-  margin-left: auto;
-}
-
 .buttonBox {
   display: flex;
   padding: 0 1rem;
@@ -46,4 +41,24 @@
 
 .next {
   margin-left: auto;
+}
+
+.title {
+  @include font-bold;
+  @include text-xl;
+
+  @include respond-to(tablet) {
+    @include text-lg;
+  }
+
+  @include respond-to(mobile) {
+    @include text-normal;
+  }
+}
+
+.headerBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }

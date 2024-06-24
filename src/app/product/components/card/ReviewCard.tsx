@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Session } from "next-auth";
 import { useEffect, useRef, useState } from "react";
 import LoginModal from "@/app/product/components/modal/LoginModal";
@@ -75,11 +76,16 @@ export default function ReviewCard({ review, session }: ReviewCardProps) {
     <div className={styles.layout}>
       <div className={styles.mainBox}>
         <div className={styles.userBox}>
-          <UserItem
-            image={user.image}
-            nickname={user.nickname}
-            rating={rating}
-          />
+          <Link
+            href={`/user/${userId}`}
+            className={styles.userLink}
+          >
+            <UserItem
+              image={user.image}
+              nickname={user.nickname}
+              rating={rating}
+            />
+          </Link>
           <p
             className={cn(isExpanded ? styles.expand : styles.description)}
             ref={contentRef}
