@@ -11,10 +11,15 @@ export const toggleItem = async (
   item: "reviews" | "products",
 ): Promise<boolean> => {
   const endPoint = item === "reviews" ? "like" : "favorite";
+  const headers: HeadersInit = { cache: "no-cache" };
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`;
+  }
+
   try {
     if (isToggle) {
       await httpClient.delete(`/${item}/${id}/${endPoint}`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
+        headers,
       });
     } else {
       await httpClient.post(`/${item}/${id}/${endPoint}`, { headers: { Authorization: `Bearer ${accessToken}` } });
@@ -29,16 +34,12 @@ export const toggleItem = async (
 const uploadImage = async (image: Blob, accessToken: string | undefined): Promise<string> => {
   const formData = new FormData();
   formData.append("image", image);
-
+  const headers: HeadersInit = {};
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`;
+  }
   try {
-    const response = await httpClient.post<{ url: string }>(
-      "/images/upload",
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      },
-      formData,
-    );
-
+    const response = await httpClient.post<{ url: string }>("/images/upload", headers, formData);
     return response.url;
   } catch (error) {
     console.error("Error uploading image:", error);
@@ -48,6 +49,11 @@ const uploadImage = async (image: Blob, accessToken: string | undefined): Promis
 
 export const reviewSubmit = async (data: FormValues, accessToken: string | undefined) => {
   const { uploadImageList, ...restData } = data;
+  const headers: HeadersInit = { "Content-Type": "application/json" };
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`;
+  }
+
   try {
     const imageUrlList = uploadImageList
       ? await Promise.all(uploadImageList?.map((image) => uploadImage(image.blob, accessToken)))
@@ -55,11 +61,7 @@ export const reviewSubmit = async (data: FormValues, accessToken: string | undef
 
     const bodyData = { ...restData, images: imageUrlList };
 
-    const response = await httpClient.post(
-      "/reviews",
-      { headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` } },
-      JSON.stringify(bodyData),
-    );
+    const response = await httpClient.post("/reviews", headers, JSON.stringify(bodyData));
     window.location.reload();
     return response;
   } catch (error) {
@@ -75,6 +77,11 @@ export const reviewPatch = async (
   originalImageList: { source: string }[],
 ) => {
   const { uploadImageList, ...restData } = data;
+  const headers: HeadersInit = { "Content-Type": "application/json" };
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`;
+  }
+
   try {
     const responseImageList = uploadImageList
       ? await Promise.all(uploadImageList?.map((image) => uploadImage(image.blob, accessToken)))
@@ -84,11 +91,7 @@ export const reviewPatch = async (
     const images = originalImageList.concat(newImageList);
 
     const bodyData = { ...restData, images };
-    const response = await httpClient.patch(
-      `/reviews/${reviewId}`,
-      { headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` } },
-      JSON.stringify(bodyData),
-    );
+    const response = await httpClient.patch(`/reviews/${reviewId}`, headers, JSON.stringify(bodyData));
     window.location.reload();
     return response;
   } catch (error) {
@@ -125,11 +128,15 @@ export const fetchReviews = async (
   cursor: number,
   accessToken: string | undefined,
 ) => {
+  const headers: HeadersInit = {};
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`;
+  }
+
   const response = await httpClient.get<{ list: ReviewType[]; nextCursor: number | null }>(
     `/products/${productId}/reviews?cursor=${cursor}&order=${order}`,
-    {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    },
+
+    headers,
   );
   return response;
 };
