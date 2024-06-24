@@ -76,9 +76,11 @@
 .th {
   padding: 20px;
   text-align: center;
+  width: 30px;
 
   @include respond-to(mobile) {
     padding: 15px;
+    width: auto;
   }
 }
 
