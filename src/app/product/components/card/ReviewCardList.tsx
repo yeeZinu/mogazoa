@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Session } from "next-auth";
 import { useState } from "react";
 import { ReviewType } from "@/types/global";
-import { ARROW_LEFT, ARROW_RIGHT } from "@/utils/constant";
+import { ARROW_LEFT_ICON, ARROW_RIGHT_ICON } from "@/utils/constant";
 import HttpClient from "@/utils/httpClient";
 import ReviewCard from "./ReviewCard";
 import styles from "./ReviewCardList.module.scss";
@@ -81,7 +81,7 @@ export default function ReviewCardList({
           <Image
             className={styles.prev}
             onClick={handlePrevClick}
-            src={ARROW_LEFT}
+            src={ARROW_LEFT_ICON}
             alt='previous'
             width={45}
             height={45}
@@ -91,7 +91,7 @@ export default function ReviewCardList({
           <Image
             className={styles.next}
             onClick={handleNextClick}
-            src={ARROW_RIGHT}
+            src={ARROW_RIGHT_ICON}
             alt='next'
             width={45}
             height={45}
