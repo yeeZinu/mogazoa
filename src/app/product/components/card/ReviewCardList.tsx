@@ -1,55 +1,71 @@
 "use client";
 
+import { useSuspenseQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { Session } from "next-auth";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { fetchReviews } from "@/app/product/utils/apis";
+import { Dropdown } from "@/components/Dropdown";
+import { DROPDOWN, ORDER } from "@/components/Dropdown/constants";
 import { ReviewType } from "@/types/global";
 import { ARROW_LEFT_ICON, ARROW_RIGHT_ICON } from "@/utils/constant";
-import HttpClient from "@/utils/httpClient";
 import ReviewCard from "./ReviewCard";
 import styles from "./ReviewCardList.module.scss";
 
 const VIEW_COUNT = 6;
 
 export default function ReviewCardList({
-  initialReviews,
   session,
   productId,
-  initialCursor,
   reviewCount,
 }: {
-  initialReviews: ReviewType[];
   session: Session | null;
   productId: string;
-  initialCursor: number | null;
   reviewCount: number;
 }) {
-  const [reviewList, setReviewList] = useState<ReviewType[]>(initialReviews);
-  const [cursor, setCursor] = useState<number | null>(initialCursor);
-  const [page, setPage] = useState(0);
+  const { control } = useForm({ mode: "onBlur" });
+  const order = useWatch({ control, name: "order" }) || "recent";
   const maxPage = Math.ceil(reviewCount / VIEW_COUNT) - 1;
 
-  const loadMoreReviews = async () => {
-    try {
-      const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL || "");
-      const { list: newReviews, nextCursor } = await httpClient.get<{ list: ReviewType[]; nextCursor: number | null }>(
-        `/products/${productId}/reviews?cursor=${cursor}`,
-        {
-          headers: { Authorization: `Bearer ${session?.accessToken}` },
-        },
-      );
+  const { data: reviewsData } = useSuspenseQuery({
+    queryKey: ["reviews", productId, order, 0],
+    queryFn: () => fetchReviews(productId, order, 0, session?.accessToken),
+  });
 
-      setCursor(nextCursor);
-      setReviewList((prevReviews) => [...prevReviews, ...newReviews]);
-    } catch (error) {
-      console.error("Failed to load reviews:", error);
-    }
-  };
+  const [reviewList, setReviewList] = useState<ReviewType[]>(reviewsData.list);
+  const [cursor, setCursor] = useState<number | null>(reviewsData.nextCursor);
+  const [page, setPage] = useState(0);
+
+  const loadMoreReviews = useCallback(
+    async (reviewOrder: string, reviewCursor: number) => {
+      try {
+        const { list: newReviews, nextCursor } = await fetchReviews(
+          productId,
+          reviewOrder,
+          reviewCursor,
+          session?.accessToken,
+        );
+        setCursor(nextCursor);
+        setReviewList((prevReviews) => [...prevReviews, ...newReviews]);
+      } catch (error) {
+        console.error("Failed to load reviews:", error);
+      }
+    },
+    [productId, session],
+  );
+
+  useEffect(() => {
+    setCursor(0);
+    setPage(0);
+    setReviewList([]);
+    loadMoreReviews(order, 0);
+  }, [order, loadMoreReviews]);
 
   const handleNextClick = () => {
     const nextPage = page + 1;
-    if (page % 2 !== 0) {
-      loadMoreReviews();
+    if (page < maxPage) {
+      loadMoreReviews(order, cursor || 0);
     }
     setPage(nextPage);
   };
@@ -66,6 +82,15 @@ export default function ReviewCardList({
 
   return (
     <div>
+      <Dropdown
+        className={styles.dropDown}
+        items={ORDER.REVIEW}
+        control={control}
+        name='order'
+        variant={DROPDOWN.ORDER}
+        placeholder={ORDER.REVIEW[0].option}
+      />
+
       <ul className={styles.layout}>
         {reviewList.slice(startIdx, endIdx).map((review) => (
           <li key={review.id}>

@@ -1,13 +1,13 @@
 import { getServerSession } from "next-auth";
 import { Suspense } from "react";
-import Loading from "@/app/Loading";
 import ProductCard from "@/app/product/components/card/ProductCard";
 import ReviewCardList from "@/app/product/components/card/ReviewCardList";
 import Shopping from "@/app/product/components/shopping/Shopping";
+import ReviewListSkeleton from "@/app/product/components/skeleton/ReviewListSkeleton";
 import ShoppingSkeleton from "@/app/product/components/skeleton/ShoppingSkeleton";
 import Statistics, { StatisticsProps } from "@/components/Card/Statistics/Statistics";
 import authOptions from "@/lib/auth";
-import { ProductDetailType, ReviewType } from "@/types/global";
+import { ProductDetailType } from "@/types/global";
 import HttpClient from "@/utils/httpClient";
 import styles from "./page.module.scss";
 
@@ -24,11 +24,6 @@ export default async function ProductPage({ params }: { params: { slug: string }
     headers: { Authorization: `Bearer ${accessToken}` },
     cache: "no-cache",
   });
-  const { list: initialReviews, nextCursor: initialCursor }: { list: ReviewType[]; nextCursor: number | null } =
-    await httpClient.get(`/products/${productId}/reviews`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      cache: "no-cache",
-    });
 
   const { rating, reviewCount, favoriteCount, categoryMetric } = productDetail;
   const statisticsList: StatisticsListType[] = [
@@ -58,12 +53,10 @@ export default async function ProductPage({ params }: { params: { slug: string }
         ))}
       </div>
       <h2 className={styles.title}>상품 리뷰</h2>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<ReviewListSkeleton reviewCount={reviewCount} />}>
         <ReviewCardList
-          initialReviews={initialReviews}
           session={session}
           productId={productId}
-          initialCursor={initialCursor}
           reviewCount={reviewCount}
         />
       </Suspense>
