@@ -12,8 +12,8 @@ type CompareInputProps = {
 };
 export default function ProductInput({ product, isChange, id, second, onClick }: CompareInputProps) {
   return (
-    <div className={cn(styles.container, product || styles.borderRed)}>
-      <span className={cn(second ? styles.second : styles.first, product || styles.textRed)}>
+    <div className={styles.container}>
+      <span className={cn(second ? styles.second : styles.first, product || styles.textGray)}>
         {product || "비교 상품을 등록해주세요."}
 
         {isChange && (
