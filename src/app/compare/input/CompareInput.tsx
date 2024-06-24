@@ -64,12 +64,12 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
     setSelectedProduct: React.Dispatch<React.SetStateAction<Product | null>>,
     setSuggestions: React.Dispatch<React.SetStateAction<Product[]>>,
     setProduct: React.Dispatch<React.SetStateAction<string>>,
-    localStorageKey: string,
+    // localStorageKey: string,
   ) => {
     setSelectedProduct(product);
     setSuggestions([]);
     setProduct("");
-    saveToLocalStorage(localStorageKey, product);
+    // saveToLocalStorage(localStorageKey, product);
   };
 
   const handleKeyDown = (
@@ -78,10 +78,10 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
     setSelectedProduct: React.Dispatch<React.SetStateAction<Product | null>>,
     setSuggestions: React.Dispatch<React.SetStateAction<Product[]>>,
     setProduct: React.Dispatch<React.SetStateAction<string>>,
-    localStorageKey: string,
+    // localStorageKey: string,
   ) => {
     if (event.key === "Enter") {
-      handleSelect(product, setSelectedProduct, setSuggestions, setProduct, localStorageKey);
+      handleSelect(product, setSelectedProduct, setSuggestions, setProduct);
     }
   };
 
@@ -123,12 +123,8 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
                 <div
                   key={item.id}
                   className={styles.listItem}
-                  onClick={() =>
-                    handleSelect(item, setSelectedProduct1, setSuggestions1, setProduct1, "selectedProduct1")
-                  }
-                  onKeyDown={(e) =>
-                    handleKeyDown(e, item, setSelectedProduct1, setSuggestions1, setProduct1, "selectedProduct1")
-                  }
+                  onClick={() => handleSelect(item, setSelectedProduct1, setSuggestions1, setProduct1)}
+                  onKeyDown={(e) => handleKeyDown(e, item, setSelectedProduct1, setSuggestions1, setProduct1)}
                   tabIndex={0}
                   role='button'
                 >
@@ -169,12 +165,8 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onCompare }) => {
                 <div
                   key={item.id}
                   className={styles.listItem}
-                  onClick={() =>
-                    handleSelect(item, setSelectedProduct2, setSuggestions2, setProduct2, "selectedProduct2")
-                  }
-                  onKeyDown={(e) =>
-                    handleKeyDown(e, item, setSelectedProduct2, setSuggestions2, setProduct2, "selectedProduct2")
-                  }
+                  onClick={() => handleSelect(item, setSelectedProduct2, setSuggestions2, setProduct2)}
+                  onKeyDown={(e) => handleKeyDown(e, item, setSelectedProduct2, setSuggestions2, setProduct2)}
                   tabIndex={0}
                   role='button'
                 >
