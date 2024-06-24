@@ -2,7 +2,9 @@
 @import "@/styles/_media";
 
 .container {
-  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
   line-height: 22px;
   color: $gray-200;
   word-break: break-word;
