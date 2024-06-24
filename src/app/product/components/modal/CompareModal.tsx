@@ -6,7 +6,6 @@ import ProductInput from "@/app/product/components/input/ProductInput";
 import getButtonMessage from "@/app/product/utils/getButtonMessage";
 import Button from "@/components/Button/Button";
 import { ProductDetailType } from "@/types/global";
-import cn from "@/utils/classNames";
 import styles from "./CompareModal.module.scss";
 
 export default function CompareModal({ productDetail }: { productDetail: ProductDetailType }) {
@@ -73,7 +72,7 @@ export default function CompareModal({ productDetail }: { productDetail: Product
         />
       </div>
       <Button
-        className={cn(styles.button, slotState !== "ok" && styles.redBorder)}
+        className={styles.button}
         styleType='primary'
         disabled={slotState !== "ok"}
       >
