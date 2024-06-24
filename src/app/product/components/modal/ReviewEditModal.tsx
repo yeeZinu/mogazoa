@@ -26,7 +26,7 @@ export default function ReviewEditModal({ review }: { review: ReviewType }) {
     setValue,
     control,
     watch,
-    formState: { errors },
+    formState: { isValid, errors },
   } = useForm<EditFormValues>({
     mode: "onBlur",
     defaultValues: {
@@ -111,8 +111,9 @@ export default function ReviewEditModal({ review }: { review: ReviewType }) {
         className={styles.button}
         styleType='primary'
         type='submit'
+        disabled={!isValid}
       >
-        test
+        수정하기
       </Button>
     </form>
   );
