@@ -1,17 +1,14 @@
-/* eslint-disable no-restricted-imports */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import { FollowModal } from "@/app/(userpage)/user/[userId]/components/FollowModal";
+import { HTMLContent } from "@/app/(userpage)/user/[userId]/components/HTMLContent";
+import { MyProfileButton } from "@/app/(userpage)/user/[userId]/components/MyProfileButton";
 import Button from "@/components/Button/Button";
 import { UserImage } from "@/components/UserImage";
 import styles from "./UserInfo.module.scss";
-import FollowModal from "../FollowModal/FollowModal";
-// eslint-disable-next-line no-restricted-imports
-import HTMLContent from "../HTMLContent/HTMLContent";
-// eslint-disable-next-line no-restricted-imports
-import MyProfileButton from "../MyProfileButton/MyProfileButton";
 
 type UserInfoProps = {
   userId: number;

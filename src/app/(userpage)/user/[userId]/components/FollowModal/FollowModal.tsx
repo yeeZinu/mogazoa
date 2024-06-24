@@ -2,8 +2,8 @@
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import FolloweeList from "@/app/(userpage)/user/[userId]/components/FolloweeList/FolloweeList";
-import FollowerList from "@/app/(userpage)/user/[userId]/components/FollowerList/FollowerList";
+import { FolloweeList } from "@/app/(userpage)/user/[userId]/components/FolloweeList";
+import { FollowerList } from "@/app/(userpage)/user/[userId]/components/FollowerList";
 import { useFollowees, useFollowers } from "@/app/(userpage)/user/[userId]/hooks/useGetFollow";
 import Modal from "@/components/Modal/Modal";
 import { FolloweesList, FollowersList } from "@/types/global";
