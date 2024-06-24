@@ -105,7 +105,11 @@ export default function UserInfo({
           </div>
         </div>
         {Number(userId) === loginUser ? (
-          <MyProfileButton />
+          <MyProfileButton
+            Iimage={image}
+            Inickname={nickname}
+            Idescription={description}
+          />
         ) : (
           <div className={styles.followButton}>
             {isfollow ? (
