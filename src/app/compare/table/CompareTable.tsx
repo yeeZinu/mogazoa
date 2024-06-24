@@ -40,8 +40,8 @@ const CompareTable: React.FC<CompareTableProps> = ({ product1, product2 }) => {
           key={criterion.name}
         >
           <td className={`${styles.td} ${styles.name}`}>{criterion.name}</td>
-          <td className={styles.td}>{criterion.product1}</td>
-          <td className={styles.td}>{criterion.product2}</td>
+          <td className={styles.td}>{criterion.product1.toFixed(1).replace(/\.0$/, "")}</td>
+          <td className={styles.td}>{criterion.product2.toFixed(1).replace(/\.0$/, "")}</td>
           <td className={`${resultClass} ${styles.td}`}>{result}</td>
         </tr>
       );
@@ -51,11 +51,11 @@ const CompareTable: React.FC<CompareTableProps> = ({ product1, product2 }) => {
     let winningProduct = "";
     let resultClass = "";
     if (product1Wins > product2Wins) {
-      overallResult = "상품이 승리하였습니다!";
+      overallResult = "승리하였습니다!";
       winningProduct = product1.name;
       resultClass = styles.winnerText;
     } else if (product1Wins < product2Wins) {
-      overallResult = "상품이 승리하였습니다!";
+      overallResult = "승리하였습니다!";
       winningProduct = product2.name;
       resultClass = styles.loserText;
     } else {
@@ -72,9 +72,11 @@ const CompareTable: React.FC<CompareTableProps> = ({ product1, product2 }) => {
     <div className={styles.compare}>
       <div className={styles.resultBox}>
         <div className={styles.result}>
-          <div>
-            <span className={`${styles.colorText} ${resultClass}`}>{winningProduct}</span> {overallResult}
+          <div className={styles.productBox}>
+            <div className={`${styles.colorText} ${resultClass}`}>{winningProduct}</div>
+            {overallResult !== "무승부입니다!" && "상품이"}
           </div>
+          <div>{overallResult}</div>
         </div>
         <div className={styles.reason}>
           3가지 항목 중 {Math.max(product1Wins, product2Wins)}가지 항목에서 우세합니다.

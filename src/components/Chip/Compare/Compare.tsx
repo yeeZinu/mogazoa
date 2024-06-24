@@ -9,7 +9,7 @@ type CompareProps = {
   color?: boolean;
 };
 
-export function Compare({ value, onRemove, color }: CompareProps) {
+function Compare({ value, onRemove, color }: CompareProps) {
   return (
     <div className={styles.back}>
       <div className={`${styles.container} ${color ? styles.compare1 : styles.compare2}`}>
@@ -26,3 +26,5 @@ export function Compare({ value, onRemove, color }: CompareProps) {
     </div>
   );
 }
+
+export default Compare;
