@@ -1,0 +1,28 @@
+@import "@/styles/_media";
+
+.container {
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
+  width: 100%;
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 50%;
+
+  @include respond-to(tablet) {
+    gap: 1rem;
+  }
+
+  @include respond-to(mobile) {
+    width: 100%;
+  }
+}
