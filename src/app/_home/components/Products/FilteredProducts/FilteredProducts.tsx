@@ -14,6 +14,7 @@ import { NoData } from "@/components/NoData";
 import cn from "@/utils/classNames";
 import { createQueryString } from "@/utils/createQueryString";
 import styles from "./FilteredProducts.module.scss";
+import FilteringText from "./FilteringText";
 
 type FilteredProductsProps = {
   category: string | null;
@@ -45,22 +46,15 @@ export default function FilteredProducts({ category }: FilteredProductsProps) {
     }
   }, [inView, fetchNextPage, hasNextPage]);
 
-  let filteringText = "";
-
   const keyword = searchParams.get(QUERY.KEYWORD);
-
-  if (keyword && category) {
-    filteringText = `${category} 카테고리의 ${keyword}로 검색한 상품`;
-  } else if (keyword) {
-    filteringText = `${keyword}로 검색한 상품`;
-  } else if (category) {
-    filteringText = `${category}의 모든 상품`;
-  }
 
   return (
     <div className={cn(styles.container)}>
       <div className={cn(styles.header)}>
-        <h2 className={cn(styles.headerText)}>{filteringText}</h2>
+        <FilteringText
+          category={category}
+          keyword={keyword}
+        />
         <Dropdown
           items={ORDER.PRODUCT}
           control={control}
