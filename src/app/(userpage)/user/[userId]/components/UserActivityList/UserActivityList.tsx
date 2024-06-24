@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useInView } from "react-intersection-observer";
+import { TabButton } from "@/app/(userpage)/user/[userId]/components/TabButton";
+import { UserProductList } from "@/app/(userpage)/user/[userId]/components/UserProductList";
 import { Dropdown } from "@/components/Dropdown";
 import { ORDER, DROPDOWN } from "@/components/Dropdown/constants";
 import useWindowSize from "@/hooks/useWindowSize";
@@ -13,10 +15,6 @@ import { ProductType, ProductsResponseType } from "@/types/global";
 import cn from "@/utils/classNames";
 import HttpClient from "@/utils/httpClient";
 import styles from "./UserActivityList.module.scss";
-// eslint-disable-next-line no-restricted-imports
-import TabButton from "../TabButton/TabButton";
-// eslint-disable-next-line no-restricted-imports
-import UserProductList from "../UserProductList/UserProductList";
 
 type UserActivityListProps = {
   userId: number;
