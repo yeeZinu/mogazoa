@@ -12,11 +12,6 @@
   }
 }
 
-.dropDown {
-  margin-bottom: 1rem;
-  margin-left: auto;
-}
-
 .buttonBox {
   display: flex;
   padding: 0 1rem;
@@ -27,23 +22,22 @@
   }
 }
 
-.prev,
-.next {
-  padding: 0.6rem;
-  cursor: pointer;
-  background: $black-200;
+.title {
+  @include font-bold;
+  @include text-xl;
 
-  @include rounded-full;
+  @include respond-to(tablet) {
+    @include text-lg;
+  }
 
-  &:hover {
-    transform: scale(1.1);
+  @include respond-to(mobile) {
+    @include text-normal;
   }
 }
 
-.prev {
-  margin-right: auto;
-}
-
-.next {
-  margin-left: auto;
+.headerBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }

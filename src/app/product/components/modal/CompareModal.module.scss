@@ -1,10 +1,15 @@
 @import "@/styles/_index";
+@import "@/styles/_media";
 
 .container {
   display: flex;
   flex-direction: column;
-  width: 50vw;
+  width: 40rem;
   padding: 2rem;
+
+  @include respond-to(mobile) {
+    width: 30rem;
+  }
 }
 
 .productInputBox {
