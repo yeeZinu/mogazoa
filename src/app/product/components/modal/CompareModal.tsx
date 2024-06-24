@@ -20,21 +20,28 @@ export default function CompareModal({ productDetail }: { productDetail: Product
 
   useEffect(() => {
     const registerProduct = () => {
+      let hasProduct = false;
       const product1 = getFromLocalStorage(STORAGE_PRODUCT_A);
       if (!product1) {
         setProductState((prev) => ({ ...prev, [STORAGE_PRODUCT_A]: productDetail }));
         saveToLocalStorage(STORAGE_PRODUCT_A, productDetail);
         return;
       }
+      if (product1.name === productDetail.name) hasProduct = true;
       setProductState((prev) => ({ ...prev, [STORAGE_PRODUCT_A]: product1 }));
 
       const product2 = getFromLocalStorage(STORAGE_PRODUCT_B);
+      if (hasProduct && !product2) {
+        setSlotState("empty");
+        return;
+      }
       if (!product2) {
         setProductState((prev) => ({ ...prev, [STORAGE_PRODUCT_B]: productDetail }));
         saveToLocalStorage(STORAGE_PRODUCT_B, productDetail);
         setSlotState("ok");
         return;
       }
+
       setProductState((prev) => ({ ...prev, [STORAGE_PRODUCT_B]: product2 }));
       if (product1.name === productDetail.name || product2.name === productDetail.name) {
         setSlotState("ok");

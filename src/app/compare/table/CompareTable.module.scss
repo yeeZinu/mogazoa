@@ -9,7 +9,7 @@
 }
 
 .resultBox {
-  margin-top: 80px;
+  margin-top: 70px;
   margin-bottom: 40px;
   text-align: center;
 }
@@ -19,13 +19,18 @@
   gap: 8px;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin: 0 20px 20px;
   font-size: 24px;
   font-weight: 600;
 
   @include respond-to(tablet) {
     flex-direction: column;
   }
+}
+
+.productBox {
+  display: flex;
+  gap: 8px;
 }
 
 .winnerText {
@@ -74,21 +79,23 @@
 }
 
 .th {
+  width: 30px;
   padding: 20px;
   text-align: center;
-  width: 30px;
 
   @include respond-to(mobile) {
-    padding: 15px;
     width: auto;
+    padding: 15px;
   }
 }
 
 .td {
+  width: 300px;
   padding: 30px;
   text-align: center;
 
   @include respond-to(mobile) {
+    width: auto;
     padding: 15px;
   }
 }

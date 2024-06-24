@@ -1,3 +1,4 @@
+import { ReviewType } from "@/types/global";
 import HttpClient from "@/utils/httpClient";
 import { CoupangProduct, EditFormValues, FormValues, NaverProduct } from "./types";
 
@@ -117,4 +118,19 @@ export const fetchShoppingList = async (
   }
   const data = await response.json();
   return { items: data.items };
+};
+
+export const fetchReviews = async (
+  productId: string,
+  order: string,
+  cursor: number,
+  accessToken: string | undefined,
+) => {
+  const response = await httpClient.get<{ list: ReviewType[]; nextCursor: number | null }>(
+    `/products/${productId}/reviews?cursor=${cursor}&order=${order}`,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    },
+  );
+  return response;
 };
