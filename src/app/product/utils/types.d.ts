@@ -1,3 +1,5 @@
+import { Session } from "next-auth";
+
 export type ButtonType = {
   title: string;
   styleType: "primary" | "secondary" | "tertiary";
@@ -34,4 +36,10 @@ export type EditFormValues = {
   content: string;
   uploadImageList: { blob: Blob; source: string }[];
   images: { id?: number; source?: string }[];
+};
+
+export type ModalProps = {
+  productDetail: ProdcutDetailType;
+  session: Session | null;
+  onClose: () => void;
 };
