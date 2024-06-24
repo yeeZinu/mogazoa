@@ -1,0 +1,97 @@
+@import "@/styles/_index";
+@import "@/styles/_media";
+
+.skeleton {
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.container {
+  display: flex;
+  gap: 1rem;
+
+  .name {
+    width: 10rem;
+    height: 1rem;
+    background: $gray-100;
+
+    @include rounded-sm;
+    @include font-light;
+
+    @include respond-to(tablet) {
+      @include text-sm;
+
+      margin-bottom: 0.3rem;
+    }
+  }
+}
+
+.logoBox {
+  position: relative;
+  width: 80px;
+  height: 20px;
+  background: $gray-100;
+
+  @include rounded-sm;
+
+  @include respond-to(tablet) {
+    width: 60px;
+    height: 16px;
+  }
+
+  @include respond-to(mobile) {
+    width: 70px;
+    height: 20px;
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: calc(100% - 11rem);
+
+  @include respond-to(tablet) {
+    gap: 0.8rem;
+    width: calc(100% - 8rem);
+  }
+
+  @include respond-to(mobile) {
+    gap: 1rem;
+  }
+}
+
+.productImageBox {
+  width: 8rem;
+  height: 8rem;
+  overflow: hidden;
+  background: $gray-100;
+
+  @include rounded-md;
+
+  @include respond-to(tablet) {
+    width: 7rem;
+    height: 7rem;
+  }
+}
+
+.priceBox {
+  width: 6rem;
+  height: 1rem;
+  background: $gray-100;
+
+  @include rounded-sm;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background: $gray-100;
+  }
+
+  50% {
+    background: $gray-200;
+  }
+
+  100% {
+    background: $gray-100;
+  }
+}

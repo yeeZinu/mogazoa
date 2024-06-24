@@ -1,5 +1,5 @@
 import HttpClient from "@/utils/httpClient";
-import { EditFormValues, FormValues } from "./types";
+import { CoupangProduct, EditFormValues, FormValues, NaverProduct } from "./types";
 
 const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL || "");
 
@@ -107,10 +107,14 @@ export const deleteReview = async (id: number, accessToken: string | undefined) 
   }
 };
 
-export const fetchShoppingList = async (platform: "coupang" | "naver", keyword: string) => {
+export const fetchShoppingList = async (
+  platform: "coupang" | "naver",
+  keyword: string,
+): Promise<{ items: CoupangProduct[] } | { itmes: NaverProduct[] }> => {
   const response = await fetch(`http://localhost:3000/api/search/${platform}?keyword=${encodeURIComponent(keyword)}`);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
-  return response.json();
+  const data = await response.json();
+  return { items: data.items };
 };
