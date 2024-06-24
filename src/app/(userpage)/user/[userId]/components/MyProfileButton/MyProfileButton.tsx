@@ -15,6 +15,12 @@ import cn from "@/utils/classNames";
 import { CLOSE_ICON } from "@/utils/constant";
 import styles from "./MyProfileButton.module.scss";
 
+type MyProfileButtonProps = {
+  Iimage: string;
+  Inickname: string;
+  Idescription: string;
+};
+
 type UserFormValue = {
   description: string;
   nickname: string;
@@ -22,7 +28,7 @@ type UserFormValue = {
   croppedImage: Blob;
 };
 
-export default function MyProfileButton() {
+export default function MyProfileButton({ Iimage, Inickname, Idescription }: MyProfileButtonProps) {
   const queryClient = useQueryClient();
   const { data: session } = useSession();
   const accessToken = session?.accessToken ?? "";
@@ -95,7 +101,6 @@ export default function MyProfileButton() {
     }
     return "저장하기";
   };
-  console.log("입력상태", isValid);
 
   return (
     <div className={cn(styles.container)}>
@@ -109,6 +114,7 @@ export default function MyProfileButton() {
             >
               <ImageUpload
                 name='image'
+                defaultImage={Iimage}
                 cropFiledName='croppedImage'
                 setValue={setValue}
                 register={register}
@@ -123,7 +129,7 @@ export default function MyProfileButton() {
                 }}
                 errors={errors}
                 type='text'
-                placeholder='닉네임을 입력해주세요.'
+                defaultValue={Inickname}
                 maxLength={10}
                 className={cn(styles.profileInput)}
               />
@@ -131,6 +137,7 @@ export default function MyProfileButton() {
                 name='description'
                 rows={5}
                 control={control}
+                defaultValue={Idescription}
                 rules={{
                   required: "자기 소개글은 필수 입력입니다.",
                   minLength: { value: 1, message: "최소 1자 이상 적어주세요." },

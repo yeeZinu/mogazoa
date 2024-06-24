@@ -53,6 +53,10 @@
   justify-content: space-between;
   width: 184px;
 
+  :hover {
+    cursor: pointer;
+  }
+
   div {
     display: flex;
     flex-direction: column;
@@ -93,7 +97,7 @@
   }
 }
 
-.followButton{
+.followButton {
   display: flex;
   align-items: center;
   justify-content: center;
