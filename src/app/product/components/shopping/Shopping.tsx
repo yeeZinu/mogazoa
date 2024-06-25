@@ -26,22 +26,26 @@ export default function Shopping({ name }: { name: string }) {
 
   return (
     <section className={styles.container}>
-      <div className={styles.layout}>
-        {coupangData?.items?.map((product) => (
-          <CoupangCard
-            key={product.link}
-            product={product}
-          />
-        ))}
-      </div>
-      <div className={styles.layout}>
-        {naverData?.items?.map((product) => (
-          <NaverCard
-            key={product.link}
-            product={product}
-          />
-        ))}
-      </div>
+      {coupangData?.items?.length > 0 && (
+        <div className={styles.layout}>
+          {coupangData?.items?.map((product) => (
+            <CoupangCard
+              key={product.link}
+              product={product}
+            />
+          ))}
+        </div>
+      )}
+      {naverData?.items?.length > 0 && (
+        <div className={styles.layout}>
+          {naverData?.items?.map((product) => (
+            <NaverCard
+              key={product.link}
+              product={product}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
