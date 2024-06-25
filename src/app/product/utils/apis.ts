@@ -114,7 +114,9 @@ export const fetchShoppingList = async (
   platform: "coupang" | "naver",
   keyword: string,
 ): Promise<{ items: CoupangProduct[] } | { itmes: NaverProduct[] }> => {
-  const response = await fetch(`http://localhost:3000/api/search/${platform}?keyword=${encodeURIComponent(keyword)}`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DOMAIN}/api/search/${platform}?keyword=${encodeURIComponent(keyword)}`,
+  );
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
