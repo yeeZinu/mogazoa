@@ -24,7 +24,8 @@ function ModalPortal({ children }: { children: React.ReactNode }) {
 
 export default function Modal({ children, onClose }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
-  useKeydown("Escape", onClose);
+  const callback = onClose || (() => null);
+  useKeydown("Escape", callback);
   usePreventScroll();
 
   return (
