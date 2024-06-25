@@ -77,7 +77,7 @@ export default function ReviewCard({ review, session }: ReviewCardProps) {
       <div className={styles.mainBox}>
         <div className={styles.userBox}>
           <Link
-            href={`/user/${userId}`}
+            href={`/user/${user.id}`}
             className={styles.userLink}
           >
             <UserItem
