@@ -1,3 +1,4 @@
+import debounce from "lodash.debounce";
 import React from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import Rating from "@/app/product/components/rating/Rating";
@@ -52,10 +53,12 @@ export default function ReviewModal({ productDetail, session, onClose }: ModalPr
     );
   }
 
+  const debouncedOnSubmit = debounce(handleSubmit(onSubmit), 1000);
+
   return (
     <form
       className={styles.layout}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={debouncedOnSubmit}
     >
       <CategoryChip>{category.name}</CategoryChip>
       <h2>{name}</h2>

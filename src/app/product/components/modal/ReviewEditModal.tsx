@@ -1,5 +1,6 @@
 "use client";
 
+import debounce from "lodash.debounce";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
@@ -58,10 +59,11 @@ export default function ReviewEditModal({ review }: { review: ReviewType }) {
     reviewPatch(data, reviewId, accessToken, originalImageList);
   };
 
+  const debouncedOnSubmit = debounce(handleSubmit(onSubmit));
   return (
     <form
       className={styles.layout}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={debouncedOnSubmit}
     >
       <Rating
         name='rating'
