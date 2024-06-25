@@ -13,7 +13,7 @@
     "plugin:prettier/recommended",
     "prettier"
   ],
-  "ignorePatterns": ["next.config.mjs"],
+  "ignorePatterns": ["next.config.mjs", "vercel.json"],
   "rules": {
     "react/require-default-props": "off",
     "react/react-in-jsx-scope": "off",
