@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ items });
   } catch (error) {
-    console.error("Data scrapping error:", error.message);
+    console.error("Data scrapping error:", error);
     return NextResponse.json({ items: [] }, { status: 500, statusText: "Internal Server Error" });
   }
 }
