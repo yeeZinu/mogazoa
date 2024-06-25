@@ -1,7 +1,10 @@
 {
   "regions": ["icn1"],
   "functions": {
-    "app/api/**/*": {
+    "src/app/api/search/coupang/*.ts": {
+      "maxDuration": 300
+    },
+    "src/app/api/search/naver/*.ts": {
       "maxDuration": 300
     }
   },
