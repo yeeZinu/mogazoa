@@ -39,7 +39,7 @@ const uploadImage = async (image: Blob, accessToken: string | undefined): Promis
     headers.Authorization = `Bearer ${accessToken}`;
   }
   try {
-    const response = await httpClient.post<{ url: string }>("/images/upload", headers, formData);
+    const response = await httpClient.post<{ url: string }>("/images/upload", { headers }, formData);
     return response.url;
   } catch (error) {
     console.error("Error uploading image:", error);
@@ -61,7 +61,7 @@ export const reviewSubmit = async (data: FormValues, accessToken: string | undef
 
     const bodyData = { ...restData, images: imageUrlList };
 
-    const response = await httpClient.post("/reviews", headers, JSON.stringify(bodyData));
+    const response = await httpClient.post("/reviews", { headers }, JSON.stringify(bodyData));
     window.location.reload();
     return response;
   } catch (error) {
@@ -91,7 +91,7 @@ export const reviewPatch = async (
     const images = originalImageList.concat(newImageList);
 
     const bodyData = { ...restData, images };
-    const response = await httpClient.patch(`/reviews/${reviewId}`, headers, JSON.stringify(bodyData));
+    const response = await httpClient.patch(`/reviews/${reviewId}`, { headers }, JSON.stringify(bodyData));
     window.location.reload();
     return response;
   } catch (error) {
@@ -136,7 +136,7 @@ export const fetchReviews = async (
   const response = await httpClient.get<{ list: ReviewType[]; nextCursor: number | null }>(
     `/products/${productId}/reviews?cursor=${cursor}&order=${order}`,
 
-    headers,
+    { headers },
   );
   return response;
 };

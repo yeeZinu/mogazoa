@@ -4,7 +4,7 @@ import styles from "./ShoppingSkeleton.module.scss";
 
 import ShoppingSkeletonCard from "./ShoppingSkeletonCard";
 
-const EMPTY = ["1", "2", "3", "4", "5", "6"];
+const EMPTY = ["1", "2", "3", "4", "5"];
 export default function ShoppingSkeleton() {
   return (
     <section className={styles.container}>
