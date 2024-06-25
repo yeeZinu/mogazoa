@@ -1,6 +1,5 @@
 "use client";
 
-import debounce from "lodash.debounce";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ModalProps } from "@/app/product/utils/types";
 import Button from "@/components/Button/Button";
@@ -71,14 +70,13 @@ export default function EditModal({ productDetail, session }: ModalProps) {
     );
     window.location.reload();
   };
-  const debouncedOnSubmit = debounce(handleSubmit(onSubmit), 1000);
 
   return (
     <div className={cn(styles.container)}>
       <div className={cn(styles.content)}>
         <h2 className={cn(styles.header)}>상품 수정하기</h2>
         <form
-          onSubmit={debouncedOnSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className={cn(styles.form)}
         >
           <UploadImage
