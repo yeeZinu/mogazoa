@@ -1,17 +1,15 @@
 "use client";
 
-/* eslint-disable no-restricted-imports */
-
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import React from "react";
+import React, { useEffect } from "react";
+import { UserDetail } from "@/app/(userpage)/types";
 import Activity from "@/components/Card/Activity/Activity";
 import cn from "@/utils/classNames";
 import HttpClient from "@/utils/httpClient";
 import UserActivityList from "./components/UserActivityList/UserActivityList";
 import UserInfo from "./components/UserInfo/UserInfo";
 import styles from "./UserPage.module.scss";
-import { UserDetail } from "../../types";
 
 export default function UserPage({ params }: { params: { userId: number } }) {
   const httpClient = new HttpClient(process.env.NEXT_PUBLIC_BASE_URL!);
@@ -23,7 +21,7 @@ export default function UserPage({ params }: { params: { userId: number } }) {
     headers.Authorization = `Bearer ${accessToken}`;
   }
 
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ["userData", params.userId],
     queryFn: async () => {
       const res = httpClient.get<UserDetail>(`/users/${params.userId}`, {
@@ -33,6 +31,12 @@ export default function UserPage({ params }: { params: { userId: number } }) {
       return res;
     },
   });
+
+  useEffect(() => {
+    if (accessToken !== undefined) {
+      refetch();
+    }
+  }, [accessToken, data]);
 
   return (
     <div className={cn(styles.container)}>
