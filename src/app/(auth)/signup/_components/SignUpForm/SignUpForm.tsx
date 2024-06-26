@@ -63,6 +63,7 @@ export default function SignUpForm() {
       toast?.success("회원가입이 완료되었습니다!");
       setSessionStorage("prevPath", "");
       router.push(prevPath);
+      router.refresh();
     } else {
       toast?.success("회원가입이 완료되었습니다!");
       router.push("/");

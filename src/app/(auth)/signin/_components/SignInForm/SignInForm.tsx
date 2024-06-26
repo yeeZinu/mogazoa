@@ -39,6 +39,7 @@ export default function SignInForm() {
     if (result?.ok && prevPath) {
       setSessionStorage("prevPath", "");
       router.push(prevPath);
+      router.refresh();
     } else if (result?.ok) {
       router.push("/");
     } else {
