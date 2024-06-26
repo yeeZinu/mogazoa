@@ -30,6 +30,10 @@
     outline: none;
   }
 
+  &.suggestions {
+    border-radius: 28px 28px 0 0;
+  }
+
   @include text-normal;
 
   @include respond-to(tablet) {
@@ -47,4 +51,35 @@
   width: 0;
   padding-right: 0;
   background-color: $bg-black-100;
+}
+
+.suggestionList {
+  position: absolute;
+  z-index: 9999;
+  width: 400px;
+  color: $white-100;
+  background-color: $black-200;
+  border-radius: 0 0 28px 28px;
+
+  @include text-sm;
+
+  .suggestion {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 10px 10px 10px 20px;
+
+    &:hover,
+    &:focus {
+      background-color: $black-100;
+    }
+
+    &:last-child {
+      border-radius: 0 0 28px 28px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
 }
