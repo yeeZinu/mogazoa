@@ -10,6 +10,7 @@ import Statistics, { StatisticsProps } from "@/components/Card/Statistics/Statis
 import authOptions from "@/lib/auth";
 import { ProductDetailType } from "@/types/global";
 import HttpClient from "@/utils/httpClient";
+import { getMetadata } from "@/utils/metadata";
 import styles from "./page.module.scss";
 
 type StatisticsListType = Omit<StatisticsProps, "compare">;
@@ -27,10 +28,10 @@ export const generateMetadata = async ({ params: { slug } }: ParamsType): Promis
     cache: "no-cache",
   });
 
-  return {
-    title: `mogazoa - ${productDetail.name}`,
+  return getMetadata({
+    title: productDetail.name,
     description: `${productDetail.description} | mogazoa에서 ${productDetail.name}의 사용자 후기를 확인해보세요.`,
-  };
+  });
 };
 
 export default async function ProductPage({ params }: ParamsType) {
