@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { Suspense } from "react";
 import ProductCard from "@/app/product/components/card/ProductCard";
@@ -13,7 +14,26 @@ import styles from "./page.module.scss";
 
 type StatisticsListType = Omit<StatisticsProps, "compare">;
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
+type ParamsType = {
+  params: { slug: string };
+};
+
+export const generateMetadata = async ({ params: { slug } }: ParamsType): Promise<Metadata> => {
+  const httpClient = new HttpClient(process.env.BASE_URL || "");
+  const headers: HeadersInit = { cache: "no-cache" };
+
+  const productDetail: ProductDetailType = await httpClient.get(`/products/${slug}`, {
+    headers,
+    cache: "no-cache",
+  });
+
+  return {
+    title: `mogazoa - ${productDetail.name}`,
+    description: `${productDetail.description} | mogazoa에서 ${productDetail.name}의 사용자 후기를 확인해보세요.`,
+  };
+};
+
+export default async function ProductPage({ params }: ParamsType) {
   const session = await getServerSession(authOptions);
 
   const accessToken = session?.accessToken;
