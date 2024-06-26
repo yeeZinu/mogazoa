@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useEffect } from "react";
 import { OauthSignInButton } from "@/auth/_components/OauthSignInButton";
 import { GOOGLE_ICON, KAKAO_ICON } from "@/utils/constant";
+import { getSessionStorage, setSessionStorage } from "@/utils/session";
 import styles from "./OauthSignInBox.module.scss";
 
 type OauthSignInBoxProps = {
@@ -13,6 +14,7 @@ type OauthSignInBoxProps = {
 
 export default function OauthSignInBox({ requestPage }: OauthSignInBoxProps) {
   const router = useRouter();
+  const prevPath = getSessionStorage("prevPath");
   const handleKakaoSignIn = async () => {
     if (!window) return;
 
@@ -30,21 +32,26 @@ export default function OauthSignInBox({ requestPage }: OauthSignInBoxProps) {
     const handleKakaoCallback = async () => {
       const code = new URL(window.location.href).searchParams.get("code") ?? "";
 
-      if (!localStorage.getItem("authCode") && code) {
+      if (!getSessionStorage("authCode") && code) {
         // 다시 redirect됐을 경우 요청 두 번 방지
-        localStorage.setItem("authCode", code);
-        const result = await signIn("kakao", { redirect: false, callbackUrl: "/", code, requestPage });
+        setSessionStorage("authCode", code);
+        const result = await signIn("kakao", {
+          redirect: false,
+          callbackUrl: prevPath || "/",
+          code,
+          requestPage,
+        });
 
         if (result?.status === 403) {
-          localStorage.removeItem("authCode");
+          setSessionStorage("authCode", "");
           router.push("/oauth/signup/kakao");
         }
       } else {
-        localStorage.removeItem("authCode");
+        setSessionStorage("authCode", "");
       }
     };
     handleKakaoCallback();
-  }, [router, requestPage]);
+  }, [router, requestPage, prevPath]);
 
   return (
     <div className={styles.container}>
@@ -53,7 +60,7 @@ export default function OauthSignInBox({ requestPage }: OauthSignInBoxProps) {
         <OauthSignInButton
           image={GOOGLE_ICON}
           name='google'
-          onClick={() => signIn("google", { callbackUrl: "/" })}
+          onClick={() => signIn("google", { callbackUrl: prevPath || "/" })}
         />
         <OauthSignInButton
           image={KAKAO_ICON}
