@@ -35,3 +35,4 @@ export const INFO_ICON = "/images/info.svg";
 export const ARROW_RIGHT_ICON = "/images/arrow-right.png";
 export const ARROW_LEFT_ICON = "/images/arrow-left.png";
 export const CHANGE_ICON = "/images/change.png";
+export const OPENGRAPH_IMAGE = "/images/opengraph.png";
