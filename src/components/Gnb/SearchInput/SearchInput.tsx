@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { MutableRefObject, useEffect, useState, useRef, useCallback, KeyboardEvent } from "react";
 import { useForm, SubmitHandler, useWatch } from "react-hook-form";
 import { QUERY } from "@/_home/constants";
@@ -26,6 +26,7 @@ type KeywordType = {
 export default function SearchInput({ isOpen, inputRef, onClick }: SearchInputProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathName = usePathname();
   const param = searchParams.get(QUERY.KEYWORD);
 
   const [suggestions, setSuggestions] = useState<ProductType[]>([]);
@@ -78,6 +79,10 @@ export default function SearchInput({ isOpen, inputRef, onClick }: SearchInputPr
     },
     [suggestions, focusedIndex, handleSuggestionClick],
   );
+
+  useEffect(() => {
+    reset();
+  }, [pathName, reset]);
 
   useEffect(() => {
     if (list) {
