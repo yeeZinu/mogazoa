@@ -56,6 +56,7 @@ export default function FilteredProducts({ category }: FilteredProductsProps) {
         <FilteringText
           category={category}
           keyword={keyword}
+          order={order}
         />
         <Dropdown
           items={ORDER.PRODUCT}

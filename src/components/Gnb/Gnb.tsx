@@ -51,7 +51,7 @@ export default function Gnb({ initialSession }: GnbProps) {
   useSessionCheck(initialSession, handleSession);
 
   return (
-    <div className={styles.container}>
+    <div className={cn(styles.container)}>
       <Image
         className={styles.menuIcon}
         src={MENU_TOGGLE_ICON}
