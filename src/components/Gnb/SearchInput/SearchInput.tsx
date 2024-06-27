@@ -49,6 +49,11 @@ export default function SearchInput({ isOpen, inputRef, onClick }: SearchInputPr
     setSuggestions([]);
   };
 
+  const handleIconClick = () => {
+    onClick();
+    resetSuggestions();
+  };
+
   const handleSuggestionClick = useCallback(
     (suggestion: ProductType) => {
       router.push(`/?${createQueryString("keyword", suggestion.name, searchParams)}`);
@@ -74,6 +79,7 @@ export default function SearchInput({ isOpen, inputRef, onClick }: SearchInputPr
         event.preventDefault();
       } else if (event.key === "Enter" && focusedIndex !== null) {
         handleSuggestionClick(suggestions[focusedIndex]);
+        setFocusedIndex(null);
         event.preventDefault();
       }
     },
@@ -122,7 +128,7 @@ export default function SearchInput({ isOpen, inputRef, onClick }: SearchInputPr
         width={24}
         height={24}
         alt='돋보기'
-        onClick={onClick}
+        onClick={handleIconClick}
       />
 
       <input
@@ -156,10 +162,6 @@ export default function SearchInput({ isOpen, inputRef, onClick }: SearchInputPr
               aria-selected={index === focusedIndex}
               onClick={() => handleSuggestionClick(product)}
               onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  handleSuggestionClick(product);
-                  setFocusedIndex(null);
-                }
                 handleKeyDown(event);
               }}
               tabIndex={-1}
