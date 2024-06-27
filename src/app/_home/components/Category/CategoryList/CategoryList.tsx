@@ -15,7 +15,10 @@ export default function CategoryList({ selected, onClick, categoryList }: Catego
       className={cn(styles.list)}
     >
       {categoryList.map(({ id, name }) => (
-        <li key={id}>
+        <li
+          key={id}
+          role='menuitem'
+        >
           <div
             role='button'
             className={cn(styles.item, selected === id.toString() && styles.selected)}

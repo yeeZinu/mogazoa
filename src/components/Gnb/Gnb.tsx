@@ -69,6 +69,7 @@ export default function Gnb({ initialSession }: GnbProps) {
             width={166}
             height={28}
             alt='로고'
+            priority
             onClick={handleLogoClick}
           />
         </Link>
