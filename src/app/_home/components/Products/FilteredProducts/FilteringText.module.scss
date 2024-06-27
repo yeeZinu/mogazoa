@@ -9,7 +9,11 @@
   color: $white-100;
 
   span {
-    white-space: nowrap;
+    display: inline-block;
+  }
+
+  :nth-child(1) {
+    margin-right: 6px;
   }
 
   @include respond-to(tablet) {
