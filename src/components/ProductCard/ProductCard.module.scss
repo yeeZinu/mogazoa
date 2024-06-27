@@ -85,7 +85,9 @@
 .reviewFavorite {
   display: flex;
   gap: 15px;
+  margin-right: 10px;
   color: $gray-200;
+  white-space: nowrap;
 
   @include text-normal;
 

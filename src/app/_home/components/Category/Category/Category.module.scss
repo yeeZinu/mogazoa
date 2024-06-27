@@ -16,6 +16,7 @@
   padding: 10px;
   padding-top: 45px;
   color: $white-100;
+  white-space: nowrap;
   background-color: $bg-black-100;
 
   @include text-normal;
