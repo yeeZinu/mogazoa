@@ -1,6 +1,6 @@
 type GetAuthParams = {
   path: string;
-  body?: { [key: string]: string | number };
+  body: { [key: string]: string | number };
 };
 
 const getAuth = async ({ path, body }: GetAuthParams) => {
@@ -9,7 +9,7 @@ const getAuth = async ({ path, body }: GetAuthParams) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: body ? JSON.stringify(body) : "",
+    body: JSON.stringify(body),
   });
 
   const data = await result.json();
