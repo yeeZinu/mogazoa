@@ -1,7 +1,10 @@
 import { createRoot, Root } from "react-dom/client";
 import { v4 as uuid } from "uuid";
 import { ToastList } from "./ToastList";
-import { Message } from "./type";
+import { Message, ToastType } from "./type";
+
+const TOAST_DURATION = 3000;
+const MAX_TOAST = 5;
 
 class Toast {
   private static instance: Toast;
@@ -59,51 +62,43 @@ class Toast {
   private autoCloseToast(id: string) {
     this.timeoutIds[id] = window.setTimeout(() => {
       this.closeToast(id);
-    }, 3000);
+    }, TOAST_DURATION);
+  }
+
+  private showToast(message: string, type: ToastType) {
+    if (this.messages.length >= MAX_TOAST) {
+      const oldestToast = this.messages.shift();
+
+      if (oldestToast) {
+        clearTimeout(this.timeoutIds[oldestToast.id]);
+        delete this.timeoutIds[oldestToast.id];
+      }
+    }
+
+    const id = uuid();
+    this.messages.push({
+      id,
+      message,
+      type,
+    });
+    this.renderToasts();
+    this.autoCloseToast(id);
   }
 
   success(message: string) {
-    const id = uuid();
-    this.messages.push({
-      id,
-      message,
-      type: "success",
-    });
-    this.renderToasts();
-    this.autoCloseToast(id);
+    this.showToast(message, "success");
   }
 
   caution(message: string) {
-    const id = uuid();
-    this.messages.push({
-      id,
-      message,
-      type: "caution",
-    });
-    this.renderToasts();
-    this.autoCloseToast(id);
+    this.showToast(message, "caution");
   }
 
   error(message: string) {
-    const id = uuid();
-    this.messages.push({
-      id,
-      message,
-      type: "error",
-    });
-    this.renderToasts();
-    this.autoCloseToast(id);
+    this.showToast(message, "error");
   }
 
   info(message: string) {
-    const id = uuid();
-    this.messages.push({
-      id,
-      message,
-      type: "info",
-    });
-    this.renderToasts();
-    this.autoCloseToast(id);
+    this.showToast(message, "info");
   }
 }
 
