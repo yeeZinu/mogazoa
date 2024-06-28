@@ -1,8 +1,9 @@
 "use client";
 
+import debounce from "lodash.debounce";
 import Image from "next/image";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { MutableRefObject, useEffect, useState, useRef, useCallback, KeyboardEvent } from "react";
+import { MutableRefObject, useEffect, useState, useRef, useCallback, useMemo, KeyboardEvent } from "react";
 import { useForm, SubmitHandler, useWatch } from "react-hook-form";
 import { QUERY } from "@/_home/constants";
 import { useSuggestions } from "@/components/Gnb/SearchInput/hooks/useSuggestions";
@@ -40,6 +41,8 @@ export default function SearchInput({ isOpen, inputRef, onClick }: SearchInputPr
   const watched = useWatch({ control, name: "keyword" });
 
   const { data: list, refetch } = useSuggestions(watched);
+
+  const debouncedRefetch = useMemo(() => debounce(refetch, 300), [refetch]);
 
   const onSubmit: SubmitHandler<KeywordType> = ({ keyword }) => {
     router.push(`/?${createQueryString("keyword", keyword, searchParams)}`);
@@ -98,11 +101,11 @@ export default function SearchInput({ isOpen, inputRef, onClick }: SearchInputPr
 
   useEffect(() => {
     if (watched && param !== watched) {
-      refetch();
+      debouncedRefetch();
     } else {
       resetSuggestions();
     }
-  }, [watched, refetch, param]);
+  }, [watched, debouncedRefetch, param]);
 
   useEffect(() => {
     if (focusedIndex !== null) {
