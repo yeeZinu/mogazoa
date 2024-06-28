@@ -2,6 +2,15 @@ import { cookies } from "next/headers";
 import { NextAuthOptions, User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import getAuth from "@/app/(auth)/_utils/getAuth";
+
+const END_POINT = {
+  SIGNUP: "/auth/signUp",
+  SIGNIN: "/auth/signIn",
+  OAUTHSIGNUP: "/oauth/signup",
+  KAKAO: "/kakao",
+  GOOGLE: "/google",
+};
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -19,27 +28,23 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const result = await fetch(`${process.env.BASE_URL}/auth/signIn/kakao`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
+          const { result, data } = await getAuth({
+            path: `${END_POINT.SIGNIN}${END_POINT.KAKAO}`,
+            body: {
               redirectUri: `${process.env.NEXTAUTH_URL}/${credentials?.requestPage}`,
-              token: credentials?.code,
-            }),
+              token: credentials?.code ?? "",
+            },
           });
 
-          const data = await result.json();
-          const user = data?.user;
-
           if (result.status === 403) {
-            return { redirect: `${process.env.NEXTAUTH_URL}/oauth/signup/kakao` };
+            return {
+              redirect: `${process.env.NEXTAUTH_URL}${END_POINT.OAUTHSIGNUP}${END_POINT.KAKAO}`,
+            };
           }
 
-          if (user) {
+          if (data?.user) {
             return {
-              ...user,
+              ...data?.user,
               accessToken: data.accessToken,
             };
           }
@@ -60,25 +65,19 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const result = await fetch(`${process.env.BASE_URL}/auth/signUp/${credentials?.provider}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              nickname: credentials?.nickname,
+          const { result, data } = await getAuth({
+            path: `${END_POINT.SIGNUP}${credentials?.provider}`,
+            body: {
+              nickname: credentials?.nickname ?? "",
               redirectUri: `${process.env.REDIRECT_URI}/${credentials?.provider}`,
-              token: credentials?.token,
-            }),
+              token: credentials?.token ?? "",
+            },
           });
 
-          const data = await result.json();
-          const user = data?.user;
-
-          if (result.ok && user) {
+          if (result.ok && data?.user) {
             cookies().delete("oauth-token");
             return {
-              ...user,
+              ...data?.user,
               accessToken: data.accessToken,
             };
           }
@@ -99,22 +98,20 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const result = await fetch(`${process.env.BASE_URL}/auth/signIn`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+          const { data } = await getAuth({
+            path: END_POINT.SIGNIN,
+            body: {
+              email: credentials?.email ?? "",
+              password: credentials?.password ?? "",
             },
-            body: JSON.stringify({ email: credentials?.email, password: credentials?.password }),
           });
-          const data = await result.json();
-          const user = data?.user;
 
-          if (!user) {
+          if (!data?.user) {
             return null;
           }
 
           return {
-            ...user,
+            ...data?.user,
             accessToken: data.accessToken,
           };
         } catch (error) {
@@ -133,24 +130,19 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const result = await fetch(`${process.env.BASE_URL}/auth/signUp`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+          const { result, data } = await getAuth({
+            path: END_POINT.SIGNUP,
+            body: {
+              email: credentials?.email ?? "",
+              nickname: credentials?.nickname ?? "",
+              password: credentials?.password ?? "",
+              passwordConfirmation: credentials?.passwordConfirmation ?? "",
             },
-            body: JSON.stringify({
-              email: credentials?.email,
-              nickname: credentials?.nickname,
-              password: credentials?.password,
-              passwordConfirmation: credentials?.passwordConfirmation,
-            }),
           });
-          const data = await result.json();
-          const user = data?.user;
 
-          if (result.ok && user) {
+          if (result.ok && data?.user) {
             return {
-              ...user,
+              ...data?.user,
               accessToken: data.accessToken,
             };
           }
@@ -188,20 +180,16 @@ const authOptions: NextAuthOptions = {
 
       // 구글 로그인 가입자 & 미가입자
       if (account?.provider === "google") {
-        const token = account?.id_token;
+        const token = account?.id_token ?? "";
         try {
           const payload = {
             redirectUri: `${process.env.REDIRECT_URI}/${account?.provider}`,
             token,
           };
-          const result = await fetch(`${process.env.BASE_URL}/auth/signIn/${account?.provider}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
+          const { result, data } = await getAuth({
+            path: `${END_POINT.SIGNIN}${account?.provider}`,
+            body: payload,
           });
-          const data = await result.json();
 
           if (data.user) {
             /* eslint-disable no-param-reassign */
@@ -213,7 +201,7 @@ const authOptions: NextAuthOptions = {
 
           if (result.status === 403 && data.message === "등록되지 않은 사용자입니다.") {
             cookies().set("oauth-token", token as string, { httpOnly: true, secure: true });
-            return `/oauth/signup/${account?.provider}`;
+            return `${END_POINT.OAUTHSIGNUP}${account?.provider}`;
           }
 
           return false;
